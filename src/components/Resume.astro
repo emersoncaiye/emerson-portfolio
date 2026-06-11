@@ -98,42 +98,6 @@ function renderExpItem(text: string) {
     <h2 class="section-label">{t.expLabel}</h2>
   </div>
 
-  <!-- 项目经历 -->
-  <div class="exp-subsection reveal">
-    <h3 class="exp-sub-label">{t.projectExpLabel}</h3>
-  </div>
-  <div class="timeline">
-    <div class="timeline-item reveal">
-      <div class="timeline-left">
-        <span class="timeline-year">{t.exp1Date}</span>
-        <span class="timeline-month">{t.exp1Month}</span>
-      </div>
-      <div class="timeline-track">
-        <div class="timeline-dot"></div>
-      </div>
-      <div class="timeline-content">
-        <div class="exp-role">{t.exp1Role}</div>
-        <div class="exp-company">{t.exp1Company}</div>
-        <ul class="exp-list" set:html={t.exp1Items.map(renderExpItem).join('')} />
-      </div>
-    </div>
-
-    <div class="timeline-item reveal">
-      <div class="timeline-left">
-        <span class="timeline-year">{t.exp2Date}</span>
-        <span class="timeline-month">{t.exp2Month}</span>
-      </div>
-      <div class="timeline-track">
-        <div class="timeline-dot"></div>
-      </div>
-      <div class="timeline-content">
-        <div class="exp-role">{t.exp2Role}</div>
-        <div class="exp-company">{t.exp2Company}</div>
-        <ul class="exp-list" set:html={t.exp2Items.map(renderExpItem).join('')} />
-      </div>
-    </div>
-  </div>
-
   <!-- 实践经历 -->
   <div class="exp-subsection reveal">
     <h3 class="exp-sub-label">{t.practiceExpLabel}</h3>
@@ -181,6 +145,42 @@ function renderExpItem(text: string) {
         <div class="exp-role">{t.exp5Role}</div>
         <div class="exp-company">{t.exp5Company}</div>
         <ul class="exp-list" set:html={t.exp5Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+  </div>
+
+  <!-- 项目经历 -->
+  <div class="exp-subsection reveal">
+    <h3 class="exp-sub-label">{t.projectExpLabel}</h3>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">{t.exp1Date}</span>
+        <span class="timeline-month">{t.exp1Month}</span>
+      </div>
+      <div class="timeline-track">
+        <div class="timeline-dot"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp1Role}</div>
+        <div class="exp-company">{t.exp1Company}</div>
+        <ul class="exp-list" set:html={t.exp1Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">{t.exp2Date}</span>
+        <span class="timeline-month">{t.exp2Month}</span>
+      </div>
+      <div class="timeline-track">
+        <div class="timeline-dot"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp2Role}</div>
+        <div class="exp-company">{t.exp2Company}</div>
+        <ul class="exp-list" set:html={t.exp2Items.map(renderExpItem).join('')} />
       </div>
     </div>
   </div>
