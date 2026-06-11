@@ -2,204 +2,287 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="蔡也">
-  <!-- Header -->
+<Layout title="蔡也 | CAI YE">
+
+  <!-- ===== NAV ===== -->
   <header class="header">
     <nav class="nav">
       <a href="/" class="logo">蔡也</a>
-      <div class="nav-links">
-        <a href="#experience">经历</a>
-        <a href="#moments">瞬间</a>
-        <a href="#about">关于我</a>
-        <a href="#contact">联系</a>
+      <div class="nav-links" id="navLinks">
+        <a href="#experience" class="link-hover">经历</a>
+        <a href="#moments" class="link-hover">瞬间</a>
+        <a href="#about" class="link-hover">关于我</a>
+        <a href="#contact" class="link-hover">联系</a>
       </div>
-      <button class="menu-toggle" aria-label="菜单">
+      <button class="menu-toggle" id="menuToggle" aria-label="菜单">
         <span></span><span></span><span></span>
       </button>
     </nav>
   </header>
 
-  <!-- Hero -->
+  <!-- ===== HERO ===== -->
   <section class="hero">
-    <h1 class="hero-name">蔡也</h1>
-    <p class="hero-tagline">學以致用的行動者<span class="dot">·</span>跨文化溝通者<span class="dot">·</span>複雜問題解決者</p>
-    <p class="hero-desc">
-      中、英、粵、法四語自如切換，橫跨零售、餐飲、翻譯、教育等行業，曾于三大洲獨立生活與工作。核心能力：快速適應陌生環境、在實戰中解決問題、用溝通創造價值。
-    </p>
+    <div class="hero-grid">
+      <div class="hero-left">
+        <h1 class="hero-name">蔡也</h1>
+        <p class="hero-name-en">CAI YE</p>
+      </div>
+      <div class="hero-right">
+        <div class="hero-tags">
+          <div class="tag-group">
+            <span class="tag-label">语言</span>
+            <span class="tag-value">中 · 英 · 粤 · 法</span>
+          </div>
+          <div class="tag-group">
+            <span class="tag-label">行业</span>
+            <span class="tag-value">零售 · 餐饮 · 翻译 · 教育 · 产品设计</span>
+          </div>
+          <div class="tag-group">
+            <span class="tag-label">核心能力</span>
+            <span class="tag-value">快速适应 · 实战解题 · 跨文化沟通</span>
+          </div>
+        </div>
+        <p class="hero-desc">
+          横跨三大洲独立生活与工作，四语自如切换。核心能力：快速适应陌生环境、在实战中解决问题、用沟通创造价值。
+        </p>
+      </div>
+    </div>
   </section>
 
-  <!-- Experience -->
+  <!-- ===== EXPERIENCE ===== -->
   <section id="experience" class="section">
-    <h2 class="section-title">经历</h2>
+    <h2 class="section-label reveal">经历</h2>
 
-    <div class="experience-item">
-      <div class="exp-header">
-        <h3>世界帆船对抗巡回赛（WMRT）– 随队翻译（志愿者）</h3>
-        <span class="exp-meta">深圳宝安 | 2026年1月</span>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-left">
+          <span class="timeline-year">2026</span>
+          <span class="timeline-month">01</span>
+        </div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <div class="exp-role">随队翻译（志愿者）</div>
+          <div class="exp-company">世界帆船对抗巡回赛 WMRT · 深圳宝安</div>
+          <ul class="exp-list">
+            <li>为法国队（船长 Aurélien Pierroz）提供全程英中翻译及日常法语沟通，8天赛程0沟通失误，保障队伍100%准时参赛</li>
+            <li>赛后负责船只状态与工作人员翻译对接，确认船只损伤、设备归还及检查流程，确保交接无误、无额外赔付</li>
+            <li>同步负责队伍出行安排及生活协助，最终获评 WMRT 优秀志愿者</li>
+          </ul>
+        </div>
       </div>
-      <ul>
-        <li>为法国队（船长Aurélien Pierroz）提供全程英中翻译及日常法语沟通，8天赛程中实现0沟通失误，保障队伍100%准时参赛</li>
-        <li>赛后负责船只状态与工作人员的翻译对接，协助船长与赛事工作人员确认船只损伤、设备归还及检查流程，确保交接无误、无额外赔付</li>
-        <li>同步负责队伍出行安排及生活协助，保障队员快速适应本地环境，最终获评WMRT优秀志愿者</li>
-      </ul>
-    </div>
 
-    <div class="experience-item">
-      <div class="exp-header">
-        <h3>海外多岗位全英工作经历</h3>
-        <span class="exp-meta">美国 & 新西兰 | 2023年12月 – 2025年9月</span>
+      <div class="timeline-item reveal">
+        <div class="timeline-left">
+          <span class="timeline-year">2023–25</span>
+          <span class="timeline-month">12–09</span>
+        </div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <div class="exp-role">海外多岗位全英工作</div>
+          <div class="exp-company">美国 & 新西兰</div>
+          <ul class="exp-list">
+            <li>在 ACME 超市、DF 纪念品店、Tauranga 奇异果园、Anita Gelato、Mekong Baby 等累计 7+ 份跨行业全英岗位，平均 3-7 天独立完成培训并上岗</li>
+            <li>累计 19 个月跨文化全英工作环境，日均服务 200+ 顾客，在高频客诉与快节奏收银中强化英语沟通与抗压能力</li>
+            <li>善于与多元文化团队高效协作，独立规划跨国工作与生活，练就高适应力与快速学习能力</li>
+          </ul>
+        </div>
       </div>
-      <ul>
-        <li>在美国ACME超市、新西兰DF纪念品店、Tauranga奇异果园（采摘）、Anita Gelato、Mekong Baby等累计完成7+份跨行业全英岗位，平均3-7天独立完成培训并上岗，覆盖零售、餐饮、服务、园艺等多场景</li>
-        <li>累计19个月跨文化全英工作环境，日均服务200+顾客（以ACME超市为例），在高频客诉与快节奏收银中强化英语沟通与抗压能力</li>
-        <li>善于在快节奏场景中与多元文化团队高效协作，并独立规划跨国工作与生活，练就高适应力、快速学习能力与客户服务技巧</li>
-      </ul>
-    </div>
 
-    <div class="experience-item">
-      <div class="exp-header">
-        <h3>个人网站 & 多语言作品集</h3>
-        <span class="exp-meta">项目组长 | 2026.05 - 至今</span>
+      <div class="timeline-item reveal">
+        <div class="timeline-left">
+          <span class="timeline-year">2026</span>
+          <span class="timeline-month">05–</span>
+        </div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <div class="exp-role">项目组长</div>
+          <div class="exp-company">个人网站 & 多语言作品集</div>
+          <ul class="exp-list">
+            <li>基于 Astro + Cloudflare Pages 搭建个人网站，2 天从 0 到 1 上线（原计划 10 天，效率提升 5 倍），掌握 vibe coding 快速原型工作流</li>
+            <li>独立完成中/英/法三语简历页面的内容架构与多设备响应式实现</li>
+            <li>统筹内容规划与技术实现，验证非技术背景人员借助 AI 工具快速落地前端产品的能力</li>
+          </ul>
+        </div>
       </div>
-      <ul>
-        <li>基于Astro+Cloudflare Pages搭建个人网站，通过AI编程助手以自然语言驱动方式完成前端开发，2天内从0到1上线（原计划10天，效率提升5倍），掌握"vibe coding"式快速原型工作流</li>
-        <li>独立完成中/英/法三语简历页面的内容架构与多设备响应式实现，打造公开访问的线上作品集</li>
-        <li>作为项目组长，统筹内容规划与技术实现，验证了非技术背景人员借助AI工具快速落地前端产品的能力</li>
-      </ul>
-    </div>
 
-    <div class="experience-item">
-      <div class="exp-header">
-        <h3>励风教育（深圳）有限公司 – 辅导老师</h3>
-        <span class="exp-meta">深圳 | 兼职 · 至今</span>
+      <div class="timeline-item reveal">
+        <div class="timeline-left">
+          <span class="timeline-year">至今</span>
+          <span class="timeline-month">兼职</span>
+        </div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <div class="exp-role">辅导老师</div>
+          <div class="exp-company">励风教育（深圳）有限公司</div>
+          <ul class="exp-list">
+            <li>辅导港深两地中学生（DSE 课程，Form 1–6），覆盖英语、中西方历史、经济等学科</li>
+            <li>因材施教，帮助学生巩固知识薄弱环节，在教学相长中锻炼耐心与沟通引导能力</li>
+          </ul>
+        </div>
       </div>
-      <ul>
-        <li>辅导港深两地中学生（DSE课程，Form 1–6），覆盖英语、中西方历史、经济等学科</li>
-        <li>根据学生性格特点调整教学方式，因材施教，帮助学生巩固知识薄弱环节</li>
-        <li>在教学相长中与学生共同进步，锻炼了耐心与沟通引导能力</li>
-      </ul>
-    </div>
 
-    <div class="experience-item">
-      <div class="exp-header">
-        <h3>AI 运营助手 – 产品原型设计</h3>
-        <span class="exp-meta">产品设计 | 2026.05 - 至今</span>
+      <div class="timeline-item reveal">
+        <div class="timeline-left">
+          <span class="timeline-year">2026</span>
+          <span class="timeline-month">05–</span>
+        </div>
+        <div class="timeline-line"></div>
+        <div class="timeline-content">
+          <div class="exp-role">产品设计</div>
+          <div class="exp-company">AI 运营助手 · 产品原型设计</div>
+          <ul class="exp-list">
+            <li>设计面向外贸/运营场景的 AI Agent 原型：多语言产品描述生成、客户邮件分类与回复建议，输出 PRD + 交互流程图</li>
+            <li>调研 3 位外贸运营人员，梳理 50+ 条真实用户查询并模拟响应逻辑，确保方案可落地</li>
+            <li>使用 Figma / ProcessOn 完成原型设计，产出可直接用于开发沟通的 AI Agent 方案</li>
+          </ul>
+        </div>
       </div>
-      <ul>
-        <li>设计面向外贸/运营场景的AI Agent原型，功能包括：多语言产品描述生成、客户邮件分类与回复建议，输出PRD+交互流程图</li>
-        <li>通过调研3位外贸运营人员，梳理50+条真实用户查询并模拟响应逻辑，确保方案可落地</li>
-        <li>主导产品方向与功能规划，使用Figma/ProcessOn完成原型设计，产出可直接用于开发沟通的AI Agent方案</li>
-      </ul>
     </div>
   </section>
 
-  <!-- Moments -->
-  <section id="moments" class="section">
-    <h2 class="section-title">瞬间</h2>
-    <div class="moments-grid">
+  <!-- ===== MOMENTS (dark block) ===== -->
+  <section id="moments" class="moments-section">
+    <h2 class="section-label reveal" style="color: #999; border-color: #333;">瞬间</h2>
+    <div class="moments-grid reveal">
       <div class="moment-card">
-        <div class="moment-img-placeholder">🏔️</div>
-        <p>Tongariro Alpine Crossing · 20km</p>
+        <div class="moment-img">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M40 10L50 35H70L54 50L60 75L40 60L20 75L26 50L10 35H30L40 10Z" stroke="#555" stroke-width="1"/></svg>
+        </div>
+        <div class="moment-caption">Tongariro Alpine Crossing</div>
+        <div class="moment-sub">20km · New Zealand</div>
       </div>
       <div class="moment-card">
-        <div class="moment-img-placeholder">⛵</div>
-        <p>WMRT · 与法国队赛后</p>
+        <div class="moment-img">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 60L40 20L60 60" stroke="#555" stroke-width="1"/><path d="M30 60L40 40L50 60" stroke="#555" stroke-width="0.5"/></svg>
+        </div>
+        <div class="moment-caption">WMRT Shenzhen</div>
+        <div class="moment-sub">法国队 · 赛后</div>
       </div>
       <div class="moment-card">
-        <div class="moment-img-placeholder">🌅</div>
-        <p>Slope Point · 南岛最南端</p>
+        <div class="moment-img">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="40" r="20" stroke="#555" stroke-width="1"/><path d="M40 20V60M20 40H60" stroke="#555" stroke-width="0.5"/></svg>
+        </div>
+        <div class="moment-caption">Slope Point</div>
+        <div class="moment-sub">南岛最南端</div>
       </div>
       <div class="moment-card">
-        <div class="moment-img-placeholder">🍻</div>
-        <p>北岛 · 与同事的after hours</p>
+        <div class="moment-img">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="25" width="40" height="30" stroke="#555" stroke-width="1"/><line x1="20" y1="35" x2="60" y2="35" stroke="#555" stroke-width="0.5"/></svg>
+        </div>
+        <div class="moment-caption">北岛 After Hours</div>
+        <div class="moment-sub">与同事的时光</div>
       </div>
       <div class="moment-card">
-        <div class="moment-img-placeholder">🌄</div>
-        <p>Timaru · 日出</p>
+        <div class="moment-img">
+          <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="20" y1="60" x2="60" y2="20" stroke="#555" stroke-width="1"/><circle cx="55" cy="25" r="8" stroke="#555" stroke-width="0.5"/></svg>
+        </div>
+        <div class="moment-caption">Timaru Sunrise</div>
+        <div class="moment-sub">新西兰南岛</div>
       </div>
     </div>
   </section>
 
-  <!-- About -->
+  <!-- ===== ABOUT ===== -->
   <section id="about" class="section">
-    <h2 class="section-title">关于我</h2>
-    <p class="about-intro">一个善于解决实际问题的人——有创造力、有决断力、有韧性。</p>
-    <p>擅长处理复杂事务：中、英、粤、法四语运用自如；零售、餐饮、翻译、教育等多行业经验；曾于三个大洲独自生活，持续适应陌生环境。</p>
-    <p>现就读于深圳职业技术大学应用法文专业。但真正的课堂不在学校——在路上。</p>
+    <h2 class="section-label reveal">关于我</h2>
 
-    <div class="about-blocks">
-      <div class="about-block">
-        <h3>🏆 关键经历</h3>
-        <p>为世界级帆船赛事担任翻译，也用AI两天建好三语网站。在WMRT的术语与赛况间切换，也在皇后镇纪念品店与来自50多国的游客交流。在深圳辅导港深跨境DSE学生，学会了耐心与引导。</p>
+    <p class="about-intro reveal">
+      一个善于解决实际问题的人——<br/>有创造力、有决断力、有韧性。
+    </p>
+
+    <p class="about-body reveal">
+      擅长处理复杂事务：中、英、粤、法四语运用自如；零售、餐饮、翻译、教育等多行业经验；曾于三个大洲独自生活，持续适应陌生环境。现就读于深圳职业技术大学应用法文专业。但真正的课堂不在学校——在路上。
+    </p>
+
+    <div class="about-grid">
+      <div class="about-block reveal">
+        <span class="about-num">01</span>
+        <h3 class="about-block-title">关键经历</h3>
+        <p class="about-block-text">为世界级帆船赛事担任翻译，也用 AI 两天建好三语网站。在 WMRT 的术语与赛况间切换，也在皇后镇纪念品店与来自 50 多国的游客交流。在深圳辅导港深跨境 DSE 学生，学会了耐心与引导。</p>
       </div>
-      <div class="about-block">
-        <h3>🌍 独自面对陌生</h3>
-        <p>从新西兰北岛到南岛，美国东岸到西岸。独自处理合同、签证、税务、购车。经历过深夜找不到住处，又曾因住处无公交可达，背着17kg的背包独行3英里，也经历过站在柜台前不知该问谁的茫然。</p>
+
+      <div class="about-block reveal">
+        <span class="about-num">02</span>
+        <h3 class="about-block-title">独自面对陌生</h3>
+        <p class="about-block-text">从新西兰北岛到南岛，美国东岸到西岸。独自处理合同、签证、税务、购车。经历过深夜找不到住处，背着 17kg 的背包独行 3 英里，也经历过站在柜台前不知该问谁的茫然。</p>
       </div>
-      <div class="about-block">
-        <h3>🥾 一个人走完的路</h3>
-        <p>独自完成Tongariro Alpine Crossing（20公里、逾千米落差）。自驾横跨南北岛，星空下露营，自己投简历、面试、谈薪水。在北岛有同事一起在果园摘奇异果，放假就约去行山、去沙滩；到南岛就一个人去凯库拉观鲸，去Timaru看企鹅，开车去看Slope Point的日落。在洛杉矶，见识过阳光与棕榈树下的sprawling city——没车真的好像没脚；在纽约，见证时代广场的繁华不夜天，人群汹涌，每一步都踏着这座城市的节奏。</p>
+
+      <div class="about-block reveal">
+        <span class="about-num">03</span>
+        <h3 class="about-block-title">一个人走完的路</h3>
+        <p class="about-block-text">独自完成 Tongariro Alpine Crossing（20 公里、逾千米落差）。自驾横跨南北岛，星空下露营。在北岛有同事一起摘奇异果，放假就约去行山、去沙滩；到南岛就一个人去凯库拉观鲸，去 Timaru 看企鹅，开车去看 Slope Point 的日落。</p>
       </div>
-      <div class="about-block">
-        <h3>💡 我的信念</h3>
-        <p>背包沉，夜色深，但只要肯问、肯走、肯理清头绪，就没有跨不过去的陌生。</p>
+
+      <div class="about-block reveal">
+        <span class="about-num">04</span>
+        <h3 class="about-block-title">我的信念</h3>
+        <p class="about-block-text">背包沉，夜色深，但只要肯问、肯走、肯理清头绪，就没有跨不过去的陌生。</p>
       </div>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="section contact">
-    <h2 class="section-title">联系我</h2>
-    <a href="mailto:emerson.the.k@gmail.com" class="contact-email">emerson.the.k@gmail.com</a>
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="contact-section">
+    <div class="contact-inner reveal">
+      <h2 class="section-label" style="color: #999; border-color: #333;">联系</h2>
+      <div class="contact-content">
+        <span class="contact-name">蔡也</span>
+        <a href="mailto:emerson.the.k@gmail.com" class="contact-email">emerson.the.k@gmail.com</a>
+      </div>
+    </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <p>© 2026 蔡也</p>
+    <span>&copy; 2026 蔡也</span>
   </footer>
+
 </Layout>
 
 <style>
-  /* Header */
+  /* ====== HEADER ====== */
   .header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    background: rgba(250, 250, 250, 0.9);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    background: rgba(254, 252, 249, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
   }
 
   .nav {
-    max-width: 960px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 0.875rem 2.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
   .logo {
-    font-size: 1.25rem;
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
     font-weight: 600;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.05em;
   }
 
   .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 2.25rem;
   }
 
   .nav-links a {
-    font-size: 0.875rem;
-    color: #666;
-    transition: color 0.2s;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    transition: color 0.3s var(--ease);
   }
 
   .nav-links a:hover {
-    color: #1a1a1a;
+    color: var(--text);
   }
 
   .menu-toggle {
@@ -214,227 +297,452 @@ import Layout from '../layouts/Layout.astro';
 
   .menu-toggle span {
     display: block;
-    width: 22px;
-    height: 2px;
-    background: #1a1a1a;
-    transition: transform 0.3s, opacity 0.3s;
+    width: 20px;
+    height: 1.5px;
+    background: var(--text);
+    transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
   }
 
-  /* Hero */
+  /* ====== HERO ====== */
   .hero {
-    max-width: 960px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 10rem 2rem 6rem;
+    padding: 9rem 2.5rem 6rem;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .hero-left {
+    padding-top: 0.5rem;
   }
 
   .hero-name {
-    font-size: clamp(2.5rem, 8vw, 5rem);
-    font-weight: 600;
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 700;
     letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
+    line-height: 1.05;
+    color: var(--text);
   }
 
-  .hero-tagline {
-    font-size: 1.125rem;
-    color: #555;
+  .hero-name-en {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    color: var(--text-secondary);
+    margin-top: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .hero-right {
+    padding-top: 1.5rem;
+  }
+
+  .hero-tags {
     margin-bottom: 2rem;
-    line-height: 1.8;
   }
 
-  .dot {
-    margin: 0 0.5rem;
-    color: #999;
+  .tag-group {
+    display: flex;
+    align-items: baseline;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tag-group:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .tag-label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+    width: 6rem;
+    flex-shrink: 0;
+  }
+
+  .tag-value {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: 0.02em;
   }
 
   .hero-desc {
     font-size: 0.9375rem;
-    color: #666;
-    max-width: 640px;
-    line-height: 1.9;
+    line-height: 1.85;
+    color: #5a5a5a;
+    max-width: 420px;
   }
 
-  /* Sections */
+  /* ====== EXPERIENCE ====== */
   .section {
-    max-width: 960px;
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 4rem 2rem;
+    padding: 5rem 2.5rem;
   }
 
-  .section-title {
+  .timeline {
+    margin-top: 0;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 6rem 2rem 1fr;
+    gap: 0;
+    margin-bottom: 2.5rem;
+    align-items: start;
+  }
+
+  .timeline-left {
+    text-align: right;
+    padding-top: 0.25rem;
+  }
+
+  .timeline-year {
+    display: block;
     font-size: 0.8125rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: #999;
-    margin-bottom: 3rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 1px solid #e5e5e5;
+    color: var(--text);
+    letter-spacing: 0.02em;
   }
 
-  /* Experience */
-  .experience-item {
-    margin-bottom: 3rem;
+  .timeline-month {
+    display: block;
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+    margin-top: 0.125rem;
   }
 
-  .exp-header {
-    margin-bottom: 1rem;
+  .timeline-line {
+    width: 1px;
+    background: var(--border);
+    min-height: 100%;
+    position: relative;
   }
 
-  .exp-header h3 {
-    font-size: 1.0625rem;
+  .timeline-line::before {
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    left: -3px;
+    width: 7px;
+    height: 7px;
+    border: 1.5px solid var(--text-secondary);
+    background: var(--bg);
+  }
+
+  .timeline-content {
+    padding: 0 0 2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .timeline-item:last-child .timeline-content {
+    border-bottom: none;
+  }
+
+  .exp-role {
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 0.25rem;
+    color: var(--text);
+    margin-bottom: 0.125rem;
   }
 
-  .exp-meta {
+  .exp-company {
     font-size: 0.8125rem;
-    color: #888;
+    color: var(--text-secondary);
+    margin-bottom: 0.875rem;
   }
 
-  .experience-item ul {
+  .exp-list {
     list-style: none;
     padding: 0;
   }
 
-  .experience-item li {
-    font-size: 0.9375rem;
-    color: #444;
+  .exp-list li {
+    font-size: 0.875rem;
     line-height: 1.8;
-    padding-left: 1.25rem;
+    color: #4a4a4a;
+    padding-left: 1rem;
     position: relative;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
   }
 
-  .experience-item li::before {
+  .exp-list li::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 0.7em;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: #ccc;
+    top: 0.65em;
+    width: 4px;
+    height: 1px;
+    background: var(--text-secondary);
   }
 
-  /* Moments */
+  /* ====== MOMENTS (dark) ====== */
+  .moments-section {
+    background: var(--bg-dark);
+    padding: 5rem 2.5rem;
+  }
+
   .moments-grid {
+    max-width: 1120px;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
   }
 
   .moment-card {
-    background: #f0f0f0;
-    border-radius: 4px;
-    overflow: hidden;
-    transition: transform 0.2s;
+    cursor: default;
+    transition: transform 0.3s var(--ease);
   }
 
   .moment-card:hover {
     transform: translateY(-2px);
   }
 
-  .moment-img-placeholder {
-    aspect-ratio: 4 / 3;
+  .moment-img {
+    aspect-ratio: 3 / 4;
+    background: #252525;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
-    background: #e8e8e8;
+    margin-bottom: 0.75rem;
+    border: 1px solid #333;
   }
 
-  .moment-card p {
-    padding: 0.875rem 1rem;
-    font-size: 0.8125rem;
-    color: #555;
+  .moment-img svg {
+    width: 48px;
+    height: 48px;
+    opacity: 0.4;
   }
 
-  /* About */
-  .about-intro {
-    font-size: 1.125rem;
+  .moment-caption {
+    font-size: 0.75rem;
     font-weight: 500;
+    color: #ccc;
+    letter-spacing: 0.03em;
+  }
+
+  .moment-sub {
+    font-size: 0.6875rem;
+    color: #666;
+    margin-top: 0.125rem;
+  }
+
+  /* ====== ABOUT ====== */
+  .about-intro {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text);
     margin-bottom: 1.5rem;
   }
 
-  .section p {
+  .about-body {
     font-size: 0.9375rem;
-    color: #444;
-    line-height: 1.9;
-    margin-bottom: 1.25rem;
+    color: #5a5a5a;
+    max-width: 600px;
+    margin-bottom: 3.5rem;
+    line-height: 1.85;
   }
 
-  .about-blocks {
-    margin-top: 3rem;
+  .about-grid {
     display: grid;
-    gap: 2.5rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 3rem;
   }
 
-  .about-block h3 {
+  .about-block {
+    position: relative;
+    padding-top: 0.5rem;
+  }
+
+  .about-num {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--border);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .about-block-title {
+    font-family: var(--font-serif);
     font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 0.75rem;
+    color: var(--text);
+    margin-bottom: 0.625rem;
   }
 
-  .about-block p {
-    color: #555;
+  .about-block-text {
+    font-size: 0.875rem;
+    color: #5a5a5a;
+    line-height: 1.85;
   }
 
-  /* Contact */
-  .contact {
-    text-align: center;
-    padding: 6rem 2rem;
+  /* ====== CONTACT ====== */
+  .contact-section {
+    background: var(--bg-dark);
+    padding: 5rem 2.5rem;
+  }
+
+  .contact-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .contact-content {
+    display: flex;
+    align-items: baseline;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-name {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #eee;
   }
 
   .contact-email {
-    display: inline-block;
-    font-size: 1.125rem;
-    color: #1a1a1a;
-    border-bottom: 1px solid #1a1a1a;
-    padding-bottom: 2px;
-    transition: opacity 0.2s;
+    font-size: 0.875rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 1px;
+    transition: opacity 0.3s var(--ease);
   }
 
   .contact-email:hover {
-    opacity: 0.6;
+    opacity: 0.7;
   }
 
-  /* Footer */
+  /* ====== FOOTER ====== */
   .footer {
-    text-align: center;
-    padding: 2rem;
-    border-top: 1px solid #e5e5e5;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 1.5rem 2.5rem;
+    border-top: 1px solid var(--border);
   }
 
-  .footer p {
-    font-size: 0.75rem;
-    color: #aaa;
+  .footer span {
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
   }
 
-  /* Mobile */
-  @media (max-width: 768px) {
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .moments-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .nav {
+      padding: 0.75rem 1.5rem;
+    }
+
     .nav-links {
       display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      z-index: 200;
+    }
+
+    .nav-links.open {
+      display: flex;
+    }
+
+    .nav-links a {
+      font-size: 1.25rem;
+      letter-spacing: 0.1em;
     }
 
     .menu-toggle {
       display: flex;
+      z-index: 300;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(4px, 4px);
+    }
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(4px, -4px);
     }
 
     .hero {
-      padding: 8rem 1.5rem 4rem;
+      padding: 7rem 1.5rem 4rem;
     }
 
     .section {
-      padding: 3rem 1.5rem;
+      padding: 3.5rem 1.5rem;
+    }
+
+    .moments-section {
+      padding: 3.5rem 1.5rem;
+    }
+
+    .timeline-item {
+      grid-template-columns: 4.5rem 1.5rem 1fr;
+    }
+
+    .timeline-content {
+      padding-left: 1rem;
     }
 
     .moments-grid {
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
     }
+
+    .tag-group {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .tag-label {
+      width: auto;
+    }
+
+    .contact-content {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 400px) {
     .moments-grid {
       grid-template-columns: 1fr;
     }
@@ -442,22 +750,18 @@ import Layout from '../layouts/Layout.astro';
 </style>
 
 <script>
-  // Mobile menu toggle
-  const toggle = document.querySelector('.menu-toggle');
-  const navLinks = document.querySelector('.nav-links');
+  const toggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
   if (toggle && navLinks) {
     toggle.addEventListener('click', () => {
-      const isOpen = navLinks.style.display === 'flex';
-      navLinks.style.display = isOpen ? 'none' : 'flex';
-      navLinks.style.flexDirection = 'column';
-      navLinks.style.position = 'absolute';
-      navLinks.style.top = '100%';
-      navLinks.style.left = '0';
-      navLinks.style.right = '0';
-      navLinks.style.background = 'rgba(250,250,250,0.98)';
-      navLinks.style.padding = isOpen ? '0' : '1.5rem 2rem';
-      navLinks.style.borderBottom = '1px solid rgba(0,0,0,0.06)';
-      navLinks.style.gap = '1rem';
+      navLinks.classList.toggle('open');
+      toggle.classList.toggle('active');
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        toggle.classList.remove('active');
+      });
     });
   }
 </script>
