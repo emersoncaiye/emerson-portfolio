@@ -194,8 +194,8 @@ function renderExpItem(text: string) {
       <h2 class="section-label dark">{t.momentsLabel}</h2>
     </div>
     <div class="moments-scroll reveal">
-      {t.moments.map((m) => (
-        <div class="moment-card">
+      {t.moments.map((m, i) => (
+        <div class={`moment-card${i === 3 ? ' moment-card--offset' : ''}`}>
           <div class="moment-img">
             <img src={m.img} alt={m.caption} loading="lazy" />
           </div>
@@ -720,6 +720,10 @@ function renderExpItem(text: string) {
 
   .moment-card:hover .moment-img img {
     filter: grayscale(0%);
+  }
+
+  .moment-card--offset {
+    margin-top: 10%;
   }
 
   .moment-caption {
