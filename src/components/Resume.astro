@@ -17,12 +17,7 @@ interface Props {
     title: string;
     heroName: string;
     heroNameEn: string;
-    tagLanguage: string;
-    tagLanguageVal: string;
-    tagIndustry: string;
-    tagIndustryVal: string;
-    tagStrength: string;
-    tagStrengthVal: string;
+    heroIdentities: string[];
     heroDesc: string;
     expLabel: string;
     exp1Role: string; exp1Company: string; exp1Date: string; exp1Month: string; exp1Items: string[];
@@ -79,19 +74,10 @@ function renderExpItem(text: string) {
       <p class="hero-name-en">{t.heroNameEn}</p>
     </div>
     <div class="hero-right">
-      <div class="hero-tags">
-        <div class="tag-group">
-          <span class="tag-label">{t.tagLanguage}</span>
-          <span class="tag-value">{t.tagLanguageVal}</span>
-        </div>
-        <div class="tag-group">
-          <span class="tag-label">{t.tagIndustry}</span>
-          <span class="tag-value">{t.tagIndustryVal}</span>
-        </div>
-        <div class="tag-group">
-          <span class="tag-label">{t.tagStrength}</span>
-          <span class="tag-value">{t.tagStrengthVal}</span>
-        </div>
+      <div class="hero-identities">
+        {t.heroIdentities.map((id: string) => (
+          <span class="identity-line">{id}</span>
+        ))}
       </div>
       <p class="hero-desc">{t.heroDesc}</p>
     </div>
@@ -346,36 +332,21 @@ function renderExpItem(text: string) {
     padding-top: 1.5rem;
   }
 
-  .hero-tags {
+  .hero-identities {
     margin-bottom: 2rem;
-  }
-
-  .tag-group {
-    display: flex;
-    align-items: baseline;
-    padding: 0.625rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
   }
 
-  .tag-group:first-child {
-    border-top: 1px solid var(--border);
-  }
-
-  .tag-label {
-    font-size: 0.6875rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--text-secondary);
-    width: 6rem;
-    flex-shrink: 0;
-  }
-
-  .tag-value {
-    font-size: 0.875rem;
-    font-weight: 400;
+  .identity-line {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: clamp(1rem, 2.5vw, 1.375rem);
+    font-weight: 600;
+    line-height: 2;
     color: var(--text);
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
   }
 
   .hero-desc {
@@ -733,13 +704,8 @@ function renderExpItem(text: string) {
       padding-left: 1rem;
     }
 
-    .tag-group {
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .tag-label {
-      width: auto;
+    .identity-line {
+      font-size: 1rem;
     }
 
     .contact-content {
