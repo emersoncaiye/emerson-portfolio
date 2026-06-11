@@ -1,0 +1,750 @@
+---
+interface MomentItem {
+  img: string;
+  caption: string;
+  sub: string;
+}
+
+interface AboutBlock {
+  num: string;
+  title: string;
+  text: string;
+}
+
+interface Props {
+  lang: string;
+  t: {
+    title: string;
+    heroName: string;
+    heroNameEn: string;
+    tagLanguage: string;
+    tagLanguageVal: string;
+    tagIndustry: string;
+    tagIndustryVal: string;
+    tagStrength: string;
+    tagStrengthVal: string;
+    heroDesc: string;
+    expLabel: string;
+    exp1Role: string; exp1Company: string; exp1Date: string; exp1Month: string; exp1Items: string[];
+    exp2Role: string; exp2Company: string; exp2Date: string; exp2Month: string; exp2Items: string[];
+    exp3Role: string; exp3Company: string; exp3Date: string; exp3Month: string; exp3Items: string[];
+    exp4Role: string; exp4Company: string; exp4Date: string; exp4Month: string; exp4Items: string[];
+    exp5Role: string; exp5Company: string; exp5Date: string; exp5Month: string; exp5Items: string[];
+    momentsLabel: string;
+    moments: MomentItem[];
+    aboutLabel: string;
+    aboutIntro: string;
+    aboutBody: string;
+    aboutBlocks: AboutBlock[];
+    contactLabel: string;
+    contactName: string;
+    contactEmail: string;
+  };
+  langLinks: { code: string; label: string; href: string; active: boolean }[];
+}
+
+const { lang, t, langLinks } = Astro.props;
+
+function renderExpItem(text: string) {
+  return `<li>${text}</li>`;
+}
+---
+
+<!-- ===== NAV ===== -->
+<header class="header">
+  <nav class="nav">
+    <a href={lang === 'en' ? '/' : `/${lang}/`} class="logo">{lang === 'zh' || lang === 'yue' ? '蔡也' : 'Emerson'}</a>
+    <div class="nav-center">
+      <a href="#experience" class="link-hover">{t.expLabel}</a>
+      <a href="#moments" class="link-hover">{t.momentsLabel}</a>
+      <a href="#about" class="link-hover">{t.aboutLabel}</a>
+      <a href="#contact" class="link-hover">{t.contactLabel}</a>
+    </div>
+    <div class="lang-nav">
+      {langLinks.map((l) => (
+        <a href={l.href} class:list={['lang-link', { active: l.active }]}>{l.label}</a>
+      ))}
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <h1 class="hero-name">{t.heroName}</h1>
+      <p class="hero-name-en">{t.heroNameEn}</p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-tags">
+        <div class="tag-group">
+          <span class="tag-label">{t.tagLanguage}</span>
+          <span class="tag-value">{t.tagLanguageVal}</span>
+        </div>
+        <div class="tag-group">
+          <span class="tag-label">{t.tagIndustry}</span>
+          <span class="tag-value">{t.tagIndustryVal}</span>
+        </div>
+        <div class="tag-group">
+          <span class="tag-label">{t.tagStrength}</span>
+          <span class="tag-value">{t.tagStrengthVal}</span>
+        </div>
+      </div>
+      <p class="hero-desc">{t.heroDesc}</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section id="experience" class="section">
+  <h2 class="section-label reveal">{t.expLabel}</h2>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">{t.exp1Date}</span>
+        <span class="timeline-month">{t.exp1Month}</span>
+      </div>
+      <div class="timeline-line"></div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp1Role}</div>
+        <div class="exp-company">{t.exp1Company}</div>
+        <ul class="exp-list" set:html={t.exp1Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">{t.exp2Date}</span>
+        <span class="timeline-month">{t.exp2Month}</span>
+      </div>
+      <div class="timeline-line"></div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp2Role}</div>
+        <div class="exp-company">{t.exp2Company}</div>
+        <ul class="exp-list" set:html={t.exp2Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">{t.exp3Date}</span>
+        <span class="timeline-month">{t.exp3Month}</span>
+      </div>
+      <div class="timeline-line"></div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp3Role}</div>
+        <div class="exp-company">{t.exp3Company}</div>
+        <ul class="exp-list" set:html={t.exp3Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">{t.exp4Date}</span>
+        <span class="timeline-month">{t.exp4Month}</span>
+      </div>
+      <div class="timeline-line"></div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp4Role}</div>
+        <div class="exp-company">{t.exp4Company}</div>
+        <ul class="exp-list" set:html={t.exp4Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">{t.exp5Date}</span>
+        <span class="timeline-month">{t.exp5Month}</span>
+      </div>
+      <div class="timeline-line"></div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp5Role}</div>
+        <div class="exp-company">{t.exp5Company}</div>
+        <ul class="exp-list" set:html={t.exp5Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MOMENTS (dark block) ===== -->
+<section id="moments" class="moments-section">
+  <h2 class="section-label reveal" style="color: #999; border-color: #333;">{t.momentsLabel}</h2>
+  <div class="moments-grid reveal">
+    {t.moments.map((m) => (
+      <div class="moment-card">
+        <div class="moment-img">
+          <img src={m.img} alt={m.caption} loading="lazy" />
+        </div>
+        <div class="moment-caption">{m.caption}</div>
+        <div class="moment-sub">{m.sub}</div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="section">
+  <h2 class="section-label reveal">{t.aboutLabel}</h2>
+  <p class="about-intro reveal">{t.aboutIntro}</p>
+  <p class="about-body reveal">{t.aboutBody}</p>
+  <div class="about-grid">
+    {t.aboutBlocks.map((b) => (
+      <div class="about-block reveal">
+        <span class="about-num">{b.num}</span>
+        <h3 class="about-block-title">{b.title}</h3>
+        <p class="about-block-text">{b.text}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner reveal">
+    <h2 class="section-label" style="color: #999; border-color: #333;">{t.contactLabel}</h2>
+    <div class="contact-content">
+      <span class="contact-name">{t.contactName}</span>
+      <a href={`mailto:${t.contactEmail}`} class="contact-email">{t.contactEmail}</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <span>&copy; 2026 {t.contactName}</span>
+</footer>
+
+<style>
+  /* ====== HEADER ====== */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(254, 252, 249, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0.875rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-center {
+    display: flex;
+    gap: 2.25rem;
+  }
+
+  .nav-center a {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    transition: color 0.3s var(--ease);
+  }
+
+  .nav-center a:hover {
+    color: var(--text);
+  }
+
+  .lang-nav {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .lang-link {
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+
+  .lang-link:hover,
+  .lang-link.active {
+    opacity: 1;
+  }
+
+  .lang-link.active {
+    font-weight: 600;
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--text);
+    transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  }
+
+  /* ====== HERO ====== */
+  .hero {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 9rem 2.5rem 6rem;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .hero-left {
+    padding-top: 0.5rem;
+  }
+
+  .hero-name {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: var(--text);
+  }
+
+  .hero-name-en {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    color: var(--text-secondary);
+    margin-top: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .hero-right {
+    padding-top: 1.5rem;
+  }
+
+  .hero-tags {
+    margin-bottom: 2rem;
+  }
+
+  .tag-group {
+    display: flex;
+    align-items: baseline;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tag-group:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .tag-label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+    width: 6rem;
+    flex-shrink: 0;
+  }
+
+  .tag-value {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+
+  .hero-desc {
+    font-size: 0.9375rem;
+    line-height: 1.85;
+    color: #5a5a5a;
+    max-width: 420px;
+  }
+
+  /* ====== EXPERIENCE ====== */
+  .section {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 5rem 2.5rem;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 6rem 2rem 1fr;
+    gap: 0;
+    margin-bottom: 2.5rem;
+    align-items: start;
+  }
+
+  .timeline-left {
+    text-align: right;
+    padding-top: 0.25rem;
+  }
+
+  .timeline-year {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+
+  .timeline-month {
+    display: block;
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+    margin-top: 0.125rem;
+  }
+
+  .timeline-line {
+    width: 1px;
+    background: var(--border);
+    min-height: 100%;
+    position: relative;
+  }
+
+  .timeline-line::before {
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    left: -3px;
+    width: 7px;
+    height: 7px;
+    border: 1.5px solid var(--text-secondary);
+    background: var(--bg);
+  }
+
+  .timeline-content {
+    padding: 0 0 2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .timeline-item:last-child .timeline-content {
+    border-bottom: none;
+  }
+
+  .exp-role {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.125rem;
+  }
+
+  .exp-company {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.875rem;
+  }
+
+  .exp-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .exp-list :global(li) {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: #4a4a4a;
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-list :global(li)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 4px;
+    height: 1px;
+    background: var(--text-secondary);
+  }
+
+  /* ====== MOMENTS (dark) ====== */
+  .moments-section {
+    background: var(--bg-dark);
+    padding: 5rem 2.5rem;
+  }
+
+  .moments-grid {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
+  }
+
+  .moment-card {
+    cursor: default;
+    transition: transform 0.3s var(--ease);
+  }
+
+  .moment-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .moment-img {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+  }
+
+  .moment-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter 0.4s var(--ease);
+  }
+
+  .moment-card:hover .moment-img img {
+    filter: grayscale(0%);
+  }
+
+  .moment-caption {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #ccc;
+    letter-spacing: 0.03em;
+  }
+
+  .moment-sub {
+    font-size: 0.6875rem;
+    color: #666;
+    margin-top: 0.125rem;
+  }
+
+  /* ====== ABOUT ====== */
+  .about-intro {
+    font-family: var(--font-serif);
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-body {
+    font-size: 0.9375rem;
+    color: #5a5a5a;
+    max-width: 600px;
+    margin-bottom: 3.5rem;
+    line-height: 1.85;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 3rem;
+  }
+
+  .about-block {
+    position: relative;
+    padding-top: 0.5rem;
+  }
+
+  .about-num {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--border);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .about-block-title {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.625rem;
+  }
+
+  .about-block-text {
+    font-size: 0.875rem;
+    color: #5a5a5a;
+    line-height: 1.85;
+  }
+
+  /* ====== CONTACT ====== */
+  .contact-section {
+    background: var(--bg-dark);
+    padding: 5rem 2.5rem;
+  }
+
+  .contact-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .contact-content {
+    display: flex;
+    align-items: baseline;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-name {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #eee;
+  }
+
+  .contact-email {
+    font-size: 0.875rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 1px;
+    transition: opacity 0.3s var(--ease);
+  }
+
+  .contact-email:hover {
+    opacity: 0.7;
+  }
+
+  /* ====== FOOTER ====== */
+  .footer {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 1.5rem 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer span {
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+  }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .moments-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .nav {
+      padding: 0.75rem 1.5rem;
+    }
+
+    .nav-center {
+      display: none;
+    }
+
+    .lang-nav {
+      display: none;
+    }
+
+    .mobile-open .nav-center,
+    .mobile-open .lang-nav {
+      display: flex;
+    }
+
+    .menu-toggle {
+      display: flex;
+      z-index: 300;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(4px, 4px);
+    }
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(4px, -4px);
+    }
+
+    .hero {
+      padding: 7rem 1.5rem 4rem;
+    }
+
+    .section {
+      padding: 3.5rem 1.5rem;
+    }
+
+    .moments-section {
+      padding: 3.5rem 1.5rem;
+    }
+
+    .timeline-item {
+      grid-template-columns: 4.5rem 1.5rem 1fr;
+    }
+
+    .timeline-content {
+      padding-left: 1rem;
+    }
+
+    .moments-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .tag-group {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .tag-label {
+      width: auto;
+    }
+
+    .contact-content {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .moments-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.querySelector('.nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      nav.classList.toggle('mobile-open');
+    });
+  }
+</script>
