@@ -84,6 +84,10 @@ function renderExpItem(text: string) {
         ))}
       </div>
       <p class="hero-desc">{t.heroDesc}</p>
+      <div class="hero-direction reveal">
+        <p class="hero-direction-label">{t.heroDirection}</p>
+        <p class="hero-direction-sub">{t.heroDirectionSub}</p>
+      </div>
     </div>
   </div>
   <div class="hero-scroll-hint">
@@ -491,6 +495,26 @@ function renderExpItem(text: string) {
     max-width: 400px;
   }
 
+  .hero-direction {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #E2E0DC;
+  }
+
+  .hero-direction-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #C8553D;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-direction-sub {
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: #8A8A8A;
+  }
+
   .hero-scroll-hint {
     display: flex;
     justify-content: center;
@@ -775,7 +799,7 @@ function renderExpItem(text: string) {
   }
 
   .moment-card {
-    flex: 0 0 calc((100% - 2.5rem) / 3);
+    flex: 0 0 calc((100% - 3rem) / 4);
     scroll-snap-align: start;
     min-width: 0;
     cursor: pointer;
