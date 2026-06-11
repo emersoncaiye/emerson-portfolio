@@ -186,6 +186,34 @@ function renderExpItem(text: string) {
   </div>
 </section>
 
+<!-- ===== SKILLS ===== -->
+<section class="skills-section reveal">
+  <div class="section-header">
+    <span class="section-num">01b</span>
+    <h2 class="section-label">{t.skillsLabel}</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-label">{t.skillLangTag}</div>
+      <div class="skill-tags">
+        {t.skillLangs.map((s: string) => <span class="skill-tag">{s}</span>)}
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">{t.skillToolTag}</div>
+      <div class="skill-tags">
+        {t.skillTools.map((s: string) => <span class="skill-tag">{s}</span>)}
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-label">{t.skillMethodTag}</div>
+      <div class="skill-tags">
+        {t.skillMethods.map((s: string) => <span class="skill-tag">{s}</span>)}
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ===== MOMENTS (dark block) ===== -->
 <section id="moments" class="moments-section">
   <div class="moments-inner">
@@ -242,7 +270,16 @@ function renderExpItem(text: string) {
     <div class="contact-content reveal">
       <span class="contact-name">{t.contactName}</span>
       <div class="contact-divider"></div>
-      <a href={`mailto:${t.contactEmail}`} class="contact-email">{t.contactEmail}</a>
+      <div class="contact-links">
+        <a href={`mailto:${t.contactEmail}`} class="contact-email">{t.contactEmail}</a>
+        <span class="contact-sep">·</span>
+        <span class="contact-city">{t.contactCity}</span>
+        <span class="contact-sep">·</span>
+        <a href={t.contactGithub} target="_blank" rel="noopener" class="contact-link">GitHub</a>
+        <span class="contact-sep">·</span>
+        <a href={t.contactLinkedin} target="_blank" rel="noopener" class="contact-link">LinkedIn</a>
+      </div>
+      <p class="contact-open">{t.contactOpen}</p>
     </div>
   </div>
 </section>
@@ -659,10 +696,56 @@ function renderExpItem(text: string) {
     background: var(--text-secondary);
   }
 
+  /* ====== SKILLS ====== */
+  .skills-section {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem 4rem;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .skill-group {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+  }
+
+  .skill-group-label {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    color: var(--text);
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--border);
+    transition: border-color 0.3s ease;
+  }
+
+  .skill-tag:hover {
+    border-color: var(--text);
+  }
+
   /* ====== MOMENTS (dark) ====== */
   .moments-section {
     background: var(--bg-dark);
-    padding: 6rem 0;
+    padding: 4rem 0;
   }
 
   .moments-inner {
@@ -850,6 +933,14 @@ function renderExpItem(text: string) {
     background: #555;
   }
 
+  .contact-links {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
   .contact-email {
     font-size: 0.875rem;
     color: var(--accent);
@@ -860,6 +951,37 @@ function renderExpItem(text: string) {
 
   .contact-email:hover {
     opacity: 0.7;
+  }
+
+  .contact-sep {
+    color: #555;
+    font-size: 0.75rem;
+  }
+
+  .contact-city {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .contact-link {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.6);
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 1px;
+    transition: color 0.3s var(--ease);
+  }
+
+  .contact-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .contact-open {
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.35);
+    margin-top: 1.25rem;
   }
 
   /* ====== FOOTER ====== */
