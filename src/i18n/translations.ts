@@ -29,7 +29,7 @@ export const languages = {
     ],
     exp3Role: '辅导老师',
     exp3Company: '励风教育（深圳）有限公司',
-    exp3Date: '至今',
+    exp3Date: '2026.06 – 至今',
     exp3Month: '兼职',
     exp3Items: [
       '辅导港深两地中学生（DSE 课程，Form 1–6），覆盖英语、中西方历史、经济等学科',
@@ -104,7 +104,7 @@ export const languages = {
     ],
     exp3Role: 'Tutor',
     exp3Company: 'Li Feng Education (Shenzhen) Co.',
-    exp3Date: 'Present',
+    exp3Date: 'Jun 2026 – Present',
     exp3Month: 'Part-time',
     exp3Items: [
       'Tutored secondary students (DSE curriculum, Form 1–6) from Hong Kong and Shenzhen in English, History, and Economics',
@@ -179,7 +179,7 @@ export const languages = {
     ],
     exp3Role: 'Tutrice',
     exp3Company: 'Li Feng Éducation (Shenzhen) Co.',
-    exp3Date: 'Présent',
+    exp3Date: 'Juin 2026 – Présent',
     exp3Month: 'Temps partiel',
     exp3Items: [
       'Tutorat d\'élèves du secondaire (programme DSE, Form 1–6) en anglais, histoire et économie',
@@ -254,7 +254,7 @@ export const languages = {
     ],
     exp3Role: '輔導老師',
     exp3Company: '勵風教育（深圳）有限公司',
-    exp3Date: '至今',
+    exp3Date: '2026.06 – 至今',
     exp3Month: '兼職',
     exp3Items: [
       '輔導港深兩地中學生（DSE課程，Form 1–6），教授英文、中西史、經濟等學科',
