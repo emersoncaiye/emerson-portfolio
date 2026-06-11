@@ -16,7 +16,8 @@ export const languages = {
     exp1Items: [
       '基于 Astro + Cloudflare Pages 搭建个人网站，2 天从 0 到 1 上线（原计划 10 天，效率提升 5 倍），掌握 vibe coding 快速原型工作流',
       '独立完成中/英/法三语简历页面的内容架构与多设备响应式实现',
-      '统筹内容规划与技术实现，验证非技术背景人员借助 AI 工具快速落地前端产品的能力',
+      '作为项目组长，统筹 7 人团队完成全部成员简历网站的开发与上线，涵盖前端开发、多语翻译与内容编排',
+      '验证非技术背景人员借助 AI 工具快速落地前端产品的能力',
     ],
     exp2Role: '产品设计',
     exp2Company: 'AI 运营助手 · 产品原型设计',
@@ -92,7 +93,8 @@ export const languages = {
     exp1Items: [
       'Built personal website with Astro + Cloudflare Pages using AI-driven development; zero to launch in 2 days (5x efficiency gain)',
       'Independently architected trilingual resume pages (EN/ZH/FR) with responsive design',
-      'Led content planning and technical implementation, demonstrating non-technical individuals can ship front-end products with AI tools',
+      'Led a 7-member team to develop and launch resume websites for all members, covering front-end development, multilingual translation, and content layout',
+      'Demonstrated non-technical individuals can ship front-end products with AI tools',
     ],
     exp2Role: 'Product Design',
     exp2Company: 'AI Operations Assistant · Product Prototype',
@@ -168,7 +170,8 @@ export const languages = {
     exp1Items: [
       'Site personnel construit avec Astro + Cloudflare Pages ; du zéro au lancement en 2 jours (gain d\'efficacité 5x)',
       'Architecture indépendante de trois pages CV (EN/ZH/FR) avec design responsive',
-      'Direction du projet, coordination de la planification du contenu et de la mise en œuvre technique',
+      'En tant que chef de projet, coordination d\'une équipe de 7 membres pour développer et lancer les sites CV de tous les membres, couvrant le développement front-end, la traduction multilingue et la mise en page',
+      'Démonstration que des personnes non techniques peuvent livrer des produits front-end avec des outils IA',
     ],
     exp2Role: 'Conception Produit',
     exp2Company: 'Assistant IA pour Opérations · Prototype',
@@ -244,7 +247,8 @@ export const languages = {
     exp1Items: [
       '採用 Astro + Cloudflare Pages 建立個人網站，2日內從零到上線（效率提升5倍）',
       '獨立完成中/英/法三語簡歷頁面嘅內容架構與響應式設計',
-      '統籌內容規劃與技術實現，驗證非技術背景人士亦可借助AI工具快速落地前端產品',
+      '作為項目組長，統籌7人團隊完成全部成員簡歷網站嘅開發與上線，涵蓋前端開發、多語翻譯與內容編排',
+      '驗證非技術背景人士亦可借助AI工具快速落地前端產品',
     ],
     exp2Role: '產品設計',
     exp2Company: 'AI 營運助手 · 產品原型設計',
