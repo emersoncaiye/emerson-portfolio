@@ -97,6 +97,11 @@ function renderExpItem(text: string) {
     <span class="section-num">01</span>
     <h2 class="section-label">{t.expLabel}</h2>
   </div>
+
+  <!-- 项目经历 -->
+  <div class="exp-subsection reveal">
+    <h3 class="exp-sub-label">{t.projectExpLabel}</h3>
+  </div>
   <div class="timeline">
     <div class="timeline-item reveal">
       <div class="timeline-left">
@@ -127,7 +132,13 @@ function renderExpItem(text: string) {
         <ul class="exp-list" set:html={t.exp2Items.map(renderExpItem).join('')} />
       </div>
     </div>
+  </div>
 
+  <!-- 实践经历 -->
+  <div class="exp-subsection reveal">
+    <h3 class="exp-sub-label">{t.practiceExpLabel}</h3>
+  </div>
+  <div class="timeline">
     <div class="timeline-item reveal">
       <div class="timeline-left">
         <span class="timeline-year">{t.exp3Date}</span>
@@ -488,6 +499,22 @@ function renderExpItem(text: string) {
 
   .section-label.dark {
     color: #777;
+  }
+
+  /* ====== EXP SUBSECTION ====== */
+  .exp-subsection {
+    padding: 2rem 0 0;
+  }
+  .exp-sub-label {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #C8553D;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #E2E0DC;
+    margin-bottom: 1.5rem;
   }
 
   /* ====== TIMELINE ====== */
