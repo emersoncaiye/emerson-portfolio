@@ -172,7 +172,7 @@ function renderExpItem(text: string) {
 <!-- ===== MOMENTS (dark block) ===== -->
 <section id="moments" class="moments-section">
   <h2 class="section-label reveal" style="color: #999; border-color: #333;">{t.momentsLabel}</h2>
-  <div class="moments-grid reveal">
+  <div class="moments-scroll reveal">
     {t.moments.map((m) => (
       <div class="moment-card">
         <div class="moment-img">
@@ -490,33 +490,51 @@ function renderExpItem(text: string) {
     padding: 5rem 2.5rem;
   }
 
-  .moments-grid {
+  .moments-scroll {
     max-width: 1120px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1.25rem;
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: #444 transparent;
+  }
+
+  .moments-scroll::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .moments-scroll::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 1px;
   }
 
   .moment-card {
-    cursor: default;
-    transition: transform 0.3s var(--ease);
+    flex: 0 0 calc((100% - 3rem) / 3);
+    scroll-snap-align: start;
+    min-width: 0;
+    cursor: pointer;
+    transition: opacity 0.3s var(--ease);
   }
 
   .moment-card:hover {
-    transform: translateY(-2px);
+    opacity: 0.85;
   }
 
   .moment-img {
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 4 / 3;
     overflow: hidden;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.625rem;
   }
 
   .moment-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
     filter: grayscale(100%);
     transition: filter 0.4s var(--ease);
   }
@@ -653,8 +671,8 @@ function renderExpItem(text: string) {
       gap: 2rem;
     }
 
-    .moments-grid {
-      grid-template-columns: repeat(3, 1fr);
+    .moments-scroll .moment-card {
+      flex: 0 0 calc((100% - 1.5rem) / 2);
     }
   }
 
@@ -703,17 +721,16 @@ function renderExpItem(text: string) {
       padding: 3.5rem 1.5rem;
     }
 
+    .moments-scroll .moment-card {
+      flex: 0 0 75%;
+    }
+
     .timeline-item {
       grid-template-columns: 4.5rem 1.5rem 1fr;
     }
 
     .timeline-content {
       padding-left: 1rem;
-    }
-
-    .moments-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
     }
 
     .tag-group {
@@ -732,8 +749,8 @@ function renderExpItem(text: string) {
   }
 
   @media (max-width: 400px) {
-    .moments-grid {
-      grid-template-columns: 1fr;
+    .moments-scroll .moment-card {
+      flex: 0 0 90%;
     }
   }
 </style>
