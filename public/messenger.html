@@ -651,34 +651,59 @@ section { padding: 100px 48px; position: relative; }
 }
 .return-table .highlight { color: var(--accent); }
 
-/* ===== COLOPHON ===== */
+/* ===== COLOPHON — dark footer ===== */
 .colophon {
-  padding: 60px 48px;
-  background: var(--bg-alt);
+  padding: 80px 48px 60px;
+  background: #0f1a14;
   text-align: center;
 }
 .colophon-inner {
   max-width: 600px;
   margin: 0 auto;
 }
+
+/* four selection principles */
+.colophon-credo {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+.colophon-credo span {
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 1.5vw, 20px);
+  letter-spacing: 6px;
+  color: #c8d4c0;
+  font-weight: 200;
+  text-transform: uppercase;
+  position: relative;
+}
+.colophon-credo span + span::before {
+  content: '·';
+  position: absolute;
+  left: -16px;
+  color: rgba(143,168,122,0.3);
+}
+
 .colophon .brand {
   font-family: var(--font-serif);
   font-size: 22px;
   letter-spacing: 6px;
-  color: var(--text);
+  color: #c8d4c0;
   margin-bottom: 8px;
   font-weight: 400;
 }
 .colophon .meta {
   font-family: var(--font-mono);
   font-size: 10px;
-  color: var(--gray-300);
+  color: rgba(143,168,122,0.5);
   letter-spacing: 2px;
   line-height: 2;
 }
 .colophon .meta span { margin: 0 8px; opacity: 0.3; }
 .colophon .links {
-  margin-top: 20px;
+  margin-top: 24px;
   display: flex;
   justify-content: center;
   gap: 24px;
@@ -687,26 +712,29 @@ section { padding: 100px 48px; position: relative; }
 .colophon .links a {
   font-family: var(--font-sans);
   font-size: 11px;
-  color: var(--deep-forest);
+  color: rgba(143,168,122,0.6);
   text-decoration: none;
   letter-spacing: 2px;
   text-transform: uppercase;
   opacity: 0.7;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s, color 0.3s;
 }
-.colophon .links a:hover { opacity: 1; }
+.colophon .links a:hover { 
+  opacity: 1; 
+  color: #c8d4c0;
+}
 .colophon-stamp {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 48px; height: 48px;
   border-radius: 50%;
-  border: 1px solid var(--gray-100);
+  border: 1px solid rgba(143,168,122,0.2);
   margin-top: 24px;
   font-family: var(--font-mono);
   font-size: 7px;
   letter-spacing: 2px;
-  color: var(--gray-300);
+  color: rgba(143,168,122,0.4);
   transform: rotate(-8deg);
 }
 
@@ -1026,9 +1054,15 @@ section { padding: 100px 48px; position: relative; }
   </div>
 </section>
 
-<!-- ===== COLOPHON ===== -->
+<!-- ===== COLOPHON — dark footer ===== -->
 <section class="colophon">
   <div class="colophon-inner">
+    <div class="colophon-credo">
+      <span>降噪</span>
+      <span>聪明</span>
+      <span>实用</span>
+      <span>流转</span>
+    </div>
     <h3 class="brand">三角洲</h3>
     <p class="meta">
       ISSUE 001 · 2024
@@ -1067,6 +1101,10 @@ const i18nMap = {
 '社区环保行动': ['社区环保行动', 'Community Environmental Action'],
 '每季度公示捐赠记录': ['每季度公示捐赠记录', 'Quarterly donation records'],
 '你让好东西继续流动。我们一起做点好事。': ['你让好东西继续流动。我们一起做点好事。', 'You keep good things moving. Together we do some good.'],
+  '降噪': ['降噪', 'Quiet'],
+  '聪明': ['聪明', 'Smart'],
+  '实用': ['实用', 'Practical'],
+  '流转': ['流转', 'Circulating'],
   '买走之后，如果哪一天它不再需要你了，送回给三角洲。它会继续被下一个人遇见。': ['买走之后，如果哪一天它不再需要你了，送回给三角洲。它会继续被下一个人遇见。', 'When it no longer needs you, send it back. Someone else will find it.'],
   '每一次再流通，利润的 20% 注入公益金。': ['每一次再流通，利润的 20% 注入公益金。', 'Every recirculation, 20% goes to charity.'],
   '审美策展 · 每一件都经过筛选': ['审美策展 · 每一件都经过筛选', 'Curated · Every piece selected'],
