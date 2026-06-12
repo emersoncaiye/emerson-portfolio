@@ -14,22 +14,23 @@
     }
 
     :root {
-      --bg: #0f1a14;
-      --bg-alt: #142019;
-      --bg-card: #182a20;
-      --text: #c8d4c0;
+      --bg: #e2eade;
+      --bg-alt: #d4dec8;
+      --bg-card: #c8d6bc;
+      --text: #1c2820;
       --accent: #4a7c59;
       --sprout: #8fa87a;
-      --deep-forest: #3d5a47;
-      --gray-100: #1a2e22;
-      --gray-300: #3d5a47;
-      --gray-600: #8fa87a;
-      --gray-900: #c8d4c0;
-      --accent-muted: rgba(74, 124, 89, 0.15);
-      --ink: #0a1210;
+      --deep-forest: #5a7a5e;
+      --gray-100: #d4dec8;
+      --gray-300: #8fa87a;
+      --gray-600: #3d5a47;
+      --gray-900: #1c2820;
+      --accent-muted: rgba(74, 124, 89, 0.12);
+      --ink: #0f1a14;
       --terra: #b8452a;
       --terra-muted: rgba(184, 69, 42, 0.12);
       --warm-glow: rgba(74, 124, 89, 0.08);
+      --text-light: #c8d4c0;
       --font-serif: 'SerifDisplay', 'Noto Serif SC', 'Times New Roman', serif;
       --font-mono: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', monospace;
       --font-sans: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
@@ -225,7 +226,7 @@
       transition: color 0.1s;
     }
     .gate-title .board-letter.flipping { color: var(--deep-forest); }
-    .gate-title .board-letter.settled { color: var(--text); }
+    .gate-title .board-letter.settled { color: var(--text-light); }
 
     .gate-title .highlight {
       display: block;
@@ -258,7 +259,7 @@
     .gate-flight-row:nth-child(2) { animation-delay: 1.5s; }
     .gate-flight-row:nth-child(3) { animation-delay: 1.8s; }
     .gate-flight-row:nth-child(4) { animation-delay: 2.1s; }
-    .gate-flight-row .flight-code { width: 120px; color: var(--text); opacity: 0.6; }
+    .gate-flight-row .flight-code { width: 120px; color: var(--text-light); opacity: 0.6; }
     .gate-flight-row .flight-route { flex: 1; }
     .gate-flight-row .flight-gate { width: 80px; text-align: right; }
     .gate-flight-row .flight-status { width: 100px; text-align: right; }
@@ -1241,7 +1242,7 @@
     /* ===== FOOTER ===== */
     footer {
       background: var(--ink);
-      color: var(--deep-forest);
+      color: var(--sprout);
       padding: 48px 60px;
       display: flex;
       justify-content: space-between;
