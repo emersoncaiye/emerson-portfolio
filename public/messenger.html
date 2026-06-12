@@ -112,21 +112,26 @@ header nav a:hover { opacity: 1; }
   text-align: right;
 }
 .cover-title {
-  font-size: clamp(72px, 14vw, 180px);
-  font-weight: 400;
-  letter-spacing: 0.04em;
-  line-height: 0.92;
+  font-family: var(--font-sans);
+  font-weight: 200;
+  font-size: clamp(36px, 7vw, 80px);
+  letter-spacing: 0.08em;
+  line-height: 1;
   text-align: center;
   color: var(--text);
   position: relative;
   z-index: 1;
+  text-transform: lowercase;
 }
 .cover-title .highlight {
   display: block;
+  font-family: var(--font-serif);
   font-style: italic;
-  margin-top: 0.05em;
-  opacity: 0.85;
-  color: var(--accent);
+  font-weight: 400;
+  margin-top: 0.1em;
+  opacity: 0.6;
+  font-size: 0.3em;
+  letter-spacing: 0.2em;
 }
 .cover-line {
   margin-top: 40px;
