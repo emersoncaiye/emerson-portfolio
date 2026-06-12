@@ -325,13 +325,13 @@
       opacity: 0.6;
     }
 
-    /* ===== MANIFESTO ===== */
+    /* ===== EDITOR'S NOTE ===== */
     .manifesto {
       border-top: 1px solid var(--accent);
       background: var(--bg-alt);
     }
 
-    .manifesto-grid {
+    .editors-note {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
@@ -340,17 +340,17 @@
       align-items: start;
     }
 
-    .manifesto-text {
+    .editors-note-text {
       font-size: clamp(15px, 1.4vw, 20px);
       line-height: 2;
       color: var(--gray-900);
     }
 
-    .manifesto-text p + p {
+    .editors-note-text p + p {
       margin-top: 1.6em;
     }
 
-    .manifesto-text .pull-quote {
+    .editors-note-text .pull-quote {
       font-size: clamp(22px, 2.4vw, 36px);
       line-height: 1.3;
       font-style: italic;
@@ -360,45 +360,48 @@
       margin: 40px 0;
     }
 
-    .manifesto-image {
-      position: relative;
-      aspect-ratio: 3/4;
-      background: var(--gray-100);
-      overflow: hidden;
+    .editors-note-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
 
-    .manifesto-image .texture-overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 3px,
-          rgba(0,0,0,0.03) 3px,
-          rgba(0,0,0,0.03) 4px
-        );
-      mix-blend-mode: multiply;
+    .editors-note-sidebar .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--gray-100);
     }
 
-    .manifesto-image .content-block {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 40px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.85));
-      color: var(--bg);
+    .editors-note-sidebar .stat-num {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
       font-family: var(--font-mono);
-      font-size: 11px;
-      letter-spacing: 2px;
-      line-height: 2;
+      font-size: 14px;
+      color: var(--accent);
     }
 
-    .manifesto-image .content-block strong {
-      font-family: var(--font-serif);
-      font-size: 18px;
-      font-weight: 400;
+    .editors-note-sidebar .stat-label {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--gray-600);
+      line-height: 1.6;
+    }
+
+    .editors-note-sidebar .stat-label strong {
       display: block;
-      margin-bottom: 8px;
+      font-family: var(--font-serif);
+      font-size: 16px;
+      color: var(--gray-900);
+      font-weight: 400;
+      margin-bottom: 2px;
     }
 
     /* ===== ITEMS GRID (循环之物) ===== */
@@ -795,61 +798,6 @@
       margin-bottom: 8px;
     }
 
-    /* ===== ABOUT COLLAPSE ===== */
-    .about-expand {
-      background: var(--bg-alt);
-      border-top: 2px solid var(--accent);
-      opacity: 0.3;
-      padding: 0 60px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.8s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    .about-expand.open {
-      max-height: 800px;
-    }
-
-    .about-expand-inner {
-      padding: 60px 0 80px;
-      max-width: 720px;
-      margin: 0 auto;
-      font-size: clamp(15px, 1.3vw, 18px);
-      line-height: 2.2;
-      color: var(--gray-900);
-    }
-
-    .about-expand-inner p + p {
-      margin-top: 1.4em;
-    }
-
-    .about-trigger {
-      display: inline-block;
-      font-family: var(--font-mono);
-      font-size: 10px;
-      letter-spacing: 3px;
-      color: var(--gray-600);
-      cursor: pointer;
-      margin-top: 24px;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--gray-300);
-      transition: color 0.3s, border-color 0.3s;
-    }
-
-    .about-trigger:hover {
-      color: var(--ink);
-      border-color: var(--ink);
-    }
-
-    .about-trigger .arrow {
-      display: inline-block;
-      transition: transform 0.4s ease;
-    }
-
-    .about-trigger.open .arrow {
-      transform: rotate(180deg);
-    }
-
     /* ===== CHARITY TAG ===== */
     .charity-tag {
       display: inline-flex;
@@ -1182,7 +1130,7 @@
       section { padding: 80px 30px; }
       header { padding: 16px 24px; }
       header nav { display: none; }
-      .manifesto-grid { grid-template-columns: 1fr; gap: 40px; }
+      .editors-note { grid-template-columns: 1fr; gap: 40px; }
       .items-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
       .item-card:nth-child(2),
       .item-card:nth-child(4),
@@ -1191,7 +1139,6 @@
       .charity-grid { grid-template-columns: 1fr; gap: 40px; }
       .charity-ring-container { order: -1; }
       .charity-fund { padding: 100px 30px; }
-      .about-expand { padding: 0 30px; }
       .attitude-strip { padding: 60px 30px; }
       .custom-cursor { display: none; }
       footer { flex-direction: column; gap: 20px; text-align: center; }
@@ -1228,7 +1175,7 @@
   <header>
     <div class="logo"><a href="#">三角洲</a></div>
     <nav>
-      <a href="#manifesto" data-i18n="nav_manifesto">· 信条</a>
+      <a href="#manifesto" data-i18n="nav_manifesto">· 编者按</a>
       <a href="#items" data-i18n="nav_items">· 之物</a>
       <a href="#return" data-i18n="nav_return">· 回流</a>
       <a href="#cycle" data-i18n="nav_cycle">· 循环</a>
@@ -1255,104 +1202,58 @@
     <div class="scroll-indicator">SCROLL</div>
   </section>
 
-  <!-- MANIFESTO -->
+  <!-- EDITOR'S NOTE -->
   <section class="manifesto" id="manifesto">
-    <div class="manifesto-grid">
-      <div class="manifesto-text">
-        <div class="section-label reveal" data-i18n="manifesto_label">· 故事 Story</div>
-
-        <p class="reveal" style="font-size:clamp(20px,2.4vw,36px);line-height:1.6;font-style:italic;color:var(--ink);" data-i18n="manifesto_p1">
-          漂亮的东西应该流动。
+    <div class="section-label reveal" data-i18n="editors_note_label">编者按 Editor's Note</div>
+    <div class="editors-note">
+      <div class="editors-note-text">
+        <p class="reveal" data-i18n="editors_note_p1">
+          你可能不需要更多东西。<br>
+          你需要更好的选择。
         </p>
 
-        <p class="reveal" data-i18n="manifesto_p2">
-          我一件一件淘，你一件一件看。
+        <p class="reveal" data-i18n="editors_note_p2">
+          三角洲是一个以审美为坐标的循环空间。每件物品经过筛选才出现在这里——不是因为它贵，不是因为它是品牌，是因为它有被留下来的理由。
         </p>
 
-        <p class="reveal" data-i18n="manifesto_p3">
+        <p class="reveal pull-quote" data-i18n="editors_note_p3">
           这里的东西可以被带走，也可以被送回来。
         </p>
 
-        <p class="reveal" data-i18n="manifesto_p4" style="margin-top:48px;padding-top:32px;border-top:1px solid var(--gray-100);font-size:clamp(13px,1.2vw,16px);font-family:var(--font-sans);line-height:1.8;color:var(--gray-600);">
-          <strong style="font-family:var(--font-serif);color:var(--gray-900);font-weight:400;">审美这件事，可以很轻松。</strong><br>
-          no elitist、no gatekeeping、not pretentious。我们的价值不是卖便宜，而是帮你省心。花一笔对的钱，买一个我们挑过的杯子，比买五个快时尚杯子更值得。
+        <p class="reveal" data-i18n="editors_note_p4">
+          买走之后，如果哪一天它不再需要你了，送回给三角洲。它会继续被下一个人遇见。
         </p>
 
-        <span class="about-trigger reveal" id="aboutTrigger" data-i18n="about_trigger">
-          阅读完整故事 <span class="arrow">▼</span>
-        </span>
+        <p class="reveal" data-i18n="editors_note_p5" style="margin-top:40px;padding-top:24px;border-top:1px solid var(--gray-100);font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--accent);">
+          每一次再流通，利润的 20% 注入公益金。
+        </p>
       </div>
 
-      <div class="manifesto-image reveal">
-        <div class="texture-overlay"></div>
-        <div class="tex-3" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
-          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:4px;color:var(--gray-600);text-align:center;line-height:2;opacity:0.6;">
-            <div>◈</div>
-            <div style="margin-top:12px;" data-i18n="manifesto_image_text">审美即坐标</div>
-            <div style="font-size:8px;" data-i18n="manifesto_image_sub">AESTHETICS AS COORDINATES</div>
+      <div class="editors-note-sidebar reveal">
+        <div class="stat-item">
+          <div class="stat-num">1</div>
+          <div class="stat-label">
+            <strong data-i18n="sidebar_stat1_title">个人审美策展</strong>
+            <span data-i18n="sidebar_stat1_desc">每件物件都有编号、来源坐标、流转履历</span>
           </div>
         </div>
-        <div class="content-block">
-          <strong data-i18n="manifesto_philosophy_title">流动生活的选品空间</strong>
-          <span data-i18n="manifesto_philosophy_text">漂亮的东西应该流动<br>Beauty is meant to flow</span>
+        <div class="stat-item">
+          <div class="stat-num">2</div>
+          <div class="stat-label">
+            <strong data-i18n="sidebar_stat2_title">回流积分</strong>
+            <span data-i18n="sidebar_stat2_desc">不喜欢了送回来，物件继续飞下一段航程</span>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">3</div>
+          <div class="stat-label">
+            <strong data-i18n="sidebar_stat3_title">公益金</strong>
+            <span data-i18n="sidebar_stat3_desc">二次流转利润的 20% 注入公益金</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- ABOUT (expandable long story) -->
-  <div class="about-expand" id="aboutExpand">
-    <div class="about-expand-inner">
-      <p data-i18n="about_p1">
-        我们这一代人，很少真正安顿下来。<br>
-        租房、搬家、出国、换城市。
-      </p>
-      <p data-i18n="about_p2">
-        拥有的东西越来越少，<br>
-        但依然希望生活里有美感。
-      </p>
-      <p data-i18n="about_p3">
-        问题是：<br>
-        好看的东西太贵。<br>
-        便宜的东西不值得留下。
-      </p>
-      <p data-i18n="about_p4">
-        所以我们开始寻找另一种方式——<br>
-        不是拥有更多，而是拥有得更聪明。
-      </p>
-      <p data-i18n="about_p5">
-        一盏灯。一个杯子。一本旧杂志。<br>
-        一个被使用过很多年的包。
-      </p>
-      <p data-i18n="about_p6">
-        它们不一定昂贵，<br>
-        但都有被选中的理由。
-      </p>
-      <p data-i18n="about_p7" style="font-style:italic;">
-        我们相信：<br>
-        好的物品不应该永远属于某一个人。<br>
-        它们应该流动。<br>
-        像故事一样。像人生一样。
-      </p>
-      <p data-i18n="about_p8">
-        这不是一家二手商店。<br>
-        这是流动生活的选品空间。
-      </p>
-
-      <div style="margin-top:48px;padding-top:32px;border-top:1px solid var(--gray-100);">
-        <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:3px;color:var(--gray-600);margin-bottom:16px;" data-i18n="about_standard_label">我的选品标准</div>
-        <div style="font-family:var(--font-serif);font-size:clamp(20px,2vw,28px);letter-spacing:6px;color:var(--ink);line-height:1.8;">
-          <span data-i18n="about_sig1">降噪</span><span style="color:var(--gray-300);margin:0 6px;">·</span>
-          <span data-i18n="about_sig2">聪明</span><span style="color:var(--gray-300);margin:0 6px;">·</span>
-          <span data-i18n="about_sig3">实用</span><span style="color:var(--gray-300);margin:0 6px;">·</span>
-          <span data-i18n="about_sig4">流转</span>
-        </div>
-        <div style="font-family:var(--font-sans);font-size:12px;color:var(--gray-600);margin-top:12px;letter-spacing:1px;" data-i18n="about_standard_note">
-          我选东西看这四点。每件都过一遍。
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ITEMS -->
   <section class="items" id="items">
@@ -1613,31 +1514,25 @@
       const translations = {
         zh: {
           page_title: '三角洲',
-          nav_manifesto: '· 信条',
+          nav_manifesto: '· 编者按',
           nav_items: '· 之物',
           nav_return: '· 回流',
           nav_cycle: '· 循环',
           hero_highlight: '循环空间',
           hero_sub_en: 'A cyclic space with aesthetics as coordinates',
           hero_sub_cn: '以审美为坐标的循环空间',
-          manifesto_label: '· 故事 Story',
-          manifesto_p1: '漂亮的东西应该流动。',
-          manifesto_p2: '我一件一件淘，你一件一件看。',
-          manifesto_p3: '这里的东西可以被带走，也可以被送回来。',
-          manifesto_p4: '<strong style="font-family:var(--font-serif);color:var(--gray-900);font-weight:400;">审美这件事，可以很轻松。</strong><br>no elitist、no gatekeeping、not pretentious。我们的价值不是卖便宜，而是帮你省心。花一笔对的钱，买一个我们挑过的杯子，比买五个快时尚杯子更值得。',
-          about_trigger: '阅读完整故事 <span class="arrow">▼</span>',
-          about_p1: '我们这一代人，很少真正安顿下来。<br>租房、搬家、出国、换城市。',
-          about_p2: '拥有的东西越来越少，<br>但依然希望生活里有美感。',
-          about_p3: '问题是：<br>好看的东西太贵。<br>便宜的东西不值得留下。',
-          about_p4: '所以我们开始寻找另一种方式——<br>不是拥有更多，而是拥有得更聪明。',
-          about_p5: '一盏灯。一个杯子。一本旧杂志。<br>一个被使用过很多年的包。',
-          about_p6: '它们不一定昂贵，<br>但都有被选中的理由。',
-          about_p7: '我们相信：<br>好的物品不应该永远属于某一个人。<br>它们应该流动。<br>像故事一样。像人生一样。',
-          about_p8: '这不是一家二手商店。<br>这是流动生活的选品空间。',
-          manifesto_image_text: '审美即坐标',
-          manifesto_image_sub: 'AESTHETICS AS COORDINATES',
-          manifesto_philosophy_title: '流动生活的选品空间',
-          manifesto_philosophy_text: '漂亮的东西应该流动<br>Beauty is meant to flow',
+          editors_note_label: "编者按 Editor's Note",
+          editors_note_p1: '你可能不需要更多东西。<br>你需要更好的选择。',
+          editors_note_p2: '三角洲是一个以审美为坐标的循环空间。每件物品经过筛选才出现在这里——不是因为它贵，不是因为它是品牌，是因为它有被留下来的理由。',
+          editors_note_p3: '这里的东西可以被带走，也可以被送回来。',
+          editors_note_p4: '买走之后，如果哪一天它不再需要你了，送回给三角洲。它会继续被下一个人遇见。',
+          editors_note_p5: '每一次再流通，利润的 20% 注入公益金。',
+          sidebar_stat1_title: '个人审美策展',
+          sidebar_stat1_desc: '每件物件都有编号、来源坐标、流转履历',
+          sidebar_stat2_title: '回流积分',
+          sidebar_stat2_desc: '不喜欢了送回来，物件继续飞下一段航程',
+          sidebar_stat3_title: '公益金',
+          sidebar_stat3_desc: '二次流转利润的 20% 注入公益金',
           items_label: '· 循环之物 Objects',
           items_title: '它们在寻找<br>下一个<em>主人</em>',
           item1_tag: '已修复 / 限一件',
@@ -1717,31 +1612,25 @@
         },
         en: {
           page_title: 'Delta — aesthetics as coordinates',
-          nav_manifesto: '· Manifesto',
+          nav_manifesto: "· Editor's Note",
           nav_items: '· Objects',
           nav_return: '· Return',
           nav_cycle: '· Cycle',
           hero_highlight: 'Cyclic Space',
           hero_sub_en: 'A cyclic space with aesthetics as coordinates',
           hero_sub_cn: '以审美为坐标的循环空间',
-          manifesto_label: '· Story',
-          manifesto_p1: 'Beauty is meant to flow.',
-          manifesto_p2: 'I hunt them down, one by one. You look, one by one.',
-          manifesto_p3: 'Things here can be taken away, and they can be sent back.',
-          manifesto_p4: '<strong style="font-family:var(--font-serif);color:var(--gray-900);font-weight:400;">Good taste doesn\'t have to be heavy.</strong><br>No elitist, no gatekeeping, not pretentious. Our value isn\'t selling cheap — it\'s saving you the trouble. Spend the right money on a cup we picked for you, and it\'s worth more than five fast-fashion ones.',
-          about_trigger: 'Read the full story <span class="arrow">▼</span>',
-          about_p1: 'Our generation rarely settles down.<br>We rent, we move, we go abroad, we change cities.',
-          about_p2: 'We own less and less,<br>but we still want beauty in our lives.',
-          about_p3: 'The problem:<br>beautiful things cost too much.<br>Cheap things aren\'t worth keeping.',
-          about_p4: 'So we started looking for another way—<br>not owning more, but owning smarter.',
-          about_p5: 'A lamp. A cup. An old magazine.<br>A bag that\'s been used for years.',
-          about_p6: 'They\'re not necessarily expensive,<br>but they all have a reason for being chosen.',
-          about_p7: 'We believe:<br>good things shouldn\'t belong to one person forever.<br>They should flow.<br>Like stories. Like lives.',
-          about_p8: 'This is not a second-hand store.<br>This is a curation space for a life in motion.',
-          manifesto_image_text: 'Aesthetics as Coordinates',
-          manifesto_image_sub: '审美即坐标',
-          manifesto_philosophy_title: 'Curation for a Life in Motion',
-          manifesto_philosophy_text: 'Beauty is meant to flow<br>漂亮的东西应该流动',
+          editors_note_label: "编者按 Editor's Note",
+          editors_note_p1: 'You may not need more things.<br>You need better choices.',
+          editors_note_p2: "Delta is a circulation space with aesthetics as coordinates. Every item is curated before it appears here — not because it's expensive, not because of the brand, but because it has a reason to stay.",
+          editors_note_p3: 'Things here can be taken away, and they can be sent back.',
+          editors_note_p4: "After you take it home, if one day it no longer needs you, send it back to Delta. It will continue to be found by the next person.",
+          editors_note_p5: 'Every resale: 20% of the profit flows into the charity fund.',
+          sidebar_stat1_title: 'Personal Curation',
+          sidebar_stat1_desc: 'Every item has a number, source coordinates, and circulation history',
+          sidebar_stat2_title: 'Buyback Credits',
+          sidebar_stat2_desc: "Changed your mind? Send it back, the item continues its journey",
+          sidebar_stat3_title: 'Charity Fund',
+          sidebar_stat3_desc: '20% of resale profit flows into the charity fund',
           items_label: '· Objects in Cycle',
           items_title: 'They are searching<br>for their next <em>owner</em>',
           item1_tag: 'Restored / One of a Kind',
@@ -1855,14 +1744,6 @@
       // Lang toggle click
       document.getElementById('langToggle').addEventListener('click', function() {
         switchLang(currentLang === 'zh' ? 'en' : 'zh');
-      });
-
-      // ===== ABOUT TOGGLE =====
-      const aboutTrigger = document.getElementById('aboutTrigger');
-      const aboutExpand = document.getElementById('aboutExpand');
-      aboutTrigger.addEventListener('click', function() {
-        aboutExpand.classList.toggle('open');
-        aboutTrigger.classList.toggle('open');
       });
 
       // ===== CUSTOM CURSOR =====
