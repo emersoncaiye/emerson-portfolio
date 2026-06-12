@@ -597,7 +597,7 @@
     }
 
     .return-text .intro {
-      font-size: clamp(15px, 1.3vw, 18px);
+      font-size: clamp(11px, 0.9vw, 13px);
       line-height: 2;
       color: var(--gray-900);
       margin-bottom: 28px;
@@ -639,23 +639,23 @@
       width: 100%;
       border-collapse: collapse;
       font-family: var(--font-mono);
-      font-size: 12px;
+      font-size: 8px;
       letter-spacing: 0.5px;
     }
 
     .return-table thead th {
       text-align: left;
-      padding: 14px 12px;
+      padding: 10px 8px;
       font-weight: 400;
       color: var(--gray-600);
       border-bottom: 1px solid var(--gray-100);
-      font-size: 10px;
+      font-size: 7px;
       letter-spacing: 2px;
       text-transform: uppercase;
     }
 
     .return-table tbody td {
-      padding: 14px 12px;
+      padding: 10px 8px;
       border-bottom: 1px solid rgba(0,0,0,0.04);
       color: var(--gray-900);
     }
@@ -671,17 +671,17 @@
 
     .return-table .label-row {
       font-family: var(--font-sans);
-      font-size: 11px;
+      font-size: 8px;
       color: var(--gray-300);
       letter-spacing: 1px;
     }
 
     .return-table .cash {
-      font-size: 13px;
+      font-size: 9px;
     }
 
     .return-table .credit {
-      font-size: 13px;
+      font-size: 9px;
       opacity: 0.75;
     }
 
@@ -702,22 +702,22 @@
     .process-step {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 8px;
       letter-spacing: 0.5px;
       color: var(--gray-900);
       background: var(--bg-alt);
       border-top: 2px solid var(--accent);
       opacity: 0.3;
-      padding: 10px 16px;
+      padding: 8px 12px;
       flex: 1 1 auto;
-      min-width: 140px;
+      min-width: 100px;
     }
 
     .process-step .num {
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       border-radius: 50%;
       background: var(--ink);
       color: var(--bg);
@@ -1399,25 +1399,35 @@
           <thead>
             <tr>
               <th data-i18n="return_th_period">持有时间</th>
-              <th data-i18n="return_th_cash">回收金</th>
+              <th data-i18n="return_th_cash">现金返还</th>
+              <th data-i18n="return_th_credit">积分返还</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td data-i18n="return_row1_period">30 天内</td>
               <td class="cash highlight" data-i18n="return_row1_cash">60%</td>
+              <td class="credit highlight" data-i18n="return_row1_credit">70%</td>
             </tr>
             <tr>
               <td data-i18n="return_row2_period">30–90 天</td>
               <td class="cash" data-i18n="return_row2_cash">50%</td>
+              <td class="credit" data-i18n="return_row2_credit">60%</td>
             </tr>
             <tr>
               <td data-i18n="return_row3_period">90–180 天</td>
               <td class="cash" data-i18n="return_row3_cash">40%</td>
+              <td class="credit" data-i18n="return_row3_credit">50%</td>
             </tr>
             <tr>
-              <td data-i18n="return_row4_period">180 天以上</td>
+              <td data-i18n="return_row4_period">180–360 天</td>
               <td class="cash" data-i18n="return_row4_cash">30%</td>
+              <td class="credit" data-i18n="return_row4_credit">40%</td>
+            </tr>
+            <tr>
+              <td data-i18n="return_row5_period">超过 1 年</td>
+              <td class="cash" data-i18n="return_row5_cash">—</td>
+              <td class="credit" data-i18n="return_row5_credit">捐赠公益</td>
             </tr>
           </tbody>
         </table>
@@ -1561,15 +1571,23 @@
           return_step3: '按持有时间回收',
           return_step4: '下一个人遇见',
           return_th_period: '持有时间',
-          return_th_cash: '回收金',
+          return_th_cash: '现金返还',
+          return_th_credit: '积分返还',
           return_row1_period: '30 天内',
           return_row1_cash: '60%',
+          return_row1_credit: '70%',
           return_row2_period: '30–90 天',
           return_row2_cash: '50%',
+          return_row2_credit: '60%',
           return_row3_period: '90–180 天',
           return_row3_cash: '40%',
-          return_row4_period: '180 天以上',
+          return_row3_credit: '50%',
+          return_row4_period: '180–360 天',
           return_row4_cash: '30%',
+          return_row4_credit: '40%',
+          return_row5_period: '超过 1 年',
+          return_row5_cash: '—',
+          return_row5_credit: '捐赠公益',
           charity_label: '· 公益金 Charity Fund',
           charity_percent: '20%',
           charity_title: '你流回的东西<br>我们让它<em>继续流动</em>',
@@ -1651,15 +1669,23 @@
           return_step3: 'Buyback by hold time',
           return_step4: 'The next person finds it',
           return_th_period: 'Hold Time',
-          return_th_cash: 'Buyback',
+          return_th_cash: 'Cash Back',
+          return_th_credit: 'Store Credit',
           return_row1_period: 'Within 30 days',
           return_row1_cash: '60%',
+          return_row1_credit: '70%',
           return_row2_period: '30–90 days',
           return_row2_cash: '50%',
+          return_row2_credit: '60%',
           return_row3_period: '90–180 days',
           return_row3_cash: '40%',
-          return_row4_period: '180+ days',
+          return_row3_credit: '50%',
+          return_row4_period: '180–360 days',
           return_row4_cash: '30%',
+          return_row4_credit: '40%',
+          return_row5_period: 'Over 1 year',
+          return_row5_cash: '—',
+          return_row5_credit: 'Donated to charity',
           charity_label: '· Charity Fund',
           charity_percent: '20%',
           charity_title: 'What you return<br>keeps <em>flowing onward</em>',
