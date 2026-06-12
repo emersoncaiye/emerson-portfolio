@@ -157,6 +157,21 @@ function renderExpItem(text: string) {
   <div class="timeline">
     <div class="timeline-item reveal">
       <div class="timeline-left">
+        <span class="timeline-year">{t.exp6Date}</span>
+        <span class="timeline-month">{t.exp6Month}</span>
+      </div>
+      <div class="timeline-track">
+        <div class="timeline-dot"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp6Role}</div>
+        <div class="exp-company">{t.exp6Company}</div>
+        <ul class="exp-list" set:html={t.exp6Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
         <span class="timeline-year">{t.exp1Date}</span>
         <span class="timeline-month">{t.exp1Month}</span>
       </div>
@@ -182,21 +197,6 @@ function renderExpItem(text: string) {
         <div class="exp-role">{t.exp2Role}</div>
         <div class="exp-company">{t.exp2Company}</div>
         <ul class="exp-list" set:html={t.exp2Items.map(renderExpItem).join('')} />
-      </div>
-    </div>
-
-    <div class="timeline-item reveal">
-      <div class="timeline-left">
-        <span class="timeline-year">{t.exp6Date}</span>
-        <span class="timeline-month">{t.exp6Month}</span>
-      </div>
-      <div class="timeline-track">
-        <div class="timeline-dot"></div>
-      </div>
-      <div class="timeline-content">
-        <div class="exp-role">{t.exp6Role}</div>
-        <div class="exp-company">{t.exp6Company}</div>
-        <ul class="exp-list" set:html={t.exp6Items.map(renderExpItem).join('')} />
       </div>
     </div>
   </div>
