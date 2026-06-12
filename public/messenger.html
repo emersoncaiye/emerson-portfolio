@@ -14,19 +14,23 @@
     }
 
     :root {
-      --black: #0a0a0a;
-      --white: var(--bg);
-      --off-white: var(--bg-alt);
-      --gray-100: #e0ddd6;
-      --gray-300: #a8a49c;
-      --gray-600: #6b6760;
-      --gray-900: #2a2825;
+      --ink: #0f1a14;
+      --bg: #e8ece4;
+      --bg-alt: #dee3db;
+      --bg-light: #f0f3ec;
+      --text: #1c2820;
       --accent: #4a7c59;
-      --accent-muted: rgba(196, 62, 44, 0.08);
-      --ink: #1a1a18;
-      --font-serif: 'SerifDisplay', 'Noto Serif SC', 'Times New Roman', serif;
-      --font-mono: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', monospace;
-      --font-sans: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+      --accent-muted: rgba(74,124,89,0.10);
+      --sprout: #8fa87a;
+      --deep-forest: #3d5a47;
+      --text-light: #c8d4c0;
+      --gray-100: #d8d4cc;
+      --gray-300: #9a9080;
+      --gray-600: #69604f;
+      --gray-900: #1c2820;
+      --font-serif: Georgia, 'Times New Roman', 'Noto Serif SC', serif;
+      --font-mono: 'SF Mono', Menlo, 'Cascadia Code', monospace;
+      --font-sans: Inter, -apple-system, 'Helvetica Neue', sans-serif;
       --grid-col: 80px;
       --grid-gap: 20px;
       --header-h: 64px;
@@ -503,7 +507,7 @@
       background:
         repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px),
         radial-gradient(ellipse at 20% 80%, rgba(196,62,44,0.05) 0%, transparent 50%),
-        linear-gradient(135deg, #e0ddd6 0%, #cfcbc3 100%);
+        linear-gradient(135deg, var(--gray-100) 0%, #cfcbc3 100%);
     }
     .item-image .tex-5 {
       background:
@@ -514,7 +518,7 @@
     .item-image .tex-6 {
       background:
         repeating-linear-gradient(-45deg, transparent, transparent 12px, rgba(0,0,0,0.015) 12px, rgba(0,0,0,0.015) 13px),
-        linear-gradient(135deg, #e5e1d9 0%, #d8d4cc 50%, #e0ddd6 100%);
+        linear-gradient(135deg, #e5e1d9 0%, #d8d4cc 50%, var(--gray-100) 100%);
     }
 
     .item-tag {
@@ -1968,7 +1972,7 @@
         const msg = lang === 'en'
           ? 'A cyclic space with aesthetics as coordinates'
           : '以审美为坐标的循环空间';
-        console.log('%c ' + msg + ' ', 'color: #6b6760; font-size: 12px;');
+        console.log('%c ' + msg + ' ', 'color: var(--gray-600); font-size: 12px;');
       }
       printSubtitle(currentLang);
 
