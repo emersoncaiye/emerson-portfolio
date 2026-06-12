@@ -646,7 +646,7 @@
 
     .return-table thead th {
       text-align: left;
-      padding: 14px 6px;
+      padding: 10px 20px;
       font-weight: 400;
       color: var(--gray-600);
       border-bottom: 1px solid var(--gray-100);
@@ -656,11 +656,19 @@
       background: #edeae1;
     }
 
+    .return-table thead th + th {
+      padding-left: 28px;
+    }
+
     .return-table tbody td {
-      padding: 14px 6px;
+      padding: 10px 20px;
       border-bottom: 1px solid rgba(0,0,0,0.04);
       color: var(--gray-900);
       background: #edeae1;
+    }
+
+    .return-table tbody td + td {
+      padding-left: 28px;
     }
 
     .return-table tbody tr:last-child td {
