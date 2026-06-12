@@ -2,311 +2,1084 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>messenger — 以审美为坐标的循环空间</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>messenger</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-@font-face{font-family:'SerifDisplay';src:local('Times New Roman'),local('Noto Serif SC'),serif}
-:root{
-  --bg:#e2eade;
-  --bg-alt:#d4dec8;
-  --text:#1c2820;
-  --text-light:#c8d4c0;
-  --accent:#4a7c59;
-  --accent-dim:rgba(74,124,89,0.09);
-  --sprout:#8fa87a;
-  --deep-forest:#3d5a47;
-  --ink:#0f1a14;
-  --terra:#b8452a;
-  --gray-100:#cbdac4;
-  --gray-300:#8fa87a;
-  --gray-600:#3d5a47;
-  --gray-900:#1c2820;
+/* ===== VARIABLES ===== */
+:root {
+  --ink: #0f1a14;
+  --bg: #f0ece4;
+  --bg-alt: #e6e2d8;
+  --white: #faf8f3;
+  --text: #1c2820;
+  --accent: #4a7c59;
+  --accent-muted: rgba(74,124,89,0.10);
+  --sprout: #8fa87a;
+  --deep-forest: #3d5a47;
+  --gray-100: #d8d4cc;
+  --gray-300: #9a9080;
+  --gray-600: #69604f;
+  --gray-900: #1c2820;
+  --font-serif: Georgia, 'Times New Roman', 'Noto Serif SC', serif;
+  --font-sans: Inter, -apple-system, 'Helvetica Neue', sans-serif;
+  --font-mono: 'SF Mono', Menlo, 'Cascadia Code', monospace;
+  --text-light: #c8d4c0;
 }
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'SerifDisplay',serif;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-serif);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== NOISE OVERLAY ===== */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===== NAV ===== */
+header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+  color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+header .logo { font-family: var(--font-serif); font-size: 18px; letter-spacing: 4px; color: inherit; text-decoration: none; }
+header nav { display: flex; gap: 20px; }
+header nav a { color: inherit; text-decoration: none; opacity: 0.6; transition: opacity 0.3s; }
+header nav a:hover { opacity: 1; }
+.lang-toggle { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; cursor: pointer; background: none; border: none; color: inherit; opacity: 0.6; }
+.lang-toggle:hover { opacity: 1; }
 
 /* ===== COVER ===== */
-.cover{background:var(--ink);color:var(--text-light);min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:3em 6vw;position:relative;overflow:hidden}
-.cover::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at 30% 50%,rgba(74,124,89,0.08) 0%,transparent 70%),radial-gradient(ellipse at 70% 30%,rgba(74,124,89,0.04) 0%,transparent 50%);pointer-events:none}
-.cover-masthead{border-bottom:1px solid rgba(200,212,192,0.15);padding-bottom:2em;margin-bottom:3em;display:flex;justify-content:space-between;align-items:flex-end}
-.cover-issue{font-size:0.7em;letter-spacing:0.2em;color:var(--sprout);text-transform:uppercase}
-.cover-date{font-size:0.7em;color:var(--sprout);font-family:monospace}
-.cover-title{font-size:clamp(56px,12vw,140px);line-height:1;letter-spacing:-0.02em;font-weight:400;margin-bottom:0.2em;position:relative}
-.cover-title em{font-style:normal;color:var(--accent)}
-.cover-tagline{font-size:clamp(14px,2vw,22px);color:var(--sprout);max-width:540px;line-height:1.6;margin-bottom:3em;font-family:serif}
-.cover-lines{display:flex;flex-direction:column;gap:0.6em;border-left:2px solid var(--accent);padding-left:1.2em;margin-bottom:3em}
-.cover-line{font-size:clamp(13px,1.4vw,17px);color:rgba(200,212,192,0.55);letter-spacing:0.03em;font-family:serif}
-.cover-line strong{color:rgba(200,212,192,0.8);font-weight:400}
-.cover-footer{border-top:1px solid rgba(200,212,192,0.12);padding-top:1.5em;display:flex;justify-content:space-between;margin-top:auto;font-size:0.7em;color:var(--sprout);letter-spacing:0.1em}
+.cover {
+  min-height: 100vh;
+  background: var(--ink);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 120px 48px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute;
+  top: -30%; right: -10%;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74,124,89,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cover-masthead {
+  position: absolute;
+  top: 100px;
+  left: 48px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--sprout);
+  opacity: 0.5;
+}
+.cover-issue {
+  position: absolute;
+  top: 100px;
+  right: 48px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--sprout);
+  opacity: 0.5;
+  text-align: right;
+}
+.cover-title {
+  font-size: clamp(72px, 14vw, 180px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 0.92;
+  text-align: center;
+  color: var(--text-light);
+  position: relative;
+  z-index: 1;
+}
+.cover-title .highlight {
+  display: block;
+  font-style: italic;
+  margin-top: 0.05em;
+  opacity: 0.85;
+}
+.cover-line {
+  margin-top: 40px;
+  font-family: var(--font-sans);
+  font-size: clamp(12px, 1.6vw, 16px);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--sprout);
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 560px;
+  line-height: 2;
+}
+.cover-line .cn {
+  display: block;
+  font-family: var(--font-serif);
+  letter-spacing: 8px;
+  text-transform: none;
+  margin-top: 8px;
+  color: var(--text-light);
+  font-size: clamp(13px, 1.5vw, 18px);
+  opacity: 0.7;
+}
+.cover-glitch {
+  position: absolute;
+  bottom: 30%;
+  left: 12%;
+  width: 100px;
+  height: 1px;
+  background: var(--accent);
+  transform: rotate(-10deg);
+  opacity: 0.4;
+}
+.cover-glitch-2 {
+  position: absolute;
+  top: 35%;
+  right: 15%;
+  width: 70px;
+  height: 1px;
+  background: var(--sprout);
+  opacity: 0.25;
+  transform: rotate(6deg);
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--sprout);
+  opacity: 0.4;
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse { 0%,100% { transform: translateX(-50%) translateY(0); opacity: 0.4; } 50% { transform: translateX(-50%) translateY(6px); opacity: 0.15; } }
 
-/* ===== SECTION HEADERS ===== */
-.section{max-width:1200px;margin:0 auto;padding:5em 6vw}
-.section-label{font-size:0.65em;letter-spacing:0.25em;text-transform:uppercase;color:var(--gray-300);margin-bottom:2em;border-bottom:1px solid var(--gray-100);padding-bottom:0.8em;display:flex;justify-content:space-between}
-.section-title{font-size:clamp(22px,3vw,36px);font-weight:400;color:var(--gray-900);margin-bottom:1.2em;line-height:1.3}
-.section-body{max-width:640px;font-size:clamp(14px,1.2vw,17px);color:var(--gray-600);line-height:1.8;margin-bottom:3em}
+/* ===== COMMON SECTIONS ===== */
+section { padding: 100px 48px; position: relative; }
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gray-300);
+  margin-bottom: 32px;
+  position: relative;
+  display: inline-block;
+}
+.section-label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 32px;
+  height: 1px;
+  background: var(--text);
+  opacity: 0.15;
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 40px;
+  max-width: 680px;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.section-content { max-width: 1200px; margin: 0 auto; }
 
-/* ===== EDITOR'S LETTER ===== */
-.editor-letter{padding:5em 6vw;max-width:720px;margin:0 auto;border-bottom:1px solid var(--gray-100)}
-.editor-label{font-size:0.65em;letter-spacing:0.2em;color:var(--gray-300);margin-bottom:1.5em;text-transform:uppercase}
-.editor-text{font-size:clamp(15px,1.3vw,19px);line-height:1.9;color:var(--gray-600)}
-.editor-text p{margin-bottom:1.4em}
-.editor-text em{color:var(--accent);font-style:normal}
-.editor-sign{font-size:0.85em;color:var(--gray-300);margin-top:2em;font-style:italic;letter-spacing:0.05em}
+/* ===== EDITOR'S NOTE ===== */
+.editors-note {
+  background: var(--bg);
+  padding-top: 140px;
+}
+.note-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: start;
+}
+.note-text {
+  font-size: clamp(14px, 1.3vw, 18px);
+  line-height: 2;
+  color: var(--text);
+}
+.note-text p + p { margin-top: 1.4em; }
+.note-text .pull-quote {
+  font-size: clamp(20px, 2.2vw, 34px);
+  line-height: 1.3;
+  font-style: italic;
+  color: var(--text);
+  padding: 24px 0 24px 28px;
+  border-left: 1px solid var(--accent);
+  margin: 32px 0;
+}
+.note-sidebar {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 2;
+  color: var(--gray-600);
+  padding: 32px;
+  background: var(--bg-alt);
+  border-radius: 2px;
+}
+.note-sidebar strong {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text);
+  display: block;
+  margin-bottom: 8px;
+}
+.note-sidebar .three-dots {
+  font-family: var(--font-serif);
+  color: var(--accent);
+  letter-spacing: 4px;
+  margin-top: 16px;
+}
 
 /* ===== FEATURE ===== */
-.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:3em;margin-top:2em}
-.feature-item{border-top:1px solid var(--gray-100);padding-top:2em}
-.feature-number{font-size:0.6em;color:var(--gray-300);letter-spacing:0.15em;margin-bottom:1em;font-family:monospace}
-.feature-visual{width:100%;aspect-ratio:4/3;background:var(--gray-100);margin-bottom:1.5em;display:flex;align-items:center;justify-content:center;color:var(--gray-300);font-size:0.8em;position:relative;overflow:hidden}
-.feature-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(74,124,89,0.06))}
-.feature-name{font-size:clamp(18px,1.8vw,26px);color:var(--gray-900);font-weight:400;margin-bottom:0.3em}
-.feature-price{font-size:0.85em;color:var(--gray-300);font-family:monospace;margin-bottom:0.8em}
-.feature-desc{font-size:0.85em;color:var(--gray-600);line-height:1.7;margin-bottom:1em}
-.feature-note{font-size:0.75em;color:var(--accent);letter-spacing:0.02em;font-style:italic;border-left:2px solid var(--accent-dim);padding-left:0.8em}
+.feature {
+  background: var(--bg-alt);
+}
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.feature-card {
+  background: var(--bg);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+.feature-card:hover { transform: translateY(-3px); }
+.feature-card:nth-child(2) { margin-top: 40px; }
+.feature-card:nth-child(3) { margin-top: -30px; }
+.feature-image {
+  aspect-ratio: 4/5;
+  background: var(--gray-100);
+  position: relative;
+  overflow: hidden;
+}
+.feature-image .tex {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gray-300);
+  letter-spacing: 2px;
+}
+.tex-1 {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(74,124,89,0.10) 0%, transparent 60%),
+    linear-gradient(135deg, #d8d4cc 0%, #e6e2d8 100%);
+}
+.tex-2 {
+  background:
+    repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(74,124,89,0.03) 8px, rgba(74,124,89,0.03) 9px),
+    linear-gradient(180deg, #e0dcd4 0%, #d4d0c8 100%);
+}
+.tex-3 {
+  background:
+    radial-gradient(circle at 80% 70%, rgba(74,124,89,0.08) 0%, transparent 40%),
+    linear-gradient(90deg, #ddd9d0 0%, #e8e4dc 50%, #d4d0c8 100%);
+}
+.catalog-item-image {
+  aspect-ratio: 1/1.2;
+  position: relative;
+  overflow: hidden;
+}
+.catalog-item-image > div {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--gray-300);
+  letter-spacing: 1px;
+}
+.catalog-item-image .cat-tex-1 {
+  background: radial-gradient(ellipse at 30% 40%, rgba(74,124,89,0.08) 0%, transparent 50%), linear-gradient(135deg, #d8d4cc 0%, #eae6de 100%);
+}
+.catalog-item-image .cat-tex-2 {
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px), linear-gradient(135deg, #e0ddd6 0%, #cfcbc3 100%);
+}
+.catalog-item-image .cat-tex-3 {
+  background: radial-gradient(circle at 50% 30%, rgba(74,124,89,0.06) 0%, transparent 30%), linear-gradient(180deg, #eae7df 0%, #ddd9d0 100%);
+}
+.catalog-item-image .cat-tex-4 {
+  background: repeating-linear-gradient(-45deg, transparent, transparent 12px, rgba(74,124,89,0.02) 12px, rgba(74,124,89,0.02) 13px), linear-gradient(135deg, #e5e1d9 0%, #d8d4cc 100%);
+}
+.feature-tag {
+  position: absolute;
+  top: 16px; left: 16px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--gray-600);
+  background: var(--white);
+  padding: 4px 10px;
+  opacity: 0.85;
+}
+.feature-info { padding: 20px 24px 24px; }
+.feature-no {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--gray-300);
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+.feature-name {
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+.feature-editorial {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--gray-600);
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+}
+.feature-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+.feature-price {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text);
+}
+.feature-status {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--accent);
+}
 
 /* ===== CATALOG ===== */
-.catalog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2.5em;margin-top:2em}
-.catalog-item{border-top:1px solid var(--gray-100);padding-top:1.5em;cursor:pointer;transition:opacity 0.3s}
-.catalog-item:hover{opacity:0.75}
-.catalog-visual{width:100%;aspect-ratio:1;background:var(--gray-100);margin-bottom:1.2em;display:flex;align-items:center;justify-content:center;color:var(--gray-300);font-size:0.75em;position:relative;overflow:hidden}
-.catalog-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 70%,rgba(74,124,89,0.05))}
-.catalog-name{font-size:1em;color:var(--gray-900);font-weight:400}
-.catalog-price{font-size:0.8em;color:var(--gray-300);font-family:monospace;margin-top:0.2em}
-.catalog-tag{display:inline-block;font-size:0.55em;letter-spacing:0.15em;padding:0.15em 0.6em;border:1px solid var(--accent);color:var(--accent);margin-top:0.6em;text-transform:uppercase}
+.catalog { background: var(--bg); }
+.catalog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+}
+.catalog-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--gray-300);
+  letter-spacing: 1px;
+}
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 28px;
+}
+.catalog-item {
+  background: var(--bg-alt);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.catalog-item:hover { transform: translateY(-2px); }
+.catalog-item-image {
+  aspect-ratio: 1/1.2;
+  background: var(--gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--gray-300);
+  letter-spacing: 1px;
+  position: relative;
+}
+.catalog-item-tag {
+  position: absolute;
+  top: 12px; left: 12px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: var(--gray-600);
+  background: var(--white);
+  padding: 3px 8px;
+  opacity: 0.8;
+}
+.catalog-item-info { padding: 14px 18px 18px; }
+.catalog-item-name {
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+  color: var(--text);
+  font-weight: 400;
+}
+.catalog-item-desc {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--gray-600);
+  line-height: 1.5;
+}
+.catalog-item-price {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0,0,0,0.04);
+}
 
 /* ===== TRANSIT ===== */
-.transit-section{background:var(--ink);color:var(--text-light);padding:5em 6vw;max-width:100%}
-.transit-section .section-label{color:rgba(200,212,192,0.4);border-color:rgba(200,212,192,0.08)}
-.transit-section .section-title{color:var(--text-light);font-size:clamp(24px,3vw,40px)}
-.transit-content{display:grid;grid-template-columns:1fr 1fr;gap:3em;max-width:1200px;margin:0 auto}
-.transit-text{font-size:clamp(14px,1.1vw,17px);line-height:1.9;color:rgba(200,212,192,0.7)}
-.transit-text p{margin-bottom:1.2em}
-.transit-text strong{color:var(--text-light);font-weight:400}
-.transit-visual{display:flex;flex-direction:column;gap:1em;padding:2em;border:1px solid rgba(200,212,192,0.1);position:relative}
-.transit-step{display:flex;align-items:flex-start;gap:1em;padding:0.8em 0;border-bottom:1px solid rgba(200,212,192,0.06)}
-.transit-step:last-child{border:none}
-.transit-step-num{font-family:monospace;font-size:0.65em;color:var(--accent);width:2em;letter-spacing:0.1em}
-.transit-step-text{font-size:0.85em;color:rgba(200,212,192,0.7);line-height:1.6}
-.transit-step-text strong{color:var(--text-light);font-weight:400}
-.transit-step-arrow{font-size:0.6em;color:var(--accent);letter-spacing:0.2em}
+.transit {
+  background: var(--bg-alt);
+}
+.transit-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: start;
+}
+.transit-text .intro {
+  font-size: clamp(14px, 1.3vw, 18px);
+  line-height: 2;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+.transit-text .note {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--gray-600);
+  line-height: 1.8;
+  padding-left: 16px;
+  border-left: 1px solid var(--accent);
+}
+.transit-text .note strong { color: var(--text); font-family: var(--font-serif); font-weight: 400; }
+.transit-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 20px;
+}
+.transit-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.3px;
+  color: var(--text);
+  background: var(--bg);
+  padding: 8px 14px;
+  flex: 1 1 auto;
+  min-width: 120px;
+}
+.transit-step .num {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+}
+.transit-table-wrap {
+  background: var(--bg);
+  padding: 28px;
+  position: relative;
+}
+.transit-table-wrap::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 28px; right: 28px;
+  height: 1px;
+  background: var(--accent);
+}
+.return-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.3px;
+}
+.return-table thead th {
+  text-align: left;
+  padding: 12px 10px;
+  font-weight: 400;
+  color: var(--gray-300);
+  border-bottom: 1px solid var(--gray-100);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.return-table tbody td {
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+  color: var(--text);
+}
+.return-table .highlight { color: var(--accent); }
 
 /* ===== DELTA ===== */
-.delta-section{background:var(--ink);color:var(--text-light);padding:3em 6vw 6em;max-width:100%;border-top:1px solid rgba(200,212,192,0.06)}
-.delta-inner{max-width:1200px;margin:0 auto;display:flex;gap:4em;align-items:center}
-.delta-viz{flex-shrink:0;display:flex;flex-direction:column;align-items:center}
-.delta-node{width:72px;height:72px;border-radius:50%;border:1px solid rgba(74,124,89,0.5);background:rgba(74,124,89,0.06);display:flex;flex-direction:column;align-items:center;justify-content:center}
-.delta-percent{font-size:1.1em;color:var(--sprout);font-weight:300;line-height:1}
-.delta-label{font-size:0.6em;color:var(--deep-forest);letter-spacing:0.15em;margin-top:3px}
-.delta-streams{display:flex;gap:3em;margin-top:0.5em;align-items:flex-start}
-.delta-stream{display:flex;flex-direction:column;align-items:center;gap:0.4em}
-.stream-line{width:2px;height:24px;background:linear-gradient(to bottom,var(--accent),rgba(74,124,89,0.15))}
-.stream-name{font-size:0.65em;color:rgba(200,212,192,0.4);letter-spacing:0.2em}
-.delta-body{font-size:clamp(14px,1.1vw,17px);line-height:2;color:rgba(200,212,192,0.6);font-family:serif}
-.delta-body em{color:var(--sprout);font-style:normal}
-.delta-body strong{color:var(--text-light);font-weight:400}
-.delta-footer{text-align:center;font-size:0.85em;color:var(--deep-forest);line-height:2;margin-top:3em;font-family:serif}
+.delta {
+  background: var(--ink);
+  padding: 100px 48px;
+  text-align: center;
+}
+.delta .section-label { color: var(--sprout); opacity: 0.6; }
+.delta .section-label::after { background: var(--sprout); opacity: 0.2; }
+.delta-viz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 48px auto;
+}
+.delta-node {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  border: 1px solid rgba(74,124,89,0.4);
+  background: rgba(74,124,89,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.delta-percent { font-size: 1.1em; color: var(--sprout); font-weight: 300; line-height: 1; }
+.delta-label { font-size: 0.55em; color: var(--accent); letter-spacing: 0.15em; margin-top: 3px; }
+.delta-streams {
+  display: flex;
+  gap: 3em;
+  margin-top: 0.4em;
+  align-items: flex-start;
+}
+.delta-stream {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4em;
+}
+.stream-line {
+  width: 2px;
+  height: 24px;
+  background: linear-gradient(to bottom, var(--accent), rgba(74,124,89,0.15));
+}
+.stream-name {
+  font-size: 0.6em;
+  color: var(--sprout);
+  letter-spacing: 0.2em;
+  opacity: 0.6;
+}
+.delta-footer {
+  text-align: center;
+  font-size: 0.85em;
+  color: var(--sprout);
+  opacity: 0.6;
+  line-height: 2;
+  margin-top: 40px;
+  font-family: var(--font-serif);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.delta-desc {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--sprout);
+  opacity: 0.5;
+  line-height: 1.8;
+  max-width: 480px;
+  margin: 20px auto 0;
+  letter-spacing: 0.3px;
+}
 
 /* ===== COLOPHON ===== */
-.colophon{background:var(--ink);color:var(--text-light);padding:3em 6vw;border-top:1px solid rgba(200,212,192,0.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1.5em}
-.colophon-brand{font-size:1.1em;letter-spacing:0.1em;color:var(--text-light);font-family:serif}
-.colophon-links{display:flex;gap:2em;font-size:0.75em}
-.colophon-links a{color:var(--deep-forest);text-decoration:none;letter-spacing:0.08em;transition:color 0.3s}
-.colophon-links a:hover{color:var(--sprout)}
-.colophon-stamp{width:60px;height:60px;border-radius:50%;border:1px solid rgba(74,124,89,0.25);display:flex;align-items:center;justify-content:center;font-size:0.5em;color:var(--deep-forest);letter-spacing:0.1em;transform:rotate(-6deg);flex-shrink:0}
+.colophon {
+  padding: 60px 48px;
+  background: var(--bg-alt);
+  text-align: center;
+}
+.colophon-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.colophon .brand {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  letter-spacing: 6px;
+  color: var(--text);
+  margin-bottom: 8px;
+  font-weight: 400;
+}
+.colophon .meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--gray-300);
+  letter-spacing: 2px;
+  line-height: 2;
+}
+.colophon .meta span { margin: 0 8px; opacity: 0.3; }
+.colophon .links {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.colophon .links a {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--deep-forest);
+  text-decoration: none;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+.colophon .links a:hover { opacity: 1; }
+.colophon-stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--gray-100);
+  margin-top: 24px;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 2px;
+  color: var(--gray-300);
+  transform: rotate(-8deg);
+}
 
 /* ===== RESPONSIVE ===== */
-@media(max-width:768px){
-  .feature-grid{grid-template-columns:1fr}
-  .cover-title{font-size:clamp(40px,10vw,80px)}
-  .transit-content{grid-template-columns:1fr}
-  .delta-inner{flex-direction:column;gap:2em;text-align:center}
-  .cover-lines{display:none}
-  .catalog-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1.5em}
+@media (max-width: 768px) {
+  header { padding: 16px 20px; }
+  header nav { gap: 12px; }
+  header nav a { font-size: 9px; letter-spacing: 1px; }
+  section { padding: 60px 20px; }
+  .cover { padding: 100px 20px 40px; }
+  .cover-masthead, .cover-issue { top: 80px; left: 20px; right: 20px; font-size: 8px; }
+  .note-layout, .transit-layout { grid-template-columns: 1fr; gap: 32px; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .feature-card:nth-child(2), .feature-card:nth-child(3) { margin-top: 0; }
+  .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .catalog-item-info { padding: 10px 12px 14px; }
+  .catalog-item-name { font-size: 12px; }
+  .delta-streams { gap: 2em; }
+  .section-title { margin-bottom: 28px; }
 }
-@media(max-width:480px){
-  .section{padding:3em 5vw}
-  .cover{padding:2em 5vw}
-  .delta-streams{gap:1.5em}
+@media (max-width: 480px) {
+  .catalog-grid { grid-template-columns: 1fr; }
+  .transit-step { min-width: 80px; }
 }
 </style>
 </head>
 <body>
 
-<!-- COVER -->
+<header>
+  <a href="#" class="logo">m</a>
+  <nav>
+    <a href="#catalog">目录</a>
+    <a href="#transit">回流</a>
+    <a href="#delta">三角洲</a>
+  </nav>
+  <button class="lang-toggle">EN <span class="sep">/</span> <span class="active-lang">中</span></button>
+</header>
+
+<!-- ===== COVER ===== -->
 <section class="cover" id="cover">
-  <div class="cover-masthead">
-    <span class="cover-issue">ISSUE 001</span>
-    <span class="cover-date" id="coverDate"></span>
-  </div>
-  <div class="cover-title">mes<span style="color:var(--accent)">s</span>enger</div>
-  <div class="cover-tagline">以审美为坐标的循环空间。东西在这里流动，每一件都有来处和去处。</div>
-  <div class="cover-lines">
-    <div class="cover-line"><strong>个人审美策展</strong> — 每件物件亲自挑选，附来源坐标和流转履历</div>
-    <div class="cover-line"><strong>回流积分</strong> — 不喜欢了改签，物件继续飞下一段航程</div>
-    <div class="cover-line"><strong>慈善捐赠</strong> — 二次流转利润的 20% 入三角洲，分三条河道流出</div>
-  </div>
-  <div class="cover-footer">
-    <span>FOUND 2024 · SHANGHAI</span>
-    <span>阅读时间 5 min</span>
-  </div>
+  <div class="cover-masthead">ISSUE</div>
+  <div class="cover-issue">001<br>2024</div>
+  <h1 class="cover-title">
+    messenger
+    <span class="highlight">——</span>
+  </h1>
+  <p class="cover-line">
+    漂亮的东西应该流动
+    <span class="cn">Beauty is meant to flow</span>
+  </p>
+  <div class="cover-glitch"></div>
+  <div class="cover-glitch-2"></div>
+  <p class="scroll-hint">向下翻阅</p>
 </section>
 
-<!-- EDITOR -->
-<div class="editor-letter">
-  <div class="editor-label">编者按 · Editor's Letter</div>
-  <div class="editor-text">
-    <p>漂亮的东西应该流动。</p>
-    <p>这个网站存在的理由很简单：我们相信一件好的物品不应该永远停在同一个人手里。你收藏它、使用它、然后——当它不再属于你此刻的生活——让它去下一段旅程。</p>
-    <p>在这里你会找到一些我们认真挑选过的东西。不是铺天盖地的选择，每件都有编号、有坐标、有它为什么值得被带走的理由。你看上的东西，可以买走。不想要了，可以改签。它会继续被下一个人遇见。</p>
-    <p>每次回流，利润的 20% 进入 <em>三角洲</em>——分成三股支流，流向不同的方向。具体流向哪里，每季在这里公布。</p>
-  </div>
-  <div class="editor-sign">—— messenger 编辑室</div>
-</div>
-
-<!-- FEATURE -->
-<section class="section" id="feature">
-  <div class="section-label"><span>专题 · Feature</span><span>本期选品 3/10</span></div>
-  <div class="section-title">本期推荐</div>
-  <div class="section-body">每件东西都有一个故事。不是营销文案，是它真正经历过的——从被谁发现、经历什么、到为什么被放在这里。</div>
-  <div class="feature-grid">
-    <div class="feature-item">
-      <div class="feature-number">MSG-2024-001</div>
-      <div class="feature-visual">废铁皮飞行员夹克 · 纹理占位</div>
-      <div class="feature-name">废铁皮飞行员夹克</div>
-      <div class="feature-price">¥ 680</div>
-      <div class="feature-desc">90年代军需工厂尾单，厚实铁皮棉布，铜拉链有年头了但还能用很久。每件磨损痕迹不同，你拿到的那件是独一无二的。</div>
-      <div class="feature-note">「拉链头已经氧化成哑光铜色，不新，但好看。」</div>
-    </div>
-    <div class="feature-item">
-      <div class="feature-number">MSG-2024-002</div>
-      <div class="feature-visual">手作陶器 · 斑驳釉面</div>
-      <div class="feature-name">手作陶器·斑驳釉面</div>
-      <div class="feature-price">¥ 420</div>
-      <div class="feature-desc">景德镇小窑手作，釉面自然流动形成的斑驳纹理，每一只都是孤品。容量约350ml，适合一人份手冲或清酒。</div>
-      <div class="feature-note">「窑变的位置不在设计图里——是火决定的。」</div>
-    </div>
-    <div class="feature-item">
-      <div class="feature-number">MSG-2024-003</div>
-      <div class="feature-visual">旧书改装笔记本</div>
-      <div class="feature-name">旧书改装笔记本</div>
-      <div class="feature-price">¥ 168</div>
-      <div class="feature-desc">回收80年代旧书，手工改装成笔记本。封面保留原书名和借阅卡口袋，内页120g无酸纸，钢笔书写不透。</div>
-      <div class="feature-note">「翻开第一页的时候，上一任读者的笔记还在。」</div>
-    </div>
-  </div>
-</section>
-
-<!-- CATALOG -->
-<section class="section" id="catalog">
-  <div class="section-label"><span>目录 · Catalog</span><span>全部 10 件</span></div>
-  <div class="section-title">在本期找到的东西</div>
-  <div class="section-body">每件附编号、坐标、状态。点开看详细流转履历。</div>
-  <div class="catalog-grid" id="catalogGrid"></div>
-</section>
-
-<!-- TRANSIT -->
-<section class="transit-section" id="transit">
-  <div class="section-label"><span>回流 · Transit</span></div>
-  <div class="section-title" style="max-width:600px">不喜欢了？改签。<br>东西继续流动。</div>
-  <div class="transit-content">
-    <div class="transit-text">
-      <p>你买走的东西，在拥有一段时间之后，如果它不再适合你的生活——可以把它送回来。</p>
-      <p><strong>不需要理由。</strong> 每条物品在购买时都会附带一个回流码，有效期内扫描即可发起改签。</p>
-      <p>我们收到后会重新上架，你获得本次交易额 <strong>60%</strong> 的回流积分。积分可用于下次购买，也可选择直接<span style="color:var(--accent)">转为慈善捐赠</span>——全额进入三角洲。</p>
-      <p style="font-size:0.85em;color:rgba(200,212,192,0.4);margin-top:2em;border-top:1px solid rgba(200,212,192,0.06);padding-top:1.5em">回流窗口：购买后 30 天内 · 物品需保持基本完好 · 邮费由我们承担</p>
-    </div>
-    <div class="transit-visual">
-      <div class="transit-step">
-        <span class="transit-step-num">01</span>
-        <div class="transit-step-text">你在网站上买走一件东西</div>
+<!-- ===== EDITOR'S NOTE ===== -->
+<section class="editors-note" id="about">
+  <div class="section-content">
+    <div class="section-label">编者按 Editor's Note</div>
+    <div class="note-layout">
+      <div class="note-text">
+        <p>你可能不需要更多东西。<br>你需要更好的选择。</p>
+        <p>messenger 是一个以审美为坐标的循环空间。每件物品经过筛选才出现在这里——不是因为它贵，不是因为它是品牌，是因为它有被留下来的理由。</p>
+        <div class="pull-quote">漂亮的东西不应该永远属于某一个人。</div>
+        <p>买走之后，如果哪一天它不再需要你了，送回给messenger。它会继续被下一个人遇见。</p>
+        <p>每一次回流再被买走，利润的 20% 进入三角洲——三股支流，每股有方向，每季有记录。</p>
       </div>
-      <div class="transit-step-arrow">↓</div>
-      <div class="transit-step">
-        <span class="transit-step-num">02</span>
-        <div class="transit-step-text">拥有它一段时间后，如果不想要了，<strong>扫描回流码</strong>发起改签</div>
-      </div>
-      <div class="transit-step-arrow">↓</div>
-      <div class="transit-step">
-        <span class="transit-step-num">03</span>
-        <div class="transit-step-text">你把东西寄回，我们收到后<strong>重新上架</strong></div>
-      </div>
-      <div class="transit-step-arrow">↓</div>
-      <div class="transit-step">
-        <span class="transit-step-num">04</span>
-        <div class="transit-step-text">你获得 <strong>60%</strong> 回流积分，或选择 <strong style="color:var(--accent)">全额捐入三角洲</strong></div>
-      </div>
-      <div class="transit-step-arrow">↓</div>
-      <div class="transit-step">
-        <span class="transit-step-num">05</span>
-        <div class="transit-step-text">下一个人遇见它，旅程继续</div>
+      <div class="note-sidebar">
+        <strong>在这里你会得到</strong>
+        <p>审美策展 · 每一件都经过筛选</p>
+        <p>回流积分 · 不喜欢了可改签退回</p>
+        <p>慈善三角洲 · 利润 20% 分入三股支流</p>
+        <div class="three-dots">✦ &#x2003; ✦ &#x2003; ✦</div>
+        <p style="margin-top:12px;font-size:11px;color:var(--gray-300);letter-spacing:1px;">
+          流通 · 审美 · 流动 · 选择
+        </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DELTA -->
-<section class="delta-section" id="delta">
-  <div class="delta-inner">
+<!-- ===== FEATURE ===== -->
+<section class="feature" id="feature">
+  <div class="section-content">
+    <div class="section-label">本期专题 Feature</div>
+    <div class="feature-grid">
+      <!-- Item 1 -->
+      <div class="feature-card">
+        <div class="feature-image">
+          <div class="tex tex-1"></div>
+          <span class="feature-tag">降噪 · 聪明</span>
+        </div>
+        <div class="feature-info">
+          <div class="feature-no">MSG-2024-001</div>
+          <h3 class="feature-name">废铁皮飞行员夹克</h3>
+          <p class="feature-editorial">90年代军需工厂库存，五金件原装。可能轻微划痕——那是时间的签名，不是瑕疵。</p>
+          <div class="feature-meta">
+            <span class="feature-price">¥ 680</span>
+            <span class="feature-status">流转中</span>
+          </div>
+        </div>
+      </div>
+      <!-- Item 2 -->
+      <div class="feature-card">
+        <div class="feature-image">
+          <div class="tex tex-2"></div>
+          <span class="feature-tag">实用 · 流转</span>
+        </div>
+        <div class="feature-info">
+          <div class="feature-no">MSG-2024-002</div>
+          <h3 class="feature-name">手作陶器·斑驳釉面</h3>
+          <p class="feature-editorial">窑变产生的色差不是缺陷——同一个窑里也烧不出两件一样的。刚好够一个人的早饭。</p>
+          <div class="feature-meta">
+            <span class="feature-price">¥ 420</span>
+            <span class="feature-status">孤品</span>
+          </div>
+        </div>
+      </div>
+      <!-- Item 3 -->
+      <div class="feature-card">
+        <div class="feature-image">
+          <div class="tex tex-3"></div>
+          <span class="feature-tag">降噪 · 实用</span>
+        </div>
+        <div class="feature-info">
+          <div class="feature-no">MSG-2024-003</div>
+          <h3 class="feature-name">旧书改装笔记本</h3>
+          <p class="feature-editorial">回收旧书脊装订，内页80g再生纸。每一本都不一样——书名、颜色、手感。</p>
+          <div class="feature-meta">
+            <span class="feature-price">¥ 168</span>
+            <span class="feature-status">可预订</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CATALOG ===== -->
+<section class="catalog" id="catalog">
+  <div class="section-content">
+    <div class="catalog-header">
+      <div class="section-label" style="margin-bottom:0;">全部选品 Catalog</div>
+      <span class="catalog-count">10 件在架</span>
+    </div>
+    <div class="catalog-grid">
+      <div class="catalog-item">
+        <div class="catalog-item-image"><div class="cat-tex-1"></div><span class="catalog-item-tag">降噪 · 聪明</span></div>
+        <div class="catalog-item-info">
+          <h4 class="catalog-item-name">废铁皮飞行员夹克</h4>
+          <p class="catalog-item-desc">90年代军需工厂库存</p>
+          <div class="catalog-item-price">¥ 680</div>
+        </div>
+      </div>
+      <div class="catalog-item">
+        <div class="catalog-item-image"><div class="cat-tex-2"></div><span class="catalog-item-tag">实用 · 流转</span></div>
+        <div class="catalog-item-info">
+          <h4 class="catalog-item-name">手作陶器·斑驳釉面</h4>
+          <p class="catalog-item-desc">窑变不可复制，刚好够一人</p>
+          <div class="catalog-item-price">¥ 420</div>
+        </div>
+      </div>
+      <div class="catalog-item">
+        <div class="catalog-item-image"><div class="cat-tex-3"></div><span class="catalog-item-tag">降噪 · 实用</span></div>
+        <div class="catalog-item-info">
+          <h4 class="catalog-item-name">旧书改装笔记本</h4>
+          <p class="catalog-item-desc">回收书脊，80g再生纸</p>
+          <div class="catalog-item-price">¥ 168</div>
+        </div>
+      </div>
+      <div class="catalog-item">
+        <div class="catalog-item-image"><div class="cat-tex-4"></div><span class="catalog-item-tag">流转 · 实用</span></div>
+        <div class="catalog-item-info">
+          <h4 class="catalog-item-name">铸铁茶壶·年代不详</h4>
+          <p class="catalog-item-desc">内壁已养出茶山</p>
+          <div class="catalog-item-price">¥ 580</div>
+        </div>
+      </div>
+      <div class="catalog-item">
+        <div class="catalog-item-image"><div class="cat-tex-1"></div><span class="catalog-item-tag">降噪 · 聪明</span></div>
+        <div class="catalog-item-info">
+          <h4 class="catalog-item-name">亚麻工作围裙</h4>
+          <p class="catalog-item-desc">越洗越软，越穿越合身</p>
+          <div class="catalog-item-price">¥ 320</div>
+        </div>
+      </div>
+      <div class="catalog-item">
+        <div class="catalog-item-image"><div class="cat-tex-2"></div><span class="catalog-item-tag">聪明 · 流转</span></div>
+        <div class="catalog-item-info">
+          <h4 class="catalog-item-name">老相机镜头改台灯</h4>
+          <p class="catalog-item-desc">焦距调到手边最暖的光</p>
+          <div class="catalog-item-price">¥ 760</div>
+        </div>
+      </div>
+      <div class="catalog-item">
+        <div class="catalog-item-image"><div class="cat-tex-3"></div><span class="catalog-item-tag">降噪 · 实用</span></div>
+        <div class="catalog-item-info">
+          <h4 class="catalog-item-name">手工皮革帆布包</h4>
+          <p class="catalog-item-desc">植鞣革+帆布，越旧越好看</p>
+          <div class="catalog-item-price">¥ 490</div>
+        </div>
+      </div>
+      <div class="catalog-item">
+        <div class="catalog-item-image"><div class="cat-tex-4"></div><span class="catalog-item-tag">聪明 · 流转</span></div>
+        <div class="catalog-item-info">
+          <h4 class="catalog-item-name">木刻版画·巷弄</h4>
+          <p class="catalog-item-desc">手拓，每张略有不同</p>
+          <div class="catalog-item-price">¥ 260</div>
+        </div>
+      </div>
+      <div class="catalog-item">
+        <div class="catalog-item-image"><div class="cat-tex-1"></div><span class="catalog-item-tag">实用 · 降噪</span></div>
+        <div class="catalog-item-info">
+          <h4 class="catalog-item-name">黄铜文具盒</h4>
+          <p class="catalog-item-desc">随着使用产生自然色变</p>
+          <div class="catalog-item-price">¥ 180</div>
+        </div>
+      </div>
+      <div class="catalog-item">
+        <div class="catalog-item-image"><div class="cat-tex-2"></div><span class="catalog-item-tag">流转 · 聪明</span></div>
+        <div class="catalog-item-info">
+          <h4 class="catalog-item-name">羊毛毡帽</h4>
+          <p class="catalog-item-desc">手工塑形，每一顶弧线不同</p>
+          <div class="catalog-item-price">¥ 340</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRANSIT ===== -->
+<section class="transit" id="transit">
+  <div class="section-content">
+    <div class="section-label">回流 Transit</div>
+    <div class="transit-layout">
+      <div class="transit-text">
+        <p class="intro">不喜欢了？改签。</p>
+        <p class="note"><strong>东西不需要永远属于你。</strong>退回来，它继续被下一个人遇见。你拿回流积分，下一件更划算。</p>
+        <div class="transit-steps">
+          <span class="transit-step"><span class="num">1</span> 退回messenger</span>
+          <span class="transit-step"><span class="num">2</span> 上架流通</span>
+          <span class="transit-step"><span class="num">3</span> 下一个人遇见</span>
+        </div>
+      </div>
+      <div class="transit-table-wrap">
+        <table class="return-table">
+          <thead>
+            <tr>
+              <th>时段</th>
+              <th>退还比例</th>
+              <th>形式</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1个月内</td>
+              <td class="highlight">100%</td>
+              <td>原路退回</td>
+            </tr>
+            <tr>
+              <td>3个月内</td>
+              <td>70%</td>
+              <td>回流积分</td>
+            </tr>
+            <tr>
+              <td>6个月内</td>
+              <td>50%</td>
+              <td>回流积分</td>
+            </tr>
+            <tr>
+              <td>6个月以上</td>
+              <td>—</td>
+              <td>捐赠三角洲</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DELTA ===== -->
+<section class="delta" id="delta">
+  <div class="section-content">
+    <div class="section-label">三角洲 Delta</div>
+    <p style="font-family:var(--font-serif);font-size:clamp(18px,2vw,28px);color:var(--text-light);max-width:500px;margin:0 auto 16px;line-height:1.4;opacity:0.9;">
+      你送回来的东西，<br>我们让它重新入海。
+    </p>
     <div class="delta-viz">
       <div class="delta-node">
         <span class="delta-percent">20%</span>
         <span class="delta-label">入海</span>
       </div>
       <div class="delta-streams">
-        <div class="delta-stream"><div class="stream-line"></div><p class="stream-name">一股</p></div>
-        <div class="delta-stream"><div class="stream-line"></div><p class="stream-name">二股</p></div>
-        <div class="delta-stream"><div class="stream-line"></div><p class="stream-name">三股</p></div>
+        <div class="delta-stream">
+          <div class="stream-line"></div>
+          <p class="stream-name">一股</p>
+        </div>
+        <div class="delta-stream">
+          <div class="stream-line"></div>
+          <p class="stream-name">二股</p>
+        </div>
+        <div class="delta-stream">
+          <div class="stream-line"></div>
+          <p class="stream-name">三股</p>
+        </div>
       </div>
     </div>
-    <div class="delta-body">
-      <p>你送回来的东西，被下一个人买走后，利润的 <strong>20%</strong> 进入三角洲。</p>
-      <p>它会分成三股支流——<em>一股</em> · <em>二股</em> · <em>三股</em>。</p>
-      <p>每股有方向。每季有记录。</p>
-      <p style="margin-top:1.5em;font-size:0.85em;color:rgba(200,212,192,0.35)">它不在乎你捐了多少。它在乎你让它继续流动。</p>
-    </div>
+    <p class="delta-footer">
+      每股有方向。<br>
+      每季有记录。
+    </p>
+    <p class="delta-desc">
+      回流后被再次买走的每件物品，利润的 20% 进入三角洲，分为三股支流。不是因为你捐得多，是因为你让东西继续流动。
+    </p>
   </div>
-  <div class="delta-footer">delta · messenger</div>
 </section>
 
-<!-- COLOPHON -->
-<footer class="colophon">
-  <div class="colophon-brand">messenger</div>
-  <div class="colophon-links">
-    <a href="#cover">Issue 001</a>
-    <a href="#feature">专题</a>
-    <a href="#catalog">目录</a>
-    <a href="#transit">回流</a>
-    <a href="#delta">三角洲</a>
+<!-- ===== COLOPHON ===== -->
+<section class="colophon">
+  <div class="colophon-inner">
+    <h3 class="brand">messenger</h3>
+    <p class="meta">
+      ISSUE 001 · 2024
+      <span>|</span>
+      审美不是消费，是选择
+    </p>
+    <div class="links">
+      <a href="#">Instagram</a>
+      <a href="#">关于</a>
+      <a href="#">联系</a>
+    </div>
+    <div class="colophon-stamp">MSG</div>
   </div>
-  <div class="colophon-stamp">DELTA</div>
-</footer>
+</section>
 
 <script>
-// Cover date
-document.getElementById('coverDate').textContent = new Date().toLocaleString('zh-CN',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})
+// ===== LANG TOGGLE =====
+const btn = document.querySelector('.lang-toggle');
+let lang = 'zh';
 
-// Catalog items
-const items = [
-  {id:'MSG-2024-001',name:'废铁皮飞行员夹克',price:'¥ 680',tag:'1件',note:'90年代军需工厂尾单，铜拉链氧化成哑光铜色',color:'#3a5a44'},
-  {id:'MSG-2024-002',name:'手作陶器·斑驳釉面',price:'¥ 420',tag:'孤品',note:'景德镇小窑，窑变釉面每件不同',color:'#5a6a4a'},
-  {id:'MSG-2024-003',name:'旧书改装笔记本',price:'¥ 168',tag:'待回流',note:'回收80年代旧书手工改装，120g无酸纸',color:'#4a5a3a'},
-  {id:'MSG-2024-004',name:'铸铁茶壶·年代不详',price:'¥ 580',tag:'1件',note:'日本南部铁器风格，内壁已养出自然氧化层',color:'#2a3a2a'},
-  {id:'MSG-2024-005',name:'亚麻工作围裙',price:'¥ 320',tag:'1件',note:'法国产雨露麻，经多次水洗已软化',color:'#aab89a'},
-  {id:'MSG-2024-006',name:'老相机镜头改台灯',price:'¥ 760',tag:'已入流',note:'60年代德国镜头+手工黄铜底座',color:'#4a4a32'},
-  {id:'MSG-2024-007',name:'手工皮革帆布包',price:'¥ 490',tag:'1件',note:'意大利植鞣革+日本帆布，会随使用变色',color:'#5a4a32'},
-  {id:'MSG-2024-008',name:'木刻版画·巷弄',price:'¥ 260',tag:'孤品',note:'日本和纸手工拓印，版已毁',color:'#8a7a5a'},
-  {id:'MSG-2024-009',name:'黄铜文具盒',price:'¥ 180',tag:'1件',note:'印度黄铜手工敲制，表面会自然氧化',color:'#7a6a3a'},
-  {id:'MSG-2024-010',name:'羊毛毡帽',price:'¥ 340',tag:'已入流',note:'内蒙古羊毛手工毡制，保暖防风',color:'#6a5a4a'}
-]
-const grid = document.getElementById('catalogGrid')
-items.forEach((item,i)=>{
-  const tags = { '待回流':'待回流','已入流':'已入流','孤品':'孤品','1件':'1件' }
-  const div = document.createElement('div')
-  div.className = 'catalog-item'
-  div.innerHTML = `<div class="catalog-visual" style="background:${item.color};color:var(--text-light);opacity:0.85;display:flex;align-items:center;justify-content:center">${item.name}</div><div class="catalog-name">${item.name}</div><div class="catalog-price">${item.price}</div><div class="catalog-tag">${item.tag}</div>`
-  grid.appendChild(div)
-})
+const i18nMap = {
+  '编者按 Editor\'s Note': ['编者按 Editor\'s Note', 'Editor\'s Note'],
+  '本期专题 Feature': ['本期专题 Feature', 'Feature'],
+  '全部选品 Catalog': ['全部选品 Catalog', 'All Items'],
+  '回流 Transit': ['回流 Transit', 'Transit'],
+  '不喜欢了？改签。': ['不喜欢了？改签。', 'Changed your mind? Return it.'],
+  '东西不需要永远属于你。': ['东西不需要永远属于你。', 'Things don\'t have to be yours forever.'],
+  '退回来，它继续被下一个人遇见。你拿回流积分，下一件更划算。': ['退回来，它继续被下一个人遇见。你拿回流积分，下一件更划算。', 'Send it back. Someone else will find it. You get return credit.'],
+  '三角洲 Delta': ['三角洲 Delta', 'Delta'],
+  '你送回来的东西，<br>我们让它重新入海。': ['你送回来的东西，<br>我们让它重新入海。', 'What you return,<br>we return to the sea.'],
+  '回流后被再次买走的每件物品，利润的 20% 进入三角洲，分为三股支流。不是因为你捐得多，是因为你让东西继续流动。': ['回流后被再次买走的每件物品，利润的 20% 进入三角洲，分为三股支流。不是因为你捐得多，是因为你让东西继续流动。', 'Every item recirculated — 20% of profit flows into the delta, branching into three. Not because you donated a lot, but because you let things keep moving.'],
+  '你可能不需要更多东西。<br>你需要更好的选择。': ['你可能不需要更多东西。<br>你需要更好的选择。', 'You probably don\'t need more things.<br>You need better choices.'],
+  'messenger 是一个以审美为坐标的循环空间。每件物品经过筛选才出现在这里——不是因为它贵，不是因为它是品牌，是因为它有被留下来的理由。': ['messenger 是一个以审美为坐标的循环空间。每件物品经过筛选才出现在这里——不是因为它贵，不是因为它是品牌，是因为它有被留下来的理由。', 'messenger is a circulation space with aesthetics as coordinates. Every item is here because it earned its place.'],
+  '漂亮的东西不应该永远属于某一个人。': ['漂亮的东西不应该永远属于某一个人。', 'Beautiful things shouldn\'t belong to one person forever.'],
+  '买走之后，如果哪一天它不再需要你了，送回给messenger。它会继续被下一个人遇见。': ['买走之后，如果哪一天它不再需要你了，送回给messenger。它会继续被下一个人遇见。', 'When it no longer needs you, send it back. Someone else will find it.'],
+  '每一次回流再被买走，利润的 20% 进入三角洲——三股支流，每股有方向，每季有记录。': ['每一次回流再被买走，利润的 20% 进入三角洲——三股支流，每股有方向，每季有记录。', 'Every return, 20% enters the delta — three branches, each with direction, each season recorded.'],
+  '审美策展 · 每一件都经过筛选': ['审美策展 · 每一件都经过筛选', 'Curated · Every piece selected'],
+  '回流积分 · 不喜欢了可改签退回': ['回流积分 · 不喜欢了可改签退回', 'Return credit · Change your mind, send it back'],
+  '慈善三角洲 · 利润 20% 分入三股支流': ['慈善三角洲 · 利润 20% 分入三股支流', 'Delta · 20% flows into three branches'],
+  '流通 · 审美 · 流动 · 选择': ['流通 · 审美 · 流动 · 选择', 'Circulate · Aesthetic · Flow · Choose'],
+  '10 件在架': ['10 件在架', '10 items in stock'],
+  'ISSN': ['审美不是消费，是选择', 'Aesthetics is not consumption, it\'s choice'],
+  '每股有方向。': ['每股有方向。', 'Each branch has direction.'],
+  '每季有记录。': ['每季有记录。', 'Each season has records.'],
+  '博物馆': ['博物馆', 'Archive'],
+  '目录': ['目录', 'Catalog'],
+  '回流': ['回流', 'Transit'],
+  '三角洲': ['三角洲', 'Delta'],
+};
+
+btn.addEventListener('click', () => {
+  lang = lang === 'zh' ? 'en' : 'zh';
+  btn.querySelectorAll('span').forEach(s => s.classList.toggle('active-lang'));
+  
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    const pair = i18nMap[key];
+    if (pair) el.innerHTML = lang === 'zh' ? pair[0] : pair[1];
+  });
+  
+  // Also handle inline content
+  document.querySelectorAll('.section-label, .catalog-count, .note-text p, .cover-line, .colophon .meta, .sidebar-text, nav a, .delta-footer, .delta-desc, .intro, .note')
+    .forEach(el => {
+      const text = el.innerHTML;
+      if (i18nMap[text]) el.innerHTML = lang === 'zh' ? i18nMap[text][0] : i18nMap[text][1];
+    });
+});
 </script>
 </body>
 </html>
