@@ -344,10 +344,19 @@
       font-size: clamp(15px, 1.4vw, 20px);
       line-height: 2;
       color: var(--gray-900);
+      padding-left: 64px;
     }
 
     .editors-note-text p + p {
       margin-top: 1.6em;
+    }
+
+    .editors-note-text p:first-child {
+      padding-left: 0;
+      margin-left: -24px;
+      font-size: clamp(18px, 1.7vw, 24px);
+      line-height: 1.7;
+      letter-spacing: 0.02em;
     }
 
     .editors-note-text .pull-quote {
@@ -357,7 +366,12 @@
       color: var(--ink);
       padding: 32px 0 32px 32px;
       border-left: 1px solid var(--accent);
-      margin: 40px 0;
+      margin: 40px 0 40px -32px;
+    }
+
+    .editors-note-text p:last-of-type {
+      padding-left: 32px;
+      margin-top: 48px;
     }
 
     .editors-note-sidebar {
