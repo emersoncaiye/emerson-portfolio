@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://my-zenmind-blog.pages.dev',
+  site: 'https://emerson-portfolio.pages.dev',
   output: 'static',
   i18n: {
     defaultLocale: 'en',
