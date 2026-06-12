@@ -1381,7 +1381,7 @@
       height: 40px;
       border-radius: 50%;
       border: 1px solid var(--deep-forest);
-      background: rgba(10,18,16,0.35);
+      background: rgba(10,18,16,0.6);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1394,6 +1394,23 @@
     }
     .music-dot:hover { border-color: var(--accent); color: var(--text); }
     .music-dot.playing { animation: breathe 2s infinite; }
+    .music-dot::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 1px solid var(--accent);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .music-dot.ripple::after {
+      animation: water-ripple 1.2s ease-out;
+    }
+    @keyframes water-ripple {
+      0% { transform: scale(1); opacity: 0.5; }
+      100% { transform: scale(2.5); opacity: 0; }
+    }
     @keyframes breathe {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.4; }
@@ -1401,7 +1418,7 @@
 
     .gate-timer {
       font-size: 0.75em;
-      color: var(--deep-forest);
+      color: var(--new-shoot);
       letter-spacing: 0.15em;
       text-transform: uppercase;
     }
@@ -1431,53 +1448,53 @@
     <div class="gate-signal"><span></span><span></span><span></span><span></span></div>
     <div class="gate-postmark"></div>
 
-    <div class="gate-meta" id="gateMeta">COLLECTING · <span id="gateTime"></span></div>
-    <div class="gate-timer" id="gateTimer">采集号 · SPC-0000 · 编目中</div>
+    <div class="gate-meta" id="gateMeta">FLOWING · <span id="gateTime"></span></div>
+    <div class="gate-timer" id="gateTimer">水文 · FLOW-0000 · 请涉水</div>
 
     <h1 class="gate-title" id="gateTitle">MESSENGER</h1>
 
     <div class="gate-flights" id="gateFlights">
       <div class="gate-flight-row">
-        <span class="flight-code">SPC 0412</span>
-        <span class="flight-route">39°54'N 116°24'E</span>
-        <span class="flight-gate">DRAWER 04</span>
-        <span class="flight-status">CLASSIFIED</span>
+        <span class="flight-code">FLOW 04</span>
+        <span class="flight-route">涩谷 · 漂至</span>
+        <span class="flight-gate">2.4kn</span>
+        <span class="flight-status">FLOWING</span>
       </div>
       <div class="gate-flight-row">
-        <span class="flight-code">SPC 0718</span>
-        <span class="flight-route">48°51'N 2°21'E</span>
-        <span class="flight-gate">DRAWER 12</span>
-        <span class="flight-status">ARCHIVING</span>
+        <span class="flight-code">FLOW 06</span>
+        <span class="flight-route">玛黑 · 静止中</span>
+        <span class="flight-gate">0.0kn</span>
+        <span class="flight-status">STILL</span>
       </div>
       <div class="gate-flight-row">
-        <span class="flight-code">SPC 0923</span>
+        <span class="flight-code">FLOW --</span>
         <span class="flight-route">--- → YOU</span>
-        <span class="flight-gate">DRAWER 07</span>
-        <span class="flight-status you">AWAITING</span>
+        <span class="flight-gate">---</span>
+        <span class="flight-status you">请涉水</span>
       </div>
       <div class="gate-flight-row">
-        <span class="flight-code">SPC 1205</span>
-        <span class="flight-route">35°41'N 139°41'E</span>
-        <span class="flight-gate">DRAWER 03</span>
-        <span class="flight-status">CLASSIFIED</span>
+        <span class="flight-code">FLOW 12</span>
+        <span class="flight-route">愚园路 · 正在被遇见</span>
+        <span class="flight-gate">1.8kn</span>
+        <span class="flight-status">DRIFTING</span>
       </div>
     </div>
 
     <p class="gate-sub">
-      <span data-i18n="gate_sub_en">Smart. Quiet. Circulate.</span>
-      <span class="cn" data-i18n="gate_sub_cn">这里的东西可以被带走，也可以被送回来。</span>
+      <span data-i18n="gate_sub_en">Water doesn't compete. It just flows down.</span>
+      <span class="cn" data-i18n="gate_sub_cn">漂亮的东西应该流动。像河流一样。像根茎一样。</span>
     </p>
 
-    <div class="scroll-indicator" data-i18n="scroll_hint">SCROLL</div>
+    <div class="scroll-indicator" data-i18n="scroll_hint">〰 涉水</div>
   </section>
 
   <div class="mounting-strip"></div>
   <!-- ===================== FRAGMENTS ===================== -->
   <section class="fragments herbarium-paper" id="world">
     <div style="max-width:1200px;margin:0 auto 60px;">
-      <div class="section-label reveal" data-i18n="frag_label">· 世界碎片 Fragments</div>
+      <div class="section-label reveal" data-i18n="frag_label">· 水文碎片 Field Notes</div>
       <div class="telegram-strip reveal">
-        <span>FIELD NOTES /// SPC-SIGNAL</span>
+        <span>FIELD NOTES /// MSG-FLOW</span>
         <span class="urgency">● LIVE</span>
       </div>
       <h2 class="section-title reveal" data-i18n="frag_title">这里有一个<em>世界</em></h2>
@@ -1535,24 +1552,24 @@
   <!-- ===================== NOTEBOOK ===================== -->
   <section class="notebook" id="manifesto">    <div class="notebook-grid">
       <div class="notebook-text">
-        <div class="section-label reveal" data-i18n="manifesto_label">· 信条 Specimen</div>
+        <div class="section-label reveal" data-i18n="manifesto_label">· 水生信条 Monograph</div>
 
         <p class="pull-quote reveal" data-i18n="manifesto_p1">漂亮的东西应该流动。</p>
 
-        <p class="body-text reveal" data-i18n="manifesto_p2">我一件一件淘，你一件一件看。</p>
+        <p class="body-text reveal" data-i18n="manifesto_p2">像河流一样。像根茎一样。</p>
 
         <p class="body-text reveal" style="margin-top:32px;padding-top:24px;border-top:1px solid var(--gray-100);" data-i18n="manifesto_p3"></p>
 
         <span class="about-trigger reveal" id="aboutTrigger" data-i18n="about_trigger">阅读完整故事 <span class="arrow">▼</span></span>
 
-        <div class="notebook-margin reveal" data-i18n="manifesto_margin">AESTHETICS · COORDINATES</div>
+        <div class="notebook-margin reveal" data-i18n="manifesto_margin">水流 · 漂流</div>
       </div>
 
       <div class="notebook-image reveal">
         <div class="tex-symbol">
           <span class="diamond">◈</span>
-          <div data-i18n="manifesto_image_text">审美即坐标</div>
-          <div style="font-size:8px;letter-spacing:4px;" data-i18n="manifesto_image_sub">AESTHETICS AS COORDINATES</div>
+          <div data-i18n="manifesto_image_text">水生审美</div>
+          <div style="font-size:8px;letter-spacing:4px;" data-i18n="manifesto_image_sub">AESTHETICS AS CURRENTS</div>
         </div>
         <div class="content-block">
           <strong data-i18n="manifesto_philosophy_title">流动生活的选品空间</strong>
@@ -1592,20 +1609,20 @@
   <!-- ===================== ARCHIVE ===================== -->
   <section class="archive" id="archive">
     <div class="archive-header">
-      <div class="section-label reveal" data-i18n="archive_label">· 物件标本 Archive</div>
+      <div class="section-label reveal" data-i18n="archive_label">· 物标档案 Archive</div>
       <div class="telegram-strip reveal">
-        <span>SPECIMEN /// UPDATED WEEKLY</span>
-        <span>SPC-2024</span>
+        <span>ARCHIVE /// UPDATED WEEKLY</span>
+        <span>MSG-2024</span>
       </div>
-      <h2 class="section-title reveal" data-i18n="archive_title">它们在寻找<br>下一个<em>主人</em></h2>
+      <h2 class="section-title reveal" data-i18n="archive_title">它们在水中<br>寻找<em>下一站</em></h2>
     </div>
 
     <div class="archive-grid">
       <div class="archive-card break-right reveal">
-        <div class="acc-no">SPC-2024-001</div>
+        <div class="acc-no">MSG-2024-001</div>
         <div class="archive-image">
           <div class="placeholder-img tex-1"><span>◎</span></div>
-          <span class="item-tag" data-i18n="item1_tag">已修复 / 限一件</span>
+          <span class="item-tag" data-i18n="item1_tag">已入流 / 限一件</span>
         </div>
         <div class="item-info">
           <div class="item-origin">39°54'N 116°24'E</div>
@@ -1616,10 +1633,10 @@
       </div>
 
       <div class="archive-card reveal">
-        <div class="acc-no">SPC-2024-002</div>
+        <div class="acc-no">MSG-2024-002</div>
         <div class="archive-image">
           <div class="placeholder-img tex-2"><span>◎</span></div>
-          <span class="item-tag" data-i18n="item2_tag">孤品</span>
+          <span class="item-tag" data-i18n="item2_tag">孤流</span>
         </div>
         <div class="item-info">
           <div class="item-origin">26°04'N 119°17'E</div>
@@ -1630,10 +1647,10 @@
       </div>
 
       <div class="archive-card break-left reveal">
-        <div class="acc-no">SPC-2024-003</div>
+        <div class="acc-no">MSG-2024-003</div>
         <div class="archive-image">
           <div class="placeholder-img tex-3"><span>◎</span></div>
-          <span class="item-tag" data-i18n="item3_tag">带使用痕迹</span>
+          <span class="item-tag" data-i18n="item3_tag">水渍痕迹</span>
         </div>
         <div class="item-info">
           <div class="item-origin">51°30'N 0°07'W</div>
@@ -1644,10 +1661,10 @@
       </div>
 
       <div class="archive-card reveal">
-        <div class="acc-no">SPC-2024-004</div>
+        <div class="acc-no">MSG-2024-004</div>
         <div class="archive-image">
           <div class="placeholder-img tex-4"><span>◎</span></div>
-          <span class="item-tag" data-i18n="item4_tag">艺术家合作款</span>
+          <span class="item-tag" data-i18n="item4_tag">支流汇入</span>
         </div>
         <div class="item-info">
           <div class="item-origin">35°41'N 139°41'E</div>
@@ -1658,10 +1675,10 @@
       </div>
 
       <div class="archive-card break-right reveal">
-        <div class="acc-no">SPC-2024-005</div>
+        <div class="acc-no">MSG-2024-005</div>
         <div class="archive-image">
           <div class="placeholder-img tex-5"><span>◎</span></div>
-          <span class="item-tag tag-sold" data-i18n="item5_tag">已售 · 可预定</span>
+          <span class="item-tag tag-sold" data-i18n="item5_tag">已入海 · 可预定</span>
         </div>
         <div class="item-info">
           <div class="item-origin">52°31'N 13°23'E</div>
@@ -1672,10 +1689,10 @@
       </div>
 
       <div class="archive-card break-left reveal">
-        <div class="acc-no">SPC-2024-006</div>
+        <div class="acc-no">MSG-2024-006</div>
         <div class="archive-image">
           <div class="placeholder-img tex-6"><span>◎</span></div>
-          <span class="item-tag" data-i18n="item6_tag">待修复</span>
+          <span class="item-tag" data-i18n="item6_tag">待回流</span>
         </div>
         <div class="item-info">
           <div class="item-origin">35°41'N 139°41'E</div>
@@ -1692,17 +1709,17 @@
   <!-- ===================== TRANSIT ===================== -->
   <section class="transit" id="transit">
     <div class="transit-header">
-      <div class="section-label reveal" data-i18n="transit_label">· 归档 Reclassify</div>
+      <div class="section-label reveal" data-i18n="transit_label">· 回流 Transit</div>
       <div class="telegram-strip reveal">
-        <span>RE-ARCHIVE /// CIRCULATION POLICY</span>
-        <span>SPC-TRANSIT</span>
+        <span>RETURN-FLOW /// CIRCULATION POLICY</span>
+        <span>MSG-TRANSIT</span>
       </div>
-      <h2 class="section-title reveal" data-i18n="transit_title">不喜欢了？<br><em>归档</em></h2>
+      <h2 class="section-title reveal" data-i18n="transit_title">不喜欢了？<br><em>让它继续漂</em></h2>
     </div>
 
     <div class="boarding-pass reveal">
       <div class="bp-left">
-        <div class="bp-flight-no">RECATEGORIZE-01</div>
+        <div class="bp-flight-no">RETURN-FLOW-01</div>
         <div style="height:2px;background:repeating-linear-gradient(-45deg,var(--accent) 0,var(--accent) 2px,var(--bg-alt) 2px,var(--bg-alt) 4px,var(--accent) 4px,var(--accent) 6px,var(--bg-alt) 6px,var(--bg-alt) 8px);opacity:0.3;margin-bottom:24px;"></div>
         <div class="bp-route">
           <div class="bp-city" data-i18n="transit_from">YOU</div>
@@ -1712,16 +1729,16 @@
 
         <div class="bp-info-row">
           <div class="bp-info-item">
-            <div class="bp-info-label" data-i18n="transit_gate_label">CATALOG</div>
+            <div class="bp-info-label" data-i18n="transit_gate_label">FLOW</div>
             <div class="bp-info-value">RETURN</div>
           </div>
           <div class="bp-info-item">
-            <div class="bp-info-label" data-i18n="transit_class_label">CONDITION</div>
-            <div class="bp-info-value" data-i18n="transit_class">流通舱</div>
+            <div class="bp-info-label" data-i18n="transit_class_label">CURRENT</div>
+            <div class="bp-info-value" data-i18n="transit_class">回流舱</div>
           </div>
           <div class="bp-info-item">
-            <div class="bp-info-label">SEAT</div>
-            <div class="bp-info-value">OPEN</div>
+            <div class="bp-info-label">DRIFT</div>
+            <div class="bp-info-value">FLOWING</div>
           </div>
         </div>
 
@@ -1744,7 +1761,7 @@
       </div>
 
       <div class="bp-right">
-        <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:3px;color:var(--gray-300);text-transform:uppercase;margin-bottom:16px;" data-i18n="transit_fare_label">RETURN TABLE · 归档表</div>
+        <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:3px;color:var(--gray-300);text-transform:uppercase;margin-bottom:16px;" data-i18n="transit_fare_label">FLOW TABLE · 回流表</div>
         <table class="return-table">
           <thead>
             <tr>
@@ -1793,12 +1810,12 @@
         </div>
       </div>
       <div>
-        <div class="section-label reveal" data-i18n="delta_label">· 三角洲 Delta</div>
+        <div class="section-label reveal" data-i18n="delta_label">· 支流 Delta</div>
         <div class="charity-highlight reveal">20%</div>
-        <h2 class="charity-title reveal" data-i18n="delta_title">你流回的东西<br>我们让它<em>继续流动</em></h2>
+        <h2 class="charity-title reveal" data-i18n="delta_title">你送回来的东西<br>我们让它<em>重新入海</em></h2>
         <div class="charity-text reveal">
-          <p data-i18n="delta_p1">你流回的东西，我们会重新上架。二次销售的利润，20% 进入流动公益金。</p>
-          <p data-i18n="delta_p2">这些钱会按季度捐给：</p>
+          <p data-i18n="delta_p1">每一次回流，20% 进入三角洲。它会分成三股支流——流浪动物、乡村阅读、社区行动。</p>
+          <p data-i18n="delta_p2">每一股都有记录，每一季在这里汇合。</p>
         </div>
         <div class="charity-categories reveal">
           <div class="charity-cat"><span class="marker"></span><span data-i18n="delta_cat1">流浪动物救助</span></div>
@@ -1806,7 +1823,7 @@
           <div class="charity-cat"><span class="marker"></span><span data-i18n="delta_cat3">社区环保行动</span></div>
         </div>
         <div class="charity-text reveal" style="margin-top:24px;">
-          <p data-i18n="delta_p3">每季度在这里公示捐赠记录。你让好东西继续流动。我们一起做点好事。</p>
+          <p data-i18n="delta_p3">三角洲不在乎你捐了多少。它在乎你让它继续流动。</p>
         </div>
       </div>
     </div>
@@ -1844,7 +1861,7 @@
   <!-- FOOTER -->
   <footer>
     <div>
-      <span class="stamp">SPC<br>EST.<br>2024</span>
+      <span class="stamp">MSG<br>EST.<br>2024</span>
     </div>
     <div data-i18n="footer_text">messenger · 漂亮的东西应该流动</div>
     <div class="footer-links">
@@ -1855,24 +1872,24 @@
     </div>
   </footer>
 
-  <!-- RADIO PLAYER -->
+  <!-- WATER SIGNAL -->
   <div class="radio-player" id="radioPlayer">
     <div class="radio-signal off" id="radioSignal">
       <span></span><span></span><span></span><span></span>
     </div>
     <div class="radio-city" id="radioCity">PVG</div>
-    <div class="radio-freq">87.5 MHz</div>
+    <div class="radio-freq">〰 flowing</div>
   </div>
 
   <!-- MUSIC DOT (YouTube) -->
-  <div class="music-dot" id="music-dot">♫</div>
+  <div class="music-dot" id="music-dot">〰</div>
   <div id="bg-music" style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;pointer-events:none;"></div>
 
   <script>
     (function() {
       'use strict';
 
-      // ===== GATE: DEPARTURE BOARD =====
+      // ===== GATE: FLOW BOARD =====
       var gateTitle = document.getElementById('gateTitle');
       var targetText = 'MESSENGER';
       var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -1892,7 +1909,7 @@
       var highlightSpan = document.createElement('span');
       highlightSpan.className = 'highlight';
       highlightSpan.setAttribute('data-i18n', 'gate_highlight');
-      highlightSpan.textContent = '\u5FAA\u73AF\u7A7A\u95F4'; // 循环空间
+      highlightSpan.textContent = '\u6D41\u52A8\u7A7A\u95F4'; // 流动空间
       gateTitle.appendChild(highlightSpan);
 
       // Animate each letter
@@ -1947,18 +1964,18 @@
         zh: {
           page_title: 'messenger \u2014 \u4EE5\u5BA1\u7F8E\u4E3A\u5750\u6807\u7684\u5FAA\u73AF\u7A7A\u95F4',
           nav_world: '\u00B7 \u788E\u7247', nav_manifesto: '\u00B7 \u4FE1\u6761', nav_archive: '\u00B7 \u6863\u6848', nav_transit: '\u00B7 \u6539\u7B7E', nav_delta: '\u00B7 \u4E09\u89D2\u6D32',
-          gate_highlight: '\u5FAA\u73AF\u7A7A\u95F4',
-          gate_sub_en: 'Smart. Quiet. Circulate.',
-          gate_sub_cn: '\u8FD9\u91CC\u7684\u4E1C\u897F\u53EF\u4EE5\u88AB\u5E26\u8D70\uFF0C\u4E5F\u53EF\u4EE5\u88AB\u9001\u56DE\u6765\u3002',
-          scroll_hint: 'SCROLL',
-          frag_label: '\u00B7 \u4E16\u754C\u788E\u7247 Fragments',
-          frag_title: '\u8FD9\u91CC\u6709\u4E00\u4E2A<em>\u4E16\u754C</em>',
-          manifesto_label: '\u00B7 \u4FE1\u6761 Notebook',
+          gate_highlight: '\u6D41\u52A8\u7A7A\u95F4',
+          gate_sub_en: 'Water doesn\u2019t compete. It just flows down.',
+          gate_sub_cn: '\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8\u3002\u50CF\u6CB3\u6D41\u4E00\u6837\u3002\u50CF\u6839\u830E\u4E00\u6837\u3002',
+          scroll_hint: '\u301C \u6D89\u6C34',
+          frag_label: '\u00B7 \u6C34\u6587\u788E\u7247 Field Notes',
+          frag_title: '\u8FD9\u91CC\u6709\u4E00\u7247<em>\u6C34\u57DF</em>',
+          manifesto_label: '\u00B7 \u6C34\u751F\u4FE1\u6761 Monograph',
           manifesto_p1: '\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8\u3002',
-          manifesto_p2: '\u6211\u4E00\u4EF6\u4E00\u4EF6\u6DD8\uFF0C\u4F60\u4E00\u4EF6\u4E00\u4EF6\u770B\u3002',
-          manifesto_p3: '<strong style="font-family:var(--font-serif);color:var(--gray-900);font-weight:400;">\u5BA1\u7F8E\u8FD9\u4EF6\u4E8B\uFF0C\u53EF\u4EE5\u5F88\u8F7B\u677E\u3002</strong><br>\u4E0D elitist\uFF0C\u4E0D gatekeeping\uFF0C\u4E0D pretentious\u3002<br>\u6211\u4EEC\u7684\u4EF7\u503C\u4E0D\u662F\u62FC\u4EF7\u683C\uFF0C\u800C\u662F\u8BA9\u4F60\u4E0D\u7EA0\u7ED3\u3002<br>\u82B1\u4E00\u7B14\u5BF9\u7684\u94B1\uFF0C\u4E70\u4E00\u4E2A\u6211\u4EEC\u6311\u8FC7\u7684\u676F\u5B50\u3002<br>\u5B83\u4F1A\u966A\u4F60\u5F88\u4E45\u3002',
-          manifesto_margin: '\u5BA1\u7F8E \u00B7 \u5750\u6807',
-          manifesto_image_text: '\u5BA1\u7F8E\u5373\u5750\u6807', manifesto_image_sub: 'AESTHETICS AS COORDINATES',
+          manifesto_p2: '\u50CF\u6CB3\u6D41\u4E00\u6837\u3002\u50CF\u6839\u830E\u4E00\u6837\u3002',
+          manifesto_p3: '<strong style="font-family:var(--font-serif);color:var(--gray-900);font-weight:400;">\u6C34\u4E0D\u4E89\uFF0C\u5B83\u53EA\u662F\u5411\u4E0B\u8D70\u3002</strong><br>\u597D\u7684\u7269\u4EF6\u4E0D\u5E94\u8BE5\u6C38\u8FDC\u5C5E\u4E8E\u4E00\u4E2A\u4EBA\u3002<br>\u5B83\u4EEC\u5E94\u8BE5\u7EE7\u7EED\u88AB\u627E\u5230\u3002',
+          manifesto_margin: '\u6C34\u6D41 \u00B7 \u6F02\u6D41',
+          manifesto_image_text: '\u6C34\u751F\u5BA1\u7F8E', manifesto_image_sub: 'AESTHETICS AS CURRENTS',
           manifesto_philosophy_title: '\u6D41\u52A8\u751F\u6D3B\u7684\u9009\u54C1\u7A7A\u95F4',
           manifesto_philosophy_text: '\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8<br>Beauty is meant to flow',
           about_trigger: '\u9605\u8BFB\u5B8C\u6574\u6545\u4E8B <span class="arrow">\u25BC</span>',
@@ -1973,8 +1990,8 @@
           about_standard_label: '\u6211\u7684\u9009\u54C1\u6807\u51C6',
           about_sig1: '\u964D\u566A', about_sig2: '\u806A\u660E', about_sig3: '\u5B9E\u7528', about_sig4: '\u6D41\u8F6C',
           about_standard_note: '\u6211\u9009\u4E1C\u897F\u770B\u8FD9\u56DB\u70B9\u3002\u6BCF\u4EF6\u90FD\u8FC7\u4E00\u904D\u3002',
-          archive_label: '\u00B7 \u7269\u4EF6\u6863\u6848 Archive',
-          archive_title: '\u5B83\u4EEC\u5728\u5BFB\u627E<br>\u4E0B\u4E00\u4E2A<em>\u4E3B\u4EBA</em>',
+          archive_label: '\u00B7 \u7269\u6807\u6863\u6848 Archive',
+          archive_title: '\u5B83\u4EEC\u5728\u6C34\u4E2D<br>\u5BFB\u627E<em>\u4E0B\u4E00\u7AD9</em>',
           item1_tag: '\u5DF2\u4FEE\u590D / \u9650\u4E00\u4EF6', item1_name: '\u5E9F\u94C1\u76AE\u98DE\u884C\u5458\u5939\u514B',
           item1_desc: '90\u5E74\u4EE3\u519B\u9700\u5DE5\u5382\u5C3E\u5355\uFF0C\u94DC\u8D28\u62C9\u94FE\u6C27\u5316\u6210\u53E4\u94DC\u8272\u3002\u5185\u886C\u624B\u5DE5\u4FEE\u8865\u2014\u2014\u7528\u4E86\u4E00\u6BB5\u8001\u548C\u670D\u8170\u5E26\u3002',
           item2_tag: '\u5B64\u54C1', item2_name: '\u624B\u7EC7\u4E9A\u9EBB\u9614\u817F\u88E4',
@@ -1987,8 +2004,8 @@
           item5_desc: '\u7A7F\u4E86\u516D\u5E74\u7684Dr. Martens\uFF0C\u76AE\u9762\u81EA\u7136\u9F9F\u88C2\u5982\u5730\u56FE\u3002\u978B\u5E95\u7EB9\u8DEF\u91CC\u5D4C\u7740\u7684\u4E0D\u662F\u6CE5\u571F\uFF0C\u662F\u4E09\u4E2A\u57CE\u5E02\u7684\u8BB0\u5FC6\u3002',
           item6_tag: '\u5F85\u4FEE\u590D', item6_name: '\u65E7\u4E66\u5E97\u7684\u706F',
           item6_desc: '\u662D\u548C\u5E74\u95F4\u9EC4\u94DC\u53F0\u706F\uFF0C\u706F\u7F69\u624B\u5DE5\u6376\u6253\u51FA\u51F9\u51F8\u7EB9\u7406\u3002\u7535\u7EBF\u5DF2\u6362\u65B0\uFF0C\u63A5\u5934\u5916\u9732\u2014\u2014\u6545\u610F\u4E0D\u85CF\u8D77\u6765\u3002',
-          transit_label: '\u00B7 \u6539\u7B7E Transit',
-          transit_title: '\u4E0D\u559C\u6B22\u4E86\uFF1F<br><em>\u6539\u7B7E</em>',
+          transit_label: '\u00B7 \u56DE\u6D41 Transit',
+          transit_title: '\u4E0D\u559C\u6B22\u4E86\uFF1F<br><em>\u8BA9\u5B83\u7EE7\u7EED\u6F02</em>',
           transit_from: 'YOU', transit_to: 'MSG', transit_class: '\u6D41\u901A\u8231',
           transit_gate_label: 'GATE', transit_class_label: 'CLASS',
           transit_step1: '\u8054\u7CFB\u6211\uFF08\u5FAE\u4FE1/\u79C1\u4FE1\uFF09',
@@ -2004,14 +2021,14 @@
           transit_row3_period: '90\u2013180 \u5929', transit_row3_cash: '40%', transit_row3_credit: '50%',
           transit_row4_period: '180 \u5929\u4EE5\u4E0A', transit_row4_cash: '30%', transit_row4_credit: '40%',
           transit_credit_note: '\u79EF\u5206 1:1 \u4F7F\u7528\uFF0C\u4E0D\u8FC7\u671F\u3002',
-          delta_label: '\u00B7 \u4E09\u89D2\u6D32 Delta',
-          delta_title: '\u4F60\u6D41\u56DE\u7684\u4E1C\u897F<br>\u6211\u4EEC\u8BA9\u5B83<em>\u7EE7\u7EED\u6D41\u52A8</em>',
-          delta_p1: '\u4F60\u6D41\u56DE\u7684\u4E1C\u897F\uFF0C\u6211\u4EEC\u4F1A\u91CD\u65B0\u4E0A\u67B6\u3002\u4E8C\u6B21\u9500\u552E\u7684\u5229\u6DA6\uFF0C20% \u8FDB\u5165\u6D41\u52A8\u516C\u76CA\u91D1\u3002',
-          delta_p2: '\u8FD9\u4E9B\u94B1\u4F1A\u6309\u5B63\u5EA6\u6350\u7ED9\uFF1A',
+          delta_label: '\u00B7 \u652F\u6D41 Delta',
+          delta_title: '\u4F60\u9001\u56DE\u6765\u7684\u4E1C\u897F<br>\u6211\u4EEC\u8BA9\u5B83\u91CD\u65B0<em>\u5165\u6D77</em>',
+          delta_p1: '\u6BCF\u4E00\u6B21\u56DE\u6D41\uFF0C20% \u8FDB\u5165\u4E09\u89D2\u6D32\u3002\u5B83\u4F1A\u5206\u6210\u4E09\u80A1\u652F\u6D41\u2014\u2014\u6D41\u6D6A\u52A8\u7269\u3001\u4E61\u6751\u9605\u8BFB\u3001\u793E\u533A\u884C\u52A8\u3002',
+          delta_p2: '\u6BCF\u4E00\u80A1\u90FD\u6709\u8BB0\u5F55\uFF0C\u6BCF\u4E00\u5B63\u5728\u8FD9\u91CC\u6C47\u5408\u3002',
           delta_cat1: '\u6D41\u6D6A\u52A8\u7269\u6551\u52A9',
           delta_cat2: '\u4E61\u6751\u513F\u7AE5\u9605\u8BFB',
           delta_cat3: '\u793E\u533A\u73AF\u4FDD\u884C\u52A8',
-          delta_p3: '\u6BCF\u5B63\u5EA6\u5728\u8FD9\u91CC\u516C\u793A\u6350\u8D60\u8BB0\u5F55\u3002\u4F60\u8BA9\u597D\u4E1C\u897F\u7EE7\u7EED\u6D41\u52A8\u3002\u6211\u4EEC\u4E00\u8D77\u505A\u70B9\u597D\u4E8B\u3002',
+          delta_p3: '\u4E09\u89D2\u6D32\u4E0D\u5728\u4E4E\u4F60\u6350\u4E86\u591A\u5C11\u3002\u5B83\u5728\u4E4E\u4F60\u8BA9\u5B83\u7EE7\u7EED\u6D41\u52A8\u3002',
           attitude_line1: '\u5BA1\u7F8E', attitude_line2: '\u4E0D\u662F\u7279\u6743', attitude_line3: 'just come in',
           visitors_label: '\u5F53\u524D\u5728\u7EBF',
           visitors_text: '\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8<br>Beauty is meant to flow',
@@ -2020,20 +2037,20 @@
           footer_instagram: 'Instagram', footer_about: '\u5173\u4E8E', footer_consign: '\u5BC4\u552E', footer_contact: '\u8054\u7CFB'
         },
         en: {
-          page_title: 'messenger \u2014 A cyclic space with aesthetics as coordinates',
-          nav_world: '\u00B7 Fragments', nav_manifesto: '\u00B7 Manifesto', nav_archive: '\u00B7 Archive', nav_transit: '\u00B7 Transit', nav_delta: '\u00B7 Delta',
-          gate_highlight: 'Cyclic Space',
-          gate_sub_en: 'Smart. Quiet. Circulate.',
-          gate_sub_cn: '\u8FD9\u91CC\u7684\u4E1C\u897F\u53EF\u4EE5\u88AB\u5E26\u8D70\uFF0C\u4E5F\u53EF\u4EE5\u88AB\u9001\u56DE\u6765\u3002',
-          scroll_hint: 'SCROLL',
+          page_title: 'messenger \u2014 Where beauty flows',
+          nav_world: '\u00B7 Currents', nav_manifesto: '\u00B7 Manifesto', nav_archive: '\u00B7 Archive', nav_transit: '\u00B7 Return-Flow', nav_delta: '\u00B7 Delta',
+          gate_highlight: 'Flow In',
+          gate_sub_en: 'Beauty flows. Like rivers. Like rhizomes.',
+          gate_sub_cn: '\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8\u3002',
+          scroll_hint: '\u301C wade in',
           frag_label: '\u00B7 World Fragments',
           frag_title: 'There is a <em>world</em> here',
           manifesto_label: '\u00B7 Manifesto',
           manifesto_p1: 'Beauty is meant to flow.',
-          manifesto_p2: 'I hunt them down, one by one. You look, one by one.',
-          manifesto_p3: '<strong style="font-family:var(--font-serif);color:var(--gray-900);font-weight:400;">Good taste doesn\'t have to be heavy.</strong><br>No elitist, no gatekeeping, not pretentious.<br>Our value isn\'t about price wars \u2014 it\'s about peace of mind.<br>Spend the right money on a cup we picked for you.<br>It will stay with you a long time.',
-          manifesto_margin: 'AESTHETICS \u00B7 COORDINATES',
-          manifesto_image_text: 'Aesthetics as Coordinates', manifesto_image_sub: '\u5BA1\u7F8E\u5373\u5750\u6807',
+          manifesto_p2: 'Like rivers. Like rhizomes.',
+          manifesto_p3: '<strong style="font-family:var(--font-serif);color:var(--gray-900);font-weight:400;">Water does not compete. It simply flows downward.</strong><br>Good things should not belong to one person forever.<br>They should continue to be found.',
+          manifesto_margin: 'CURRENTS \u00B7 DRIFT',
+          manifesto_image_text: 'Aesthetics as Currents', manifesto_image_sub: '\u6C34\u751F\u5BA1\u7F8E',
           manifesto_philosophy_title: 'Curation for a Life in Motion',
           manifesto_philosophy_text: 'Beauty is meant to flow<br>\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8',
           about_trigger: 'Read the full story <span class="arrow">\u25BC</span>',
@@ -2063,7 +2080,7 @@
           item6_tag: 'Awaiting Restoration', item6_name: 'Old Bookshop Lamp',
           item6_desc: 'Showa-era brass desk lamp, shade hand-hammered with textured patterns. Rewired with exposed joints \u2014 deliberately left uncovered.',
           transit_label: '\u00B7 Transit',
-          transit_title: 'Don\'t love it anymore?<br><em>Re-route</em>',
+          transit_title: 'Don\'t love it anymore?<br><em>Let it drift</em>',
           transit_from: 'YOU', transit_to: 'MSG', transit_class: 'CIRCULATION',
           transit_gate_label: 'GATE', transit_class_label: 'CLASS',
           transit_step1: 'Message me (WeChat / DM)',
@@ -2079,14 +2096,14 @@
           transit_row3_period: '90\u2013180 days', transit_row3_cash: '40%', transit_row3_credit: '50%',
           transit_row4_period: '180+ days', transit_row4_cash: '30%', transit_row4_credit: '40%',
           transit_credit_note: 'Store credit is 1:1, never expires.',
-          delta_label: '\u00B7 Delta',
-          delta_title: 'What you return<br>keeps <em>flowing onward</em>',
-          delta_p1: 'Items you return are re-listed. 20% of second-sale profit goes into the flowing charity fund.',
-          delta_p2: 'These funds are donated quarterly to:',
+          delta_label: '\u00B7 \u652F\u6D41 Delta',
+          delta_title: 'What you return<br>re-<em>enters the sea</em>',
+          delta_p1: 'Every return, 20% enters the delta. It splits into three tributaries \u2014 stray animals, rural reading, community action.',
+          delta_p2: 'Each tributary has records. Each season they converge here.',
           delta_cat1: 'Stray animal rescue',
           delta_cat2: 'Rural children\'s reading',
           delta_cat3: 'Community environmental action',
-          delta_p3: 'Donation records are published here every quarter. You keep good things flowing. We do good together.',
+          delta_p3: 'The delta doesn\'t care how much you donated. It cares that you let it keep flowing.',
           attitude_line1: 'Good taste', attitude_line2: 'is not a privilege', attitude_line3: 'just come in',
           visitors_label: 'Online Now',
           visitors_text: 'Beauty is meant to flow<br>\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8',
@@ -2188,7 +2205,7 @@
       var audioCtx = null;
       var radioPlaying = false;
       var radioNodes = [];
-      var cities = ['PVG', 'NRT', 'CDG', 'LHR', 'JFK', 'HKG', 'FRA', 'ARN'];
+      var cities = ['涩谷', '玛黑', '愚园路', 'Camden', '深水埙', 'Kreuzberg', '下北沢'];
       var cityIndex = 0;
 
       function initAudio() {
@@ -2264,6 +2281,11 @@
         var isMuted = true;
         dot.addEventListener('click', function() {
           if (!player) return;
+          // Water ripple effect
+          dot.classList.remove('ripple');
+          void dot.offsetWidth;
+          dot.classList.add('ripple');
+          setTimeout(function() { dot.classList.remove('ripple'); }, 1200);
           if (isMuted) {
             player.unMute();
             dot.classList.add('playing');
@@ -2280,7 +2302,7 @@
         var mm = String(d.getMonth()+1).padStart(2,'0');
         var dd = String(d.getDate()).padStart(2,'0');
         var timerEl = document.getElementById('gateTimer');
-        if (timerEl) timerEl.textContent = '航班号 · MSG-' + mm + dd + ' · 请登机';
+        if (timerEl) timerEl.textContent = '水文 · FLOW-' + mm + dd + ' · 请涉水';
       })();
 
     })();
