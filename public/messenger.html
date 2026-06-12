@@ -663,40 +663,6 @@ section { padding: 100px 48px; position: relative; }
 }
 .return-table .highlight { color: var(--accent); }
 
-/* ===== CREDO STRIP ===== */
-.credo-strip {
-  padding: 64px 48px;
-  background: var(--bg);
-  text-align: center;
-}
-.credo-strip-inner {
-  max-width: 620px;
-  margin: 0 auto;
-}
-.credo-line1 {
-  font-family: var(--font-sans);
-  font-size: clamp(28px, 4vw, 48px);
-  color: var(--text);
-  letter-spacing: 8px;
-  line-height: 1.2;
-  margin-bottom: 2px;
-  font-weight: 200;
-}
-.credo-line2 {
-  font-family: var(--font-sans);
-  font-size: clamp(14px, 1.8vw, 22px);
-  color: var(--gray-300);
-  letter-spacing: 4px;
-  line-height: 1.8;
-  margin-bottom: 12px;
-}
-.credo-line3 {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--gray-300);
-  letter-spacing: 3px;
-}
-
 /* ===== COLOPHON — dark bar ===== */
 .colophon {
   background: #0f1a14;
@@ -712,7 +678,7 @@ section { padding: 100px 48px; position: relative; }
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 24px;
+  gap: 32px;
 }
 
 /* left: brand */
@@ -721,34 +687,39 @@ section { padding: 100px 48px; position: relative; }
 }
 .colophon .brand {
   font-family: var(--font-sans);
-  font-size: 12px;
-  letter-spacing: 4px;
-  color: rgba(200, 212, 192, 0.5);
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: rgba(200, 212, 192, 0.35);
   font-weight: 300;
   text-transform: uppercase;
 }
 .colophon .issue {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: rgba(143,168,122,0.3);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  color: rgba(200, 212, 192, 0.25);
   letter-spacing: 2px;
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
-/* center: credo */
+/* center: credo with separators */
 .colophon-credo {
   display: flex;
-  gap: 20px;
+  gap: 0;
   justify-content: center;
+  align-items: center;
 }
 .colophon-credo span {
-  font-family: var(--font-mono);
-  font-size: clamp(10px, 1vw, 14px);
-  letter-spacing: 6px;
-  color: rgba(200, 212, 192, 0.4);
-  font-weight: 200;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: rgba(200, 212, 192, 0.35);
+  font-weight: 300;
   text-transform: uppercase;
-  white-space: nowrap;
+}
+.colophon-credo .sep {
+  color: rgba(200, 212, 192, 0.2);
+  margin: 0 12px;
+  font-size: 10px;
 }
 
 /* right: links */
@@ -757,22 +728,21 @@ section { padding: 100px 48px; position: relative; }
 }
 .colophon .links {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   justify-content: flex-end;
   flex-wrap: wrap;
 }
 .colophon .links a {
   font-family: var(--font-sans);
   font-size: 11px;
-  color: rgba(143,168,122,0.5);
+  color: rgba(200, 212, 192, 0.3);
   text-decoration: none;
   letter-spacing: 2px;
   text-transform: uppercase;
-  transition: opacity 0.3s, color 0.3s;
+  transition: opacity 0.25s;
 }
 .colophon .links a:hover { 
-  opacity: 1; 
-  color: rgba(200, 212, 192, 0.7);
+  opacity: 0.7;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -1091,15 +1061,6 @@ section { padding: 100px 48px; position: relative; }
   </div>
 </section>
 
-<!-- ===== 信条 CREDO STRIP ===== -->
-<section class="credo-strip">
-  <div class="credo-strip-inner">
-    <p class="credo-line1">审美</p>
-    <p class="credo-line2">不是特权</p>
-    <p class="credo-line3">no pretentious&ensp;·&ensp;just come in</p>
-  </div>
-</section>
-
 <!-- ===== COLOPHON — dark bar ===== -->
 <section class="colophon">
   <div class="colophon-inner">
@@ -1109,8 +1070,11 @@ section { padding: 100px 48px; position: relative; }
     </div>
     <div class="colophon-credo">
       <span>降噪</span>
+      <span class="sep">·</span>
       <span>聪明</span>
+      <span class="sep">·</span>
       <span>实用</span>
+      <span class="sep">·</span>
       <span>流转</span>
     </div>
     <div class="colophon-right">
@@ -1150,8 +1114,6 @@ const i18nMap = {
   '聪明': ['聪明', 'Smart'],
   '实用': ['实用', 'Practical'],
   '流转': ['流转', 'Circulating'],
-  '审美': ['审美', 'Aesthetic'],
-  '不是特权': ['不是特权', 'is not privilege'],
   '三角洲': ['三角洲', 'Delta'],
   '买走之后，如果哪一天它不再需要你了，送回给三角洲。它会继续被下一个人遇见。': ['买走之后，如果哪一天它不再需要你了，送回给三角洲。它会继续被下一个人遇见。', 'When it no longer needs you, send it back. Someone else will find it.'],
   '每一次再流通，利润的 20% 注入公益金。': ['每一次再流通，利润的 20% 注入公益金。', 'Every recirculation, 20% goes to charity.'],
