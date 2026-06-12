@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="page_title">messenger — 以审美为坐标的循环空间</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @font-face {
+      font-family: 'SerifDisplay';
+      src: local('Times New Roman'), local('SimSun'), local('Noto Serif SC'), serif;
+    }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f3ef;
+      --off-white: #ebe8e1;
+      --gray-100: #e0ddd6;
+      --gray-300: #a8a49c;
+      --gray-600: #6b6760;
+      --gray-900: #2a2825;
+      --accent: #c43e2c;
+      --accent-muted: rgba(196, 62, 44, 0.08);
+      --ink: #1a1a18;
+      --font-serif: 'SerifDisplay', 'Noto Serif SC', 'Times New Roman', serif;
+      --font-mono: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', monospace;
+      --font-sans: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--white);
+      color: var(--ink);
+    }
+
+    body {
+      font-family: var(--font-serif);
+      line-height: 1.7;
+      background: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--off-white); }
+    ::-webkit-scrollbar-thumb { background: var(--gray-300); }
+
+    /* ===== GRID OVERLAY ===== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(0,0,0,0.03) 79px, rgba(0,0,0,0.03) 80px),
+        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(0,0,0,0.03) 79px, rgba(0,0,0,0.03) 80px);
+      opacity: 0.4;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: background 0.4s, color 0.4s;
+    }
+    header.on-gate {
+      background: transparent;
+      color: var(--gray-300);
+    }
+    header.off-gate {
+      background: var(--white);
+      color: var(--ink);
+      mix-blend-mode: normal;
+    }
+
+    header .logo a {
+      text-decoration: none;
+      color: inherit;
+      font-family: var(--font-serif);
+      font-size: 20px;
+      letter-spacing: 4px;
+      font-weight: 400;
+    }
+
+    .lang-toggle {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+      background: none;
+      border: none;
+      color: inherit;
+      padding: 0;
+    }
+    .lang-toggle:hover { opacity: 1; }
+    .lang-toggle .sep { opacity: 0.3; margin: 0 4px; }
+    .lang-toggle .active-lang { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+
+    header nav { display: flex; gap: 24px; align-items: center; }
+    header nav a { color: inherit; text-decoration: none; opacity: 0.7; transition: opacity 0.3s; font-size: 11px; }
+    header nav a:hover { opacity: 1; }
+
+    /* ===== GATE (Departure Board) ===== */
+    .gate {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: var(--ink);
+      overflow: hidden;
+      padding: 120px 40px 80px;
+    }
+
+    .gate::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gray-600) 20%, var(--gray-600) 80%, transparent);
+      opacity: 0.3;
+    }
+
+    /* signal dots */
+    .gate-signal {
+      position: absolute;
+      top: 100px;
+      right: 60px;
+      display: flex;
+      gap: 4px;
+      align-items: flex-end;
+    }
+    .gate-signal span {
+      display: block;
+      width: 3px;
+      background: var(--accent);
+      opacity: 0.3;
+    }
+    .gate-signal span:nth-child(1) { height: 4px; opacity: 0.6; }
+    .gate-signal span:nth-child(2) { height: 8px; opacity: 0.5; }
+    .gate-signal span:nth-child(3) { height: 14px; opacity: 0.4; }
+    .gate-signal span:nth-child(4) { height: 20px; opacity: 0.3; }
+
+    /* boarding info top */
+    .gate-meta {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gray-600);
+      text-transform: uppercase;
+      margin-bottom: 60px;
+      text-align: center;
+      animation: fadeUp 1.4s ease-out;
+    }
+
+    /* main title - departure board style */
+    .gate-title {
+      font-size: clamp(60px, 12vw, 160px);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      line-height: 0.95;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+      z-index: 1;
+    }
+    .gate-title .board-letter {
+      display: inline-block;
+      transition: color 0.1s;
+    }
+    .gate-title .board-letter.flipping { color: var(--gray-600); }
+    .gate-title .board-letter.settled { color: var(--white); }
+
+    .gate-title .highlight {
+      display: block;
+      font-style: italic;
+      font-size: 0.5em;
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+      margin-top: 0.05em;
+    }
+
+    /* flight rows */
+    .gate-flights {
+      margin-top: 60px;
+      width: 100%;
+      max-width: 800px;
+      font-family: var(--font-mono);
+      font-size: clamp(10px, 1.2vw, 13px);
+      letter-spacing: 2px;
+      color: var(--gray-600);
+    }
+    .gate-flight-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+    .gate-flight-row:nth-child(1) { animation-delay: 1.2s; }
+    .gate-flight-row:nth-child(2) { animation-delay: 1.5s; }
+    .gate-flight-row:nth-child(3) { animation-delay: 1.8s; }
+    .gate-flight-row:nth-child(4) { animation-delay: 2.1s; }
+    .gate-flight-row .flight-code { width: 120px; color: var(--white); opacity: 0.6; }
+    .gate-flight-row .flight-route { flex: 1; }
+    .gate-flight-row .flight-gate { width: 80px; text-align: right; }
+    .gate-flight-row .flight-status { width: 100px; text-align: right; }
+    .gate-flight-row .flight-status.you { color: var(--accent); }
+
+    .gate-sub {
+      margin-top: 60px;
+      font-family: var(--font-sans);
+      font-size: clamp(12px, 1.5vw, 16px);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gray-600);
+      text-align: center;
+      max-width: 500px;
+      line-height: 2;
+      animation: fadeUp 1.4s ease-out 0.6s both;
+    }
+    .gate-sub .cn {
+      font-family: var(--font-serif);
+      letter-spacing: 8px;
+      text-transform: none;
+      display: block;
+      margin-top: 8px;
+      color: var(--gray-300);
+      font-size: clamp(14px, 1.6vw, 20px);
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gray-600);
+      opacity: 0.4;
+      writing-mode: vertical-lr;
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+      50% { transform: translateX(-50%) translateY(8px); opacity: 0.15; }
+    }
+
+    /* ===== SECTION COMMON ===== */
+    section { padding: 140px 60px; position: relative; }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gray-300);
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+    }
+    .section-label::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -8px;
+      width: 40px; height: 1px;
+      background: var(--ink);
+      opacity: 0.2;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 5vw, 64px);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      line-height: 1.15;
+      margin-bottom: 32px;
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    /* ===== REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== FRAGMENTS ===== */
+    .fragments {
+      background: var(--white);
+      padding: 140px 40px;
+    }
+
+    .frag-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .frag {
+      padding: 24px 20px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.8;
+      letter-spacing: 1px;
+      color: var(--gray-600);
+      border: 1px solid var(--gray-100);
+      transition: transform 0.3s ease, background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .frag:hover {
+      transform: translateY(-2px);
+      background: var(--off-white);
+    }
+
+    .frag-coord { color: var(--gray-300); font-size: 10px; letter-spacing: 2px; }
+    .frag-mood { font-family: var(--font-serif); font-size: 14px; color: var(--gray-900); line-height: 1.6; }
+    .frag-mood-en { font-family: var(--font-sans); font-size: 12px; color: var(--gray-600); line-height: 1.5; }
+    .frag-foreign { font-style: italic; color: var(--gray-300); }
+    .frag-stamp {
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gray-900);
+      opacity: 0.6;
+    }
+    .frag-stamp::before {
+      content: '◎';
+      display: block;
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: var(--accent);
+      opacity: 0.4;
+    }
+    .frag-time { color: var(--accent); opacity: 0.5; font-size: 10px; }
+    .frag-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border: 1px solid var(--gray-300);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray-600);
+    }
+    .frag-wide { grid-column: span 2; }
+    .frag-tall { grid-row: span 2; }
+    .frag-accent { border-left: 2px solid var(--accent); padding-left: 18px; }
+    .frag-empty { border-color: transparent; }
+
+    @media (max-width: 768px) {
+      .frag-grid { grid-template-columns: 1fr 1fr; }
+      .frag-wide { grid-column: span 2; }
+    }
+
+    /* ===== NOTEBOOK ===== */
+    .notebook {
+      background: var(--white);
+    }
+
+    .notebook-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .notebook-text {
+      position: relative;
+    }
+    .notebook-text::before {
+      content: '';
+      position: absolute;
+      left: -20px; top: 0; bottom: 0;
+      width: 2px;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
+    .notebook-text .pull-quote {
+      font-size: clamp(22px, 2.4vw, 36px);
+      line-height: 1.4;
+      font-style: italic;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    .notebook-text .body-text {
+      font-size: clamp(13px, 1.2vw, 16px);
+      font-family: var(--font-sans);
+      line-height: 2;
+      color: var(--gray-600);
+      margin-bottom: 16px;
+    }
+    .notebook-text .body-text strong {
+      font-family: var(--font-serif);
+      color: var(--gray-900);
+      font-weight: 400;
+    }
+
+    .notebook-text .crossed-out {
+      text-decoration: line-through;
+      opacity: 0.35;
+    }
+
+    .notebook-margin {
+      position: absolute;
+      right: -120px; top: 40px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 3px;
+      color: var(--gray-300);
+      writing-mode: vertical-rl;
+      text-transform: uppercase;
+    }
+
+    .notebook-image {
+      position: relative;
+      background: var(--off-white);
+      border: 1px solid var(--gray-100);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+    }
+    .notebook-image .tex-symbol {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: var(--gray-600);
+      text-align: center;
+      line-height: 2;
+      opacity: 0.6;
+    }
+    .notebook-image .tex-symbol .diamond { font-size: 24px; display: block; margin-bottom: 12px; color: var(--accent); opacity: 0.3; }
+    .notebook-image .content-block {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 32px 24px 24px;
+      background: linear-gradient(transparent, rgba(26,26,24,0.7));
+      color: var(--white);
+    }
+    .notebook-image .content-block strong { display: block; font-size: 14px; letter-spacing: 2px; margin-bottom: 4px; }
+    .notebook-image .content-block span { font-size: 11px; opacity: 0.7; font-family: var(--font-sans); }
+
+    /* About expand */
+    .about-trigger {
+      display: inline-block;
+      margin-top: 32px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: color 0.3s;
+      border-bottom: 1px solid var(--gray-300);
+      padding-bottom: 2px;
+    }
+    .about-trigger:hover { color: var(--accent); }
+    .about-trigger.open .arrow { transform: rotate(180deg); }
+    .about-trigger .arrow { display: inline-block; transition: transform 0.3s; font-size: 10px; }
+
+    .about-expand {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.8s ease-out;
+    }
+    .about-expand.open { max-height: 800px; }
+    .about-expand-inner {
+      max-width: 560px;
+      padding: 48px 0 0;
+    }
+    .about-expand-inner p {
+      margin-bottom: 20px;
+      font-size: clamp(14px, 1.2vw, 17px);
+      line-height: 1.9;
+      color: var(--gray-900);
+    }
+
+    .about-standard {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--gray-100);
+    }
+    .about-standard .label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gray-600);
+      margin-bottom: 16px;
+    }
+    .about-standard .words {
+      font-size: clamp(20px, 2vw, 28px);
+      letter-spacing: 6px;
+      color: var(--ink);
+      line-height: 1.8;
+    }
+    .about-standard .words .sep { color: var(--gray-300); margin: 0 6px; }
+    .about-standard .note {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      color: var(--gray-600);
+      margin-top: 12px;
+      letter-spacing: 1px;
+    }
+
+    /* ===== ARCHIVE ===== */
+    .archive { background: var(--white); }
+
+    .archive-header {
+      max-width: 1100px;
+      margin: 0 auto;
+      margin-bottom: 60px;
+    }
+
+    .archive-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .archive-card {
+      border: 1px solid var(--gray-100);
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    .archive-card.break-right { transform: rotate(0.8deg); }
+    .archive-card.break-left { transform: rotate(-0.6deg); }
+
+    .archive-card .acc-no {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 3px;
+      color: var(--gray-300);
+      padding: 12px 16px 0;
+      text-transform: uppercase;
+    }
+
+    .archive-card .archive-image {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      background: var(--off-white);
+      overflow: hidden;
+    }
+    .archive-card .placeholder-img {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .placeholder-img span {
+      font-size: 32px;
+      color: var(--gray-300);
+      opacity: 0.4;
+    }
+    .placeholder-img.tex-1 { background: linear-gradient(135deg, var(--off-white) 0%, #d4c9b8 100%); }
+    .placeholder-img.tex-2 { background: linear-gradient(135deg, #c4b8a4 0%, var(--off-white) 100%); }
+    .placeholder-img.tex-3 { background: linear-gradient(180deg, var(--off-white) 0%, #c8bfb0 100%); }
+    .placeholder-img.tex-4 { background: linear-gradient(225deg, #b8a896 0%, var(--off-white) 100%); }
+    .placeholder-img.tex-5 { background: linear-gradient(315deg, var(--off-white) 0%, #c0b4a2 100%); }
+    .placeholder-img.tex-6 { background: linear-gradient(45deg, #bfb4a4 0%, var(--off-white) 100%); }
+
+    .archive-card .item-tag {
+      position: absolute;
+      top: 12px; left: 12px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border: 1px solid var(--gray-300);
+      background: rgba(245,243,239,0.85);
+      color: var(--gray-600);
+    }
+
+    .archive-card .item-info { padding: 16px; }
+    .archive-card .item-origin {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: var(--gray-300);
+      margin-bottom: 6px;
+    }
+    .archive-card .item-name {
+      font-family: var(--font-serif);
+      font-size: clamp(16px, 1.4vw, 20px);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .archive-card .item-desc {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--gray-600);
+      margin-bottom: 12px;
+    }
+    .archive-card .item-price {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: var(--ink);
+    }
+
+    @media (max-width: 900px) {
+      .archive-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .archive-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== TRANSIT (Boarding Pass) ===== */
+    .transit {
+      background: var(--white);
+      padding: 140px 40px;
+    }
+
+    .transit-header {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      text-align: center;
+    }
+
+    .boarding-pass {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      position: relative;
+      border: 1px solid var(--gray-300);
+      background: var(--off-white);
+    }
+
+    .bp-left {
+      flex: 1;
+      padding: 40px;
+      position: relative;
+    }
+
+    .bp-left .bp-flight-no {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 3px;
+      color: var(--gray-300);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .bp-left .bp-route {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .bp-left .bp-city {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+    }
+    .bp-left .bp-arrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--gray-300);
+      letter-spacing: 4px;
+    }
+
+    .bp-left .bp-info-row {
+      display: flex;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+    .bp-left .bp-info-item .bp-info-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 3px;
+      color: var(--gray-300);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .bp-left .bp-info-item .bp-info-value {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      letter-spacing: 1px;
+      color: var(--ink);
+    }
+
+    .bp-left .bp-steps {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--gray-100);
+    }
+    .bp-left .bp-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 6px 0;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      color: var(--gray-600);
+    }
+    .bp-left .bp-step .step-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      width: 20px; height: 20px;
+      border: 1px solid var(--gray-300);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray-600);
+    }
+
+    .bp-left .bp-note {
+      margin-top: 20px;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      line-height: 1.8;
+      color: var(--gray-600);
+    }
+    .bp-left .bp-note strong { color: var(--gray-900); font-weight: 400; }
+
+    /* perforation */
+    .bp-perf {
+      width: 1px;
+      position: relative;
+      border-left: 2px dashed var(--gray-300);
+    }
+    .bp-perf .cutout {
+      position: absolute;
+      width: 20px; height: 20px;
+      background: var(--white);
+      border-radius: 50%;
+      left: -11px;
+    }
+    .bp-perf .cutout-top { top: -10px; }
+    .bp-perf .cutout-bottom { bottom: -10px; }
+
+    .bp-right {
+      flex: 0 0 320px;
+      padding: 40px;
+    }
+
+    .return-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-top: 2px solid var(--accent);
+    }
+    .return-table th {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray-300);
+      text-align: left;
+      padding: 12px 0 8px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .return-table td {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 1px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+      color: var(--gray-600);
+    }
+    .return-table td.highlight { color: var(--accent); font-weight: 500; }
+
+    @media (max-width: 768px) {
+      .boarding-pass { flex-direction: column; }
+      .bp-perf { width: auto; height: 1px; border-left: none; border-top: 2px dashed var(--gray-300); }
+      .bp-perf .cutout { display: none; }
+      .bp-right { flex: auto; }
+    }
+
+    /* ===== DELTA ===== */
+    .delta {
+      background: var(--ink);
+      color: var(--white);
+      padding: 140px 60px;
+    }
+
+    .delta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .cycle-ring-container {
+      position: relative;
+      width: 280px; height: 280px;
+      margin: 0 auto;
+    }
+    .cycle-ring {
+      width: 100%; height: 100%;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50%;
+      position: relative;
+      animation: spin 40s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .cycle-dot {
+      position: absolute;
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      top: -4px; left: 50%;
+      margin-left: -4px;
+    }
+    .cycle-dot:nth-child(2) { top: auto; bottom: -4px; }
+    .cycle-dot:nth-child(3) { top: 50%; left: -4px; margin-top: -4px; margin-left: 0; }
+
+    .cycle-center-label {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-serif);
+      font-size: 18px;
+      letter-spacing: 6px;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      line-height: 1.6;
+      animation: spin 40s linear infinite reverse;
+    }
+
+    .delta .section-label { color: var(--gray-300); }
+    .delta .section-label::after { background: var(--gray-600); }
+
+    .delta .charity-highlight {
+      font-size: clamp(80px, 12vw, 140px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    .delta .charity-title {
+      font-size: clamp(24px, 3vw, 40px);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      line-height: 1.3;
+      margin-bottom: 32px;
+      color: var(--white);
+    }
+    .delta .charity-title em { color: var(--accent); font-style: italic; }
+
+    .delta .charity-text p {
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--gray-300);
+      margin-bottom: 16px;
+    }
+
+    .delta .charity-categories { margin: 24px 0; }
+    .delta .charity-cat {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+    }
+    .delta .charity-cat .marker {
+      width: 6px; height: 6px;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
+    /* ===== ATTITUDE ===== */
+    .attitude-strip {
+      background: var(--white);
+      padding: 140px 40px;
+      text-align: center;
+    }
+    .attitude-text {
+      font-size: clamp(40px, 8vw, 100px);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+    .attitude-text .line-break { display: block; }
+    .attitude-text .strike-through {
+      display: block;
+      text-decoration: line-through;
+      text-decoration-color: var(--accent);
+      text-decoration-thickness: 3px;
+      opacity: 0.3;
+      font-family: var(--font-sans);
+      font-size: 0.4em;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin: 16px 0;
+    }
+    .attitude-text .small {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--gray-600);
+      margin-top: 32px;
+      text-transform: uppercase;
+    }
+
+    /* ===== VISITORS ===== */
+    .visitors {
+      background: var(--off-white);
+      padding: 120px 40px;
+      text-align: center;
+    }
+    .visitors .label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gray-300);
+      margin-bottom: 16px;
+    }
+    .visitors .number {
+      font-family: var(--font-mono);
+      font-size: clamp(60px, 10vw, 120px);
+      letter-spacing: 0.05em;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+    .visitors .copy {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      letter-spacing: 4px;
+      color: var(--gray-600);
+      line-height: 1.8;
+    }
+
+    /* ===== BRAND SIGNATURE ===== */
+    .brand-signature {
+      text-align: center;
+      padding: 48px 40px;
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 2vw, 24px);
+      letter-spacing: 6px;
+      color: var(--ink);
+    }
+    .brand-signature .sig-sep { color: var(--gray-300); margin: 0 6px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.4);
+      padding: 48px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+    }
+    footer .footer-links { display: flex; gap: 24px; }
+    footer a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
+    footer a:hover { color: var(--accent); }
+
+    /* stamp */
+    footer .stamp {
+      display: inline-block;
+      border: 2px solid var(--accent);
+      padding: 8px 16px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0.5;
+      transform: rotate(-3deg);
+    }
+
+    @media (max-width: 600px) {
+      footer { flex-direction: column; gap: 24px; text-align: center; }
+      section { padding: 80px 24px; }
+      .notebook-grid { grid-template-columns: 1fr; }
+      .delta-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ===== RADIO PLAYER ===== */
+    .radio-player {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 200;
+      background: var(--ink);
+      color: var(--white);
+      padding: 12px 20px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: opacity 0.3s;
+      user-select: none;
+    }
+    .radio-player:hover { opacity: 0.85; }
+
+    .radio-signal {
+      display: flex;
+      gap: 2px;
+      align-items: flex-end;
+    }
+    .radio-signal span {
+      display: block;
+      width: 2px;
+      background: var(--accent);
+    }
+    .radio-signal span:nth-child(1) { height: 3px; opacity: 0.3; }
+    .radio-signal span:nth-child(2) { height: 6px; opacity: 0.4; }
+    .radio-signal span:nth-child(3) { height: 10px; opacity: 0.5; }
+    .radio-signal span:nth-child(4) { height: 14px; opacity: 0.6; }
+    .radio-signal.off span { opacity: 0.15 !important; }
+
+    .radio-city {
+      color: var(--gray-300);
+      text-transform: uppercase;
+    }
+    .radio-freq {
+      color: var(--gray-600);
+      font-size: 9px;
+    }
+
+    /* ===== CUSTOM CURSOR ===== */
+    .cursor-dot {
+      position: fixed;
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      mix-blend-mode: difference;
+      transition: width 0.2s, height 0.2s, margin 0.2s, background 0.2s;
+      margin: -4px 0 0 -4px;
+    }
+    .cursor-dot.active { opacity: 1; }
+    .cursor-dot.hovering {
+      width: 40px; height: 40px;
+      margin: -20px 0 0 -20px;
+      background: transparent;
+      border: 1px solid var(--accent);
+    }
+
+    @media (hover: none) {
+      .cursor-dot { display: none; }
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursor"></div>
+
+  <!-- Header -->
+  <header id="mainHeader" class="on-gate">
+    <div class="logo"><a href="#gate">messenger</a></div>
+    <nav>
+      <a href="#world" data-i18n="nav_world">· 碎片</a>
+      <a href="#manifesto" data-i18n="nav_manifesto">· 信条</a>
+      <a href="#archive" data-i18n="nav_archive">· 档案</a>
+      <a href="#transit" data-i18n="nav_transit">· 改签</a>
+      <a href="#delta" data-i18n="nav_delta">· 三角洲</a>
+      <button class="lang-toggle" id="langToggle">
+        <span class="active-lang" data-lang="zh">中</span><span class="sep">/</span><span data-lang="en">EN</span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ===================== GATE ===================== -->
+  <section class="gate" id="gate">
+    <div class="gate-signal"><span></span><span></span><span></span><span></span></div>
+
+    <div class="gate-meta" id="gateMeta">BOARDING · <span id="gateTime"></span></div>
+
+    <h1 class="gate-title" id="gateTitle">MESSENGER</h1>
+
+    <div class="gate-flights" id="gateFlights">
+      <div class="gate-flight-row">
+        <span class="flight-code">MSG 0412</span>
+        <span class="flight-route">PVG → NRT</span>
+        <span class="flight-gate">GATE 04</span>
+        <span class="flight-status">ON TIME</span>
+      </div>
+      <div class="gate-flight-row">
+        <span class="flight-code">MSG 0718</span>
+        <span class="flight-route">CDG → LHR</span>
+        <span class="flight-gate">GATE 12</span>
+        <span class="flight-status">BOARDING</span>
+      </div>
+      <div class="gate-flight-row">
+        <span class="flight-code">MSG 0923</span>
+        <span class="flight-route">--- → YOU</span>
+        <span class="flight-gate">GATE 07</span>
+        <span class="flight-status you">WAITING</span>
+      </div>
+      <div class="gate-flight-row">
+        <span class="flight-code">MSG 1205</span>
+        <span class="flight-route">NRT → PVG</span>
+        <span class="flight-gate">GATE 03</span>
+        <span class="flight-status">ON TIME</span>
+      </div>
+    </div>
+
+    <p class="gate-sub">
+      <span data-i18n="gate_sub_en">Smart. Quiet. Circulate.</span>
+      <span class="cn" data-i18n="gate_sub_cn">这里的东西可以被带走，也可以被送回来。</span>
+    </p>
+
+    <div class="scroll-indicator" data-i18n="scroll_hint">SCROLL</div>
+  </section>
+
+  <!-- ===================== FRAGMENTS ===================== -->
+  <section class="fragments" id="world">
+    <div style="max-width:1200px;margin:0 auto 60px;">
+      <div class="section-label reveal" data-i18n="frag_label">· 世界碎片 Fragments</div>
+      <h2 class="section-title reveal" data-i18n="frag_title">这里有一个<em>世界</em></h2>
+    </div>
+
+    <div class="frag-grid">
+      <div class="frag frag-coord reveal">48.8566°N, 2.3522°E</div>
+      <div class="frag frag-mood reveal" data-i18n="frag_mood1">凌晨五点不属于任何城市的光</div>
+      <div class="frag frag-stamp reveal">TOKYO</div>
+      <div class="frag frag-time reveal">04:17 DEP</div>
+
+      <div class="frag frag-mood-en reveal">The light at 5am in a city you don't live in</div>
+      <div class="frag frag-foreign reveal">Le bruit des valises sur le carrelage</div>
+      <div class="frag frag-tag reveal">MIGRATION AESTHETICS</div>
+      <div class="frag frag-coord reveal">35.6762°N, 139.6503°E</div>
+
+      <div class="frag frag-wide frag-accent reveal" style="font-family:var(--font-serif);font-size:16px;line-height:1.6;color:var(--gray-900);" data-i18n="frag_quote">漂亮的东西应该流动。像故事一样。像人生一样。</div>
+      <div class="frag frag-coord reveal">31.2304°N, 121.4737°E</div>
+
+      <div class="frag frag-foreign reveal">荷物の音</div>
+      <div class="frag frag-mood reveal" data-i18n="frag_mood2">机场不是出发，是住了一段时间的客厅</div>
+      <div class="frag frag-tag reveal">AIRPORT FEELING</div>
+      <div class="frag frag-time reveal">23:52 ARR</div>
+
+      <div class="frag frag-mood-en reveal">Objects carry the coordinates of their previous owners</div>
+      <div class="frag frag-coord reveal">51.5074°N, 0.1278°W</div>
+      <div class="frag frag-stamp reveal">PARIS</div>
+      <div class="frag frag-tag reveal">NOTEBOOK</div>
+
+      <div class="frag frag-time reveal">06:30 LAY</div>
+      <div class="frag frag-wide frag-mood reveal" data-i18n="frag_mood3">好的物品不应该永远属于某一个人。它们应该流动。</div>
+      <div class="frag frag-coord reveal">40.7128°N, 74.0060°W</div>
+    </div>
+  </section>
+
+  <!-- ===================== NOTEBOOK ===================== -->
+  <section class="notebook" id="manifesto">
+    <div class="notebook-grid">
+      <div class="notebook-text">
+        <div class="section-label reveal" data-i18n="manifesto_label">· 信条 Notebook</div>
+
+        <p class="pull-quote reveal" data-i18n="manifesto_p1">漂亮的东西应该流动。</p>
+
+        <p class="body-text reveal" data-i18n="manifesto_p2">我一件一件淘，你一件一件看。</p>
+
+        <p class="body-text reveal" style="margin-top:32px;padding-top:24px;border-top:1px solid var(--gray-100);" data-i18n="manifesto_p3"></p>
+
+        <span class="about-trigger reveal" id="aboutTrigger" data-i18n="about_trigger">阅读完整故事 <span class="arrow">▼</span></span>
+
+        <div class="notebook-margin reveal" data-i18n="manifesto_margin">AESTHETICS · COORDINATES</div>
+      </div>
+
+      <div class="notebook-image reveal">
+        <div class="tex-symbol">
+          <span class="diamond">◈</span>
+          <div data-i18n="manifesto_image_text">审美即坐标</div>
+          <div style="font-size:8px;letter-spacing:4px;" data-i18n="manifesto_image_sub">AESTHETICS AS COORDINATES</div>
+        </div>
+        <div class="content-block">
+          <strong data-i18n="manifesto_philosophy_title">流动生活的选品空间</strong>
+          <span data-i18n="manifesto_philosophy_text">漂亮的东西应该流动<br>Beauty is meant to flow</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT (expandable) -->
+  <div class="about-expand" id="aboutExpand">
+    <div class="about-expand-inner" style="max-width:680px;margin:0 auto;padding:0 60px;">
+      <p data-i18n="about_p1">我们这一代人，很少真正安顿下来。<br>租房、搬家、出国、换城市。</p>
+      <p data-i18n="about_p2">拥有的东西越来越少，<br>但依然希望生活里有美感。</p>
+      <p data-i18n="about_p3">问题是：<br>好看的东西太贵。<br>便宜的东西不值得留下。</p>
+      <p data-i18n="about_p4">所以我们开始寻找另一种方式——<br>不是拥有更多，而是拥有得更聪明。</p>
+      <p data-i18n="about_p5">一盏灯。一个杯子。一本旧杂志。<br>一个被使用过很多年的包。</p>
+      <p data-i18n="about_p6">它们不一定昂贵，<br>但都有被选中的理由。</p>
+      <p data-i18n="about_p7" style="font-style:italic;">我们相信：<br>好的物品不应该永远属于某一个人。<br>它们应该流动。<br>像故事一样。像人生一样。</p>
+      <p data-i18n="about_p8">这不是一家二手商店。<br>这是流动生活的选品空间。</p>
+
+      <div class="about-standard">
+        <div class="label" data-i18n="about_standard_label">我的选品标准</div>
+        <div class="words">
+          <span data-i18n="about_sig1">降噪</span><span class="sep">·</span>
+          <span data-i18n="about_sig2">聪明</span><span class="sep">·</span>
+          <span data-i18n="about_sig3">实用</span><span class="sep">·</span>
+          <span data-i18n="about_sig4">流转</span>
+        </div>
+        <div class="note" data-i18n="about_standard_note">我选东西看这四点。每件都过一遍。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== ARCHIVE ===================== -->
+  <section class="archive" id="archive">
+    <div class="archive-header">
+      <div class="section-label reveal" data-i18n="archive_label">· 物件档案 Archive</div>
+      <h2 class="section-title reveal" data-i18n="archive_title">它们在寻找<br>下一个<em>主人</em></h2>
+    </div>
+
+    <div class="archive-grid">
+      <div class="archive-card break-right reveal">
+        <div class="acc-no">MSG-2024-001</div>
+        <div class="archive-image">
+          <div class="placeholder-img tex-1"><span>◎</span></div>
+          <span class="item-tag" data-i18n="item1_tag">已修复 / 限一件</span>
+        </div>
+        <div class="item-info">
+          <div class="item-origin">39°54'N 116°24'E</div>
+          <h3 class="item-name" data-i18n="item1_name">废铁皮飞行员夹克</h3>
+          <p class="item-desc" data-i18n="item1_desc">90年代军需工厂尾单，铜质拉链氧化成古铜色。内衬手工修补——用了一段老和服腰带。</p>
+          <div class="item-price">¥ 680</div>
+        </div>
+      </div>
+
+      <div class="archive-card reveal">
+        <div class="acc-no">MSG-2024-002</div>
+        <div class="archive-image">
+          <div class="placeholder-img tex-2"><span>◎</span></div>
+          <span class="item-tag" data-i18n="item2_tag">孤品</span>
+        </div>
+        <div class="item-info">
+          <div class="item-origin">26°04'N 119°17'E</div>
+          <h3 class="item-name" data-i18n="item2_name">手织亚麻阔腿裤</h3>
+          <p class="item-desc" data-i18n="item2_desc">手工草木染，颜色来自核桃皮和茜草。左口袋内侧有前主人绣的经纬度坐标。</p>
+          <div class="item-price">¥ 520</div>
+        </div>
+      </div>
+
+      <div class="archive-card break-left reveal">
+        <div class="acc-no">MSG-2024-003</div>
+        <div class="archive-image">
+          <div class="placeholder-img tex-3"><span>◎</span></div>
+          <span class="item-tag" data-i18n="item3_tag">带使用痕迹</span>
+        </div>
+        <div class="item-info">
+          <div class="item-origin">51°30'N 0°07'W</div>
+          <h3 class="item-name" data-i18n="item3_name">黑胶唱片包</h3>
+          <p class="item-desc" data-i18n="item3_desc">手缝帆布包，印着1987年伦敦某地下乐队的演出海报。背带是回收的登山绳。</p>
+          <div class="item-price">¥ 380</div>
+        </div>
+      </div>
+
+      <div class="archive-card reveal">
+        <div class="acc-no">MSG-2024-004</div>
+        <div class="archive-image">
+          <div class="placeholder-img tex-4"><span>◎</span></div>
+          <span class="item-tag" data-i18n="item4_tag">艺术家合作款</span>
+        </div>
+        <div class="item-info">
+          <div class="item-origin">35°41'N 139°41'E</div>
+          <h3 class="item-name" data-i18n="item4_name">拼贴工装马甲</h3>
+          <p class="item-desc" data-i18n="item4_desc">六块不同年代的军布拼成，每块都有自己的色差和故事。口袋衬里是手写乐谱。</p>
+          <div class="item-price">¥ 890</div>
+        </div>
+      </div>
+
+      <div class="archive-card break-right reveal">
+        <div class="acc-no">MSG-2024-005</div>
+        <div class="archive-image">
+          <div class="placeholder-img tex-5"><span>◎</span></div>
+          <span class="item-tag" data-i18n="item5_tag">已售 · 可预定</span>
+        </div>
+        <div class="item-info">
+          <div class="item-origin">52°31'N 13°23'E</div>
+          <h3 class="item-name" data-i18n="item5_name">磨损马丁靴</h3>
+          <p class="item-desc" data-i18n="item5_desc">穿了六年的Dr. Martens，皮面自然龟裂如地图。鞋底纹路里嵌着的不是泥土，是三个城市的记忆。</p>
+          <div class="item-price">¥ 750</div>
+        </div>
+      </div>
+
+      <div class="archive-card break-left reveal">
+        <div class="acc-no">MSG-2024-006</div>
+        <div class="archive-image">
+          <div class="placeholder-img tex-6"><span>◎</span></div>
+          <span class="item-tag" data-i18n="item6_tag">待修复</span>
+        </div>
+        <div class="item-info">
+          <div class="item-origin">35°41'N 139°41'E</div>
+          <h3 class="item-name" data-i18n="item6_name">旧书店的灯</h3>
+          <p class="item-desc" data-i18n="item6_desc">昭和年间黄铜台灯，灯罩手工捶打出凹凸纹理。电线已换新，接头外露——故意不藏起来。</p>
+          <div class="item-price">¥ 460</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TRANSIT ===================== -->
+  <section class="transit" id="transit">
+    <div class="transit-header">
+      <div class="section-label reveal" data-i18n="transit_label">· 改签 Transit</div>
+      <h2 class="section-title reveal" data-i18n="transit_title">不喜欢了？<br><em>改签</em></h2>
+    </div>
+
+    <div class="boarding-pass reveal">
+      <div class="bp-left">
+        <div class="bp-flight-no">CIRCULATE-01</div>
+        <div class="bp-route">
+          <div class="bp-city" data-i18n="transit_from">YOU</div>
+          <div class="bp-arrow">———✕———→</div>
+          <div class="bp-city" data-i18n="transit_to">MSG</div>
+        </div>
+
+        <div class="bp-info-row">
+          <div class="bp-info-item">
+            <div class="bp-info-label" data-i18n="transit_gate_label">GATE</div>
+            <div class="bp-info-value">RETURN</div>
+          </div>
+          <div class="bp-info-item">
+            <div class="bp-info-label" data-i18n="transit_class_label">CLASS</div>
+            <div class="bp-info-value" data-i18n="transit_class">流通舱</div>
+          </div>
+          <div class="bp-info-item">
+            <div class="bp-info-label">SEAT</div>
+            <div class="bp-info-value">OPEN</div>
+          </div>
+        </div>
+
+        <div class="bp-steps">
+          <div class="bp-step"><span class="step-num">1</span><span data-i18n="transit_step1">联系我（微信/私信）</span></div>
+          <div class="bp-step"><span class="step-num">2</span><span data-i18n="transit_step2">确认成色</span></div>
+          <div class="bp-step"><span class="step-num">3</span><span data-i18n="transit_step3">你寄回</span></div>
+          <div class="bp-step"><span class="step-num">4</span><span data-i18n="transit_step4">按规则返还</span></div>
+        </div>
+
+        <p class="bp-note reveal">
+          <strong data-i18n="transit_note_title">备注</strong><br>
+          <span data-i18n="transit_note_text">退回的东西会重新整理上架。二次销售利润的 20% 进入公益金，每季度公示去向。</span>
+        </p>
+      </div>
+
+      <div class="bp-perf">
+        <div class="cutout cutout-top"></div>
+        <div class="cutout cutout-bottom"></div>
+      </div>
+
+      <div class="bp-right">
+        <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:3px;color:var(--gray-300);text-transform:uppercase;margin-bottom:16px;" data-i18n="transit_fare_label">FARE TABLE · 票价表</div>
+        <table class="return-table">
+          <thead>
+            <tr>
+              <th data-i18n="transit_th_period">退回时间</th>
+              <th data-i18n="transit_th_cash">现金</th>
+              <th data-i18n="transit_th_credit">积分</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-i18n="transit_row1_period">30 天内</td>
+              <td class="highlight" data-i18n="transit_row1_cash">60%</td>
+              <td class="highlight" data-i18n="transit_row1_credit">70%</td>
+            </tr>
+            <tr>
+              <td data-i18n="transit_row2_period">30–90 天</td>
+              <td data-i18n="transit_row2_cash">50%</td>
+              <td data-i18n="transit_row2_credit">60%</td>
+            </tr>
+            <tr>
+              <td data-i18n="transit_row3_period">90–180 天</td>
+              <td data-i18n="transit_row3_cash">40%</td>
+              <td data-i18n="transit_row3_credit">50%</td>
+            </tr>
+            <tr>
+              <td data-i18n="transit_row4_period">180 天以上</td>
+              <td data-i18n="transit_row4_cash">30%</td>
+              <td data-i18n="transit_row4_credit">40%</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top:16px;font-family:var(--font-sans);font-size:11px;line-height:1.7;color:var(--gray-600);" data-i18n="transit_credit_note">积分 1:1 使用，不过期。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DELTA ===================== -->
+  <section class="delta" id="delta">
+    <div class="delta-grid">
+      <div class="cycle-ring-container reveal">
+        <div class="cycle-ring">
+          <div class="cycle-dot"></div>
+          <div class="cycle-dot"></div>
+          <div class="cycle-dot"></div>
+          <div class="cycle-center-label">循<br>环<br>∞</div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label reveal" data-i18n="delta_label">· 三角洲 Delta</div>
+        <div class="charity-highlight reveal">20%</div>
+        <h2 class="charity-title reveal" data-i18n="delta_title">你流回的东西<br>我们让它<em>继续流动</em></h2>
+        <div class="charity-text reveal">
+          <p data-i18n="delta_p1">你流回的东西，我们会重新上架。二次销售的利润，20% 进入流动公益金。</p>
+          <p data-i18n="delta_p2">这些钱会按季度捐给：</p>
+        </div>
+        <div class="charity-categories reveal">
+          <div class="charity-cat"><span class="marker"></span><span data-i18n="delta_cat1">流浪动物救助</span></div>
+          <div class="charity-cat"><span class="marker"></span><span data-i18n="delta_cat2">乡村儿童阅读</span></div>
+          <div class="charity-cat"><span class="marker"></span><span data-i18n="delta_cat3">社区环保行动</span></div>
+        </div>
+        <div class="charity-text reveal" style="margin-top:24px;">
+          <p data-i18n="delta_p3">每季度在这里公示捐赠记录。你让好东西继续流动。我们一起做点好事。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ATTITUDE ===================== -->
+  <section class="attitude-strip" id="attitude">
+    <div class="attitude-text reveal">
+      <span data-i18n="attitude_line1">审美</span>
+      <span class="line-break" data-i18n="attitude_line2">不是特权</span>
+      <span class="strike-through">pretentious</span>
+      <span class="line-break" data-i18n="attitude_line3">just come in</span>
+      <span class="small">— messenger · no gatekeeping —</span>
+    </div>
+  </section>
+
+  <!-- ===================== VISITORS ===================== -->
+  <section class="visitors" id="visitors">
+    <div class="reveal">
+      <div class="label" data-i18n="visitors_label">当前在线</div>
+      <div class="number" id="visitorCount">0</div>
+      <div class="copy" data-i18n="visitors_text">漂亮的东西应该流动<br>Beauty is meant to flow</div>
+    </div>
+  </section>
+
+  <!-- BRAND SIGNATURE -->
+  <div class="brand-signature">
+    <span data-i18n="sig_1">降噪</span><span class="sig-sep"> · </span>
+    <span data-i18n="sig_2">聪明</span><span class="sig-sep"> · </span>
+    <span data-i18n="sig_3">实用</span><span class="sig-sep"> · </span>
+    <span data-i18n="sig_4">流转</span>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <span class="stamp">MSG · EST. 2024</span>
+    </div>
+    <div data-i18n="footer_text">messenger · 漂亮的东西应该流动</div>
+    <div class="footer-links">
+      <a href="#" data-i18n="footer_instagram">Instagram</a>
+      <a href="#" data-i18n="footer_about">关于</a>
+      <a href="#" data-i18n="footer_consign">寄售</a>
+      <a href="#" data-i18n="footer_contact">联系</a>
+    </div>
+  </footer>
+
+  <!-- RADIO PLAYER -->
+  <div class="radio-player" id="radioPlayer">
+    <div class="radio-signal off" id="radioSignal">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="radio-city" id="radioCity">PVG</div>
+    <div class="radio-freq">87.5 MHz</div>
+  </div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // ===== GATE: DEPARTURE BOARD =====
+      var gateTitle = document.getElementById('gateTitle');
+      var targetText = 'MESSENGER';
+      var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      var letterSpans = [];
+
+      // Build letter spans
+      for (var i = 0; i < targetText.length; i++) {
+        var span = document.createElement('span');
+        span.className = 'board-letter flipping';
+        span.textContent = chars[Math.floor(Math.random() * chars.length)];
+        gateTitle.textContent = '';
+        gateTitle.appendChild(span);
+        letterSpans.push(span);
+      }
+
+      // Add highlight line
+      var highlightSpan = document.createElement('span');
+      highlightSpan.className = 'highlight';
+      highlightSpan.setAttribute('data-i18n', 'gate_highlight');
+      highlightSpan.textContent = '\u5FAA\u73AF\u7A7A\u95F4'; // 循环空间
+      gateTitle.appendChild(highlightSpan);
+
+      // Animate each letter
+      letterSpans.forEach(function(span, idx) {
+        var flipCount = 0;
+        var maxFlips = 6 + Math.floor(Math.random() * 8);
+        var delay = idx * 80;
+        setTimeout(function() {
+          var interval = setInterval(function() {
+            span.textContent = chars[Math.floor(Math.random() * chars.length)];
+            flipCount++;
+            if (flipCount >= maxFlips) {
+              clearInterval(interval);
+              span.textContent = targetText[idx];
+              span.classList.remove('flipping');
+              span.classList.add('settled');
+            }
+          }, 50);
+        }, delay);
+      });
+
+      // Gate time
+      function updateGateTime() {
+        var now = new Date();
+        var h = String(now.getHours()).padStart(2, '0');
+        var m = String(now.getMinutes()).padStart(2, '0');
+        var el = document.getElementById('gateTime');
+        if (el) el.textContent = h + ':' + m;
+      }
+      updateGateTime();
+      setInterval(updateGateTime, 30000);
+
+      // ===== HEADER: GATE SCROLL DETECTION =====
+      var header = document.getElementById('mainHeader');
+      var gateSection = document.getElementById('gate');
+
+      function checkHeader() {
+        var gateBottom = gateSection.getBoundingClientRect().bottom;
+        if (gateBottom <= 0) {
+          header.className = 'off-gate';
+        } else {
+          header.className = 'on-gate';
+        }
+      }
+      window.addEventListener('scroll', function() {
+        requestAnimationFrame(checkHeader);
+      });
+      checkHeader();
+
+      // ===== I18N =====
+      var translations = {
+        zh: {
+          page_title: 'messenger \u2014 \u4EE5\u5BA1\u7F8E\u4E3A\u5750\u6807\u7684\u5FAA\u73AF\u7A7A\u95F4',
+          nav_world: '\u00B7 \u788E\u7247', nav_manifesto: '\u00B7 \u4FE1\u6761', nav_archive: '\u00B7 \u6863\u6848', nav_transit: '\u00B7 \u6539\u7B7E', nav_delta: '\u00B7 \u4E09\u89D2\u6D32',
+          gate_highlight: '\u5FAA\u73AF\u7A7A\u95F4',
+          gate_sub_en: 'Smart. Quiet. Circulate.',
+          gate_sub_cn: '\u8FD9\u91CC\u7684\u4E1C\u897F\u53EF\u4EE5\u88AB\u5E26\u8D70\uFF0C\u4E5F\u53EF\u4EE5\u88AB\u9001\u56DE\u6765\u3002',
+          scroll_hint: 'SCROLL',
+          frag_label: '\u00B7 \u4E16\u754C\u788E\u7247 Fragments',
+          frag_title: '\u8FD9\u91CC\u6709\u4E00\u4E2A<em>\u4E16\u754C</em>',
+          frag_mood1: '\u51CC\u6668\u4E94\u70B9\u4E0D\u5C5E\u4E8E\u4EFB\u4F55\u57CE\u5E02\u7684\u5149',
+          frag_mood2: '\u673A\u573A\u4E0D\u662F\u51FA\u53D1\uFF0C\u662F\u4F4F\u4E86\u4E00\u6BB5\u65F6\u95F4\u7684\u5BA2\u5385',
+          frag_mood3: '\u597D\u7684\u7269\u54C1\u4E0D\u5E94\u8BE5\u6C38\u8FDC\u5C5E\u4E8E\u67D0\u4E00\u4E2A\u4EBA\u3002\u5B83\u4EEC\u5E94\u8BE5\u6D41\u52A8\u3002',
+          frag_quote: '\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8\u3002\u50CF\u6545\u4E8B\u4E00\u6837\u3002\u50CF\u4EBA\u751F\u4E00\u6837\u3002',
+          manifesto_label: '\u00B7 \u4FE1\u6761 Notebook',
+          manifesto_p1: '\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8\u3002',
+          manifesto_p2: '\u6211\u4E00\u4EF6\u4E00\u4EF6\u6DD8\uFF0C\u4F60\u4E00\u4EF6\u4E00\u4EF6\u770B\u3002',
+          manifesto_p3: '<strong style="font-family:var(--font-serif);color:var(--gray-900);font-weight:400;">\u5BA1\u7F8E\u8FD9\u4EF6\u4E8B\uFF0C\u53EF\u4EE5\u5F88\u8F7B\u677E\u3002</strong><br>\u4E0D elitist\uFF0C\u4E0D gatekeeping\uFF0C\u4E0D pretentious\u3002<br>\u6211\u4EEC\u7684\u4EF7\u503C\u4E0D\u662F\u62FC\u4EF7\u683C\uFF0C\u800C\u662F\u8BA9\u4F60\u4E0D\u7EA0\u7ED3\u3002<br>\u82B1\u4E00\u7B14\u5BF9\u7684\u94B1\uFF0C\u4E70\u4E00\u4E2A\u6211\u4EEC\u6311\u8FC7\u7684\u676F\u5B50\u3002<br>\u5B83\u4F1A\u966A\u4F60\u5F88\u4E45\u3002',
+          manifesto_margin: '\u5BA1\u7F8E \u00B7 \u5750\u6807',
+          manifesto_image_text: '\u5BA1\u7F8E\u5373\u5750\u6807', manifesto_image_sub: 'AESTHETICS AS COORDINATES',
+          manifesto_philosophy_title: '\u6D41\u52A8\u751F\u6D3B\u7684\u9009\u54C1\u7A7A\u95F4',
+          manifesto_philosophy_text: '\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8<br>Beauty is meant to flow',
+          about_trigger: '\u9605\u8BFB\u5B8C\u6574\u6545\u4E8B <span class="arrow">\u25BC</span>',
+          about_p1: '\u6211\u4EEC\u8FD9\u4E00\u4EE3\u4EBA\uFF0C\u5F88\u5C11\u771F\u6B63\u5B89\u987F\u4E0B\u6765\u3002<br>\u79DF\u623F\u3001\u642C\u5BB6\u3001\u51FA\u56FD\u3001\u6362\u57CE\u5E02\u3002',
+          about_p2: '\u62E5\u6709\u7684\u4E1C\u897F\u8D8A\u6765\u8D8A\u5C11\uFF0C<br>\u4F46\u4F9D\u7136\u5E0C\u671B\u751F\u6D3B\u91CC\u6709\u7F8E\u611F\u3002',
+          about_p3: '\u95EE\u9898\u662F\uFF1A<br>\u597D\u770B\u7684\u4E1C\u897F\u592A\u8D35\u3002<br>\u4FBF\u5B9C\u7684\u4E1C\u897F\u4E0D\u503C\u5F97\u7559\u4E0B\u3002',
+          about_p4: '\u6240\u4EE5\u6211\u4EEC\u5F00\u59CB\u5BFB\u627E\u53E6\u4E00\u79CD\u65B9\u5F0F\u2014\u2014<br>\u4E0D\u662F\u62E5\u6709\u66F4\u591A\uFF0C\u800C\u662F\u62E5\u6709\u5F97\u66F4\u806A\u660E\u3002',
+          about_p5: '\u4E00\u76CF\u706F\u3002\u4E00\u4E2A\u676F\u5B50\u3002\u4E00\u672C\u65E7\u6742\u5FD7\u3002<br>\u4E00\u4E2A\u88AB\u4F7F\u7528\u8FC7\u5F88\u591A\u5E74\u7684\u5305\u3002',
+          about_p6: '\u5B83\u4EEC\u4E0D\u4E00\u5B9A\u6602\u8D35\uFF0C<br>\u4F46\u90FD\u6709\u88AB\u9009\u4E2D\u7684\u7406\u7531\u3002',
+          about_p7: '\u6211\u4EEC\u76F8\u4FE1\uFF1A<br>\u597D\u7684\u7269\u54C1\u4E0D\u5E94\u8BE5\u6C38\u8FDC\u5C5E\u4E8E\u67D0\u4E00\u4E2A\u4EBA\u3002<br>\u5B83\u4EEC\u5E94\u8BE5\u6D41\u52A8\u3002<br>\u50CF\u6545\u4E8B\u4E00\u6837\u3002\u50CF\u4EBA\u751F\u4E00\u6837\u3002',
+          about_p8: '\u8FD9\u4E0D\u662F\u4E00\u5BB6\u4E8C\u624B\u5546\u5E97\u3002<br>\u8FD9\u662F\u6D41\u52A8\u751F\u6D3B\u7684\u9009\u54C1\u7A7A\u95F4\u3002',
+          about_standard_label: '\u6211\u7684\u9009\u54C1\u6807\u51C6',
+          about_sig1: '\u964D\u566A', about_sig2: '\u806A\u660E', about_sig3: '\u5B9E\u7528', about_sig4: '\u6D41\u8F6C',
+          about_standard_note: '\u6211\u9009\u4E1C\u897F\u770B\u8FD9\u56DB\u70B9\u3002\u6BCF\u4EF6\u90FD\u8FC7\u4E00\u904D\u3002',
+          archive_label: '\u00B7 \u7269\u4EF6\u6863\u6848 Archive',
+          archive_title: '\u5B83\u4EEC\u5728\u5BFB\u627E<br>\u4E0B\u4E00\u4E2A<em>\u4E3B\u4EBA</em>',
+          item1_tag: '\u5DF2\u4FEE\u590D / \u9650\u4E00\u4EF6', item1_name: '\u5E9F\u94C1\u76AE\u98DE\u884C\u5458\u5939\u514B',
+          item1_desc: '90\u5E74\u4EE3\u519B\u9700\u5DE5\u5382\u5C3E\u5355\uFF0C\u94DC\u8D28\u62C9\u94FE\u6C27\u5316\u6210\u53E4\u94DC\u8272\u3002\u5185\u886C\u624B\u5DE5\u4FEE\u8865\u2014\u2014\u7528\u4E86\u4E00\u6BB5\u8001\u548C\u670D\u8170\u5E26\u3002',
+          item2_tag: '\u5B64\u54C1', item2_name: '\u624B\u7EC7\u4E9A\u9EBB\u9614\u817F\u88E4',
+          item2_desc: '\u624B\u5DE5\u8349\u6728\u67D3\uFF0C\u989C\u8272\u6765\u81EA\u6838\u6843\u76AE\u548C\u8334\u8349\u3002\u5DE6\u53E3\u888B\u5185\u4FA7\u6709\u524D\u4E3B\u4EBA\u7EE3\u7684\u7ECF\u7EAC\u5EA6\u5750\u6807\u3002',
+          item3_tag: '\u5E26\u4F7F\u7528\u75D5\u8FF9', item3_name: '\u9ED1\u80F6\u5531\u7247\u5305',
+          item3_desc: '\u624B\u7F1D\u5E06\u5E03\u5305\uFF0C\u5370\u77401987\u5E74\u4F26\u6566\u67D0\u5730\u4E0B\u4E50\u961F\u7684\u6F14\u51FA\u6D77\u62A5\u3002\u80CC\u5E26\u662F\u56DE\u6536\u7684\u767B\u5C71\u7EF3\u3002',
+          item4_tag: '\u827A\u672F\u5BB6\u5408\u4F5C\u6B3E', item4_name: '\u62FC\u8D34\u5DE5\u88C5\u9A6C\u7532',
+          item4_desc: '\u516D\u5757\u4E0D\u540C\u5E74\u4EE3\u7684\u519B\u5E03\u62FC\u6210\uFF0C\u6BCF\u5757\u90FD\u6709\u81EA\u5DF1\u7684\u8272\u5DEE\u548C\u6545\u4E8B\u3002\u53E3\u888B\u886C\u91CC\u662F\u624B\u5199\u4E50\u8C31\u3002',
+          item5_tag: '\u5DF2\u552E \u00B7 \u53EF\u9884\u5B9A', item5_name: '\u78E8\u635F\u9A6C\u4E01\u9774',
+          item5_desc: '\u7A7F\u4E86\u516D\u5E74\u7684Dr. Martens\uFF0C\u76AE\u9762\u81EA\u7136\u9F9F\u88C2\u5982\u5730\u56FE\u3002\u978B\u5E95\u7EB9\u8DEF\u91CC\u5D4C\u7740\u7684\u4E0D\u662F\u6CE5\u571F\uFF0C\u662F\u4E09\u4E2A\u57CE\u5E02\u7684\u8BB0\u5FC6\u3002',
+          item6_tag: '\u5F85\u4FEE\u590D', item6_name: '\u65E7\u4E66\u5E97\u7684\u706F',
+          item6_desc: '\u662D\u548C\u5E74\u95F4\u9EC4\u94DC\u53F0\u706F\uFF0C\u706F\u7F69\u624B\u5DE5\u6376\u6253\u51FA\u51F9\u51F8\u7EB9\u7406\u3002\u7535\u7EBF\u5DF2\u6362\u65B0\uFF0C\u63A5\u5934\u5916\u9732\u2014\u2014\u6545\u610F\u4E0D\u85CF\u8D77\u6765\u3002',
+          transit_label: '\u00B7 \u6539\u7B7E Transit',
+          transit_title: '\u4E0D\u559C\u6B22\u4E86\uFF1F<br><em>\u6539\u7B7E</em>',
+          transit_from: 'YOU', transit_to: 'MSG', transit_class: '\u6D41\u901A\u8231',
+          transit_gate_label: 'GATE', transit_class_label: 'CLASS',
+          transit_step1: '\u8054\u7CFB\u6211\uFF08\u5FAE\u4FE1/\u79C1\u4FE1\uFF09',
+          transit_step2: '\u786E\u8BA4\u6210\u8272',
+          transit_step3: '\u4F60\u5BC4\u56DE',
+          transit_step4: '\u6309\u89C4\u5219\u8FD4\u8FD8',
+          transit_note_title: '\u5907\u6CE8',
+          transit_note_text: '\u9000\u56DE\u7684\u4E1C\u897F\u4F1A\u91CD\u65B0\u6574\u7406\u4E0A\u67B6\u3002\u4E8C\u6B21\u9500\u552E\u5229\u6DA6\u7684 20% \u8FDB\u5165\u516C\u76CA\u91D1\uFF0C\u6BCF\u5B63\u5EA6\u516C\u793A\u53BB\u5411\u3002',
+          transit_fare_label: 'FARE TABLE \u00B7 \u7968\u4EF7\u8868',
+          transit_th_period: '\u9000\u56DE\u65F6\u95F4', transit_th_cash: '\u73B0\u91D1', transit_th_credit: '\u79EF\u5206',
+          transit_row1_period: '30 \u5929\u5185', transit_row1_cash: '60%', transit_row1_credit: '70%',
+          transit_row2_period: '30\u201390 \u5929', transit_row2_cash: '50%', transit_row2_credit: '60%',
+          transit_row3_period: '90\u2013180 \u5929', transit_row3_cash: '40%', transit_row3_credit: '50%',
+          transit_row4_period: '180 \u5929\u4EE5\u4E0A', transit_row4_cash: '30%', transit_row4_credit: '40%',
+          transit_credit_note: '\u79EF\u5206 1:1 \u4F7F\u7528\uFF0C\u4E0D\u8FC7\u671F\u3002',
+          delta_label: '\u00B7 \u4E09\u89D2\u6D32 Delta',
+          delta_title: '\u4F60\u6D41\u56DE\u7684\u4E1C\u897F<br>\u6211\u4EEC\u8BA9\u5B83<em>\u7EE7\u7EED\u6D41\u52A8</em>',
+          delta_p1: '\u4F60\u6D41\u56DE\u7684\u4E1C\u897F\uFF0C\u6211\u4EEC\u4F1A\u91CD\u65B0\u4E0A\u67B6\u3002\u4E8C\u6B21\u9500\u552E\u7684\u5229\u6DA6\uFF0C20% \u8FDB\u5165\u6D41\u52A8\u516C\u76CA\u91D1\u3002',
+          delta_p2: '\u8FD9\u4E9B\u94B1\u4F1A\u6309\u5B63\u5EA6\u6350\u7ED9\uFF1A',
+          delta_cat1: '\u6D41\u6D6A\u52A8\u7269\u6551\u52A9',
+          delta_cat2: '\u4E61\u6751\u513F\u7AE5\u9605\u8BFB',
+          delta_cat3: '\u793E\u533A\u73AF\u4FDD\u884C\u52A8',
+          delta_p3: '\u6BCF\u5B63\u5EA6\u5728\u8FD9\u91CC\u516C\u793A\u6350\u8D60\u8BB0\u5F55\u3002\u4F60\u8BA9\u597D\u4E1C\u897F\u7EE7\u7EED\u6D41\u52A8\u3002\u6211\u4EEC\u4E00\u8D77\u505A\u70B9\u597D\u4E8B\u3002',
+          attitude_line1: '\u5BA1\u7F8E', attitude_line2: '\u4E0D\u662F\u7279\u6743', attitude_line3: 'just come in',
+          visitors_label: '\u5F53\u524D\u5728\u7EBF',
+          visitors_text: '\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8<br>Beauty is meant to flow',
+          footer_text: 'messenger \u00B7 \u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8',
+          sig_1: '\u964D\u566A', sig_2: '\u806A\u660E', sig_3: '\u5B9E\u7528', sig_4: '\u6D41\u8F6C',
+          footer_instagram: 'Instagram', footer_about: '\u5173\u4E8E', footer_consign: '\u5BC4\u552E', footer_contact: '\u8054\u7CFB'
+        },
+        en: {
+          page_title: 'messenger \u2014 A cyclic space with aesthetics as coordinates',
+          nav_world: '\u00B7 Fragments', nav_manifesto: '\u00B7 Manifesto', nav_archive: '\u00B7 Archive', nav_transit: '\u00B7 Transit', nav_delta: '\u00B7 Delta',
+          gate_highlight: 'Cyclic Space',
+          gate_sub_en: 'Smart. Quiet. Circulate.',
+          gate_sub_cn: '\u8FD9\u91CC\u7684\u4E1C\u897F\u53EF\u4EE5\u88AB\u5E26\u8D70\uFF0C\u4E5F\u53EF\u4EE5\u88AB\u9001\u56DE\u6765\u3002',
+          scroll_hint: 'SCROLL',
+          frag_label: '\u00B7 World Fragments',
+          frag_title: 'There is a <em>world</em> here',
+          frag_mood1: 'The light at 5am in a city you don\'t live in',
+          frag_mood2: 'An airport isn\'t departure \u2014 it\'s a living room you stayed in for a while',
+          frag_mood3: 'Good things shouldn\'t belong to one person forever. They should flow.',
+          frag_quote: 'Beauty is meant to flow. Like stories. Like lives.',
+          manifesto_label: '\u00B7 Manifesto',
+          manifesto_p1: 'Beauty is meant to flow.',
+          manifesto_p2: 'I hunt them down, one by one. You look, one by one.',
+          manifesto_p3: '<strong style="font-family:var(--font-serif);color:var(--gray-900);font-weight:400;">Good taste doesn\'t have to be heavy.</strong><br>No elitist, no gatekeeping, not pretentious.<br>Our value isn\'t about price wars \u2014 it\'s about peace of mind.<br>Spend the right money on a cup we picked for you.<br>It will stay with you a long time.',
+          manifesto_margin: 'AESTHETICS \u00B7 COORDINATES',
+          manifesto_image_text: 'Aesthetics as Coordinates', manifesto_image_sub: '\u5BA1\u7F8E\u5373\u5750\u6807',
+          manifesto_philosophy_title: 'Curation for a Life in Motion',
+          manifesto_philosophy_text: 'Beauty is meant to flow<br>\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8',
+          about_trigger: 'Read the full story <span class="arrow">\u25BC</span>',
+          about_p1: 'Our generation rarely settles down.<br>We rent, we move, we go abroad, we change cities.',
+          about_p2: 'We own less and less,<br>but we still want beauty in our lives.',
+          about_p3: 'The problem:<br>beautiful things cost too much.<br>Cheap things aren\'t worth keeping.',
+          about_p4: 'So we started looking for another way\u2014<br>not owning more, but owning smarter.',
+          about_p5: 'A lamp. A cup. An old magazine.<br>A bag that\'s been used for years.',
+          about_p6: 'They\'re not necessarily expensive,<br>but they all have a reason for being chosen.',
+          about_p7: 'We believe:<br>good things shouldn\'t belong to one person forever.<br>They should flow.<br>Like stories. Like lives.',
+          about_p8: 'This is not a second-hand store.<br>This is a curation space for a life in motion.',
+          about_standard_label: 'Selection Criteria',
+          about_sig1: 'Noise Off', about_sig2: 'Smart', about_sig3: 'Useful', about_sig4: 'Flowing',
+          about_standard_note: 'Four things I check. Every piece, every time.',
+          archive_label: '\u00B7 Object Archive',
+          archive_title: 'They are searching<br>for their next <em>owner</em>',
+          item1_tag: 'Restored / One of a Kind', item1_name: 'Scrap Leather Bomber Jacket',
+          item1_desc: '90s military surplus, brass zipper oxidized to bronze. Lining hand-repaired with a piece of old kimono obi.',
+          item2_tag: 'Unique Piece', item2_name: 'Handwoven Linen Wide-leg Pants',
+          item2_desc: 'Hand-dyed with natural pigments from walnut shells and madder root. Inside left pocket embroidered with previous owner\'s coordinates.',
+          item3_tag: 'Signs of Use', item3_name: 'Vinyl Record Bag',
+          item3_desc: 'Hand-stitched canvas bag printed with a 1987 London underground band poster. Strap made from recycled climbing rope.',
+          item4_tag: 'Artist Collaboration', item4_name: 'Patchwork Utility Vest',
+          item4_desc: 'Six panels of military fabric from different eras, each with its own patina and story. Pocket lining is hand-written sheet music.',
+          item5_tag: 'Sold \u00B7 Available for Order', item5_name: 'Worn Dr. Martens Boots',
+          item5_desc: 'Six years worn Dr. Martens, leather naturally cracked like a map. Embedded in the sole treads aren\'t just dirt \u2014 they\'re memories of three cities.',
+          item6_tag: 'Awaiting Restoration', item6_name: 'Old Bookshop Lamp',
+          item6_desc: 'Showa-era brass desk lamp, shade hand-hammered with textured patterns. Rewired with exposed joints \u2014 deliberately left uncovered.',
+          transit_label: '\u00B7 Transit',
+          transit_title: 'Don\'t love it anymore?<br><em>Re-route</em>',
+          transit_from: 'YOU', transit_to: 'MSG', transit_class: 'CIRCULATION',
+          transit_gate_label: 'GATE', transit_class_label: 'CLASS',
+          transit_step1: 'Message me (WeChat / DM)',
+          transit_step2: 'Condition check',
+          transit_step3: 'Ship it back',
+          transit_step4: 'Refund issued',
+          transit_note_title: 'Note',
+          transit_note_text: 'Returned items will be re-listed. 20% of second-sale profit goes to the charity fund, reported quarterly.',
+          transit_fare_label: 'FARE TABLE',
+          transit_th_period: 'Return Period', transit_th_cash: 'Cash', transit_th_credit: 'Credit',
+          transit_row1_period: 'Within 30 days', transit_row1_cash: '60%', transit_row1_credit: '70%',
+          transit_row2_period: '30\u201390 days', transit_row2_cash: '50%', transit_row2_credit: '60%',
+          transit_row3_period: '90\u2013180 days', transit_row3_cash: '40%', transit_row3_credit: '50%',
+          transit_row4_period: '180+ days', transit_row4_cash: '30%', transit_row4_credit: '40%',
+          transit_credit_note: 'Store credit is 1:1, never expires.',
+          delta_label: '\u00B7 Delta',
+          delta_title: 'What you return<br>keeps <em>flowing onward</em>',
+          delta_p1: 'Items you return are re-listed. 20% of second-sale profit goes into the flowing charity fund.',
+          delta_p2: 'These funds are donated quarterly to:',
+          delta_cat1: 'Stray animal rescue',
+          delta_cat2: 'Rural children\'s reading',
+          delta_cat3: 'Community environmental action',
+          delta_p3: 'Donation records are published here every quarter. You keep good things flowing. We do good together.',
+          attitude_line1: 'Good taste', attitude_line2: 'is not a privilege', attitude_line3: 'just come in',
+          visitors_label: 'Online Now',
+          visitors_text: 'Beauty is meant to flow<br>\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8',
+          footer_text: 'messenger \u00B7 Beauty is meant to flow',
+          sig_1: 'Noise Off', sig_2: 'Smart', sig_3: 'Useful', sig_4: 'Flowing',
+          footer_instagram: 'Instagram', footer_about: 'About', footer_consign: 'Consign', footer_contact: 'Contact'
+        }
+      };
+
+      var currentLang = localStorage.getItem('messenger-lang') || 'zh';
+
+      function switchLang(lang) {
+        currentLang = lang;
+        localStorage.setItem('messenger-lang', lang);
+        document.getElementById('html-root').setAttribute('lang', lang === 'zh' ? 'zh-CN' : 'en');
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+          var key = el.getAttribute('data-i18n');
+          var text = translations[lang][key];
+          if (text !== undefined) el.innerHTML = text;
+        });
+        var toggle = document.getElementById('langToggle');
+        toggle.querySelectorAll('span[data-lang]').forEach(function(span) {
+          span.classList.toggle('active-lang', span.getAttribute('data-lang') === lang);
+        });
+      }
+      switchLang(currentLang);
+
+      document.getElementById('langToggle').addEventListener('click', function() {
+        switchLang(currentLang === 'zh' ? 'en' : 'zh');
+      });
+
+      // ===== ABOUT TOGGLE =====
+      var aboutTrigger = document.getElementById('aboutTrigger');
+      var aboutExpand = document.getElementById('aboutExpand');
+      aboutTrigger.addEventListener('click', function() {
+        aboutExpand.classList.toggle('open');
+        aboutTrigger.classList.toggle('open');
+      });
+
+      // ===== CUSTOM CURSOR =====
+      var cursor = document.getElementById('cursor');
+      var cursorVisible = false;
+
+      document.addEventListener('mousemove', function(e) {
+        if (!cursorVisible) { cursor.classList.add('active'); cursorVisible = true; }
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+      document.addEventListener('mouseleave', function() {
+        cursor.classList.remove('active'); cursorVisible = false;
+      });
+      document.querySelectorAll('a, .archive-card, button, .about-trigger, .frag, .radio-player').forEach(function(el) {
+        el.addEventListener('mouseenter', function() { cursor.classList.add('hovering'); });
+        el.addEventListener('mouseleave', function() { cursor.classList.remove('hovering'); });
+      });
+
+      // ===== SCROLL REVEAL =====
+      var revealElements = document.querySelectorAll('.reveal');
+      function checkReveal() {
+        var windowHeight = window.innerHeight;
+        revealElements.forEach(function(el) {
+          var rect = el.getBoundingClientRect();
+          if (rect.top < windowHeight * 0.88) el.classList.add('visible');
+        });
+      }
+      checkReveal();
+      var scrollTicking = false;
+      window.addEventListener('scroll', function() {
+        if (!scrollTicking) {
+          window.requestAnimationFrame(function() { checkReveal(); scrollTicking = false; });
+          scrollTicking = true;
+        }
+      });
+
+      // ===== VISITOR COUNTER =====
+      var visitorEl = document.getElementById('visitorCount');
+      var currentCount = 0;
+      var targetCount = 128;
+      function animateCount() {
+        var step = Math.ceil((targetCount - currentCount) / 20);
+        if (step <= 1) { currentCount = targetCount; visitorEl.textContent = targetCount; return; }
+        currentCount += step;
+        visitorEl.textContent = currentCount;
+        requestAnimationFrame(animateCount);
+      }
+      var countAnimated = false;
+      function checkCountTrigger() {
+        if (countAnimated) return;
+        var rect = document.getElementById('visitors').getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.9) { countAnimated = true; animateCount(); }
+      }
+      window.addEventListener('scroll', checkCountTrigger);
+      checkCountTrigger();
+
+      // ===== RADIO PLAYER (Web Audio API) =====
+      var radioPlayer = document.getElementById('radioPlayer');
+      var radioSignal = document.getElementById('radioSignal');
+      var radioCity = document.getElementById('radioCity');
+      var audioCtx = null;
+      var radioPlaying = false;
+      var radioNodes = [];
+      var cities = ['PVG', 'NRT', 'CDG', 'LHR', 'JFK', 'HKG', 'FRA', 'ARN'];
+      var cityIndex = 0;
+
+      function initAudio() {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        // Filtered noise (rain ambience)
+        var bufferSize = 2 * audioCtx.sampleRate;
+        var buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        var data = buffer.getChannelData(0);
+        for (var i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+        var noise = audioCtx.createBufferSource();
+        noise.buffer = buffer;
+        noise.loop = true;
+        var filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.value = 350;
+        var gain = audioCtx.createGain();
+        gain.gain.value = 0.025;
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+        radioNodes.push({ source: noise, gain: gain });
+
+        // Low drone
+        var osc = audioCtx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.value = 55;
+        var oscGain = audioCtx.createGain();
+        oscGain.gain.value = 0.015;
+        osc.connect(oscGain);
+        oscGain.connect(audioCtx.destination);
+        radioNodes.push({ source: osc, gain: oscGain });
+      }
+
+      radioPlayer.addEventListener('click', function() {
+        if (!radioPlaying) {
+          if (!audioCtx) initAudio();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+          radioNodes.forEach(function(n) { n.source.start(); });
+          radioPlaying = true;
+          radioSignal.classList.remove('off');
+          // Cycle cities
+          setInterval(function() {
+            cityIndex = (cityIndex + 1) % cities.length;
+            radioCity.textContent = cities[cityIndex];
+          }, 8000);
+        } else {
+          radioNodes.forEach(function(n) { try { n.source.stop(); } catch(e) {} });
+          radioNodes = [];
+          radioPlaying = false;
+          radioSignal.classList.add('off');
+          audioCtx = null;
+        }
+      });
+
+      // ===== INSPECTOR LOG =====
+      console.log('%c messenger ', 'background: #1a1a18; color: #f5f3ef; font-size: 16px; padding: 8px 12px; border-left: 3px solid #c43e2c;');
+
+    })();
+  </script>
+</body>
+</html>
