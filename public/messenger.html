@@ -31,158 +31,86 @@
   background: var(--bg);
   padding: var(--section-py) 48px;
   text-align: center;
-  overflow: hidden;
 }
 .cycle-content {
-  max-width: 680px;
+  max-width: 620px;
   margin: 40px auto 0;
 }
 
-/* === orbit === */
+/* 20% circle */
 .cycle-viz {
   position: relative;
-  width: 280px;
-  height: 280px;
-  margin: 0 auto 20px;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 24px;
 }
-.cycle-viz *,
-.cycle-viz *::before,
-.cycle-viz *::after { pointer-events: none; }
-
-/* ring */
 .cycle-ring {
   position: absolute;
-  top: 50%; left: 50%;
-  width: 200px; height: 200px;
-  margin: -100px 0 0 -100px;
+  inset: 0;
   border-radius: 50%;
-  border: 1px dashed rgba(74,124,89,0.2);
-  transition: border-color 0.5s;
-}
-.cycle:hover .cycle-ring { border-color: rgba(74,124,89,0.4); }
-
-/* center */
-.cycle-center {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 80px; height: 80px;
-  margin: -40px 0 0 -40px;
-  border-radius: 50%;
-  border: 1px solid rgba(74,124,89,0.15);
+  border: 1px solid rgba(74,124,89,0.18);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--bg);
-  z-index: 2;
-  transition: border-color 0.5s, box-shadow 0.5s;
+  transition: border-color 0.4s, box-shadow 0.4s;
 }
-.cycle:hover .cycle-center { border-color: rgba(74,124,89,0.35); }
+.cycle:hover .cycle-ring {
+  border-color: rgba(74,124,89,0.35);
+  box-shadow: 0 0 24px rgba(74,124,89,0.06);
+}
 .cycle-pct {
   font-family: var(--font-sans);
-  font-size: 26px;
+  font-size: 24px;
   color: var(--accent);
   font-weight: 200;
   letter-spacing: 0.02em;
-  animation: breathe-pct 3s ease-in-out infinite;
-}
-.cycle:hover .cycle-pct { animation-play-state: paused; }
-@keyframes breathe-pct {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(0.95); }
 }
 
-/* three arms — each rotates independently */
-.cycle-arm {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 0; height: 0;
-  transform: translate(-50%, -50%) rotate(var(--angle));
-  animation: spin-arm 12s linear infinite;
-  animation-delay: var(--delay);
+/* three flowing dots — pulse in sequence L→R */
+.cycle-flow {
+  display: flex;
+  justify-content: center;
+  gap: 64px;
+  margin-bottom: 24px;
 }
-.cycle:hover .cycle-arm { animation-play-state: paused; }
-@keyframes spin-arm {
-  to { transform: translate(-50%, -50%) rotate(calc(var(--angle) + 360deg)); }
+.flow-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
-
-/* arm dot */
-.arm-dot {
-  position: absolute;
-  top: -8px; left: -8px;
-  width: 16px; height: 16px;
-  margin: 0;
+.flow-dot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--accent);
-  opacity: 0.6;
-  transform: translateY(-100px);
-  transition: all 0.5s;
-  z-index: 1;
+  opacity: 0.25;
+  animation: seq-pulse 2.4s ease-in-out infinite;
 }
-.arm-dot::before {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  border: 1px solid rgba(74,124,89,0.3);
-  animation: pulse-ring 2s ease-in-out infinite;
+.flow-item:nth-child(2) .flow-dot { animation-delay: 0.8s; }
+.flow-item:nth-child(3) .flow-dot { animation-delay: 1.6s; }
+@keyframes seq-pulse {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.5); }
 }
-.arm-dot::after {
-  content: '';
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 4px; height: 4px;
-  margin: -2px 0 0 -2px;
-  border-radius: 50%;
-  background: var(--bg);
-  opacity: 0.6;
-}
-@keyframes pulse-ring {
-  0%, 100% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.6); opacity: 0; }
-}
-
-/* arm label — counter-rotates to stay horizontal */
-.arm-label {
-  position: absolute;
-  transform: translateY(-135px) translateX(-65px);
-  width: 130px;
+.flow-label {
   font-family: var(--font-sans);
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 3px;
-  text-transform: uppercase;
   color: var(--gray-300);
-  text-align: center;
-  transition: color 0.5s;
-  /* counter-rotate */
-  animation: counter-spin 12s linear infinite;
-  animation-delay: var(--delay);
+  white-space: nowrap;
+  transition: color 0.3s;
 }
-.cycle:hover .arm-label { animation-play-state: paused; }
-@keyframes counter-spin {
-  to { transform: translateY(-135px) translateX(-65px) rotate(-360deg); }
-}
+.cycle:hover .flow-dot { opacity: 0.5; }
+.cycle:hover .flow-item:nth-child(2) .flow-dot { animation-delay: 0.8s; }
 
-/* hover state: dot grows, label lights up */
-.cycle:hover .arm-dot {
-  width: 22px; height: 22px;
-  top: -11px; left: -11px;
-  opacity: 1;
-  box-shadow: 0 0 16px rgba(74,124,89,0.35);
-}
-.cycle:hover .arm-label { color: var(--accent); }
-
-/* arm-specific delays so dots are evenly spread */
-.cycle-arm:nth-child(1) { --delay: 0s; }
-.cycle-arm:nth-child(2) { --delay: -4s; }
-.cycle-arm:nth-child(3) { --delay: -8s; }
-
-/* === text below viz === */
+/* typography */
 .cycle-tagline {
   font-family: var(--font-serif);
   font-size: clamp(14px, 1.3vw, 18px);
   line-height: 1.8;
   color: var(--text);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   font-style: italic;
 }
 .cycle-text {
@@ -191,26 +119,7 @@
   line-height: 2;
   color: var(--gray-400);
   max-width: 520px;
-  margin: 0 auto 24px;
-}
-.cycle-labels {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin-bottom: 28px;
-}
-.cycle-labels span {
-  font-family: var(--font-sans);
-  font-size: 10px;
-  letter-spacing: 2px;
-  color: var(--gray-300);
-  position: relative;
-  padding: 6px 14px;
-  transition: color 0.4s, background 0.4s;
-}
-.cycle:hover .cycle-labels span {
-  color: var(--accent);
+  margin: 0 auto 20px;
 }
 .cycle-note {
   font-family: var(--font-mono);
@@ -1091,21 +1000,22 @@ section { padding: 100px 48px; position: relative; }
     <div class="section-label">循环 Cycle</div>
     <div class="cycle-content">
       <div class="cycle-viz">
-        <div class="cycle-center">
+        <div class="cycle-ring">
           <span class="cycle-pct">20%</span>
         </div>
-        <div class="cycle-ring"></div>
-        <div class="cycle-arm" style="--angle: 0deg;">
-          <span class="arm-dot"></span>
-          <span class="arm-label">流浪动物救助</span>
+      </div>
+      <div class="cycle-flow">
+        <div class="flow-item">
+          <div class="flow-dot"></div>
+          <span class="flow-label">流浪动物救助</span>
         </div>
-        <div class="cycle-arm" style="--angle: 120deg;">
-          <span class="arm-dot"></span>
-          <span class="arm-label">乡村儿童阅读</span>
+        <div class="flow-item">
+          <div class="flow-dot"></div>
+          <span class="flow-label">乡村儿童阅读</span>
         </div>
-        <div class="cycle-arm" style="--angle: 240deg;">
-          <span class="arm-dot"></span>
-          <span class="arm-label">社区环保行动</span>
+        <div class="flow-item">
+          <div class="flow-dot"></div>
+          <span class="flow-label">社区环保行动</span>
         </div>
       </div>
       <p class="cycle-tagline">你流回的东西<br>我们让它继续流动</p>
