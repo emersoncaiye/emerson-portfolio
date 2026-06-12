@@ -1,0 +1,989 @@
+---
+interface MomentItem {
+  img: string;
+  caption: string;
+  sub: string;
+}
+
+interface AboutBlock {
+  num: string;
+  title: string;
+  text: string;
+}
+
+interface Props {
+  lang: string;
+  t: {
+    title: string;
+    heroName: string;
+    heroNameEn: string;
+    heroIdentities: string[];
+    heroDesc: string;
+    expLabel: string;
+    exp1Role: string; exp1Company: string; exp1Date: string; exp1Month: string; exp1Items: string[];
+    exp2Role: string; exp2Company: string; exp2Date: string; exp2Month: string; exp2Items: string[];
+    exp3Role: string; exp3Company: string; exp3Date: string; exp3Month: string; exp3Items: string[];
+    exp4Role: string; exp4Company: string; exp4Date: string; exp4Month: string; exp4Items: string[];
+    exp5Role: string; exp5Company: string; exp5Date: string; exp5Month: string; exp5Items: string[];
+    exp6Role: string; exp6Company: string; exp6Date: string; exp6Month: string; exp6Items: string[];
+    momentsLabel: string;
+    moments: MomentItem[];
+    aboutLabel: string;
+    aboutIntro: string;
+    aboutBody: string;
+    aboutBlocks: AboutBlock[];
+    contactLabel: string;
+    contactName: string;
+    contactEmail: string;
+  };
+  langLinks: { code: string; label: string; href: string; active: boolean }[];
+}
+
+const { lang, t, langLinks } = Astro.props;
+
+function renderExpItem(text: string) {
+  return `<li>${text}</li>`;
+}
+---
+
+<!-- ===== NAV ===== -->
+<header class="header">
+  <nav class="nav">
+    <a href={lang === 'en' ? '/' : `/${lang}/`} class="logo">{lang === 'zh' || lang === 'yue' ? '蔡也' : 'Emerson'}</a>
+    <div class="nav-center">
+      <a href="#experience" class="link-hover">{t.expLabel}</a>
+      <a href="#moments" class="link-hover">{t.momentsLabel}</a>
+      <a href="#about" class="link-hover">{t.aboutLabel}</a>
+      <a href="#contact" class="link-hover">{t.contactLabel}</a>
+    </div>
+    <div class="lang-nav">
+      {langLinks.map((l) => (
+        <a href={l.href} class:list={['lang-link', { active: l.active }]}>{l.label}</a>
+      ))}
+    </div>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <h1 class="hero-name">{t.heroName}</h1>
+      <p class="hero-name-en">{t.heroNameEn}</p>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-right">
+      <div class="hero-identities">
+        {t.heroIdentities.map((id: string, i: number) => (
+          <div class="identity-row">
+            <span class="identity-num">0{i + 1}</span>
+            <span class="identity-line">{id}</span>
+          </div>
+        ))}
+      </div>
+      <p class="hero-desc">{t.heroDesc}</p>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span class="scroll-line"></span>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section id="experience" class="section">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-label">{t.expLabel}</h2>
+  </div>
+
+  <!-- 实践经历 -->
+  <div class="exp-subsection reveal">
+    <h3 class="exp-sub-label">{t.practiceExpLabel}</h3>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">{t.exp3Date}</span>
+        <span class="timeline-month">{t.exp3Month}</span>
+      </div>
+      <div class="timeline-track">
+        <div class="timeline-dot"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp3Role}</div>
+        <div class="exp-company">{t.exp3Company}</div>
+        <ul class="exp-list" set:html={t.exp3Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">{t.exp4Date}</span>
+        <span class="timeline-month">{t.exp4Month}</span>
+      </div>
+      <div class="timeline-track">
+        <div class="timeline-dot"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp4Role}</div>
+        <div class="exp-company">{t.exp4Company}</div>
+        <ul class="exp-list" set:html={t.exp4Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">{t.exp5Date}</span>
+        <span class="timeline-month">{t.exp5Month}</span>
+      </div>
+      <div class="timeline-track">
+        <div class="timeline-dot"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp5Role}</div>
+        <div class="exp-company">{t.exp5Company}</div>
+        <ul class="exp-list" set:html={t.exp5Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+  </div>
+
+  <!-- 项目经历 -->
+  <div class="exp-subsection reveal">
+    <h3 class="exp-sub-label">{t.projectExpLabel}</h3>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">{t.exp1Date}</span>
+        <span class="timeline-month">{t.exp1Month}</span>
+      </div>
+      <div class="timeline-track">
+        <div class="timeline-dot"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp1Role}</div>
+        <div class="exp-company">{t.exp1Company}</div>
+        <ul class="exp-list" set:html={t.exp1Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">{t.exp2Date}</span>
+        <span class="timeline-month">{t.exp2Month}</span>
+      </div>
+      <div class="timeline-track">
+        <div class="timeline-dot"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp2Role}</div>
+        <div class="exp-company">{t.exp2Company}</div>
+        <ul class="exp-list" set:html={t.exp2Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">{t.exp6Date}</span>
+        <span class="timeline-month">{t.exp6Month}</span>
+      </div>
+      <div class="timeline-track">
+        <div class="timeline-dot"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp6Role}</div>
+        <div class="exp-company">{t.exp6Company}</div>
+        <ul class="exp-list" set:html={t.exp6Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MOMENTS (dark block) ===== -->
+<section id="moments" class="moments-section">
+  <div class="moments-inner">
+    <div class="section-header reveal">
+      <span class="section-num dark">02</span>
+      <h2 class="section-label dark">{t.momentsLabel}</h2>
+    </div>
+    <div class="moments-scroll reveal">
+      {t.moments.map((m) => (
+        <div class="moment-card">
+          <div class="moment-img">
+            <img src={m.img} alt={m.caption} loading="lazy" />
+          </div>
+          <div class="moment-caption">{m.caption}</div>
+          <div class="moment-sub">{m.sub}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="section">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-label">{t.aboutLabel}</h2>
+  </div>
+  <div class="about-layout">
+    <div class="about-lead reveal">
+      <p class="about-intro">{t.aboutIntro}</p>
+    </div>
+    <div class="about-detail reveal">
+      <p class="about-body">{t.aboutBody}</p>
+    </div>
+  </div>
+  <div class="about-grid">
+    {t.aboutBlocks.map((b) => (
+      <div class="about-block reveal">
+        <span class="about-num">{b.num}</span>
+        <h3 class="about-block-title">{b.title}</h3>
+        <p class="about-block-text">{b.text}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <div class="section-header reveal">
+      <span class="section-num dark">04</span>
+      <h2 class="section-label dark">{t.contactLabel}</h2>
+    </div>
+    <div class="contact-content reveal">
+      <span class="contact-name">{t.contactName}</span>
+      <div class="contact-divider"></div>
+      <a href={`mailto:${t.contactEmail}`} class="contact-email">{t.contactEmail}</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <span>&copy; 2026 {t.contactName}</span>
+</footer>
+
+<style>
+  /* ====== HEADER ====== */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(254, 252, 249, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0.875rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .nav-center {
+    display: flex;
+    gap: 2.25rem;
+  }
+
+  .nav-center a {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    transition: color 0.3s var(--ease);
+  }
+
+  .nav-center a:hover {
+    color: var(--text);
+  }
+
+  .lang-nav {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .lang-link {
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    opacity: 0.5;
+    transition: opacity 0.2s;
+  }
+
+  .lang-link:hover,
+  .lang-link.active {
+    opacity: 1;
+  }
+
+  .lang-link.active {
+    font-weight: 600;
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--text);
+    transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  }
+
+  /* ====== HERO ====== */
+  .hero {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 10rem 2.5rem 5rem;
+    position: relative;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 5fr 1px 4fr;
+    gap: 0;
+    align-items: start;
+    column-gap: 3rem;
+  }
+
+  .hero-left {
+    padding-top: 0.5rem;
+  }
+
+  .hero-name {
+    font-family: var(--font-serif);
+    font-size: clamp(3.5rem, 9vw, 6.5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    color: var(--text);
+  }
+
+  .hero-name-en {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    color: var(--text-secondary);
+    margin-top: 1.25rem;
+    text-transform: uppercase;
+  }
+
+  .hero-divider {
+    background: var(--border);
+    width: 1px;
+    min-height: 180px;
+    align-self: stretch;
+    margin-top: 0.75rem;
+  }
+
+  .hero-right {
+    padding-top: 1rem;
+  }
+
+  .hero-identities {
+    margin-bottom: 2.25rem;
+  }
+
+  .identity-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .identity-row:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .identity-num {
+    font-family: var(--font-sans);
+    font-size: 0.625rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    min-width: 1.5rem;
+    opacity: 0.6;
+  }
+
+  .identity-line {
+    font-family: var(--font-serif);
+    font-size: clamp(1rem, 2.2vw, 1.25rem);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+
+  .hero-desc {
+    font-size: 0.9375rem;
+    line-height: 1.9;
+    color: #5a5a5a;
+    max-width: 400px;
+  }
+
+  .hero-scroll-hint {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+  }
+
+  .scroll-line {
+    display: block;
+    width: 1px;
+    height: 48px;
+    background: var(--border);
+    position: relative;
+  }
+
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -2px;
+    width: 5px;
+    height: 5px;
+    border: 1px solid var(--text-secondary);
+    background: var(--bg);
+  }
+
+  /* ====== SECTIONS ====== */
+  .section {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 6rem 2.5rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-num {
+    font-family: var(--font-sans);
+    font-size: 0.625rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+  }
+
+  .section-num.dark {
+    color: #666;
+  }
+
+  .section-label {
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-secondary);
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .section-label.dark {
+    color: #777;
+  }
+
+  /* ====== EXP SUBSECTION ====== */
+  .exp-subsection {
+    padding: 2rem 0 0;
+  }
+  .exp-sub-label {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #C8553D;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #E2E0DC;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ====== TIMELINE ====== */
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 5.5rem 2rem 1fr;
+    gap: 0;
+    margin-bottom: 0;
+    align-items: start;
+  }
+
+  .timeline-left {
+    text-align: right;
+    padding-top: 0.35rem;
+    padding-right: 0.5rem;
+  }
+
+  .timeline-year {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 0.02em;
+  }
+
+  .timeline-month {
+    display: block;
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+    margin-top: 0.125rem;
+  }
+
+  .timeline-track {
+    width: 1px;
+    background: var(--border);
+    min-height: 100%;
+    position: relative;
+    align-self: stretch;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    top: 0.65rem;
+    left: -3px;
+    width: 7px;
+    height: 7px;
+    border: 1.5px solid var(--text);
+    background: var(--bg);
+  }
+
+  .timeline-content {
+    padding: 0.25rem 0 2.75rem 1.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .timeline-item:last-child .timeline-content {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .exp-role {
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+
+  .exp-company {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    letter-spacing: 0.01em;
+  }
+
+  .exp-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .exp-list :global(li) {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: #4a4a4a;
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-list :global(li)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 4px;
+    height: 1px;
+    background: var(--text-secondary);
+  }
+
+  /* ====== MOMENTS (dark) ====== */
+  .moments-section {
+    background: var(--bg-dark);
+    padding: 6rem 0;
+  }
+
+  .moments-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  .moments-scroll {
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: #444 transparent;
+  }
+
+  .moments-scroll::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .moments-scroll::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 1px;
+  }
+
+  .moment-card {
+    flex: 0 0 calc((100% - 2.5rem) / 3);
+    scroll-snap-align: start;
+    min-width: 0;
+    cursor: pointer;
+    transition: transform 0.3s var(--ease);
+  }
+
+  .moment-card:hover {
+    transform: translateY(-2px);
+  }
+
+  .moment-img {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+  }
+
+  .moment-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%);
+    transition: filter 0.4s var(--ease);
+  }
+
+  .moment-card:hover .moment-img img {
+    filter: grayscale(0%);
+  }
+
+  .moment-caption {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #bbb;
+    letter-spacing: 0.03em;
+  }
+
+  .moment-sub {
+    font-size: 0.6875rem;
+    color: #555;
+    margin-top: 0.125rem;
+  }
+
+  /* ====== ABOUT ====== */
+  .about-layout {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+    align-items: start;
+  }
+
+  .about-intro {
+    font-family: var(--font-serif);
+    font-size: clamp(1.375rem, 3vw, 2rem);
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--text);
+    position: relative;
+    padding-left: 1.5rem;
+  }
+
+  .about-intro::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.25rem;
+    bottom: 0.25rem;
+    width: 2px;
+    background: var(--accent);
+  }
+
+  .about-body {
+    font-size: 0.9375rem;
+    color: #5a5a5a;
+    line-height: 1.9;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  .about-block {
+    position: relative;
+    padding: 1.75rem 2rem 1.75rem 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .about-block:nth-child(even) {
+    padding-left: 2rem;
+    padding-right: 0;
+  }
+
+  .about-block:nth-last-child(-n+2) {
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-num {
+    font-family: var(--font-sans);
+    font-size: 0.625rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    display: block;
+    margin-bottom: 0.625rem;
+  }
+
+  .about-block-title {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.625rem;
+  }
+
+  .about-block-text {
+    font-size: 0.875rem;
+    color: #5a5a5a;
+    line-height: 1.85;
+  }
+
+  /* ====== CONTACT ====== */
+  .contact-section {
+    background: var(--bg-dark);
+    padding: 6rem 2.5rem;
+  }
+
+  .contact-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .contact-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-name {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 600;
+    color: #eee;
+  }
+
+  .contact-divider {
+    width: 32px;
+    height: 1px;
+    background: #555;
+  }
+
+  .contact-email {
+    font-size: 0.875rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 1px;
+    transition: opacity 0.3s var(--ease);
+  }
+
+  .contact-email:hover {
+    opacity: 0.7;
+  }
+
+  /* ====== FOOTER ====== */
+  .footer {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 1.5rem 2.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer span {
+    font-size: 0.6875rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+  }
+
+  /* ====== RESPONSIVE ====== */
+  @media (max-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .hero-divider {
+      display: none;
+    }
+
+    .about-layout {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .about-block:nth-child(even) {
+      padding-left: 0;
+    }
+
+    .about-block:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+
+    .about-block:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .moments-scroll .moment-card {
+      flex: 0 0 calc((100% - 1.25rem) / 2);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .nav {
+      padding: 0.75rem 1.5rem;
+    }
+
+    .nav-center {
+      display: none;
+    }
+
+    .lang-nav {
+      display: none;
+    }
+
+    .mobile-open .nav-center,
+    .mobile-open .lang-nav {
+      display: flex;
+    }
+
+    .menu-toggle {
+      display: flex;
+      z-index: 300;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(4px, 4px);
+    }
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(4px, -4px);
+    }
+
+    .hero {
+      padding: 7rem 1.5rem 3rem;
+    }
+
+    .hero-scroll-hint {
+      margin-top: 3rem;
+    }
+
+    .section {
+      padding: 4rem 1.5rem;
+    }
+
+    .moments-section {
+      padding: 4rem 0;
+    }
+
+    .moments-inner {
+      padding: 0 1.5rem;
+    }
+
+    .moments-scroll .moment-card {
+      flex: 0 0 80%;
+    }
+
+    .timeline-item {
+      grid-template-columns: 4.5rem 1.5rem 1fr;
+    }
+
+    .timeline-content {
+      padding-left: 1rem;
+    }
+
+    .identity-row {
+      gap: 0.75rem;
+    }
+
+    .identity-line {
+      font-size: 0.9375rem;
+    }
+
+    .contact-section {
+      padding: 4rem 1.5rem;
+    }
+
+    .contact-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .contact-divider {
+      display: none;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .moments-scroll .moment-card {
+      flex: 0 0 90%;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.querySelector('.nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('active');
+      nav.classList.toggle('mobile-open');
+    });
+  }
+</script>
