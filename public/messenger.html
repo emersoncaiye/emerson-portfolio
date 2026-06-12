@@ -23,7 +23,11 @@
       --gray-900: #2a2825;
       --accent: #c43e2c;
       --accent-muted: rgba(196, 62, 44, 0.08);
-      --ink: #1a1a18;
+      --ink: #0d0f1a;
+      --saffron: #c8963e;
+      --saffron-muted: rgba(200, 150, 62, 0.10);
+      --teal: #2a5c5c;
+      --teal-muted: rgba(42, 92, 92, 0.08);
       --font-serif: 'SerifDisplay', 'Noto Serif SC', 'Times New Roman', serif;
       --font-mono: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', monospace;
       --font-sans: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
@@ -128,13 +132,23 @@
       padding: 120px 40px 80px;
     }
 
+    .gate::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(ellipse at 30% 40%, rgba(200, 150, 62, 0.03) 0%, transparent 50%),
+                  radial-gradient(ellipse at 70% 60%, rgba(42, 92, 92, 0.02) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
     .gate::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gray-600) 20%, var(--gray-600) 80%, transparent);
-      opacity: 0.3;
+      background: linear-gradient(90deg, transparent, var(--saffron) 20%, var(--saffron) 80%, transparent);
+      opacity: 0.4;
     }
 
     /* signal dots */
@@ -149,13 +163,13 @@
     .gate-signal span {
       display: block;
       width: 3px;
-      background: var(--accent);
+      background: var(--saffron);
       opacity: 0.3;
     }
-    .gate-signal span:nth-child(1) { height: 4px; opacity: 0.6; }
-    .gate-signal span:nth-child(2) { height: 8px; opacity: 0.5; }
-    .gate-signal span:nth-child(3) { height: 14px; opacity: 0.4; }
-    .gate-signal span:nth-child(4) { height: 20px; opacity: 0.3; }
+    .gate-signal span:nth-child(1) { height: 4px; opacity: 0.7; }
+    .gate-signal span:nth-child(2) { height: 8px; opacity: 0.6; }
+    .gate-signal span:nth-child(3) { height: 14px; opacity: 0.5; }
+    .gate-signal span:nth-child(4) { height: 20px; opacity: 0.4; }
 
     /* boarding info top */
     .gate-meta {
@@ -222,7 +236,7 @@
     .gate-flight-row .flight-route { flex: 1; }
     .gate-flight-row .flight-gate { width: 80px; text-align: right; }
     .gate-flight-row .flight-status { width: 100px; text-align: right; }
-    .gate-flight-row .flight-status.you { color: var(--accent); }
+    .gate-flight-row .flight-status.you { color: var(--saffron); }
 
     .gate-sub {
       margin-top: 60px;
@@ -295,7 +309,7 @@
     }
     .section-title em {
       font-style: italic;
-      color: var(--accent);
+      color: var(--saffron);
     }
 
     /* ===== REVEAL ===== */
@@ -356,10 +370,10 @@
       display: block;
       font-size: 18px;
       margin-bottom: 8px;
-      color: var(--accent);
-      opacity: 0.4;
+      color: var(--saffron);
+      opacity: 0.5;
     }
-    .frag-time { color: var(--accent); opacity: 0.5; font-size: 10px; }
+    .frag-time { color: var(--saffron); opacity: 0.6; font-size: 10px; }
     .frag-tag {
       display: inline-block;
       padding: 2px 8px;
@@ -369,9 +383,19 @@
       text-transform: uppercase;
       color: var(--gray-600);
     }
+    .frag-tag.tag-teal {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+    .frag-tag.tag-gold {
+      border-color: var(--saffron);
+      color: var(--saffron);
+    }
     .frag-wide { grid-column: span 2; }
     .frag-tall { grid-row: span 2; }
     .frag-accent { border-left: 2px solid var(--accent); padding-left: 18px; }
+    .frag-accent-gold { border-left: 2px solid var(--saffron); padding-left: 18px; }
+    .frag-accent-teal { border-left: 2px solid var(--teal); padding-left: 18px; }
     .frag-empty { border-color: transparent; }
 
     @media (max-width: 768px) {
@@ -400,8 +424,8 @@
       position: absolute;
       left: -20px; top: 0; bottom: 0;
       width: 2px;
-      background: var(--accent);
-      opacity: 0.6;
+      background: var(--saffron);
+      opacity: 0.7;
     }
 
     .notebook-text .pull-quote {
@@ -460,7 +484,7 @@
       line-height: 2;
       opacity: 0.6;
     }
-    .notebook-image .tex-symbol .diamond { font-size: 24px; display: block; margin-bottom: 12px; color: var(--accent); opacity: 0.3; }
+    .notebook-image .tex-symbol .diamond { font-size: 24px; display: block; margin-bottom: 12px; color: var(--saffron); opacity: 0.4; }
     .notebook-image .content-block {
       position: absolute;
       bottom: 0; left: 0; right: 0;
@@ -485,7 +509,7 @@
       border-bottom: 1px solid var(--gray-300);
       padding-bottom: 2px;
     }
-    .about-trigger:hover { color: var(--accent); }
+    .about-trigger:hover { color: var(--saffron); }
     .about-trigger.open .arrow { transform: rotate(180deg); }
     .about-trigger .arrow { display: inline-block; transition: transform 0.3s; font-size: 10px; }
 
@@ -584,12 +608,12 @@
       color: var(--gray-300);
       opacity: 0.4;
     }
-    .placeholder-img.tex-1 { background: linear-gradient(135deg, var(--off-white) 0%, #d4c9b8 100%); }
-    .placeholder-img.tex-2 { background: linear-gradient(135deg, #c4b8a4 0%, var(--off-white) 100%); }
-    .placeholder-img.tex-3 { background: linear-gradient(180deg, var(--off-white) 0%, #c8bfb0 100%); }
-    .placeholder-img.tex-4 { background: linear-gradient(225deg, #b8a896 0%, var(--off-white) 100%); }
-    .placeholder-img.tex-5 { background: linear-gradient(315deg, var(--off-white) 0%, #c0b4a2 100%); }
-    .placeholder-img.tex-6 { background: linear-gradient(45deg, #bfb4a4 0%, var(--off-white) 100%); }
+    .placeholder-img.tex-1 { background: linear-gradient(135deg, var(--off-white) 0%, #c8963e33 100%); }
+    .placeholder-img.tex-2 { background: linear-gradient(135deg, #2a5c5c22 0%, var(--off-white) 100%); }
+    .placeholder-img.tex-3 { background: linear-gradient(180deg, var(--off-white) 0%, #c8963e28 100%); }
+    .placeholder-img.tex-4 { background: linear-gradient(225deg, #2a5c5c1a 0%, var(--off-white) 100%); }
+    .placeholder-img.tex-5 { background: linear-gradient(315deg, var(--off-white) 0%, #c43e2c18 100%); }
+    .placeholder-img.tex-6 { background: linear-gradient(45deg, #c8963e20 0%, var(--off-white) 100%); }
 
     .archive-card .item-tag {
       position: absolute;
@@ -602,6 +626,18 @@
       border: 1px solid var(--gray-300);
       background: rgba(245,243,239,0.85);
       color: var(--gray-600);
+    }
+    .archive-card .item-tag.tag-vermillion {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .archive-card .item-tag.tag-saffron {
+      border-color: var(--saffron);
+      color: var(--saffron);
+    }
+    .archive-card .item-tag.tag-teal {
+      border-color: var(--teal);
+      color: var(--teal);
     }
 
     .archive-card .item-info { padding: 16px; }
@@ -666,6 +702,7 @@
       flex: 1;
       padding: 40px;
       position: relative;
+      border-top: 2px solid var(--saffron);
     }
 
     .bp-left .bp-flight-no {
@@ -775,7 +812,7 @@
     .return-table {
       width: 100%;
       border-collapse: collapse;
-      border-top: 2px solid var(--accent);
+      border-top: 2px solid var(--saffron);
     }
     .return-table th {
       font-family: var(--font-mono);
@@ -809,6 +846,16 @@
       background: var(--ink);
       color: var(--white);
       padding: 140px 60px;
+      position: relative;
+    }
+
+    .delta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(200, 150, 62, 0.04) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 30%, rgba(42, 92, 92, 0.03) 0%, transparent 60%);
+      pointer-events: none;
     }
 
     .delta-grid {
@@ -827,7 +874,7 @@
     }
     .cycle-ring {
       width: 100%; height: 100%;
-      border: 1px solid rgba(255,255,255,0.12);
+      border: 1px solid rgba(200, 150, 62, 0.2);
       border-radius: 50%;
       position: relative;
       animation: spin 40s linear infinite;
@@ -837,13 +884,13 @@
     .cycle-dot {
       position: absolute;
       width: 8px; height: 8px;
-      background: var(--accent);
+      background: var(--saffron);
       border-radius: 50%;
       top: -4px; left: 50%;
       margin-left: -4px;
     }
-    .cycle-dot:nth-child(2) { top: auto; bottom: -4px; }
-    .cycle-dot:nth-child(3) { top: 50%; left: -4px; margin-top: -4px; margin-left: 0; }
+    .cycle-dot:nth-child(2) { top: auto; bottom: -4px; background: var(--teal); }
+    .cycle-dot:nth-child(3) { top: 50%; left: -4px; margin-top: -4px; margin-left: 0; background: var(--accent); }
 
     .cycle-center-label {
       position: absolute;
@@ -900,9 +947,11 @@
     }
     .delta .charity-cat .marker {
       width: 6px; height: 6px;
-      background: var(--accent);
-      opacity: 0.6;
+      background: var(--teal);
+      opacity: 0.8;
     }
+    .delta .charity-cat:nth-child(2) .marker { background: var(--saffron); opacity: 0.8; }
+    .delta .charity-cat:nth-child(3) .marker { background: var(--accent); opacity: 0.8; }
 
     /* ===== ATTITUDE ===== */
     .attitude-strip {
@@ -921,7 +970,7 @@
     .attitude-text .strike-through {
       display: block;
       text-decoration: line-through;
-      text-decoration-color: var(--accent);
+      text-decoration-color: var(--saffron);
       text-decoration-thickness: 3px;
       opacity: 0.3;
       font-family: var(--font-sans);
@@ -942,7 +991,7 @@
 
     /* ===== VISITORS ===== */
     .visitors {
-      background: var(--off-white);
+      background: var(--ink);
       padding: 120px 40px;
       text-align: center;
     }
@@ -958,7 +1007,7 @@
       font-family: var(--font-mono);
       font-size: clamp(60px, 10vw, 120px);
       letter-spacing: 0.05em;
-      color: var(--ink);
+      color: var(--saffron);
       line-height: 1;
       margin-bottom: 20px;
     }
@@ -966,7 +1015,7 @@
       font-family: var(--font-serif);
       font-size: 14px;
       letter-spacing: 4px;
-      color: var(--gray-600);
+      color: rgba(255,255,255,0.4);
       line-height: 1.8;
     }
 
@@ -977,7 +1026,8 @@
       font-family: var(--font-serif);
       font-size: clamp(18px, 2vw, 24px);
       letter-spacing: 6px;
-      color: var(--ink);
+      color: rgba(255,255,255,0.6);
+      background: var(--ink);
     }
     .brand-signature .sig-sep { color: var(--gray-300); margin: 0 6px; }
 
@@ -995,19 +1045,19 @@
     }
     footer .footer-links { display: flex; gap: 24px; }
     footer a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.3s; }
-    footer a:hover { color: var(--accent); }
+    footer a:hover { color: var(--saffron); }
 
     /* stamp */
     footer .stamp {
       display: inline-block;
-      border: 2px solid var(--accent);
+      border: 2px solid var(--saffron);
       padding: 8px 16px;
       font-family: var(--font-mono);
       font-size: 9px;
       letter-spacing: 4px;
       text-transform: uppercase;
-      color: var(--accent);
-      opacity: 0.5;
+      color: var(--saffron);
+      opacity: 0.6;
       transform: rotate(-3deg);
     }
 
@@ -1047,7 +1097,7 @@
     .radio-signal span {
       display: block;
       width: 2px;
-      background: var(--accent);
+      background: var(--saffron);
     }
     .radio-signal span:nth-child(1) { height: 3px; opacity: 0.3; }
     .radio-signal span:nth-child(2) { height: 6px; opacity: 0.4; }
@@ -1172,24 +1222,24 @@
 
       <div class="frag frag-mood-en reveal">The light at 5am in a city you don't live in</div>
       <div class="frag frag-foreign reveal">Le bruit des valises sur le carrelage</div>
-      <div class="frag frag-tag reveal">MIGRATION AESTHETICS</div>
+      <div class="frag frag-tag tag-teal reveal">MIGRATION AESTHETICS</div>
       <div class="frag frag-coord reveal">35.6762°N, 139.6503°E</div>
 
-      <div class="frag frag-wide frag-accent reveal" style="font-family:var(--font-serif);font-size:16px;line-height:1.6;color:var(--gray-900);" data-i18n="frag_quote">漂亮的东西应该流动。像故事一样。像人生一样。</div>
+      <div class="frag frag-wide frag-accent-gold reveal" style="font-family:var(--font-serif);font-size:16px;line-height:1.6;color:var(--gray-900);" data-i18n="frag_quote">漂亮的东西应该流动。像故事一样。像人生一样。</div>
       <div class="frag frag-coord reveal">31.2304°N, 121.4737°E</div>
 
       <div class="frag frag-foreign reveal">荷物の音</div>
       <div class="frag frag-mood reveal" data-i18n="frag_mood2">机场不是出发，是住了一段时间的客厅</div>
-      <div class="frag frag-tag reveal">AIRPORT FEELING</div>
+      <div class="frag frag-tag tag-teal reveal">AIRPORT FEELING</div>
       <div class="frag frag-time reveal">23:52 ARR</div>
 
       <div class="frag frag-mood-en reveal">Objects carry the coordinates of their previous owners</div>
       <div class="frag frag-coord reveal">51.5074°N, 0.1278°W</div>
       <div class="frag frag-stamp reveal">PARIS</div>
-      <div class="frag frag-tag reveal">NOTEBOOK</div>
+      <div class="frag frag-tag tag-gold reveal">NOTEBOOK</div>
 
       <div class="frag frag-time reveal">06:30 LAY</div>
-      <div class="frag frag-wide frag-mood reveal" data-i18n="frag_mood3">好的物品不应该永远属于某一个人。它们应该流动。</div>
+      <div class="frag frag-wide frag-accent-teal frag-mood reveal" data-i18n="frag_mood3">好的物品不应该永远属于某一个人。它们应该流动。</div>
       <div class="frag frag-coord reveal">40.7128°N, 74.0060°W</div>
     </div>
   </section>
@@ -1262,7 +1312,7 @@
         <div class="acc-no">MSG-2024-001</div>
         <div class="archive-image">
           <div class="placeholder-img tex-1"><span>◎</span></div>
-          <span class="item-tag" data-i18n="item1_tag">已修复 / 限一件</span>
+          <span class="item-tag tag-saffron" data-i18n="item1_tag">已修复 / 限一件</span>
         </div>
         <div class="item-info">
           <div class="item-origin">39°54'N 116°24'E</div>
@@ -1276,7 +1326,7 @@
         <div class="acc-no">MSG-2024-002</div>
         <div class="archive-image">
           <div class="placeholder-img tex-2"><span>◎</span></div>
-          <span class="item-tag" data-i18n="item2_tag">孤品</span>
+          <span class="item-tag tag-teal" data-i18n="item2_tag">孤品</span>
         </div>
         <div class="item-info">
           <div class="item-origin">26°04'N 119°17'E</div>
@@ -1290,7 +1340,7 @@
         <div class="acc-no">MSG-2024-003</div>
         <div class="archive-image">
           <div class="placeholder-img tex-3"><span>◎</span></div>
-          <span class="item-tag" data-i18n="item3_tag">带使用痕迹</span>
+          <span class="item-tag tag-saffron" data-i18n="item3_tag">带使用痕迹</span>
         </div>
         <div class="item-info">
           <div class="item-origin">51°30'N 0°07'W</div>
@@ -1304,7 +1354,7 @@
         <div class="acc-no">MSG-2024-004</div>
         <div class="archive-image">
           <div class="placeholder-img tex-4"><span>◎</span></div>
-          <span class="item-tag" data-i18n="item4_tag">艺术家合作款</span>
+          <span class="item-tag tag-teal" data-i18n="item4_tag">艺术家合作款</span>
         </div>
         <div class="item-info">
           <div class="item-origin">35°41'N 139°41'E</div>
@@ -1318,7 +1368,7 @@
         <div class="acc-no">MSG-2024-005</div>
         <div class="archive-image">
           <div class="placeholder-img tex-5"><span>◎</span></div>
-          <span class="item-tag" data-i18n="item5_tag">已售 · 可预定</span>
+          <span class="item-tag tag-vermillion" data-i18n="item5_tag">已售 · 可预定</span>
         </div>
         <div class="item-info">
           <div class="item-origin">52°31'N 13°23'E</div>
@@ -1332,7 +1382,7 @@
         <div class="acc-no">MSG-2024-006</div>
         <div class="archive-image">
           <div class="placeholder-img tex-6"><span>◎</span></div>
-          <span class="item-tag" data-i18n="item6_tag">待修复</span>
+          <span class="item-tag tag-saffron" data-i18n="item6_tag">待修复</span>
         </div>
         <div class="item-info">
           <div class="item-origin">35°41'N 139°41'E</div>
@@ -1897,7 +1947,7 @@
       });
 
       // ===== INSPECTOR LOG =====
-      console.log('%c messenger ', 'background: #1a1a18; color: #f5f3ef; font-size: 16px; padding: 8px 12px; border-left: 3px solid #c43e2c;');
+      console.log('%c messenger ', 'background: #0d0f1a; color: #f5f3ef; font-size: 16px; padding: 8px 12px; border-left: 3px solid #c8963e;');
 
     })();
   </script>
