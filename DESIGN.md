@@ -57,6 +57,19 @@ messenger 不是商店，是一个**流动世界**的入口。三个齿轮咬合
 - **信号 Radio**：Web Audio API 生成环境音（过滤白噪 + 低频无人机），浮动播放器
 - **禁止**：弹跳、旋转、脉冲、大幅位移
 
+## 复古元素
+不刻意做旧，而是自然属于旅行/邮政世界的视觉语言：
+- **航空邮件条纹**：红/金斜纹细条，用于区域分隔线和登机牌顶部，opacity 0.35-0.5
+- **邮戳圆圈**：圆形边框 + 对角划线，GATE 区水印、碎片引用内嵌、footer 戳记改为圆形
+- **缺角标签**：clip-path 裁切对角缺角，货运标签/行李标签风格，用于 archive item-tag 和 frag-tag
+- **双线分隔**：section-label 上下双线（上0.08下0.15 opacity），旧账本/电报纸风格
+- **电报条**：等宽字体 + INCOMING/// 标记 + LIVE 指示灯，用于 FRAGMENTS/ARCHIVE/TRANSIT 区标题
+- **笔记横线**：notebook-text 区域 28px 间距重复横线（0.04 opacity），模拟旧笔记本纸
+- **红色页边线**：notebook-text 32px 处 1px 朱红竖线（0.08 opacity），模拟手写纸 margin
+- **信封内衬纹理**：45°交叉对角线（0.025 opacity），FRAGMENTS 背景和 ARCHIVE 图片叠加
+- **装饰分隔符**：✦ ✦ ✦ 三星号，serif 字体，区域之间
+- **footer 戳记**：从矩形改为圆形（72px border-radius:50%），旋转-8°，更接近真实邮戳
+
 ## 页面结构
 1. **GATE 登机口**：深色全屏，航班时刻表风格翻字动画 MESSENGER，下方航班行滚动（PVG→NRT / CDG→LHR / ---→YOU），信号指示灯
 2. **FRAGMENTS 碎片**：不对称网格拼贴——坐标、时间戳、多语 mood 文字、城市戳记、行李标签、航班碎片。这就是世界的气味
