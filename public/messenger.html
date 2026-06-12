@@ -729,6 +729,15 @@
       flex-shrink: 0;
     }
 
+    .process-steps-secondary {
+      margin-top: 12px;
+    }
+
+    .process-steps-secondary .process-step {
+      border-top-color: var(--gray-100);
+      opacity: 0.2;
+    }
+
     /* ===== CHARITY FUND SECTION ===== */
     .charity-fund {
       background: var(--ink);
@@ -1392,6 +1401,18 @@
           <div class="process-step"><span class="num">3</span><span data-i18n="return_step3">按持有时间回收</span></div>
           <div class="process-step"><span class="num">4</span><span data-i18n="return_step4">下一个人遇见</span></div>
         </div>
+
+        <div class="process-steps process-steps-secondary reveal">
+          <div class="process-step"><span class="num">1</span><span data-i18n="return_how_step1">联系我（微信/私信）</span></div>
+          <div class="process-step"><span class="num">2</span><span data-i18n="return_how_step2">确认成色</span></div>
+          <div class="process-step"><span class="num">3</span><span data-i18n="return_how_step3">你寄回</span></div>
+          <div class="process-step"><span class="num">4</span><span data-i18n="return_how_step4">按规则返还</span></div>
+        </div>
+
+        <p class="note reveal">
+          <strong data-i18n="return_note_title">备注</strong>
+          <span data-i18n="return_note_text">退回的东西会重新整理上架。二次销售利润的 20% 进入公益金，每季度公示去向。</span>
+        </p>
       </div>
 
       <div class="return-table-wrap reveal">
@@ -1570,6 +1591,12 @@
           return_step2: '送回来',
           return_step3: '按持有时间回收',
           return_step4: '下一个人遇见',
+          return_how_step1: '联系我（微信/私信）',
+          return_how_step2: '确认成色',
+          return_how_step3: '你寄回',
+          return_how_step4: '按规则返还',
+          return_note_title: '备注',
+          return_note_text: '退回的东西会重新整理上架。二次销售利润的 20% 进入公益金，每季度公示去向。',
           return_th_period: '持有时间',
           return_th_cash: '现金返还',
           return_th_credit: '积分返还',
@@ -1668,6 +1695,12 @@
           return_step2: 'Send it back',
           return_step3: 'Buyback by hold time',
           return_step4: 'The next person finds it',
+          return_how_step1: 'Message me (WeChat / DM)',
+          return_how_step2: 'Condition check',
+          return_how_step3: 'Ship it back',
+          return_how_step4: 'Refund issued',
+          return_note_title: 'Note',
+          return_note_text: 'Returned items will be re-listed. 20% of second-sale profit goes to the charity fund, reported quarterly.',
           return_th_period: 'Hold Time',
           return_th_cash: 'Cash Back',
           return_th_credit: 'Store Credit',
