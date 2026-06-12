@@ -15,19 +15,23 @@
 
     :root {
       --black: #0a0908;
-      --white: #f0ead8;
-      --off-white: #e5ddc8;
-      --gray-100: #d8cfb8;
-      --gray-300: #9e9484;
-      --gray-600: #6b6152;
+      --white: #ede7d9;
+      --off-white: #e0d8c6;
+      --gray-100: #cec4ae;
+      --gray-300: #9a9080;
+      --gray-600: #69604f;
       --gray-900: #2d2820;
       --accent: #b8452a;
       --accent-muted: rgba(184, 69, 42, 0.08);
-      --ink: #1c1815;
+      --ink: #171913;
       --saffron: #c8963e;
       --saffron-muted: rgba(200, 150, 62, 0.10);
-      --teal: #2a5c5c;
-      --teal-muted: rgba(42, 92, 92, 0.08);
+      --moss: #3d6b5a;
+      --moss-muted: rgba(61, 107, 90, 0.10);
+      --moss: #5c7a5e;
+      --moss-muted: rgba(92, 122, 94, 0.08);
+      --rust: #8b6b4a;
+      --rust-muted: rgba(139, 107, 74, 0.10);
       --warm-glow: rgba(200, 150, 62, 0.06);
       --font-serif: 'SerifDisplay', 'Noto Serif SC', 'Times New Roman', serif;
       --font-mono: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', monospace;
@@ -48,7 +52,7 @@
       overflow-x: hidden;
     }
 
-    /* Warm light wash on light sections */
+    /* Warm light wash on light sections — moss + rust undertone */
     .fragments, .notebook, .archive, .transit, .attitude-strip {
       position: relative;
     }
@@ -57,7 +61,8 @@
       position: absolute;
       top: 0; right: 0;
       width: 40%; height: 60%;
-      background: radial-gradient(ellipse at top right, rgba(200,150,62,0.04) 0%, transparent 70%);
+      background: radial-gradient(ellipse at top right, rgba(139,107,74,0.04) 0%, transparent 60%),
+                  radial-gradient(ellipse at top right, rgba(92,122,94,0.03) 0%, transparent 50%);
       pointer-events: none;
     }
 
@@ -73,19 +78,19 @@
       inset: 0;
       pointer-events: none;
       z-index: 9999;
-      opacity: 0.045;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-      background-size: 200px 200px;
+      opacity: 0.065;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
     }
 
-    /* Warm vignette */
+    /* Warm vignette with moss undertone */
     body::after {
       content: '';
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 9998;
-      background: radial-gradient(ellipse at center, transparent 50%, rgba(28, 24, 21, 0.12) 100%);
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(23, 25, 19, 0.18) 100%);
     }
 
     /* ===== HEADER ===== */
@@ -160,8 +165,9 @@
       position: absolute;
       top: -50%; left: -50%;
       width: 200%; height: 200%;
-      background: radial-gradient(ellipse at 25% 35%, rgba(200, 150, 62, 0.06) 0%, transparent 45%),
-                  radial-gradient(ellipse at 75% 65%, rgba(184, 69, 42, 0.03) 0%, transparent 45%);
+      background: radial-gradient(ellipse at 25% 35%, rgba(92, 122, 94, 0.07) 0%, transparent 45%),
+                  radial-gradient(ellipse at 75% 65%, rgba(184, 69, 42, 0.04) 0%, transparent 45%),
+                  radial-gradient(ellipse at 50% 50%, rgba(139, 107, 74, 0.05) 0%, transparent 60%);
       pointer-events: none;
     }
 
@@ -519,7 +525,7 @@
     }
     .frag:hover {
       transform: translateY(-2px);
-      background: var(--off-white);
+      background: rgba(92, 122, 94, 0.05);
     }
 
     .frag-coord { color: var(--gray-300); font-size: 10px; letter-spacing: 2px; }
@@ -554,8 +560,8 @@
       clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 5px 100%, 0 calc(100% - 5px));
     }
     .frag-tag.tag-teal {
-      border-color: var(--teal);
-      color: var(--teal);
+      border-color: var(--moss);
+      color: var(--moss);
     }
     .frag-tag.tag-gold {
       border-color: var(--saffron);
@@ -565,7 +571,7 @@
     .frag-tall { grid-row: span 2; }
     .frag-accent { border-left: 2px solid var(--accent); padding-left: 18px; }
     .frag-accent-gold { border-left: 2px solid var(--saffron); padding-left: 18px; }
-    .frag-accent-teal { border-left: 2px solid var(--teal); padding-left: 18px; }
+    .frag-accent-moss { border-left: 2px solid var(--moss); padding-left: 18px; }
     .frag-empty { border-color: transparent; }
 
     @media (max-width: 768px) {
@@ -802,12 +808,12 @@
       color: var(--gray-300);
       opacity: 0.4;
     }
-    .placeholder-img.tex-1 { background: linear-gradient(135deg, var(--off-white) 0%, #c8963e44 100%); }
-    .placeholder-img.tex-2 { background: linear-gradient(135deg, #b8452a22 0%, var(--off-white) 100%); }
-    .placeholder-img.tex-3 { background: linear-gradient(180deg, var(--off-white) 0%, #c8963e38 100%); }
-    .placeholder-img.tex-4 { background: linear-gradient(225deg, #2a5c5c18 0%, var(--off-white) 100%); }
-    .placeholder-img.tex-5 { background: linear-gradient(315deg, var(--off-white) 0%, #b8452a20 100%); }
-    .placeholder-img.tex-6 { background: linear-gradient(45deg, #c8963e28 0%, var(--off-white) 100%); }
+    .placeholder-img.tex-1 { background: linear-gradient(135deg, var(--off-white) 0%, rgba(139,107,74,0.18) 100%); }
+    .placeholder-img.tex-2 { background: linear-gradient(135deg, rgba(184,69,42,0.10) 0%, var(--off-white) 100%); }
+    .placeholder-img.tex-3 { background: linear-gradient(180deg, var(--off-white) 0%, rgba(92,122,94,0.15) 100%); }
+    .placeholder-img.tex-4 { background: linear-gradient(225deg, rgba(61,107,90,0.12) 0%, var(--off-white) 100%); }
+    .placeholder-img.tex-5 { background: linear-gradient(315deg, var(--off-white) 0%, rgba(139,107,74,0.12) 100%); }
+    .placeholder-img.tex-6 { background: linear-gradient(45deg, rgba(92,122,94,0.10) 0%, var(--off-white) 100%); }
 
     .archive-card .item-tag {
       position: absolute;
@@ -832,8 +838,8 @@
       color: var(--saffron);
     }
     .archive-card .item-tag.tag-teal {
-      border-color: var(--teal);
-      color: var(--teal);
+      border-color: var(--moss);
+      color: var(--moss);
     }
 
     .archive-card .item-info { padding: 16px; }
@@ -1064,8 +1070,9 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse at 20% 50%, rgba(200, 150, 62, 0.05) 0%, transparent 60%),
-                  radial-gradient(ellipse at 80% 30%, rgba(184, 69, 42, 0.04) 0%, transparent 60%);
+      background: radial-gradient(ellipse at 20% 50%, rgba(92, 122, 94, 0.06) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 30%, rgba(184, 69, 42, 0.04) 0%, transparent 60%),
+                  radial-gradient(ellipse at 50% 80%, rgba(139, 107, 74, 0.05) 0%, transparent 50%);
       pointer-events: none;
     }
 
@@ -1100,7 +1107,7 @@
       top: -4px; left: 50%;
       margin-left: -4px;
     }
-    .cycle-dot:nth-child(2) { top: auto; bottom: -4px; background: var(--teal); }
+    .cycle-dot:nth-child(2) { top: auto; bottom: -4px; background: var(--moss); }
     .cycle-dot:nth-child(3) { top: 50%; left: -4px; margin-top: -4px; margin-left: 0; background: var(--accent); }
 
     .cycle-center-label {
@@ -1158,7 +1165,7 @@
     }
     .delta .charity-cat .marker {
       width: 6px; height: 6px;
-      background: var(--teal);
+      background: var(--moss);
       opacity: 0.8;
     }
     .delta .charity-cat:nth-child(2) .marker { background: var(--saffron); opacity: 0.8; }
@@ -1502,7 +1509,7 @@
       <div class="frag frag-tag tag-gold reveal">MIGRATION AESTHETICS</div>
       <div class="frag frag-coord reveal" style="font-size:11px;">换乘站</div>
 
-      <div class="frag frag-wide frag-accent-teal reveal" style="font-family:var(--font-serif);font-size:15px;line-height:1.8;color:var(--teal);">每天有几十万人在这里擦肩<br>没有人记得任何人的脸</div>
+      <div class="frag frag-wide frag-accent-moss reveal" style="font-family:var(--font-serif);font-size:15px;line-height:1.8;color:var(--moss);">每天有几十万人在这里擦肩<br>没有人记得任何人的脸</div>
 
       <div class="frag frag-mood reveal" style="font-size:13px;line-height:1.7;font-family:var(--font-serif);">邻桌大叔的啤酒杯沿上<br>有一圈沉默</div>
       <div class="frag frag-stamp reveal" style="font-size:10px;letter-spacing:3px;">深夜居酒屋</div>
@@ -1531,7 +1538,7 @@
       <div class="frag frag-coord reveal" style="font-size:10px;">无人自助洗衣房</div>
       <div class="frag frag-time reveal">23:52 ARR</div>
 
-      <div class="frag frag-wide frag-accent-teal reveal" style="font-family:var(--font-serif);font-size:14px;line-height:1.8;color:var(--teal);">换了新菜单但旧的那个更好喝<br>没说出口</div>
+      <div class="frag frag-wide frag-accent-moss reveal" style="font-family:var(--font-serif);font-size:14px;line-height:1.8;color:var(--moss);">换了新菜单但旧的那个更好喝<br>没说出口</div>
       <div class="frag frag-tag tag-vermillion reveal" style="font-size:9px;">常去的咖啡店</div>
       <div class="frag frag-coord reveal">51.5074°N, 0.1278°W</div>
     </div>
