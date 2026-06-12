@@ -541,79 +541,6 @@ section { padding: 100px 48px; position: relative; }
 }
 .return-table .highlight { color: var(--accent); }
 
-/* ===== DELTA ===== */
-.delta {
-  background: var(--ink);
-  padding: 100px 48px;
-  text-align: center;
-}
-.delta .section-label { color: var(--sprout); opacity: 0.6; }
-.delta .section-label::after { background: var(--sprout); opacity: 0.2; }
-.delta-viz {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 48px auto;
-}
-.delta-node {
-  width: 72px; height: 72px;
-  border-radius: 50%;
-  border: 1px solid rgba(74,124,89,0.4);
-  background: rgba(74,124,89,0.06);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-.delta-percent { font-size: 1.1em; color: var(--sprout); font-weight: 300; line-height: 1; }
-.delta-label { font-size: 0.55em; color: var(--accent); letter-spacing: 0.15em; margin-top: 3px; }
-.delta-streams {
-  display: flex;
-  gap: 3em;
-  margin-top: 0.4em;
-  align-items: flex-start;
-}
-.delta-stream {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4em;
-}
-.stream-line {
-  width: 2px;
-  height: 24px;
-  background: linear-gradient(to bottom, var(--accent), rgba(74,124,89,0.15));
-}
-.stream-name {
-  font-size: 0.6em;
-  color: var(--sprout);
-  letter-spacing: 0.2em;
-  opacity: 0.6;
-}
-.delta-footer {
-  text-align: center;
-  font-size: 0.85em;
-  color: var(--sprout);
-  opacity: 0.6;
-  line-height: 2;
-  margin-top: 40px;
-  font-family: var(--font-serif);
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.delta-desc {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  color: var(--sprout);
-  opacity: 0.5;
-  line-height: 1.8;
-  max-width: 480px;
-  margin: 20px auto 0;
-  letter-spacing: 0.3px;
-}
-
 /* ===== COLOPHON ===== */
 .colophon {
   padding: 60px 48px;
@@ -687,7 +614,6 @@ section { padding: 100px 48px; position: relative; }
   .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .catalog-item-info { padding: 10px 12px 14px; }
   .catalog-item-name { font-size: 12px; }
-  .delta-streams { gap: 2em; }
   .section-title { margin-bottom: 28px; }
 }
 @media (max-width: 480px) {
@@ -704,7 +630,6 @@ section { padding: 100px 48px; position: relative; }
     <a href="#about">信条</a>
     <a href="#catalog">之物</a>
     <a href="#transit">回流</a>
-    <a href="#delta">循环</a>
     <span class="nav-sep">/</span>
     <button class="lang-toggle"><span class="active-lang">中</span> <span class="sep">/</span> EN</button>
   </nav>
@@ -736,13 +661,13 @@ section { padding: 100px 48px; position: relative; }
         <p>messenger 是一个以审美为坐标的循环空间。每件物品经过筛选才出现在这里——不是因为它贵，不是因为它是品牌，是因为它有被留下来的理由。</p>
         <div class="pull-quote">漂亮的东西不应该永远属于某一个人。</div>
         <p>买走之后，如果哪一天它不再需要你了，送回给messenger。它会继续被下一个人遇见。</p>
-        <p>每一次再流通，利润的 20% 进入三角洲——三股支流，每股有方向，每季有记录。</p>
+        <p>每一次再流通，利润的 20% 注入公益金。</p>
       </div>
       <div class="note-sidebar">
         <strong>在这里你会得到</strong>
         <p>审美策展 · 每一件都经过筛选</p>
         <p>回收机制 · 不想拥有了可送回来</p>
-        <p>慈善三角洲 · 每次再流通 20% 分入三股支流</p>
+        <p>公益金 · 每次再流通 20% 注入</p>
         <div class="three-dots">✦ &#x2003; ✦ &#x2003; ✦</div>
         <p style="margin-top:12px;font-size:11px;color:var(--gray-300);letter-spacing:1px;">
           流通 · 审美 · 流动 · 选择
@@ -949,49 +874,12 @@ section { padding: 100px 48px; position: relative; }
             <tr>
               <td>超过1年</td>
               <td>—</td>
-              <td>纪念回收</td>
+              <td>捐赠公益金</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ===== DELTA ===== -->
-<section class="delta" id="delta">
-  <div class="section-content">
-    <div class="section-label">三角洲 Delta</div>
-    <p style="font-family:var(--font-serif);font-size:clamp(18px,2vw,28px);color:var(--text-light);max-width:500px;margin:0 auto 16px;line-height:1.4;opacity:0.9;">
-      你送回来的东西，<br>我们让它重新入海。
-    </p>
-    <div class="delta-viz">
-      <div class="delta-node">
-        <span class="delta-percent">20%</span>
-        <span class="delta-label">入海</span>
-      </div>
-      <div class="delta-streams">
-        <div class="delta-stream">
-          <div class="stream-line"></div>
-          <p class="stream-name">一股</p>
-        </div>
-        <div class="delta-stream">
-          <div class="stream-line"></div>
-          <p class="stream-name">二股</p>
-        </div>
-        <div class="delta-stream">
-          <div class="stream-line"></div>
-          <p class="stream-name">三股</p>
-        </div>
-      </div>
-    </div>
-    <p class="delta-footer">
-      每股有方向。<br>
-      每季有记录。
-    </p>
-    <p class="delta-desc">
-      被回收后再流通的每件物品，利润的 20% 进入三角洲，分为三股支流。不是因为你捐得多，是因为你让东西继续流动。
-    </p>
   </div>
 </section>
 
@@ -1026,33 +914,27 @@ const i18nMap = {
   '有时候，你不需要永远拥有它。': ['有时候，你不需要永远拥有它。', 'Sometimes, you don\'t need to own it forever.'],
   '买下它的时候，决定你想拥有多久。': ['买下它的时候，决定你想拥有多久。', 'When you buy it, decide how long.'],
   '不想继续了？送回来。messenger 按持有时间回收——物件会继续被下一个人遇见，你拿回收金，下一件更轻盈。': ['不想继续了？送回来。messenger 按持有时间回收——物件会继续被下一个人遇见，你拿回收金，下一件更轻盈。', 'Changed your mind? Send it back. messenger buys it back based on how long you\'ve had it.'],
-  '三角洲 Delta': ['三角洲 Delta', 'Delta'],
-  '你送回来的东西，<br>我们让它重新入海。': ['你送回来的东西，<br>我们让它重新入海。', 'What you return,<br>we return to the sea.'],
-  '被回收后再流通的每件物品，利润的 20% 进入三角洲，分为三股支流。不是因为你捐得多，是因为你让东西继续流动。': ['被回收后再流通的每件物品，利润的 20% 进入三角洲，分为三股支流。不是因为你捐得多，是因为你让东西继续流动。', 'Every item recirculated — 20% flows into the delta. Not because you donated, but because you kept things moving.'],
   '你可能不需要更多东西。<br>你需要更好的选择。': ['你可能不需要更多东西。<br>你需要更好的选择。', 'You probably don\'t need more things.<br>You need better choices.'],
   'messenger 是一个以审美为坐标的循环空间。每件物品经过筛选才出现在这里——不是因为它贵，不是因为它是品牌，是因为它有被留下来的理由。': ['messenger 是一个以审美为坐标的循环空间。每件物品经过筛选才出现在这里——不是因为它贵，不是因为它是品牌，是因为它有被留下来的理由。', 'messenger is a circulation space with aesthetics as coordinates.'],
   '漂亮的东西不应该永远属于某一个人。': ['漂亮的东西不应该永远属于某一个人。', 'Beautiful things shouldn\'t belong to one person forever.'],
   '买走之后，如果哪一天它不再需要你了，送回给messenger。它会继续被下一个人遇见。': ['买走之后，如果哪一天它不再需要你了，送回给messenger。它会继续被下一个人遇见。', 'When it no longer needs you, send it back. Someone else will find it.'],
-  '每一次再流通，利润的 20% 进入三角洲——三股支流，每股有方向，每季有记录。': ['每一次再流通，利润的 20% 进入三角洲——三股支流，每股有方向，每季有记录。', 'Every recirculation, 20% enters the delta — three branches.'],
+  '每一次再流通，利润的 20% 注入公益金。': ['每一次再流通，利润的 20% 注入公益金。', 'Every recirculation, 20% goes to charity.'],
   '审美策展 · 每一件都经过筛选': ['审美策展 · 每一件都经过筛选', 'Curated · Every piece selected'],
   '回收机制 · 不想拥有了可送回来': ['回收机制 · 不想拥有了可送回来', 'Buyback · Send it back anytime'],
-  '慈善三角洲 · 每次再流通 20% 分入三股支流': ['慈善三角洲 · 每次再流通 20% 分入三股支流', 'Delta · 20% to three branches'],
+  '公益金 · 每次再流通 20% 注入': ['公益金 · 每次再流通 20% 注入', 'Charity · 20% from every recirculation'],
   '流通 · 审美 · 流动 · 选择': ['流通 · 审美 · 流动 · 选择', 'Circulate · Aesthetic · Flow · Choose'],
   '10 件在架': ['10 件在架', '10 items in stock'],
   'ISSN': ['审美不是消费，是选择', 'Aesthetics is not consumption, it\'s choice'],
-  '每股有方向。': ['每股有方向。', 'Each branch has direction.'],
-  '每季有记录。': ['每季有记录。', 'Each season has records.'],
   '信条': ['信条', 'Credo'],
   '之物': ['之物', 'Objects'],
   '回流': ['回流', 'Transit'],
-  '循环': ['循环', 'Cycle'],
 };
 
 btn.addEventListener('click', () => {
   lang = lang === 'zh' ? 'en' : 'zh';
   btn.querySelectorAll('span').forEach(s => s.classList.toggle('active-lang'));
   
-  document.querySelectorAll('.section-label, .catalog-count, .note-text p, .cover-line, .colophon .meta, nav a, .delta-footer, .delta-desc, .intro, .note')
+  document.querySelectorAll('.section-label, .catalog-count, .note-text p, .cover-line, .colophon .meta, nav a, .intro, .note')
     .forEach(el => {
       const text = el.innerHTML;
       if (i18nMap[text]) el.innerHTML = lang === 'zh' ? i18nMap[text][0] : i18nMap[text][1];
