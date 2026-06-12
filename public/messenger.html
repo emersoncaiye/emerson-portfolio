@@ -73,7 +73,7 @@ header nav a:hover { opacity: 1; }
 /* ===== COVER ===== */
 .cover {
   min-height: 100vh;
-  background: var(--ink);
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -88,7 +88,7 @@ header nav a:hover { opacity: 1; }
   top: -30%; right: -10%;
   width: 700px; height: 700px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(74,124,89,0.08) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(74,124,89,0.06) 0%, transparent 60%);
   pointer-events: none;
 }
 .cover-masthead {
@@ -98,8 +98,7 @@ header nav a:hover { opacity: 1; }
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 4px;
-  color: var(--sprout);
-  opacity: 0.5;
+  color: var(--gray-300);
 }
 .cover-issue {
   position: absolute;
@@ -108,8 +107,7 @@ header nav a:hover { opacity: 1; }
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 3px;
-  color: var(--sprout);
-  opacity: 0.5;
+  color: var(--gray-300);
   text-align: right;
 }
 .cover-title {
@@ -118,7 +116,7 @@ header nav a:hover { opacity: 1; }
   letter-spacing: 0.04em;
   line-height: 0.92;
   text-align: center;
-  color: var(--text-light);
+  color: var(--text);
   position: relative;
   z-index: 1;
 }
@@ -127,6 +125,7 @@ header nav a:hover { opacity: 1; }
   font-style: italic;
   margin-top: 0.05em;
   opacity: 0.85;
+  color: var(--accent);
 }
 .cover-line {
   margin-top: 40px;
@@ -134,7 +133,7 @@ header nav a:hover { opacity: 1; }
   font-size: clamp(12px, 1.6vw, 16px);
   letter-spacing: 6px;
   text-transform: uppercase;
-  color: var(--sprout);
+  color: var(--gray-600);
   position: relative;
   z-index: 1;
   text-align: center;
@@ -147,29 +146,16 @@ header nav a:hover { opacity: 1; }
   letter-spacing: 8px;
   text-transform: none;
   margin-top: 8px;
-  color: var(--text-light);
+  color: var(--gray-600);
   font-size: clamp(13px, 1.5vw, 18px);
   opacity: 0.7;
 }
-.cover-glitch {
-  position: absolute;
-  bottom: 30%;
-  left: 12%;
-  width: 100px;
+.cover-divider {
+  width: 40px;
   height: 1px;
   background: var(--accent);
-  transform: rotate(-10deg);
-  opacity: 0.4;
-}
-.cover-glitch-2 {
-  position: absolute;
-  top: 35%;
-  right: 15%;
-  width: 70px;
-  height: 1px;
-  background: var(--sprout);
-  opacity: 0.25;
-  transform: rotate(6deg);
+  margin: 32px auto 0;
+  opacity: 0.3;
 }
 .scroll-hint {
   position: absolute;
@@ -179,8 +165,7 @@ header nav a:hover { opacity: 1; }
   font-family: var(--font-mono);
   font-size: 9px;
   letter-spacing: 3px;
-  color: var(--sprout);
-  opacity: 0.4;
+  color: var(--gray-300);
   animation: scrollPulse 2s ease-in-out infinite;
 }
 @keyframes scrollPulse { 0%,100% { transform: translateX(-50%) translateY(0); opacity: 0.4; } 50% { transform: translateX(-50%) translateY(6px); opacity: 0.15; } }
@@ -291,7 +276,6 @@ section { padding: 100px 48px; position: relative; }
 .feature-card:nth-child(3) { margin-top: -30px; }
 .feature-image {
   aspect-ratio: 4/5;
-  background: var(--gray-100);
   position: relative;
   overflow: hidden;
 }
@@ -317,34 +301,6 @@ section { padding: 100px 48px; position: relative; }
   background:
     radial-gradient(circle at 80% 70%, rgba(74,124,89,0.08) 0%, transparent 40%),
     linear-gradient(90deg, #ddd9d0 0%, #e8e4dc 50%, #d4d0c8 100%);
-}
-.catalog-item-image {
-  aspect-ratio: 1/1.2;
-  position: relative;
-  overflow: hidden;
-}
-.catalog-item-image > div {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--gray-300);
-  letter-spacing: 1px;
-}
-.catalog-item-image .cat-tex-1 {
-  background: radial-gradient(ellipse at 30% 40%, rgba(74,124,89,0.08) 0%, transparent 50%), linear-gradient(135deg, #d8d4cc 0%, #eae6de 100%);
-}
-.catalog-item-image .cat-tex-2 {
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px), linear-gradient(135deg, #e0ddd6 0%, #cfcbc3 100%);
-}
-.catalog-item-image .cat-tex-3 {
-  background: radial-gradient(circle at 50% 30%, rgba(74,124,89,0.06) 0%, transparent 30%), linear-gradient(180deg, #eae7df 0%, #ddd9d0 100%);
-}
-.catalog-item-image .cat-tex-4 {
-  background: repeating-linear-gradient(-45deg, transparent, transparent 12px, rgba(74,124,89,0.02) 12px, rgba(74,124,89,0.02) 13px), linear-gradient(135deg, #e5e1d9 0%, #d8d4cc 100%);
 }
 .feature-tag {
   position: absolute;
@@ -427,7 +383,12 @@ section { padding: 100px 48px; position: relative; }
 .catalog-item:hover { transform: translateY(-2px); }
 .catalog-item-image {
   aspect-ratio: 1/1.2;
-  background: var(--gray-100);
+  position: relative;
+  overflow: hidden;
+}
+.catalog-item-image > div {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -435,7 +396,18 @@ section { padding: 100px 48px; position: relative; }
   font-size: 9px;
   color: var(--gray-300);
   letter-spacing: 1px;
-  position: relative;
+}
+.catalog-item-image .cat-tex-1 {
+  background: radial-gradient(ellipse at 30% 40%, rgba(74,124,89,0.08) 0%, transparent 50%), linear-gradient(135deg, #d8d4cc 0%, #eae6de 100%);
+}
+.catalog-item-image .cat-tex-2 {
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px), linear-gradient(135deg, #e0ddd6 0%, #cfcbc3 100%);
+}
+.catalog-item-image .cat-tex-3 {
+  background: radial-gradient(circle at 50% 30%, rgba(74,124,89,0.06) 0%, transparent 30%), linear-gradient(180deg, #eae7df 0%, #ddd9d0 100%);
+}
+.catalog-item-image .cat-tex-4 {
+  background: repeating-linear-gradient(-45deg, transparent, transparent 12px, rgba(74,124,89,0.02) 12px, rgba(74,124,89,0.02) 13px), linear-gradient(135deg, #e5e1d9 0%, #d8d4cc 100%);
 }
 .catalog-item-tag {
   position: absolute;
@@ -739,11 +711,10 @@ section { padding: 100px 48px; position: relative; }
     <span class="highlight">——</span>
   </h1>
   <p class="cover-line">
-    漂亮的东西应该流动
-    <span class="cn">Beauty is meant to flow</span>
+    Beauty is meant to flow
+    <span class="cn">漂亮的东西应该流动</span>
   </p>
-  <div class="cover-glitch"></div>
-  <div class="cover-glitch-2"></div>
+  <div class="cover-divider"></div>
   <p class="scroll-hint">向下翻阅</p>
 </section>
 
@@ -1011,7 +982,7 @@ section { padding: 100px 48px; position: relative; }
       每季有记录。
     </p>
     <p class="delta-desc">
-      回流后被再次买走的每件物品，利润的 20% 进入三角洲，分为三股支流。不是因为你捐得多，是因为你让东西继续流动。
+      被回收后再流通的每件物品，利润的 20% 进入三角洲，分为三股支流。不是因为你捐得多，是因为你让东西继续流动。
     </p>
   </div>
 </section>
@@ -1044,26 +1015,25 @@ const i18nMap = {
   '本期专题 Feature': ['本期专题 Feature', 'Feature'],
   '全部选品 Catalog': ['全部选品 Catalog', 'All Items'],
   '回流 Transit': ['回流 Transit', 'Transit'],
-  '不喜欢了？改签。': ['不喜欢了？改签。', 'Changed your mind? Return it.'],
-  '东西不需要永远属于你。': ['东西不需要永远属于你。', 'Things don\'t have to be yours forever.'],
-  '退回来，它继续被下一个人遇见。你拿回流积分，下一件更划算。': ['退回来，它继续被下一个人遇见。你拿回流积分，下一件更划算。', 'Send it back. Someone else will find it. You get return credit.'],
+  '有时候，你不需要永远拥有它。': ['有时候，你不需要永远拥有它。', 'Sometimes, you don\'t need to own it forever.'],
+  '买下它的时候，决定你想拥有多久。': ['买下它的时候，决定你想拥有多久。', 'When you buy it, decide how long.'],
+  '不想继续了？送回来。messenger 按持有时间回收——物件会继续被下一个人遇见，你拿回收金，下一件更轻盈。': ['不想继续了？送回来。messenger 按持有时间回收——物件会继续被下一个人遇见，你拿回收金，下一件更轻盈。', 'Changed your mind? Send it back. messenger buys it back based on how long you\'ve had it.'],
   '三角洲 Delta': ['三角洲 Delta', 'Delta'],
   '你送回来的东西，<br>我们让它重新入海。': ['你送回来的东西，<br>我们让它重新入海。', 'What you return,<br>we return to the sea.'],
-  '回流后被再次买走的每件物品，利润的 20% 进入三角洲，分为三股支流。不是因为你捐得多，是因为你让东西继续流动。': ['回流后被再次买走的每件物品，利润的 20% 进入三角洲，分为三股支流。不是因为你捐得多，是因为你让东西继续流动。', 'Every item recirculated — 20% of profit flows into the delta, branching into three. Not because you donated a lot, but because you let things keep moving.'],
+  '被回收后再流通的每件物品，利润的 20% 进入三角洲，分为三股支流。不是因为你捐得多，是因为你让东西继续流动。': ['被回收后再流通的每件物品，利润的 20% 进入三角洲，分为三股支流。不是因为你捐得多，是因为你让东西继续流动。', 'Every item recirculated — 20% flows into the delta. Not because you donated, but because you kept things moving.'],
   '你可能不需要更多东西。<br>你需要更好的选择。': ['你可能不需要更多东西。<br>你需要更好的选择。', 'You probably don\'t need more things.<br>You need better choices.'],
-  'messenger 是一个以审美为坐标的循环空间。每件物品经过筛选才出现在这里——不是因为它贵，不是因为它是品牌，是因为它有被留下来的理由。': ['messenger 是一个以审美为坐标的循环空间。每件物品经过筛选才出现在这里——不是因为它贵，不是因为它是品牌，是因为它有被留下来的理由。', 'messenger is a circulation space with aesthetics as coordinates. Every item is here because it earned its place.'],
+  'messenger 是一个以审美为坐标的循环空间。每件物品经过筛选才出现在这里——不是因为它贵，不是因为它是品牌，是因为它有被留下来的理由。': ['messenger 是一个以审美为坐标的循环空间。每件物品经过筛选才出现在这里——不是因为它贵，不是因为它是品牌，是因为它有被留下来的理由。', 'messenger is a circulation space with aesthetics as coordinates.'],
   '漂亮的东西不应该永远属于某一个人。': ['漂亮的东西不应该永远属于某一个人。', 'Beautiful things shouldn\'t belong to one person forever.'],
   '买走之后，如果哪一天它不再需要你了，送回给messenger。它会继续被下一个人遇见。': ['买走之后，如果哪一天它不再需要你了，送回给messenger。它会继续被下一个人遇见。', 'When it no longer needs you, send it back. Someone else will find it.'],
-  '每一次回流再被买走，利润的 20% 进入三角洲——三股支流，每股有方向，每季有记录。': ['每一次回流再被买走，利润的 20% 进入三角洲——三股支流，每股有方向，每季有记录。', 'Every return, 20% enters the delta — three branches, each with direction, each season recorded.'],
+  '每一次再流通，利润的 20% 进入三角洲——三股支流，每股有方向，每季有记录。': ['每一次再流通，利润的 20% 进入三角洲——三股支流，每股有方向，每季有记录。', 'Every recirculation, 20% enters the delta — three branches.'],
   '审美策展 · 每一件都经过筛选': ['审美策展 · 每一件都经过筛选', 'Curated · Every piece selected'],
-  '回流积分 · 不喜欢了可改签退回': ['回流积分 · 不喜欢了可改签退回', 'Return credit · Change your mind, send it back'],
-  '慈善三角洲 · 利润 20% 分入三股支流': ['慈善三角洲 · 利润 20% 分入三股支流', 'Delta · 20% flows into three branches'],
+  '回收机制 · 不想拥有了可送回来': ['回收机制 · 不想拥有了可送回来', 'Buyback · Send it back anytime'],
+  '慈善三角洲 · 每次再流通 20% 分入三股支流': ['慈善三角洲 · 每次再流通 20% 分入三股支流', 'Delta · 20% to three branches'],
   '流通 · 审美 · 流动 · 选择': ['流通 · 审美 · 流动 · 选择', 'Circulate · Aesthetic · Flow · Choose'],
   '10 件在架': ['10 件在架', '10 items in stock'],
   'ISSN': ['审美不是消费，是选择', 'Aesthetics is not consumption, it\'s choice'],
   '每股有方向。': ['每股有方向。', 'Each branch has direction.'],
   '每季有记录。': ['每季有记录。', 'Each season has records.'],
-  '博物馆': ['博物馆', 'Archive'],
   '目录': ['目录', 'Catalog'],
   '回流': ['回流', 'Transit'],
   '三角洲': ['三角洲', 'Delta'],
@@ -1073,14 +1043,7 @@ btn.addEventListener('click', () => {
   lang = lang === 'zh' ? 'en' : 'zh';
   btn.querySelectorAll('span').forEach(s => s.classList.toggle('active-lang'));
   
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    const pair = i18nMap[key];
-    if (pair) el.innerHTML = lang === 'zh' ? pair[0] : pair[1];
-  });
-  
-  // Also handle inline content
-  document.querySelectorAll('.section-label, .catalog-count, .note-text p, .cover-line, .colophon .meta, .sidebar-text, nav a, .delta-footer, .delta-desc, .intro, .note')
+  document.querySelectorAll('.section-label, .catalog-count, .note-text p, .cover-line, .colophon .meta, nav a, .delta-footer, .delta-desc, .intro, .note')
     .forEach(el => {
       const text = el.innerHTML;
       if (i18nMap[text]) el.innerHTML = lang === 'zh' ? i18nMap[text][0] : i18nMap[text][1];
