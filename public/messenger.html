@@ -1059,106 +1059,77 @@
       color: var(--text);
       padding: 140px 60px;
       position: relative;
+      text-align: center;
     }
 
     .delta::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse at 20% 50%, rgba(74, 124, 89, 0.1) 0%, transparent 60%),
-                  radial-gradient(ellipse at 80% 30%, rgba(74, 124, 89, 0.06) 0%, transparent 60%);
+      background: radial-gradient(ellipse at 50% 30%, rgba(74, 124, 89, 0.08) 0%, transparent 60%);
       pointer-events: none;
-    }
-
-    .delta-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      max-width: 1100px;
-      margin: 0 auto;
-      align-items: center;
-    }
-
-    .cycle-ring-container {
-      position: relative;
-      width: 280px; height: 280px;
-      margin: 0 auto;
-    }
-    .cycle-ring {
-      width: 100%; height: 100%;
-      border: 1px solid rgba(200, 150, 62, 0.2);
-      border-radius: 50%;
-      position: relative;
-      animation: spin 40s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .cycle-dot {
-      position: absolute;
-      width: 8px; height: 8px;
-      background: var(--accent);
-      border-radius: 50%;
-      top: -4px; left: 50%;
-      margin-left: -4px;
-    }
-    .cycle-dot:nth-child(2) { top: auto; bottom: -4px; background: var(--accent); }
-    .cycle-dot:nth-child(3) { top: 50%; left: -4px; margin-top: -4px; margin-left: 0; background: var(--accent); }
-
-    .cycle-center-label {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: var(--font-serif);
-      font-size: 18px;
-      letter-spacing: 6px;
-      color: var(--deep-forest);
-      text-align: center;
-      line-height: 1.6;
-      animation: spin 40s linear infinite reverse;
     }
 
     .delta .section-label { color: var(--gray-300); }
     .delta .section-label::after { background: var(--gray-600); }
 
-    .delta .charity-highlight {
-      font-size: clamp(80px, 12vw, 140px);
-      font-weight: 400;
-      letter-spacing: -0.02em;
-      color: var(--terra);
-    }
-
-    .delta .charity-title {
-      font-size: clamp(24px, 3vw, 40px);
-      font-weight: 400;
-      letter-spacing: 0.03em;
-      line-height: 1.3;
-      margin-bottom: 32px;
-      color: var(--text);
-    }
-    .delta .charity-title em { color: var(--accent); font-style: italic; }
-
-    .delta .charity-text p {
-      font-family: var(--font-sans);
-      font-size: 14px;
-      line-height: 1.9;
-      color: var(--gray-300);
-      margin-bottom: 16px;
-    }
-
-    .delta .charity-categories { margin: 24px 0; }
-    .delta .charity-cat {
+    .delta-viz {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 12px;
-      padding: 8px 0;
-      font-family: var(--font-sans);
-      font-size: 14px;
-      color: var(--sprout);
+      margin: 3em 0;
     }
-    .delta .charity-cat .marker {
-      width: 6px; height: 6px;
-      background: var(--accent);
-      opacity: 0.8;
+    .delta-node {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 1px solid rgba(74,124,89,0.5);
+      background: rgba(74,124,89,0.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .delta-percent {
+      font-size: 1.1em;
+      color: #8fa87a;
+      font-weight: 300;
+      line-height: 1;
+    }
+    .delta-label {
+      font-size: 0.6em;
+      color: #6b8b6e;
+      letter-spacing: 0.15em;
+      margin-top: 3px;
+    }
+    .delta-streams {
+      display: flex;
+      gap: 3em;
+      margin-top: 0.5em;
+      align-items: flex-start;
+    }
+    .delta-stream {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4em;
+    }
+    .stream-line {
+      width: 2px;
+      height: 24px;
+      background: linear-gradient(to bottom, #4a7c59, rgba(74,124,89,0.15));
+    }
+    .stream-name {
+      font-size: 0.65em;
+      color: #4a6b50;
+      letter-spacing: 0.2em;
+    }
+    .delta-footer {
+      text-align: center;
+      font-size: 0.85em;
+      color: #6b8b6e;
+      line-height: 2;
+      font-family: 'Georgia', serif;
     }
 
     /* ===== ATTITUDE ===== */
@@ -1801,33 +1772,31 @@
 
   <!-- ===================== DELTA ===================== -->
   <section class="delta" id="delta">
-    <div class="delta-grid">
-      <div class="cycle-ring-container reveal">
-        <div class="cycle-ring">
-          <div class="cycle-dot"></div>
-          <div class="cycle-dot"></div>
-          <div class="cycle-dot"></div>
-          <div class="cycle-center-label">循<br>环<br>∞</div>
-        </div>
+    <div class="section-label reveal" data-i18n="delta_label">· 支流 Delta</div>
+    <div class="delta-viz reveal">
+      <div class="delta-node">
+        <span class="delta-percent">20%</span>
+        <span class="delta-label">入海</span>
       </div>
-      <div>
-        <div class="section-label reveal" data-i18n="delta_label">· 支流 Delta</div>
-        <div class="charity-highlight reveal">20%</div>
-        <h2 class="charity-title reveal" data-i18n="delta_title">你送回来的东西<br>我们让它<em>重新入海</em></h2>
-        <div class="charity-text reveal">
-          <p data-i18n="delta_p1">每一次回流，20% 进入三角洲。它会分成三股支流——流浪动物、乡村阅读、社区行动。</p>
-          <p data-i18n="delta_p2">每一股都有记录，每一季在这里汇合。</p>
+      <div class="delta-streams">
+        <div class="delta-stream">
+          <div class="stream-line"></div>
+          <p class="stream-name">一股</p>
         </div>
-        <div class="charity-categories reveal">
-          <div class="charity-cat"><span class="marker"></span><span data-i18n="delta_cat1">流浪动物救助</span></div>
-          <div class="charity-cat"><span class="marker"></span><span data-i18n="delta_cat2">乡村儿童阅读</span></div>
-          <div class="charity-cat"><span class="marker"></span><span data-i18n="delta_cat3">社区环保行动</span></div>
+        <div class="delta-stream">
+          <div class="stream-line"></div>
+          <p class="stream-name">二股</p>
         </div>
-        <div class="charity-text reveal" style="margin-top:24px;">
-          <p data-i18n="delta_p3">三角洲不在乎你捐了多少。它在乎你让它继续流动。</p>
+        <div class="delta-stream">
+          <div class="stream-line"></div>
+          <p class="stream-name">三股</p>
         </div>
       </div>
     </div>
+    <p class="delta-footer reveal">
+      每股有方向。<br>
+      每季有记录。
+    </p>
   </section>
 
   <!-- ===================== ATTITUDE ===================== -->
@@ -2023,13 +1992,6 @@
           transit_row4_period: '180 \u5929\u4EE5\u4E0A', transit_row4_cash: '30%', transit_row4_credit: '40%',
           transit_credit_note: '\u79EF\u5206 1:1 \u4F7F\u7528\uFF0C\u4E0D\u8FC7\u671F\u3002',
           delta_label: '\u00B7 \u652F\u6D41 Delta',
-          delta_title: '\u4F60\u9001\u56DE\u6765\u7684\u4E1C\u897F<br>\u6211\u4EEC\u8BA9\u5B83\u91CD\u65B0<em>\u5165\u6D77</em>',
-          delta_p1: '\u6BCF\u4E00\u6B21\u56DE\u6D41\uFF0C20% \u8FDB\u5165\u4E09\u89D2\u6D32\u3002\u5B83\u4F1A\u5206\u6210\u4E09\u80A1\u652F\u6D41\u2014\u2014\u6D41\u6D6A\u52A8\u7269\u3001\u4E61\u6751\u9605\u8BFB\u3001\u793E\u533A\u884C\u52A8\u3002',
-          delta_p2: '\u6BCF\u4E00\u80A1\u90FD\u6709\u8BB0\u5F55\uFF0C\u6BCF\u4E00\u5B63\u5728\u8FD9\u91CC\u6C47\u5408\u3002',
-          delta_cat1: '\u6D41\u6D6A\u52A8\u7269\u6551\u52A9',
-          delta_cat2: '\u4E61\u6751\u513F\u7AE5\u9605\u8BFB',
-          delta_cat3: '\u793E\u533A\u73AF\u4FDD\u884C\u52A8',
-          delta_p3: '\u4E09\u89D2\u6D32\u4E0D\u5728\u4E4E\u4F60\u6350\u4E86\u591A\u5C11\u3002\u5B83\u5728\u4E4E\u4F60\u8BA9\u5B83\u7EE7\u7EED\u6D41\u52A8\u3002',
           attitude_line1: '\u5BA1\u7F8E', attitude_line2: '\u4E0D\u662F\u7279\u6743', attitude_line3: 'just come in',
           visitors_label: '\u5F53\u524D\u5728\u7EBF',
           visitors_text: '\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8<br>Beauty is meant to flow',
@@ -2098,13 +2060,6 @@
           transit_row4_period: '180+ days', transit_row4_cash: '30%', transit_row4_credit: '40%',
           transit_credit_note: 'Store credit is 1:1, never expires.',
           delta_label: '\u00B7 \u652F\u6D41 Delta',
-          delta_title: 'What you return<br>re-<em>enters the sea</em>',
-          delta_p1: 'Every return, 20% enters the delta. It splits into three tributaries \u2014 stray animals, rural reading, community action.',
-          delta_p2: 'Each tributary has records. Each season they converge here.',
-          delta_cat1: 'Stray animal rescue',
-          delta_cat2: 'Rural children\'s reading',
-          delta_cat3: 'Community environmental action',
-          delta_p3: 'The delta doesn\'t care how much you donated. It cares that you let it keep flowing.',
           attitude_line1: 'Good taste', attitude_line2: 'is not a privilege', attitude_line3: 'just come in',
           visitors_label: 'Online Now',
           visitors_text: 'Beauty is meant to flow<br>\u6F02\u4EAE\u7684\u4E1C\u897F\u5E94\u8BE5\u6D41\u52A8',
