@@ -26,6 +26,30 @@
   --text-light: #c8d4c0;
 }
 
+/* ===== FUND ===== */
+.fund {
+  background: var(--bg);
+  padding: var(--section-py) 48px;
+}
+.fund-content {
+  max-width: 600px;
+  margin: 24px auto 0;
+  text-align: center;
+}
+.fund-content p {
+  font-family: var(--font-serif);
+  font-size: clamp(15px, 1.4vw, 20px);
+  line-height: 1.8;
+  color: var(--text);
+  margin-bottom: 0;
+}
+.fund-desc {
+  margin-top: 16px !important;
+  font-size: 0.85em !important;
+  color: var(--gray-400) !important;
+  font-style: italic;
+}
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -630,6 +654,7 @@ section { padding: 100px 48px; position: relative; }
     <a href="#about">信条</a>
     <a href="#catalog">之物</a>
     <a href="#transit">回流</a>
+    <a href="#fund">公益</a>
     <span class="nav-sep">/</span>
     <button class="lang-toggle"><span class="active-lang">中</span> <span class="sep">/</span> EN</button>
   </nav>
@@ -883,6 +908,17 @@ section { padding: 100px 48px; position: relative; }
   </div>
 </section>
 
+<!-- ===== FUND ===== -->
+<section class="fund" id="fund">
+  <div class="section-content">
+    <div class="section-label">公益金 Fund</div>
+    <div class="fund-content">
+      <p>每一次再流通，利润的 20% 注入 messenger 公益金。</p>
+      <p class="fund-desc">流动本身就是一种善意。</p>
+    </div>
+  </div>
+</section>
+
 <!-- ===== COLOPHON ===== -->
 <section class="colophon">
   <div class="colophon-inner">
@@ -917,6 +953,8 @@ const i18nMap = {
   '你可能不需要更多东西。<br>你需要更好的选择。': ['你可能不需要更多东西。<br>你需要更好的选择。', 'You probably don\'t need more things.<br>You need better choices.'],
   'messenger 是一个以审美为坐标的循环空间。每件物品经过筛选才出现在这里——不是因为它贵，不是因为它是品牌，是因为它有被留下来的理由。': ['messenger 是一个以审美为坐标的循环空间。每件物品经过筛选才出现在这里——不是因为它贵，不是因为它是品牌，是因为它有被留下来的理由。', 'messenger is a circulation space with aesthetics as coordinates.'],
   '这里的东西可以被带走，也可以被送回来。': ['这里的东西可以被带走，也可以被送回来。', 'Things here can be taken away, and they can be sent back.'],
+'每一次再流通，利润的 20% 注入 messenger 公益金。': ['每一次再流通，利润的 20% 注入 messenger 公益金。', '20% of every resale flows into the messenger fund.'],
+'流动本身就是一种善意。': ['流动本身就是一种善意。', 'Circulation itself is an act of kindness.'],
   '买走之后，如果哪一天它不再需要你了，送回给messenger。它会继续被下一个人遇见。': ['买走之后，如果哪一天它不再需要你了，送回给messenger。它会继续被下一个人遇见。', 'When it no longer needs you, send it back. Someone else will find it.'],
   '每一次再流通，利润的 20% 注入公益金。': ['每一次再流通，利润的 20% 注入公益金。', 'Every recirculation, 20% goes to charity.'],
   '审美策展 · 每一件都经过筛选': ['审美策展 · 每一件都经过筛选', 'Curated · Every piece selected'],
@@ -928,13 +966,14 @@ const i18nMap = {
   '信条': ['信条', 'Credo'],
   '之物': ['之物', 'Objects'],
   '回流': ['回流', 'Transit'],
+  '公益': ['公益', 'Fund'],
 };
 
 btn.addEventListener('click', () => {
   lang = lang === 'zh' ? 'en' : 'zh';
   btn.querySelectorAll('span').forEach(s => s.classList.toggle('active-lang'));
   
-  document.querySelectorAll('.section-label, .catalog-count, .note-text p, .cover-line, .colophon .meta, nav a, .intro, .note')
+  document.querySelectorAll('.section-label, .catalog-count, .note-text p, .pull-quote, .note-text .intro, .cover-line, .colophon .meta, nav a, .intro, .note, .fund-content p')
     .forEach(el => {
       const text = el.innerHTML;
       if (i18nMap[text]) el.innerHTML = lang === 'zh' ? i18nMap[text][0] : i18nMap[text][1];
