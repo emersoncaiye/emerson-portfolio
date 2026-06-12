@@ -14,20 +14,21 @@
     }
 
     :root {
-      --black: #0a0a0a;
-      --white: #f5f3ef;
-      --off-white: #ebe8e1;
-      --gray-100: #e0ddd6;
-      --gray-300: #a8a49c;
-      --gray-600: #6b6760;
-      --gray-900: #2a2825;
-      --accent: #c43e2c;
-      --accent-muted: rgba(196, 62, 44, 0.08);
-      --ink: #0d0f1a;
+      --black: #0a0908;
+      --white: #f0ead8;
+      --off-white: #e5ddc8;
+      --gray-100: #d8cfb8;
+      --gray-300: #9e9484;
+      --gray-600: #6b6152;
+      --gray-900: #2d2820;
+      --accent: #b8452a;
+      --accent-muted: rgba(184, 69, 42, 0.08);
+      --ink: #1c1815;
       --saffron: #c8963e;
       --saffron-muted: rgba(200, 150, 62, 0.10);
       --teal: #2a5c5c;
       --teal-muted: rgba(42, 92, 92, 0.08);
+      --warm-glow: rgba(200, 150, 62, 0.06);
       --font-serif: 'SerifDisplay', 'Noto Serif SC', 'Times New Roman', serif;
       --font-mono: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', monospace;
       --font-sans: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
@@ -47,22 +48,44 @@
       overflow-x: hidden;
     }
 
+    /* Warm light wash on light sections */
+    .fragments, .notebook, .archive, .transit, .attitude-strip {
+      position: relative;
+    }
+    .fragments::before, .notebook::before, .archive::before, .attitude-strip::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 40%; height: 60%;
+      background: radial-gradient(ellipse at top right, rgba(200,150,62,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
     /* ===== SCROLLBAR ===== */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--off-white); }
     ::-webkit-scrollbar-thumb { background: var(--gray-300); }
 
-    /* ===== GRID OVERLAY ===== */
+    /* ===== FILM GRAIN OVERLAY ===== */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 9999;
-      background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(0,0,0,0.03) 79px, rgba(0,0,0,0.03) 80px),
-        repeating-linear-gradient(90deg, transparent, transparent 79px, rgba(0,0,0,0.03) 79px, rgba(0,0,0,0.03) 80px);
-      opacity: 0.4;
+      opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* Warm vignette */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      background: radial-gradient(ellipse at center, transparent 50%, rgba(28, 24, 21, 0.12) 100%);
     }
 
     /* ===== HEADER ===== */
@@ -137,8 +160,8 @@
       position: absolute;
       top: -50%; left: -50%;
       width: 200%; height: 200%;
-      background: radial-gradient(ellipse at 30% 40%, rgba(200, 150, 62, 0.03) 0%, transparent 50%),
-                  radial-gradient(ellipse at 70% 60%, rgba(42, 92, 92, 0.02) 0%, transparent 50%);
+      background: radial-gradient(ellipse at 25% 35%, rgba(200, 150, 62, 0.06) 0%, transparent 45%),
+                  radial-gradient(ellipse at 75% 65%, rgba(184, 69, 42, 0.03) 0%, transparent 45%);
       pointer-events: none;
     }
 
@@ -148,7 +171,7 @@
       bottom: 0; left: 0; right: 0;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--saffron) 20%, var(--saffron) 80%, transparent);
-      opacity: 0.4;
+      opacity: 0.3;
     }
 
     /* signal dots */
@@ -266,7 +289,7 @@
       bottom: 160px;
       right: 10%;
       width: 100px; height: 100px;
-      border: 2px solid rgba(200,150,62,0.15);
+      border: 2px solid rgba(200,150,62,0.18);
       border-radius: 50%;
       transform: rotate(-15deg);
       pointer-events: none;
@@ -279,14 +302,14 @@
       font-family: var(--font-mono);
       font-size: 10px;
       letter-spacing: 4px;
-      color: rgba(200,150,62,0.2);
+      color: rgba(200,150,62,0.22);
     }
     .gate-postmark::after {
       content: '';
       position: absolute;
       top: 50%; left: -8%; right: -8%;
       height: 1px;
-      background: rgba(200,150,62,0.15);
+      background: rgba(200,150,62,0.18);
       transform: rotate(3deg);
     }
 
@@ -339,7 +362,7 @@
     }
 
     /* ===== RETRO ELEMENTS ===== */
-    /* Airmail stripe — classic red/blue diagonal */
+    /* Airmail stripe — warm red/gold diagonal */
     .airmail-strip {
       height: 3px;
       background: repeating-linear-gradient(
@@ -349,7 +372,7 @@
         var(--saffron) 8px, var(--saffron) 12px,
         var(--ink) 12px, var(--ink) 16px
       );
-      opacity: 0.35;
+      opacity: 0.4;
     }
 
     /* Postmark circle */
@@ -438,11 +461,11 @@
     }
     .telegram-strip .urgency { color: var(--accent); opacity: 0.5; }
 
-    /* Vintage envelope lining (diagonal crosshatch) */
+    /* Vintage envelope lining (diagonal crosshatch - warm) */
     .envelope-lining {
       background-image:
-        repeating-linear-gradient(45deg, transparent, transparent 14px, rgba(200,150,62,0.03) 14px, rgba(200,150,62,0.03) 15px),
-        repeating-linear-gradient(-45deg, transparent, transparent 14px, rgba(200,150,62,0.03) 14px, rgba(200,150,62,0.03) 15px);
+        repeating-linear-gradient(45deg, transparent, transparent 14px, rgba(200,150,62,0.04) 14px, rgba(200,150,62,0.04) 15px),
+        repeating-linear-gradient(-45deg, transparent, transparent 14px, rgba(200,150,62,0.04) 14px, rgba(200,150,62,0.04) 15px);
     }
 
     .section-title {
@@ -566,7 +589,7 @@
     .notebook-text {
       position: relative;
       background-image: repeating-linear-gradient(
-        transparent, transparent 27px, rgba(0,0,0,0.04) 27px, rgba(0,0,0,0.04) 28px
+        transparent, transparent 27px, rgba(28,24,21,0.05) 27px, rgba(28,24,21,0.05) 28px
       );
       background-size: 100% 28px;
       background-position: 0 6px;
@@ -650,7 +673,7 @@
       position: absolute;
       bottom: 0; left: 0; right: 0;
       padding: 32px 24px 24px;
-      background: linear-gradient(transparent, rgba(26,26,24,0.7));
+      background: linear-gradient(transparent, rgba(28,24,21,0.65));
       color: var(--white);
     }
     .notebook-image .content-block strong { display: block; font-size: 14px; letter-spacing: 2px; margin-bottom: 4px; }
@@ -759,14 +782,14 @@
       background: var(--off-white);
       overflow: hidden;
     }
-    /* Vintage envelope crosshatch on archive images */
+    /* Vintage envelope crosshatch on archive images - warm */
     .archive-card .archive-image::after {
       content: '';
       position: absolute;
       inset: 0;
       background-image:
-        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(200,150,62,0.025) 10px, rgba(200,150,62,0.025) 11px),
-        repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(200,150,62,0.025) 10px, rgba(200,150,62,0.025) 11px);
+        repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(200,150,62,0.035) 10px, rgba(200,150,62,0.035) 11px),
+        repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(200,150,62,0.035) 10px, rgba(200,150,62,0.035) 11px);
       pointer-events: none;
     }
     .archive-card .placeholder-img {
@@ -779,12 +802,12 @@
       color: var(--gray-300);
       opacity: 0.4;
     }
-    .placeholder-img.tex-1 { background: linear-gradient(135deg, var(--off-white) 0%, #c8963e33 100%); }
-    .placeholder-img.tex-2 { background: linear-gradient(135deg, #2a5c5c22 0%, var(--off-white) 100%); }
-    .placeholder-img.tex-3 { background: linear-gradient(180deg, var(--off-white) 0%, #c8963e28 100%); }
-    .placeholder-img.tex-4 { background: linear-gradient(225deg, #2a5c5c1a 0%, var(--off-white) 100%); }
-    .placeholder-img.tex-5 { background: linear-gradient(315deg, var(--off-white) 0%, #c43e2c18 100%); }
-    .placeholder-img.tex-6 { background: linear-gradient(45deg, #c8963e20 0%, var(--off-white) 100%); }
+    .placeholder-img.tex-1 { background: linear-gradient(135deg, var(--off-white) 0%, #c8963e44 100%); }
+    .placeholder-img.tex-2 { background: linear-gradient(135deg, #b8452a22 0%, var(--off-white) 100%); }
+    .placeholder-img.tex-3 { background: linear-gradient(180deg, var(--off-white) 0%, #c8963e38 100%); }
+    .placeholder-img.tex-4 { background: linear-gradient(225deg, #2a5c5c18 0%, var(--off-white) 100%); }
+    .placeholder-img.tex-5 { background: linear-gradient(315deg, var(--off-white) 0%, #b8452a20 100%); }
+    .placeholder-img.tex-6 { background: linear-gradient(45deg, #c8963e28 0%, var(--off-white) 100%); }
 
     .archive-card .item-tag {
       position: absolute;
@@ -870,7 +893,7 @@
       border: 1px solid var(--gray-300);
       background: var(--off-white);
     }
-    /* Airmail strip on boarding pass */
+    /* Airmail strip on boarding pass - warm */
     .boarding-pass::before {
       content: '';
       position: absolute;
@@ -883,7 +906,7 @@
         var(--saffron) 5px, var(--saffron) 8px,
         var(--off-white) 8px, var(--off-white) 10px
       );
-      opacity: 0.5;
+      opacity: 0.55;
     }
 
     .bp-left {
@@ -1041,8 +1064,8 @@
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse at 20% 50%, rgba(200, 150, 62, 0.04) 0%, transparent 60%),
-                  radial-gradient(ellipse at 80% 30%, rgba(42, 92, 92, 0.03) 0%, transparent 60%);
+      background: radial-gradient(ellipse at 20% 50%, rgba(200, 150, 62, 0.05) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 30%, rgba(184, 69, 42, 0.04) 0%, transparent 60%);
       pointer-events: none;
     }
 
