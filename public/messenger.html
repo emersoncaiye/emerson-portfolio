@@ -1413,6 +1413,7 @@
     <div class="gate-postmark"></div>
 
     <div class="gate-meta" id="gateMeta">BOARDING · <span id="gateTime"></span></div>
+    <div class="gate-timer" id="gateTimer">航班号 · MSG-0000 · 请登机</div>
 
     <h1 class="gate-title" id="gateTitle">MESSENGER</h1>
 
@@ -1845,6 +1846,10 @@
     <div class="radio-freq">87.5 MHz</div>
   </div>
 
+  <!-- MUSIC DOT (YouTube) -->
+  <div class="music-dot" id="music-dot">♫</div>
+  <div id="bg-music" style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;pointer-events:none;"></div>
+
   <script>
     (function() {
       'use strict';
@@ -2222,6 +2227,43 @@
 
       // ===== INSPECTOR LOG =====
       console.log('%c messenger ', 'background: #0d0f1a; color: #f5f3ef; font-size: 16px; padding: 8px 12px; border-left: 3px solid #c8963e;');
+
+      // ===== YOUTUBE MUSIC + DAILY FLIGHT =====
+      (function() {
+        var tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        document.body.appendChild(tag);
+
+        var player;
+        window.onYouTubeIframeAPIReady = function() {
+          player = new YT.Player('bg-music', {
+            events: { 'onReady': onPlayerReady }
+          });
+        };
+        function onPlayerReady(e) { player.mute(); player.playVideo(); }
+
+        var dot = document.getElementById('music-dot');
+        var isMuted = true;
+        dot.addEventListener('click', function() {
+          if (!player) return;
+          if (isMuted) {
+            player.unMute();
+            dot.classList.add('playing');
+            isMuted = false;
+          } else {
+            player.mute();
+            dot.classList.remove('playing');
+            isMuted = true;
+          }
+        });
+
+        // 每日航班号
+        var d = new Date();
+        var mm = String(d.getMonth()+1).padStart(2,'0');
+        var dd = String(d.getDate()).padStart(2,'0');
+        var timerEl = document.getElementById('gateTimer');
+        if (timerEl) timerEl.textContent = '航班号 · MSG-' + mm + dd + ' · 请登机';
+      })();
 
     })();
   </script>
