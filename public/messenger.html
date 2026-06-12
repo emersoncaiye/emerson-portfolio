@@ -1420,25 +1420,35 @@
           <thead>
             <tr>
               <th data-i18n="return_th_period">持有时间</th>
-              <th data-i18n="return_th_cash">回收金</th>
+              <th data-i18n="return_th_cash">现金返还</th>
+              <th data-i18n="return_th_credit">积分返还</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td data-i18n="return_row1_period">30 天内</td>
               <td class="cash highlight" data-i18n="return_row1_cash">60%</td>
+              <td class="credit highlight" data-i18n="return_row1_credit">70%</td>
             </tr>
             <tr>
               <td data-i18n="return_row2_period">30–90 天</td>
               <td class="cash" data-i18n="return_row2_cash">50%</td>
+              <td class="credit" data-i18n="return_row2_credit">60%</td>
             </tr>
             <tr>
               <td data-i18n="return_row3_period">90–180 天</td>
               <td class="cash" data-i18n="return_row3_cash">40%</td>
+              <td class="credit" data-i18n="return_row3_credit">50%</td>
             </tr>
             <tr>
-              <td data-i18n="return_row4_period">180 天以上</td>
+              <td data-i18n="return_row4_period">180–360 天</td>
               <td class="cash" data-i18n="return_row4_cash">30%</td>
+              <td class="credit" data-i18n="return_row4_credit">40%</td>
+            </tr>
+            <tr>
+              <td data-i18n="return_row5_period">超过 1 年</td>
+              <td class="cash" data-i18n="return_row5_cash">—</td>
+              <td class="credit" data-i18n="return_row5_credit">捐赠公益</td>
             </tr>
           </tbody>
         </table>
@@ -1588,15 +1598,23 @@
           return_note_title: '备注',
           return_note_text: '退回的东西会重新整理上架。二次销售利润的 20% 进入公益金，每季度公示去向。',
           return_th_period: '持有时间',
-          return_th_cash: '回收金',
+          return_th_cash: '现金返还',
+          return_th_credit: '积分返还',
           return_row1_period: '30 天内',
           return_row1_cash: '60%',
+          return_row1_credit: '70%',
           return_row2_period: '30–90 天',
           return_row2_cash: '50%',
+          return_row2_credit: '60%',
           return_row3_period: '90–180 天',
           return_row3_cash: '40%',
-          return_row4_period: '180 天以上',
+          return_row3_credit: '50%',
+          return_row4_period: '180–360 天',
           return_row4_cash: '30%',
+          return_row4_credit: '40%',
+          return_row5_period: '超过 1 年',
+          return_row5_cash: '—',
+          return_row5_credit: '捐赠公益',
           charity_label: '· 公益金 Charity Fund',
           charity_percent: '20%',
           charity_title: '你流回的东西<br>我们让它<em>继续流动</em>',
@@ -1684,15 +1702,23 @@
           return_note_title: 'Note',
           return_note_text: 'Returned items will be re-listed. 20% of second-sale profit goes to the charity fund, reported quarterly.',
           return_th_period: 'Hold Time',
-          return_th_cash: 'Buyback',
+          return_th_cash: 'Cash Back',
+          return_th_credit: 'Store Credit',
           return_row1_period: 'Within 30 days',
           return_row1_cash: '60%',
+          return_row1_credit: '70%',
           return_row2_period: '30–90 days',
           return_row2_cash: '50%',
+          return_row2_credit: '60%',
           return_row3_period: '90–180 days',
           return_row3_cash: '40%',
-          return_row4_period: '180+ days',
+          return_row3_credit: '50%',
+          return_row4_period: '180–360 days',
           return_row4_cash: '30%',
+          return_row4_credit: '40%',
+          return_row5_period: 'Over 1 year',
+          return_row5_cash: '—',
+          return_row5_credit: 'Donated to charity',
           charity_label: '· Charity Fund',
           charity_percent: '20%',
           charity_title: 'What you return<br>keeps <em>flowing onward</em>',
