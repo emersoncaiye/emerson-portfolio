@@ -1,3 +1,60 @@
+<!--
+================================================================
+三角洲 / Delta — 品牌循环电商网站
+版本: 1.0
+生成日期: 2025
+
+===== 技术栈 =====
+- 原生 HTML + CSS + JavaScript（单文件，无框架无依赖）
+- 字体: Google Fonts CN (Noto Serif SC, Inter, SF Mono)
+- 响应式: clamp() + auto-fill grid + 2个断点 (768px, 480px)
+
+===== 设计规范 =====
+品牌名: 三角洲 (Delta)
+气质: 黄昏六点的旧书店 — 暖米白底色 + 苔藓绿点缀 + 胶片噪点纹理
+
+===== 配色系统 =====
+--bg: #ede8df（主背景，暖米白）
+--bg-alt: #e6e2d8（次背景，略深）
+--bg-light: #f3f0e8（浅色）
+--ink: #0f1a14（曜石黑，仅用于封面和底部）
+--text: #1c2820（深绿黑，主文字）
+--text-muted: #69604f（暖灰棕，辅助文字）
+--accent: #4a7c59（苔藓绿，主强调）
+--accent-light: #8fa87a（新芽绿，深色背景上的辅助色）
+--border: #d8d4cc（边框/分割线）
+噪点纹理: SVG feTurbulence, opacity 0.03, 全页覆盖
+
+===== 字体系统 =====
+--font-serif: Georgia, 'Times New Roman', 'Noto Serif SC', serif（中文正文叙事）
+--font-sans: Inter, -apple-system, 'Helvetica Neue', sans-serif（辅助文字）
+--font-mono: SF Mono, Menlo, 'Cascadia Code', monospace（编号、标签、价格）
+
+===== 页面结构（7个板块） =====
+1. COVER — 深色全屏封面，大字"messenger"居中
+2. EDITOR'S NOTE — 双栏，左栏编者按正文+右栏三核心价值
+3. ITEMS — 10件选品 grid auto-fill，每件编号/名称/描述/价格/状态
+4. RETURN — 双栏，左栏四步流程+备注，右栏回收表格
+5. CYCLE — 深色背景，20%圆环+三颗脉冲序列点+轮流说明
+6. ATTITUDE — 浅底色三栏"审美·不是特权·no pretentious"
+7. FOOTER — 品牌条(降噪·聪明·实用·流转) + 底部导航+版权
+
+===== 交互 =====
+- 中英双语切换（data-i18n + JS 对象映射）
+- 滚动渐入（IntersectionObserver + .reveal 类）
+- 访客计数器（localStorage）
+- 循环板块脉冲动画（CSS keyframes + JS 顺序切换文字）
+
+===== 关键构建指令 =====
+- 这是一个**原生极简模式**项目
+- 单文件 HTML 在浏览器直接打开即可预览
+- 字体必须从 fonts.googleapis.cn 加载（中国大陆 CDN）
+- style 标签放在 head 中，script 标签放在 body 底部
+- 所有颜色值严格使用上方配色系统变量
+- 禁止圆角超过2px、禁止渐变（除封面径向光斑）、禁止阴影发光
+================================================================
+-->
+
 <!DOCTYPE html>
 <html lang="zh-CN" id="html-root">
 <head>
