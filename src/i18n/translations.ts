@@ -39,7 +39,7 @@ export const languages = {
     ],
     exp8Role: '全栈独立开发 · MVP已上线',
     exp8Company: '独树岗围餐 · 烧猪 — 乡村流动宴席在线预约系统',
-    exp8Date: '2026.04',
+    exp8Date: '2026.05',
     exp8Month: '至今（进行中）',
     exp8Items: [
       '为佛山三水独树岗村三十年围餐团队开发，将广东农村传统的"围餐"宴席文化通过线上方式进行记录与传播',
@@ -136,7 +136,7 @@ export const languages = {
     ],
     exp8Role: 'Full-Stack Solo Dev · MVP Live',
     exp8Company: 'Dushugang Weican · Roast Pig — Rural Banquet Online Booking System',
-    exp8Date: '2026.04',
+    exp8Date: '2026.05',
     exp8Month: 'Present (Ongoing)',
     exp8Items: [
       'Built for a 30-year banquet team in Dushugang Village, Foshan — digitizing Guangdong\'s traditional rural "Weican" (communal feast) culture for online preservation and access',
@@ -233,7 +233,7 @@ export const languages = {
     ],
     exp8Role: 'Développeur Full-Stack Indépendant · MVP en ligne',
     exp8Company: 'Weican Dushugang · Cochon Rôti — Système de Réservation en Ligne pour Banquets Ruraux',
-    exp8Date: '2026.04',
+    exp8Date: '2026.05',
     exp8Month: 'En cours',
     exp8Items: [
       'Développé pour une équipe de banquets de 30 ans du village de Dushugang, Foshan — numérisation de la culture traditionnelle des banquets ruraux "Weican" du Guangdong',
@@ -330,7 +330,7 @@ export const languages = {
     ],
     exp8Role: '全棧獨立開發 · MVP已上線',
     exp8Company: '獨樹崗圍餐 · 燒豬 — 鄉村流動宴席在線預約系統',
-    exp8Date: '2026.04',
+    exp8Date: '2026.05',
     exp8Month: '至今（進行中）',
     exp8Items: [
       '為佛山三水獨樹崗村三十年圍餐團隊開發，將廣東農村傳統嘅「圍餐」宴席文化通過線上方式記錄同傳播',
