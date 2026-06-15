@@ -1,2 +1,21 @@
-.cozeproj/reduction
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Astro cache
+.astro/
+
+# Platform-specific (not needed for standalone)
+.coze
+.cozeproj/
 .preview
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
