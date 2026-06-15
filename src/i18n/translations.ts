@@ -24,7 +24,7 @@ export const languages = {
     exp7Date: '2026',
     exp7Month: '06',
     exp7Items: [
-      '完成概念设计：以创作者本人的审美标准建立收藏体系，回流积分机制激励物品流转，公益捐赠完成价值闭环，三者构成循环流转空间',
+      '建立审美框架 + 回流机制 + 公益捐赠三位一体的循环模型：以个人审美筛选二手好物，设计阶梯式回流积分机制，并将二次销售利润的固定比例捐入公益基金',
       '同时融合视觉、音乐、文字、语言混合、archive、objects 等多元内容形式，以迁移美学与城市碎片感打造品牌世界氛围',
       '撰写完整产品需求文档（PRD），通过 AI Agent 加速概念推导，项目开源于 GitHub',
     ],
@@ -111,7 +111,7 @@ export const languages = {
     exp7Date: '2026',
     exp7Month: '06',
     exp7Items: [
-      'Completed concept design: a collection system built on the creator\'s own aesthetic standards, a return-credit mechanism incentivizing object circulation, and charitable donations closing the value loop — three pillars forming a circular transit space',
+      'Built a tripartite circular model — aesthetic curation + return credits + charitable donation: curating pre-owned gems by personal taste, designing tiered return-credit mechanisms, and allocating a fixed share of resale profits to a public-interest fund',
       'Fusing visual, music, text, language hybrid, archive, and objects into a multi-content ecosystem, crafting a brand world atmosphere through migratory aesthetics and urban fragments',
       'Authored full product requirements document (PRD), leveraging AI Agent to accelerate concept derivation; project open-sourced on GitHub',
     ],
@@ -198,7 +198,7 @@ export const languages = {
     exp7Date: '2026',
     exp7Month: '06',
     exp7Items: [
-      'Conception conceptuelle : un système de collection fondé sur les standards esthétiques du créateur, un mécanisme de crédits de retour incentivant la circulation des objets, et des dons caritatifs bouclant la boucle de valeur — trois piliers formant un espace de transit circulaire',
+      'Construction d\'un modèle circulaire tripartite — curation esthétique + crédits de retour + don caritatif : sélection de pièces d\'occasion selon un goût personnel, conception d\'un mécanisme de crédits de retour par paliers, et affectation d\'une part fixe des bénéfices de revente à un fonds d\'intérêt général',
       'Fusion du visuel, de la musique, du texte, du métissage linguistique, des archives et des objets en un écosystème de contenus multiples, forgeant une atmosphère de marque à travers l\'esthétique migratoire et les fragments urbains',
       'Rédaction complète du cahier des charges (PRD), accélérant la dérivation conceptuelle via AI Agent ; projet open-source sur GitHub',
     ],
@@ -285,7 +285,7 @@ export const languages = {
     exp7Date: '2026',
     exp7Month: '06',
     exp7Items: [
-      '完成概念設計：以創作者本人嘅審美標準建立收藏體系，回流積分機制激勵物品流轉，公益捐贈完成價值閉環，三者構成循環流轉空間',
+      '建立審美框架 + 回流機制 + 公益捐贈三位一體嘅循環模型：以個人審美篩選二手好物，設計階梯式回流積分機制，並將二次銷售利潤嘅固定比例捐入公益基金',
       '同時融合視覺、音樂、文字、語言混合、archive、objects 等多元內容形式，以遷移美學與城市碎片感打造品牌世界氛圍',
       '撰寫完整產品需求文件（PRD），通過 AI Agent 加速概念推導，項目開源於 GitHub',
     ],
