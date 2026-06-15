@@ -36,6 +36,7 @@ interface Props {
     contactLabel: string;
     contactName: string;
     contactEmail: string;
+    contactGithub: string;
   };
   langLinks: { code: string; label: string; href: string; active: boolean }[];
 }
@@ -260,6 +261,7 @@ function renderExpItem(text: string) {
       <span class="contact-name">{t.contactName}</span>
       <div class="contact-divider"></div>
       <a href={`mailto:${t.contactEmail}`} class="contact-email">{t.contactEmail}</a>
+      <a href={t.contactGithub} target="_blank" rel="noopener" class="contact-github">GitHub ↗</a>
     </div>
   </div>
 </section>
@@ -828,6 +830,19 @@ function renderExpItem(text: string) {
   }
 
   .contact-email:hover {
+    opacity: 0.7;
+  }
+
+  .contact-github {
+    font-size: 0.875rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 1px;
+    transition: opacity 0.3s var(--ease);
+    margin-left: 1.5rem;
+  }
+
+  .contact-github:hover {
     opacity: 0.7;
   }
 

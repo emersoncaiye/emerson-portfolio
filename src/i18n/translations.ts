@@ -85,6 +85,7 @@ export const languages = {
     contactLabel: '联系',
     contactName: '蔡也',
     contactEmail: 'emerson.the.k@gmail.com',
+    contactGithub: 'https://github.com/emersoncaiye',
   },
   en: {
     langLabel: 'EN',
@@ -172,6 +173,7 @@ export const languages = {
     contactLabel: 'Contact',
     contactName: 'Emerson',
     contactEmail: 'emerson.the.k@gmail.com',
+    contactGithub: 'https://github.com/emersoncaiye',
   },
   fr: {
     langLabel: 'FR',
@@ -259,6 +261,7 @@ export const languages = {
     contactLabel: 'Contact',
     contactName: 'Emerson',
     contactEmail: 'emerson.the.k@gmail.com',
+    contactGithub: 'https://github.com/emersoncaiye',
   },
   yue: {
     langLabel: '粵語',
@@ -346,5 +349,6 @@ export const languages = {
     contactLabel: '聯絡',
     contactName: '蔡也',
     contactEmail: 'emerson.the.k@gmail.com',
+    contactGithub: 'https://github.com/emersoncaiye',
   },
 };
