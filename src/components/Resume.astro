@@ -21,7 +21,7 @@ interface Props {
     heroDesc: string;
     expLabel: string;
     exp1Role: string; exp1Company: string; exp1Date: string; exp1Month: string; exp1Items: string[];
-    exp2Role: string; exp2Company: string; exp2Date: string; exp2Month: string; exp2Items: string[];
+    exp7Role: string; exp7Company: string; exp7Date: string; exp7Month: string; exp7Items: string[];
     exp3Role: string; exp3Company: string; exp3Date: string; exp3Month: string; exp3Items: string[];
     exp4Role: string; exp4Company: string; exp4Date: string; exp4Month: string; exp4Items: string[];
     exp5Role: string; exp5Company: string; exp5Date: string; exp5Month: string; exp5Items: string[];
@@ -198,21 +198,6 @@ function renderExpItem(text: string) {
         <div class="exp-role">{t.exp1Role}</div>
         <div class="exp-company">{t.exp1Company}</div>
         <ul class="exp-list" set:html={t.exp1Items.map(renderExpItem).join('')} />
-      </div>
-    </div>
-
-    <div class="timeline-item reveal">
-      <div class="timeline-left">
-        <span class="timeline-year">{t.exp2Date}</span>
-        <span class="timeline-month">{t.exp2Month}</span>
-      </div>
-      <div class="timeline-track">
-        <div class="timeline-dot"></div>
-      </div>
-      <div class="timeline-content">
-        <div class="exp-role">{t.exp2Role}</div>
-        <div class="exp-company">{t.exp2Company}</div>
-        <ul class="exp-list" set:html={t.exp2Items.map(renderExpItem).join('')} />
       </div>
     </div>
   </div>
