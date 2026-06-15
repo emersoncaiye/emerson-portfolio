@@ -12,7 +12,7 @@ export const languages = {
     exp1Role: '项目组长',
     exp1Company: '个人网站 & 多语言作品集',
     exp1Date: '2026',
-    exp1Month: '05–',
+    exp1Month: '04–',
     exp1Items: [
       '基于 Astro + Cloudflare Pages 搭建个人网站，2 天从 0 到 1 上线（原计划 10 天，效率提升 5 倍），掌握 vibe coding 快速原型工作流',
       '独立完成中/英/法三语简历页面的内容架构与多设备响应式实现',
@@ -109,7 +109,7 @@ export const languages = {
     exp1Role: 'Project Lead',
     exp1Company: 'Personal Website & Multilingual Portfolio',
     exp1Date: '2026',
-    exp1Month: '05–',
+    exp1Month: '04–',
     exp1Items: [
       'Built personal website with Astro + Cloudflare Pages using AI-driven development; zero to launch in 2 days (5x efficiency gain)',
       'Independently architected trilingual resume pages (EN/ZH/FR) with responsive design',
@@ -206,7 +206,7 @@ export const languages = {
     exp1Role: 'Chef de Projet',
     exp1Company: 'Site Personnel & Portfolio Multilingue',
     exp1Date: '2026',
-    exp1Month: '05–',
+    exp1Month: '04–',
     exp1Items: [
       'Site personnel construit avec Astro + Cloudflare Pages ; du zéro au lancement en 2 jours (gain d\'efficacité 5x)',
       'Architecture indépendante de trois pages CV (EN/ZH/FR) avec design responsive',
@@ -303,7 +303,7 @@ export const languages = {
     exp1Role: '項目組長',
     exp1Company: '個人網站及多語言作品集',
     exp1Date: '2026',
-    exp1Month: '05–',
+    exp1Month: '04–',
     exp1Items: [
       '採用 Astro + Cloudflare Pages 建立個人網站，2日內從零到上線（效率提升5倍）',
       '獨立完成中/英/法三語簡歷頁面嘅內容架構與響應式設計',
