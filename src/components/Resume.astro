@@ -26,6 +26,7 @@ interface Props {
     exp4Role: string; exp4Company: string; exp4Date: string; exp4Month: string; exp4Items: string[];
     exp5Role: string; exp5Company: string; exp5Date: string; exp5Month: string; exp5Items: string[];
     exp6Role: string; exp6Company: string; exp6Date: string; exp6Month: string; exp6Items: string[];
+    exp7Role: string; exp7Company: string; exp7Date: string; exp7Month: string; exp7Items: string[];
     momentsLabel: string;
     moments: MomentItem[];
     aboutLabel: string;
@@ -167,6 +168,21 @@ function renderExpItem(text: string) {
         <div class="exp-role">{t.exp6Role}</div>
         <div class="exp-company">{t.exp6Company}</div>
         <ul class="exp-list" set:html={t.exp6Items.map(renderExpItem).join('')} />
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-left">
+        <span class="timeline-year">{t.exp7Date}</span>
+        <span class="timeline-month">{t.exp7Month}</span>
+      </div>
+      <div class="timeline-track">
+        <div class="timeline-dot"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="exp-role">{t.exp7Role}</div>
+        <div class="exp-company">{t.exp7Company}</div>
+        <ul class="exp-list" set:html={t.exp7Items.map(renderExpItem).join('')} />
       </div>
     </div>
 
