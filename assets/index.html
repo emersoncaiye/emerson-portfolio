@@ -688,6 +688,22 @@
     }
 
     /* ===== HOLD / TRANSFER MECHANISM ===== */
+    .flow-guide-link {
+      display: inline-block;
+      margin-top: 48px;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--sprout);
+      text-decoration: none;
+      border-bottom: 1px solid var(--sprout);
+      padding-bottom: 2px;
+      transition: opacity 0.3s;
+    }
+    .flow-guide-link:hover {
+      opacity: 0.7;
+    }
+
     .return-mech {
       background: var(--ink);
       color: var(--bg);
@@ -1879,6 +1895,7 @@
     <div class="reveal" style="margin-top:32px;font-family:var(--font-sans);font-size:12px;color:rgba(255,255,255,0.3);line-height:1.8;">
       回流商品再次售出时，售价的 10% 注入公益金
     </div>
+    <a href="flow.html" class="flow-guide-link" data-i18n="flow_guide_link">查看完整回流指南 →</a>
   </div>
 </section>
 
@@ -2015,6 +2032,7 @@
           return_label: '· Hold 持有与回流',
           return_title: '有时候，你不需要永远拥有它',
           return_intro: '买下它的时候，决定你想拥有多久。送回来。我们会根据你持有的时间，给你对应的回流金。你可以选换购、选积分、或者直接拿现金。',
+          flow_guide_link: '查看完整回流指南 →',
           return_th_period: '持有时间',
           return_th_cash: '现金返还',
           return_th_credit: '积分换购',
@@ -2111,6 +2129,7 @@
           return_label: '· Hold · Keep & Return',
           return_title: 'Sometimes, you don\'t need to own it forever',
           return_intro: 'Decide how long you want to keep it. Send it back for store credit or cash.',
+          flow_guide_link: 'View full Flow Guide →',
           return_th_period: 'Hold Time',
           return_th_cash: 'Cash Back',
           return_th_credit: 'Store Credit',
