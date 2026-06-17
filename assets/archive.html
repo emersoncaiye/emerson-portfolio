@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN" id="html-root">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="page_title">三角洲 · Selection Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.cn">
+  <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin>
+  <link href="https://fonts.googleapis.cn/css2?family=Hanken+Grotesk:wght@400;500;600&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #050d06;
+      --bg: #fbf9f7;
+      --bg-alt: #f0edeb;
+      --bg-light: #ffffff;
+      --text: #121212;
+      --accent: #050d06;
+      --accent-muted: rgba(5,13,6,0.06);
+      --sprout: #5c7a64;
+      --deep-forest: #3d5243;
+      --text-light: #d4cfc4;
+      --gray-100: #e4e2e0;
+      --gray-300: #9a9488;
+      --gray-600: #6b6558;
+      --gray-900: #121212;
+      --font-serif: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+      --font-mono: 'SF Mono', Menlo, 'Cascadia Code', monospace;
+      --font-sans: 'Hanken Grotesk', Inter, -apple-system, 'Helvetica Neue', sans-serif;
+    }
+    html { scroll-behavior: smooth; background: var(--bg); color: var(--ink); }
+    body {
+      font-family: var(--font-serif);
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+    .noise-overlay {
+      position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 1.5px;
+      background: var(--accent); z-index: 10001; width: 0%;
+      transition: width 0.1s linear; opacity: 0.6;
+    }
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 20px 40px; display: flex; justify-content: space-between; align-items: center;
+      background: rgba(251, 249, 247, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      color: var(--text); font-family: var(--font-sans); font-size: 10px;
+      letter-spacing: 2px; text-transform: uppercase;
+      border-bottom: 1px solid #121212;
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), background 0.4s;
+    }
+    header.header--hidden { transform: translateY(-100%); }
+    header.header--scrolled { background: rgba(251, 249, 247, 0.92); padding: 14px 40px; }
+    header .logo a { font-family: var(--font-sans); font-size: 12px; font-weight: 400; letter-spacing: 4px; color: var(--text); text-decoration: none; }
+    header nav { display: flex; gap: 24px; align-items: center; }
+    header nav a { color: inherit; text-decoration: none; opacity: 0.7; transition: opacity 0.3s; font-size: 10px; position: relative; padding-bottom: 4px; }
+    header nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+    header nav a:hover { opacity: 1; }
+    header nav a:hover::after { width: 100%; }
+    .lang-toggle { background: none; border: none; font-family: var(--font-sans); font-size: 10px; letter-spacing: 2px; color: var(--text); cursor: pointer; opacity: 0.7; transition: opacity 0.3s; padding: 0; }
+    .lang-toggle:hover { opacity: 1; }
+    .lang-toggle .active-lang { opacity: 1; }
+    .lang-toggle .sep { margin: 0 2px; opacity: 0.4; }
+    .archive-header { padding: 140px 60px 60px; max-width: 1200px; margin: 0 auto; }
+    .archive-header h1 { font-family: var(--font-sans); font-size: clamp(32px, 5vw, 64px); font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; color: var(--text); margin-bottom: 16px; }
+    .archive-header h1 em { font-style: italic; font-weight: 400; color: var(--sprout); }
+    .archive-header p { font-family: var(--font-serif); font-size: clamp(13px, 1.3vw, 16px); line-height: 1.8; color: var(--gray-600); max-width: 520px; font-style: italic; }
+    .filter-tabs { padding: 0 60px 40px; max-width: 1200px; margin: 0 auto; display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-tab { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 8px 16px; border: 1px solid #121212; background: transparent; color: var(--gray-600); cursor: pointer; transition: all 0.3s; }
+    .filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-tab.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+    .masonry-grid { padding: 0 60px 100px; max-width: 1200px; margin: 0 auto; column-count: 3; column-gap: 24px; }
+    @media (max-width: 900px) { .masonry-grid { column-count: 2; padding: 0 30px 80px; } .archive-header { padding: 120px 30px 40px; } .filter-tabs { padding: 0 30px 30px; } }
+    @media (max-width: 480px) { .masonry-grid { column-count: 1; padding: 0 20px 60px; } .archive-header { padding: 100px 20px 30px; } .filter-tabs { padding: 0 20px 20px; } header { padding: 16px 20px; } }
+    .masonry-item { break-inside: avoid; margin-bottom: 24px; border: 1px solid #121212; background: var(--bg-light); overflow: hidden; cursor: pointer; transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s, border-color 0.3s; position: relative; }
+    .masonry-item:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(0,0,0,0.08); border-color: var(--sprout); }
+    .masonry-item:hover .item-image img { transform: scale(1.03); }
+    .masonry-item:hover .item-name { color: var(--sprout); }
+    .item-image { overflow: hidden; position: relative; }
+    .item-image img { width: 100%; display: block; transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1); filter: grayscale(15%) sepia(8%); }
+    .item-info { padding: 20px; }
+    .item-meta { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+    .item-name { font-family: var(--font-sans); font-size: 16px; font-weight: 400; letter-spacing: 0.5px; color: var(--text); transition: color 0.3s; line-height: 1.3; }
+    .item-price { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; color: var(--gray-600); white-space: nowrap; margin-left: 8px; }
+    .item-why { border-top: 1px solid #121212; padding-top: 12px; margin-top: 12px; }
+    .item-why-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--sprout); margin-bottom: 6px; }
+    .item-why-text { font-family: var(--font-serif); font-size: 13px; line-height: 1.7; color: var(--gray-600); font-style: italic; }
+    .item-tag { position: absolute; top: 12px; left: 12px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; color: var(--gray-600); background: var(--bg); padding: 4px 10px; opacity: 0.8; }
+    footer { padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-sans); font-size: 10px; letter-spacing: 2px; color: var(--gray-300); border-top: 1px solid #121212; max-width: 1200px; margin: 0 auto; }
+    footer a { color: inherit; text-decoration: none; transition: color 0.3s; }
+    footer a:hover { color: var(--sprout); }
+    footer .footer-links { display: flex; gap: 24px; }
+    @media (max-width: 480px) { footer { flex-direction: column; gap: 16px; text-align: center; padding: 30px 20px; } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .custom-cursor { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); position: fixed; pointer-events: none; z-index: 10000; mix-blend-mode: difference; transition: transform 0.15s ease-out, width 0.3s, height 0.3s, opacity 0.3s; transform: translate(-50%, -50%); opacity: 0; }
+    .custom-cursor.active { opacity: 1; }
+    .custom-cursor.hovering { width: 40px; height: 40px; background: rgba(92, 122, 100, 0.15); border: 1px solid var(--sprout); }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="noise-overlay"></div>
+  <div class="custom-cursor" id="cursor"></div>
+  <header>
+    <div class="logo"><a href="index.html">THAT program</a></div>
+    <nav>
+      <a href="index.html#taste">Taste</a>
+      <a href="index.html#hold">Hold</a>
+      <a href="index.html#transfer">Transfer</a>
+      <a href="#" class="nav-accent">Archive</a>
+      <button class="lang-toggle" id="langToggle"><span class="active-lang" data-lang="zh">中</span><span class="sep">/</span><span data-lang="en">EN</span></button>
+    </nav>
+  </header>
+  <div class="archive-header">
+    <h1 class="reveal" data-i18n="archive_title">Selection <em>Archive</em></h1>
+    <p class="reveal" data-i18n="archive_desc">精心策划的器物档案，代表着有意的瑕疵。这些物品之所以被选中，不是因为它们完美无瑕，而是因为它们承载着生命。</p>
+  </div>
+  <div class="filter-tabs reveal">
+    <button class="filter-tab active" data-filter="all">All</button>
+    <button class="filter-tab" data-filter="apparel">Apparel</button>
+    <button class="filter-tab" data-filter="objects">Objects</button>
+    <button class="filter-tab" data-filter="furniture">Furniture</button>
+    <button class="filter-tab" data-filter="books">Books</button>
+  </div>
+  <div class="masonry-grid" id="masonryGrid">
+    <article class="masonry-item reveal" data-category="objects">
+      <div class="item-image"><img alt="Cracked Moss Cup" src="https://images.unsplash.com/photo-1565193566173-7a0e3f5b0e8f?w=600&q=80"><span class="item-tag">Objects</span></div>
+      <div class="item-info">
+        <div class="item-meta"><h3 class="item-name">Cracked Moss Cup</h3><span class="item-price">$45</span></div>
+        <div class="item-why"><div class="item-why-label">选品眼光</div><p class="item-why-text">The visible repair line speaks to resilience rather than ruin. It demands to be held.</p></div>
+      </div>
+    </article>
+    <article class="masonry-item reveal" data-category="objects">
+      <div class="item-image"><img alt="Verdigris Task Lamp" src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&q=80"><span class="item-tag">Objects</span></div>
+      <div class="item-info">
+        <div class="item-meta"><h3 class="item-name">Verdigris Task Lamp</h3><span class="item-price">$210</span></div>
+        <div class="item-why"><div class="item-why-label">买得聪明</div><p class="item-why-text">The aggressive patina transforms a functional object into an artifact of time.</p></div>
+      </div>
+    </article>
+    <article class="masonry-item reveal" data-category="apparel">
+      <div class="item-image"><img alt="Heavyweight Linen Bundle" src="https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&q=80"><span class="item-tag">Apparel</span></div>
+      <div class="item-info">
+        <div class="item-meta"><h3 class="item-name">Heavyweight Linen Bundle</h3><span class="item-price">$180</span></div>
+        <div class="item-why"><div class="item-why-label">选品眼光</div><p class="item-why-text">Unbleached, undyed, unapologetic. The texture forces you to slow down.</p></div>
+      </div>
+    </article>
+    <article class="masonry-item reveal" data-category="furniture">
+      <div class="item-image"><img alt="Weathered Oak Stool" src="https://images.unsplash.com/photo-1503602642458-232111445657?w=600&q=80"><span class="item-tag">Furniture</span></div>
+      <div class="item-info">
+        <div class="item-meta"><h3 class="item-name">Weathered Oak Stool</h3><span class="item-price">$320</span></div>
+        <div class="item-why"><div class="item-why-label">流转之美</div><p class="item-why-text">Three generations of use visible in the grain. A stool that carries memory.</p></div>
+      </div>
+    </article>
+    <article class="masonry-item reveal" data-category="books">
+      <div class="item-image"><img alt="Botanical Press Collection" src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=600&q=80"><span class="item-tag">Books</span></div>
+      <div class="item-info">
+        <div class="item-meta"><h3 class="item-name">Botanical Press Collection</h3><span class="item-price">$85</span></div>
+        <div class="item-why"><div class="item-why-label">选品眼光</div><p class="item-why-text">Pressed between pages, time becomes flat. A meditation on preservation.</p></div>
+      </div>
+    </article>
+    <article class="masonry-item reveal" data-category="apparel">
+      <div class="item-image"><img alt="Waxed Canvas Tote" src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&q=80"><span class="item-tag">Apparel</span></div>
+      <div class="item-info">
+        <div class="item-meta"><h3 class="item-name">Waxed Canvas Tote</h3><span class="item-price">$95</span></div>
+        <div class="item-why"><div class="item-why-label">买得聪明</div><p class="item-why-text">Waterproofed by beeswax, softened by use. The bag that ages with you.</p></div>
+      </div>
+    </article>
+    <article class="masonry-item reveal" data-category="objects">
+      <div class="item-image"><img alt="Brass Incense Holder" src="https://images.unsplash.com/photo-1605112442948-1c5d3c6163c0?w=600&q=80"><span class="item-tag">Objects</span></div>
+      <div class="item-info">
+        <div class="item-meta"><h3 class="item-name">Brass Incense Holder</h3><span class="item-price">$68</span></div>
+        <div class="item-why"><div class="item-why-label">选品眼光</div><p class="item-why-text">Oxidized to a warm amber. Each burn adds another layer of story.</p></div>
+      </div>
+    </article>
+    <article class="masonry-item reveal" data-category="furniture">
+      <div class="item-image"><img alt="Rattan Lounge Chair" src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=80"><span class="item-tag">Furniture</span></div>
+      <div class="item-info">
+        <div class="item-meta"><h3 class="item-name">Rattan Lounge Chair</h3><span class="item-price">$450</span></div>
+        <div class="item-why"><div class="item-why-label">流转之美</div><p class="item-why-text">Hand-woven in 1987. The cane has darkened to the color of honey.</p></div>
+      </div>
+    </article>
+    <article class="masonry-item reveal" data-category="books">
+      <div class="item-image"><img alt="Typography Monograph" src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=600&q=80"><span class="item-tag">Books</span></div>
+      <div class="item-info">
+        <div class="item-meta"><h3 class="item-name">Typography Monograph</h3><span class="item-price">$120</span></div>
+        <div class="item-why"><div class="item-why-label">选品眼光</div><p class="item-why-text">First edition, 1962. The letterpress impressions are still tactile on the page.</p></div>
+      </div>
+    </article>
+  </div>
+  <footer>
+    <div data-i18n="footer_text">THAT program · 漂亮的东西应该流动</div>
+    <div class="footer-links">
+      <a href="index.html" data-i18n="footer_home">首页</a>
+      <a href="archive.html" data-i18n="footer_archive">Archive</a>
+      <a href="flow.html" data-i18n="footer_flow">Flow</a>
+    </div>
+    <div>© 2024 THAT</div>
+  </footer>
+  <script>
+    (function() {
+      const scrollProgress = document.getElementById('scrollProgress');
+      let lastScrollY = 0, scrollTicking = false;
+      function updateScrollProgress() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        scrollProgress.style.width = (scrollTop / docHeight) * 100 + '%';
+        const header = document.querySelector('header');
+        if (scrollTop > 100) {
+          header.classList.add('header--scrolled');
+          if (scrollTop > lastScrollY && scrollTop > 300) header.classList.add('header--hidden');
+          else header.classList.remove('header--hidden');
+        } else header.classList.remove('header--scrolled', 'header--hidden');
+        lastScrollY = scrollTop;
+      }
+      window.addEventListener('scroll', function() {
+        if (!scrollTicking) {
+          window.requestAnimationFrame(function() { updateScrollProgress(); scrollTicking = false; });
+          scrollTicking = true;
+        }
+      });
+
+      const cursor = document.getElementById('cursor');
+      let cursorVisible = false, cursorX = 0, cursorY = 0, targetX = 0, targetY = 0;
+      document.addEventListener('mousemove', function(e) {
+        if (!cursorVisible) { cursor.classList.add('active'); cursorVisible = true; }
+        targetX = e.clientX; targetY = e.clientY;
+      });
+      function animateCursor() { cursorX += (targetX - cursorX) * 0.15; cursorY += (targetY - cursorY) * 0.15; cursor.style.left = cursorX + 'px'; cursor.style.top = cursorY + 'px'; requestAnimationFrame(animateCursor); }
+      animateCursor();
+      document.addEventListener('mouseleave', function() { cursor.classList.remove('active'); cursorVisible = false; });
+      document.querySelectorAll('a, button, .masonry-item').forEach(function(el) {
+        el.addEventListener('mouseenter', function() { cursor.classList.add('hovering'); });
+        el.addEventListener('mouseleave', function() { cursor.classList.remove('hovering'); });
+      });
+
+      const revealElements = document.querySelectorAll('.reveal');
+      function checkReveal() {
+        const windowHeight = window.innerHeight;
+        revealElements.forEach(function(el) { if (el.getBoundingClientRect().top < windowHeight * 0.88) el.classList.add('visible'); });
+      }
+      checkReveal();
+      window.addEventListener('scroll', function() {
+        if (!scrollTicking) {
+          window.requestAnimationFrame(function() { checkReveal(); scrollTicking = false; });
+          scrollTicking = true;
+        }
+      });
+
+      const filterTabs = document.querySelectorAll('.filter-tab');
+      const masonryItems = document.querySelectorAll('.masonry-item');
+      filterTabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          const filter = this.getAttribute('data-filter');
+          filterTabs.forEach(function(t) { t.classList.remove('active'); });
+          this.classList.add('active');
+          masonryItems.forEach(function(item) {
+            const category = item.getAttribute('data-category');
+            if (filter === 'all' || category === filter) { item.style.display = 'block'; setTimeout(function() { item.style.opacity = '1'; item.style.transform = 'translateY(0)'; }, 10); }
+            else { item.style.opacity = '0'; item.style.transform = 'translateY(20px)'; setTimeout(function() { item.style.display = 'none'; }, 300); }
+          });
+        });
+      });
+
+      const translations = {
+        zh: { archive_title: 'Selection <em>Archive</em>', archive_desc: '精心策划的器物档案，代表着有意的瑕疵。这些物品之所以被选中，不是因为它们完美无瑕，而是因为它们承载着生命。', footer_text: 'THAT program · 漂亮的东西应该流动', footer_home: '首页', footer_archive: 'Archive', footer_flow: 'Flow', footer_impact: 'Impact' },
+        en: { archive_title: 'Selection <em>Archive</em>', archive_desc: 'Curated artifacts representing intentional imperfection. An archive of objects chosen not for their pristine condition, but for the life they hold.', footer_text: 'THAT program · Beauty is meant to flow', footer_home: 'Home', footer_archive: 'Archive', footer_flow: 'Flow', footer_impact: 'Impact' }
+      };
+      let currentLang = 'zh';
+      const langToggle = document.getElementById('langToggle');
+      function updateLanguage() {
+        const t = translations[currentLang];
+        document.querySelectorAll('[data-i18n]').forEach(function(el) {
+          const key = el.getAttribute('data-i18n');
+          if (t[key]) { if (key === 'archive_title') el.innerHTML = t[key]; else el.textContent = t[key]; }
+        });
+        document.querySelectorAll('.lang-toggle span[data-lang]').forEach(function(span) { span.classList.toggle('active-lang', span.getAttribute('data-lang') === currentLang); });
+      }
+      if (langToggle) langToggle.addEventListener('click', function() { currentLang = currentLang === 'zh' ? 'en' : 'zh'; updateLanguage(); });
+    })();
+  </script>
+</body>
+</html>
