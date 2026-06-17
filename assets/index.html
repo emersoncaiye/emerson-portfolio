@@ -2258,31 +2258,19 @@
 
       // ===== SCROLL REVEAL =====
       const revealElements = document.querySelectorAll('.reveal');
-
-      function checkReveal() {
-        const windowHeight = window.innerHeight;
-        revealElements.forEach(function(el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < windowHeight * 0.88) {
-            el.classList.add('visible');
+      const revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
           }
         });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      revealElements.forEach(function(el) { revealObserver.observe(el); });
+
+      function checkReveal() {
+        // Kept for compatibility — IntersectionObserver handles reveals now
       }
-
-      // Initial check
-      checkReveal();
-
-      // Throttled scroll handler
-      let scrollTicking = false;
-      window.addEventListener('scroll', function() {
-        if (!scrollTicking) {
-          window.requestAnimationFrame(function() {
-            checkReveal();
-            scrollTicking = false;
-          });
-          scrollTicking = true;
-        }
-      });
 
       // ===== VISITOR COUNTER (animated) =====
       const visitorEl = document.getElementById('visitorCount');

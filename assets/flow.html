@@ -477,17 +477,15 @@
       });
 
       const revealElements = document.querySelectorAll('.reveal');
-      function checkReveal() {
-        const windowHeight = window.innerHeight;
-        revealElements.forEach(function(el) { if (el.getBoundingClientRect().top < windowHeight * 0.88) el.classList.add('visible'); });
-      }
-      checkReveal();
-      window.addEventListener('scroll', function() {
-        if (!scrollTicking) {
-          window.requestAnimationFrame(function() { checkReveal(); scrollTicking = false; });
-          scrollTicking = true;
-        }
-      });
+      const revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      revealElements.forEach(function(el) { revealObserver.observe(el); });
 
       const translations = {
         zh: { flow_title: 'Flow Guide', flow_desc: '临时所有权是与物品的一种流动关系。你投资的是使用与体验，而非永久占有。', flow_desc2: '我们的简单信任系统建立在一个前提之上：标准不是完美，而是还值不值得被下一个喜欢。', flow_tagline: '占有不是答案。流动才是。', timeline_title: '持有时间线', timeline_desc: '你拥有得越久，返还比例越不同。但每一种放手方式，都对应一种值得的退出路径。', footer_text: 'THAT Program · Taste, Hold and Transfer', footer_home: '首页', footer_archive: 'Archive', footer_flow: 'Flow', footer_impact: 'Impact' },

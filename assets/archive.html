@@ -243,17 +243,15 @@
       });
 
       const revealElements = document.querySelectorAll('.reveal');
-      function checkReveal() {
-        const windowHeight = window.innerHeight;
-        revealElements.forEach(function(el) { if (el.getBoundingClientRect().top < windowHeight * 0.88) el.classList.add('visible'); });
-      }
-      checkReveal();
-      window.addEventListener('scroll', function() {
-        if (!scrollTicking) {
-          window.requestAnimationFrame(function() { checkReveal(); scrollTicking = false; });
-          scrollTicking = true;
-        }
-      });
+      const revealObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+      revealElements.forEach(function(el) { revealObserver.observe(el); });
 
       const filterTabs = document.querySelectorAll('.filter-tab');
       const masonryItems = document.querySelectorAll('.masonry-item');
