@@ -1175,9 +1175,59 @@
       align-items: center;
     }
 
-    footer .footer-links {
+    footer .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 48px;
+    }
+    footer .footer-brand h3 {
+      font-family: var(--font-serif);
+      font-size: 24px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 8px;
+    }
+    footer .footer-brand p {
+      font-family: var(--font-sans);
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.4);
+    }
+    footer .footer-social {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    footer .footer-social a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      transition: color 0.3s;
+    }
+    footer .footer-social a:hover { color: rgba(255,255,255,0.9); }
+    footer .footer-nav {
       display: flex;
       gap: 32px;
+      margin-bottom: 48px;
+      padding: 24px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    footer .footer-nav a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-family: var(--font-sans);
+      font-size: 13px;
+      transition: color 0.3s;
+    }
+    footer .footer-nav a:hover { color: rgba(255,255,255,0.9); }
+    footer .footer-bottom {
+      font-family: var(--font-sans);
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.25);
     }
 
     footer a {
@@ -1956,12 +2006,25 @@
 
   <!-- FOOTER -->
   <footer>
-    <div data-i18n="footer_text">THAT Program · Taste, Hold and Transfer</div>
-    <div class="footer-links">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>THAT program</h3>
+        <p>Taste, Hold and Transfer</p>
+      </div>
+      <div class="footer-social">
+        <a href="#" data-i18n="footer_instagram">Instagram</a>
+        <a href="#" data-i18n="footer_xiaohongshu">小红书</a>
+        <a href="#" data-i18n="footer_email">邮箱</a>
+      </div>
+    </div>
+    <div class="footer-nav">
       <a href="index.html" data-i18n="footer_home">首页</a>
       <a href="archive.html" data-i18n="footer_archive">Archive</a>
       <a href="flow.html" data-i18n="footer_flow">Flow</a>
+      <a href="#" data-i18n="footer_about">关于</a>
+      <a href="#" data-i18n="footer_contact">联系</a>
     </div>
+    <div class="footer-bottom">&copy; 2026 THAT program. Circularity by Design.</div>
   </footer>
 
   <script>
@@ -2052,7 +2115,14 @@
           attitude_sign: '— delta · no gatekeeping —',
           visitors_label: '当前在线',
           visitors_text: 'Taste, Hold and Transfer',
-          footer_text: 'THAT Program · Taste, Hold and Transfer',
+          footer_home: '首页',
+          footer_archive: 'Archive',
+          footer_flow: 'Flow',
+          footer_about: '关于',
+          footer_contact: '联系',
+          footer_instagram: 'Instagram',
+          footer_xiaohongshu: '小红书',
+          footer_email: '邮箱',
           about_standard_label: '我的选品标准',
           about_sig1: '降噪',
           about_sig2: '聪明',
@@ -2148,7 +2218,14 @@
           attitude_sign: '— delta · no gatekeeping —',
           visitors_label: 'Online Now',
           visitors_text: 'Taste, Hold and Transfer',
-          footer_text: 'THAT Program · Taste, Hold and Transfer',
+          footer_home: 'Home',
+          footer_archive: 'Archive',
+          footer_flow: 'Flow',
+          footer_about: 'About',
+          footer_contact: 'Contact',
+          footer_instagram: 'Instagram',
+          footer_xiaohongshu: 'RED',
+          footer_email: 'Email',
           about_standard_label: 'Selection Criteria',
           about_sig1: 'Noise Off',
           about_sig2: 'Smart',

@@ -94,10 +94,19 @@
     .item-why-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--sprout); margin-bottom: 6px; }
     .item-why-text { font-family: var(--font-serif); font-size: 13px; line-height: 1.7; color: var(--gray-600); font-style: italic; }
     .item-tag { position: absolute; top: 12px; left: 12px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; color: var(--gray-600); background: var(--bg); padding: 4px 10px; opacity: 0.8; }
-    footer { padding: 40px clamp(30px, 5vw, 120px); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-sans); font-size: 13px; letter-spacing: 2px; color: var(--gray-300); border-top: 1px solid #121212; max-width: min(1600px, 92vw); margin: 0 auto; }
+    footer { padding: 60px clamp(30px, 5vw, 120px); font-family: var(--font-sans); font-size: 13px; letter-spacing: 2px; color: var(--gray-300); border-top: 1px solid #121212; max-width: min(1600px, 92vw); margin: 0 auto; }
     footer a { color: inherit; text-decoration: none; transition: color 0.3s; }
     footer a:hover { color: var(--sprout); }
-    footer .footer-links { display: flex; gap: 24px; }
+    footer .footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 48px; }
+    footer .footer-brand h3 { font-family: var(--font-serif); font-size: 24px; font-weight: 400; color: var(--text); margin-bottom: 8px; }
+    footer .footer-brand p { font-family: var(--font-sans); font-size: 13px; letter-spacing: 1px; color: var(--gray-600); }
+    footer .footer-social { display: flex; gap: 24px; align-items: center; }
+    footer .footer-social a { color: var(--gray-600); }
+    footer .footer-social a:hover { color: var(--sprout); }
+    footer .footer-nav { display: flex; gap: 32px; margin-bottom: 48px; padding: 24px 0; border-top: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100); }
+    footer .footer-nav a { color: var(--gray-600); }
+    footer .footer-nav a:hover { color: var(--text); }
+    footer .footer-bottom { font-size: 12px; letter-spacing: 1px; color: var(--gray-300); }
     @media (max-width: 480px) { footer { flex-direction: column; gap: 16px; text-align: center; padding: 30px 20px; } }
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -197,13 +206,25 @@
     </article>
   </div>
   <footer>
-    <div data-i18n="footer_text">THAT Program · Taste, Hold and Transfer</div>
-    <div class="footer-links">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h3>THAT program</h3>
+        <p>Taste, Hold and Transfer</p>
+      </div>
+      <div class="footer-social">
+        <a href="#" data-i18n="footer_instagram">Instagram</a>
+        <a href="#" data-i18n="footer_xiaohongshu">小红书</a>
+        <a href="#" data-i18n="footer_email">邮箱</a>
+      </div>
+    </div>
+    <div class="footer-nav">
       <a href="index.html" data-i18n="footer_home">首页</a>
       <a href="archive.html" data-i18n="footer_archive">Archive</a>
       <a href="flow.html" data-i18n="footer_flow">Flow</a>
+      <a href="#" data-i18n="footer_about">关于</a>
+      <a href="#" data-i18n="footer_contact">联系</a>
     </div>
-    <div>© 2024 THAT</div>
+    <div class="footer-bottom">&copy; 2026 THAT program. Circularity by Design.</div>
   </footer>
   <script>
     (function() {
@@ -269,8 +290,8 @@
       });
 
       const translations = {
-        zh: { archive_title: 'Selection <em>Archive</em>', archive_desc: '精心策划的器物档案，代表着有意的瑕疵。这些物品之所以被选中，不是因为它们完美无瑕，而是因为它们承载着生命。', footer_text: 'THAT Program · Taste, Hold and Transfer', footer_home: '首页', footer_archive: 'Archive', footer_flow: 'Flow', footer_impact: 'Impact' },
-        en: { archive_title: 'Selection <em>Archive</em>', archive_desc: 'Curated artifacts representing intentional imperfection. An archive of objects chosen not for their pristine condition, but for the life they hold.', footer_text: 'THAT program · Taste, Hold and Transfer', footer_home: 'Home', footer_archive: 'Archive', footer_flow: 'Flow', footer_impact: 'Impact' }
+        zh: { archive_title: 'Selection <em>Archive</em>', archive_desc: '精心策划的器物档案，代表着有意的瑕疵。这些物品之所以被选中，不是因为它们完美无瑕，而是因为它们承载着生命。', footer_home: '首页', footer_archive: 'Archive', footer_flow: 'Flow', footer_about: '关于', footer_contact: '联系', footer_instagram: 'Instagram', footer_xiaohongshu: '小红书', footer_email: '邮箱', footer_impact: 'Impact' },
+        en: { archive_title: 'Selection <em>Archive</em>', archive_desc: 'Curated artifacts representing intentional imperfection. An archive of objects chosen not for their pristine condition, but for the life they hold.', footer_home: 'Home', footer_archive: 'Archive', footer_flow: 'Flow', footer_about: 'About', footer_contact: 'Contact', footer_instagram: 'Instagram', footer_xiaohongshu: 'RED', footer_email: 'Email', footer_impact: 'Impact' }
       };
       let currentLang = 'zh';
       const langToggle = document.getElementById('langToggle');
