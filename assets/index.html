@@ -162,7 +162,7 @@
       -webkit-backdrop-filter: blur(12px);
       color: var(--text);
       font-family: var(--font-sans);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 2px;
       text-transform: uppercase;
       border-bottom: 1px solid #121212;
@@ -180,7 +180,7 @@
     /* lang toggle */
     .lang-toggle {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 2px;
       cursor: pointer;
       opacity: 0.7;
@@ -211,7 +211,7 @@
       text-decoration: none;
       opacity: 0.7;
       transition: opacity 0.3s;
-      font-size: 10px;
+      font-size: 13px;
     }
 
     header nav a:hover { opacity: 1; }
@@ -348,7 +348,7 @@
       left: 50%;
       transform: translateX(-50%);
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 3px;
       color: var(--gray-600);
       opacity: 0.5;
@@ -387,7 +387,7 @@
 
     .section-label {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 4px;
       text-transform: uppercase;
       color: var(--gray-300);
@@ -603,7 +603,7 @@
       align-items: center;
       justify-content: center;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 13px;
       color: var(--gray-300);
       letter-spacing: 2px;
       transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
@@ -651,7 +651,7 @@
       top: 16px;
       left: 16px;
       font-family: var(--font-mono);
-      font-size: 9px;
+      font-size: 12px;
       letter-spacing: 2px;
       color: var(--gray-600);
       background: var(--bg);
@@ -672,7 +672,7 @@
 
     .item-desc {
       font-family: var(--font-sans);
-      font-size: 10px;
+      font-size: 13px;
       color: var(--gray-600);
       line-height: 1.6;
       letter-spacing: 0.5px;
@@ -758,7 +758,7 @@
       text-align: left;
       padding: 16px 24px;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 2px;
       text-transform: uppercase;
       font-weight: 400;
@@ -826,7 +826,7 @@
       align-items: center;
       gap: 8px;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 0.5px;
       color: var(--gray-900);
       background: #cdd0ca;
@@ -846,7 +846,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 9px;
+      font-size: 12px;
       font-family: var(--font-mono);
       flex-shrink: 0;
     }
@@ -912,7 +912,7 @@
       align-items: center;
       gap: 14px;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 1px;
       color: rgba(28,40,32,0.65);
     }
@@ -940,7 +940,7 @@
       align-items: center;
       gap: 8px;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 2px;
       color: var(--gray-600);
       background: var(--bg-alt);
@@ -1086,7 +1086,7 @@
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       font-family: var(--font-mono);
-      font-size: 9px;
+      font-size: 12px;
       letter-spacing: 4px;
       color: rgba(255,255,255,0.2);
       text-align: center;
@@ -1122,7 +1122,7 @@
       border-top: 2px solid var(--accent);
       opacity: 0.3;
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 2px;
       color: var(--gray-600);
       text-align: center;
@@ -1139,7 +1139,7 @@
     }
 
     .visitors .copy {
-      font-size: 10px;
+      font-size: 13px;
       opacity: 0.5;
       max-width: 400px;
       margin: 0 auto;
@@ -1168,7 +1168,7 @@
       background: #141414;
       color: rgba(255,255,255,0.4);
       font-family: var(--font-sans);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 1px;
       display: flex;
       justify-content: space-between;
@@ -1276,9 +1276,16 @@
       transform: translateY(0);
     }
 
+    .detail-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 48px;
+    }
+
     .detail-back {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 12px;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--gray-600);
@@ -1286,9 +1293,28 @@
       border: none;
       cursor: pointer;
       padding: 0;
-      margin-bottom: 48px;
       transition: color 0.3s;
-      display: block;
+    }
+
+    .detail-nav {
+      display: flex;
+      gap: 20px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .detail-nav a {
+      color: var(--gray-600);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+
+    .detail-nav a:hover {
+      opacity: 1;
+      color: var(--accent);
     }
 
     .detail-back:hover {
@@ -1325,7 +1351,7 @@
       top: 16px;
       left: 16px;
       font-family: var(--font-mono);
-      font-size: 9px;
+      font-size: 12px;
       letter-spacing: 2px;
       color: var(--gray-600);
       background: var(--bg);
@@ -1339,7 +1365,7 @@
 
     .detail-breadcrumb {
       font-family: var(--font-mono);
-      font-size: 9px;
+      font-size: 12px;
       letter-spacing: 3px;
       color: var(--gray-300);
       text-transform: uppercase;
@@ -1393,7 +1419,7 @@
 
     .detail-story h3 {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--accent);
@@ -1413,7 +1439,7 @@
 
     .detail-specs h3 {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--gray-600);
@@ -1423,7 +1449,7 @@
 
     .detail-specs pre {
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 13px;
       line-height: 2;
       color: var(--gray-600);
       white-space: pre-wrap;
@@ -1439,7 +1465,7 @@
 
     .detail-btn {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 2px;
       text-transform: uppercase;
       padding: 14px 28px;
@@ -1498,7 +1524,7 @@
 
     .detail-flowback-inner h3 {
       font-family: var(--font-mono);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: var(--accent);
@@ -1518,7 +1544,7 @@
       border-collapse: separate;
       border-spacing: 0;
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 13px;
       letter-spacing: 0.5px;
       margin-bottom: 28px;
     }
@@ -1528,7 +1554,7 @@
       padding: 10px 16px;
       font-weight: 400;
       color: var(--gray-600);
-      font-size: 10px;
+      font-size: 13px;
       letter-spacing: 2px;
       text-transform: uppercase;
       border-bottom: 1px solid var(--gray-100);
@@ -1656,7 +1682,7 @@
           买走之后，如果哪一天它不再需要你了，送回给三角洲。它会继续被下一个人遇见。
         </p>
 
-        <p class="reveal" data-i18n="editors_note_p5" style="margin-top:40px;padding-top:24px;border-top:1px solid var(--gray-100);font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--accent);">
+        <p class="reveal" data-i18n="editors_note_p5" style="margin-top:40px;padding-top:24px;border-top:1px solid var(--gray-100);font-family:var(--font-mono);font-size:13px;letter-spacing:2px;color:var(--accent);">
           每一次再流通，售价的 10% 注入公益金。
         </p>
       </div>
@@ -1684,7 +1710,7 @@
           </div>
         </div>
 
-        <p class="reveal" style="padding-left:48px;margin-top:16px;font-family:var(--font-mono);font-size:8px;letter-spacing:1px;color:var(--accent);line-height:1.8;">
+        <p class="reveal" style="padding-left:48px;margin-top:16px;font-family:var(--font-mono);font-size:12px;letter-spacing:1px;color:var(--accent);line-height:1.8;">
           <span style="opacity:0.6;">备注</span> <span style="opacity:0.5;">退回的东西会重新整理上架。二次销售利润的 20% 进入公益金，每季度公示去向。</span>
         </p>
       </div>
@@ -1798,7 +1824,7 @@
   <!-- HOLD: 持有与回流 -->
 <section class="return-mech" id="hold" style="background:#1a1a1a;padding:120px 60px 160px;">
   <div style="max-width:1200px;margin:0 auto;text-align:center;">
-    <div class="section-label reveal" style="color:rgba(255,255,255,0.4);display:inline-block;margin-bottom:40px;font-family:var(--font-mono);font-size:10px;letter-spacing:4px;text-transform:uppercase;">
+    <div class="section-label reveal" style="color:rgba(255,255,255,0.4);display:inline-block;margin-bottom:40px;font-family:var(--font-mono);font-size:13px;letter-spacing:4px;text-transform:uppercase;">
       · Hold 持有
     </div>
     <h2 style="font-size:clamp(28px,4vw,40px);font-weight:400;line-height:1.2;color:#ffffff;margin-bottom:16px;font-family:var(--font-serif);" data-i18n="return_title">
@@ -1812,9 +1838,9 @@
       <<table style="width:100%;border-collapse:collapse;font-family:var(--font-sans);font-size:12px;letter-spacing:0.03em;text-align:left;">
   <thead style="background:rgba(255,255,255,0.05);">
     <tr>
-      <th style="padding:16px 24px;font-weight:400;color:rgba(255,255,255,0.4);font-size:10px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);font-family:var(--font-mono);" data-i18n="return_th_period">持有时间</th>
-      <th style="padding:16px 24px;font-weight:400;color:rgba(255,255,255,0.4);font-size:10px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);font-family:var(--font-mono);" data-i18n="return_th_credit">积分换购</th>
-      <th style="padding:16px 24px;font-weight:400;color:rgba(255,255,255,0.4);font-size:10px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);font-family:var(--font-mono);" data-i18n="return_th_cash">现金返还</th>
+      <th style="padding:16px 24px;font-weight:400;color:rgba(255,255,255,0.4);font-size:13px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);font-family:var(--font-mono);" data-i18n="return_th_period">持有时间</th>
+      <th style="padding:16px 24px;font-weight:400;color:rgba(255,255,255,0.4);font-size:13px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);font-family:var(--font-mono);" data-i18n="return_th_credit">积分换购</th>
+      <th style="padding:16px 24px;font-weight:400;color:rgba(255,255,255,0.4);font-size:13px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.06);font-family:var(--font-mono);" data-i18n="return_th_cash">现金返还</th>
     </tr>
   </thead>
   <tbody>
@@ -2286,7 +2312,7 @@
         const msg = lang === 'en'
           ? 'A cyclic space with aesthetics as coordinates'
           : '以审美为坐标的循环空间';
-        console.log('%c ' + msg + ' ', 'color: var(--gray-600); font-size: 10px;');
+        console.log('%c ' + msg + ' ', 'color: var(--gray-600); font-size: 13px;');
       }
       printSubtitle(currentLang);
 
@@ -2375,7 +2401,11 @@
               s.style.display = '';
             });
             document.querySelector('header').style.display = '';
-            window.location.hash = '#items';
+            // Scroll to taste section instead of top
+            var tasteSection = document.getElementById('taste');
+            if (tasteSection) {
+              tasteSection.scrollIntoView({ behavior: 'auto', block: 'start' });
+            }
             // Re-trigger reveal
             checkReveal();
           }, 300);
@@ -2450,7 +2480,13 @@
 
       function getDetailHTML(item, index) {
         return '' +
-          '<button class="detail-back">← 返回</button>' +
+          '<div class="detail-top-bar">' +
+            '<button class="detail-back">← 返回</button>' +
+            '<div class="detail-nav">' +
+              '<a href="archive.html">Archive</a>' +
+              '<a href="flow.html">Flow</a>' +
+            '</div>' +
+          '</div>' +
           '<div class="detail-layout">' +
             '<div class="detail-image">' +
               '<div class="detail-placeholder ' + item.tex + '">' +
