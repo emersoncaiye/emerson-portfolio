@@ -298,47 +298,73 @@
     </div>
     <div class="timeline reveal">
       <div class="section-header">
-        <h2 data-i18n="timeline_title">时间线</h2>
-        <p data-i18n="timeline_desc">临时所有权的节奏。每个阶段提供与物品不同的关系。</p>
+        <h2 data-i18n="timeline_title">持有时间线</h2>
+        <p data-i18n="timeline_desc">你拥有得越久，返还比例越不同。但每一种放手方式，都对应一种值得的退出路径。</p>
       </div>
+      
       <div class="timeline-item">
         <div>
           <div class="timeline-number">01</div>
-          <div class="timeline-period">7 天</div>
+          <div class="timeline-period">7 天内</div>
         </div>
         <div class="timeline-content">
           <h3>The Trial · 试炼</h3>
-          <p>即时连接评估。全额积分返还可用。物品只是路过，以确保与你的空间兼容。</p>
+          <p>即时连接评估。<strong>100% 换购</strong> 或 <strong>80% 现金</strong> 返还。物品只是路过，以确保与你的空间兼容。</p>
         </div>
       </div>
+      
       <div class="timeline-item">
         <div>
           <div class="timeline-number">02</div>
-          <div class="timeline-period">30 天</div>
+          <div class="timeline-period">30 天内</div>
         </div>
         <div class="timeline-content">
           <h3>The Integration · 融入</h3>
-          <p>物品开始融入你的日常仪式。如果流动感到停滞，发起返还以获得部分积分，让循环继续。</p>
+          <p>物品开始融入你的日常。<strong>80% 积分</strong> 或 <strong>60% 现金</strong> 返还。如果流动停滞，让物品继续前行。</p>
         </div>
       </div>
+      
       <div class="timeline-item">
         <div>
           <div class="timeline-number">03</div>
-          <div class="timeline-period">90 天</div>
+          <div class="timeline-period">90 天内</div>
         </div>
         <div class="timeline-content">
           <h3>The Season · 季节</h3>
-          <p>整整一季的使用。磨损痕迹开始出现，为材质增添叙事。返还以获得系统积分，承认它的演变。</p>
+          <p>整整一季的使用，磨损开始出现。<strong>60% 积分</strong> 或 <strong>40% 现金</strong> 返还。承认它的演变，让它进入下一段旅程。</p>
         </div>
       </div>
+
       <div class="timeline-item">
         <div>
           <div class="timeline-number">04</div>
-          <div class="timeline-period">1 年</div>
+          <div class="timeline-period">3–6 个月</div>
+        </div>
+        <div class="timeline-content">
+          <h3>The Mark · 印记</h3>
+          <p>物品留下了你的生活痕迹。<strong>40% 积分</strong> 或 <strong>20% 现金</strong> 返还。它的故事里有了你的一部分。</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-number">05</div>
+          <div class="timeline-period">6–12 个月</div>
+        </div>
+        <div class="timeline-content">
+          <h3>The Companion · 陪伴</h3>
+          <p>它陪你走过了一整年。返还方式为 <strong>20% 积分</strong>，不再提供现金返还。它值得被好好告别。</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div>
+          <div class="timeline-number">06</div>
+          <div class="timeline-period">1 年以上</div>
         </div>
         <div class="timeline-content">
           <h3>The Bond · 羁绊</h3>
-          <p>物品吸收了你一年的生活。它现在被深深赋予了个性。如果你选择将它释放回流动中，特殊条件适用。</p>
+          <p>它已经是你的朋友了。我们不再谈"退货"，而是 <strong>代售（70% 归你）</strong>。让它体面地找到下一个家。</p>
         </div>
       </div>
     </div>
@@ -458,8 +484,8 @@
       });
 
       const translations = {
-        zh: { flow_title: 'Flow Guide', flow_desc: '临时所有权是与物品的一种流动关系。你投资的是使用与体验，而非永久占有。', flow_desc2: '我们的简单信任系统建立在一个前提之上：标准不是完美，而是还值不值得被下一个喜欢。', flow_tagline: '占有不是答案。流动才是。', timeline_title: '时间线', timeline_desc: '临时所有权的节奏。每个阶段提供与物品不同的关系。', footer_text: 'THAT Program · Taste, Hold and Transfer', footer_home: '首页', footer_archive: 'Archive', footer_flow: 'Flow', footer_impact: 'Impact' },
-        en: { flow_title: 'Flow Guide', flow_desc: 'Temporary Ownership is a fluid relationship with physical goods. You invest in access and experience, not permanent possession.', flow_desc2: 'Our Simple Trust System is built on a single premise: The standard is not perfection, but whether it is worthy of being loved by the next person.', flow_tagline: 'Possession is not the answer. Flow is.', timeline_title: 'The Timeline', timeline_desc: 'The rhythms of temporary ownership. Each phase offers a different relationship with the object.', footer_text: 'THAT program · Beauty is meant to flow', footer_home: 'Home', footer_archive: 'Archive', footer_flow: 'Flow', footer_impact: 'Impact' }
+        zh: { flow_title: 'Flow Guide', flow_desc: '临时所有权是与物品的一种流动关系。你投资的是使用与体验，而非永久占有。', flow_desc2: '我们的简单信任系统建立在一个前提之上：标准不是完美，而是还值不值得被下一个喜欢。', flow_tagline: '占有不是答案。流动才是。', timeline_title: '持有时间线', timeline_desc: '你拥有得越久，返还比例越不同。但每一种放手方式，都对应一种值得的退出路径。', footer_text: 'THAT Program · Taste, Hold and Transfer', footer_home: '首页', footer_archive: 'Archive', footer_flow: 'Flow', footer_impact: 'Impact' },
+        en: { flow_title: 'Flow Guide', flow_desc: 'Temporary Ownership is a fluid relationship with physical goods. You invest in access and experience, not permanent possession.', flow_desc2: 'Our Simple Trust System is built on a single premise: The standard is not perfection, but whether it is worthy of being loved by the next person.', flow_tagline: 'Possession is not the answer. Flow is.', timeline_title: 'Hold Timeline', timeline_desc: 'The longer you keep it, the more the return shifts. But every way of letting go has its own graceful exit.', footer_text: 'THAT program · Beauty is meant to flow', footer_home: 'Home', footer_archive: 'Archive', footer_flow: 'Flow', footer_impact: 'Impact' }
       };
       let currentLang = 'zh';
       const langToggle = document.getElementById('langToggle');
