@@ -482,13 +482,12 @@
       });
 
       const cursor = document.getElementById('cursor');
-      let cursorVisible = false, cursorX = 0, cursorY = 0, targetX = 0, targetY = 0;
+      let cursorVisible = false;
       document.addEventListener('mousemove', function(e) {
         if (!cursorVisible) { cursor.classList.add('active'); cursorVisible = true; }
-        targetX = e.clientX; targetY = e.clientY;
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
       });
-      function animateCursor() { cursorX += (targetX - cursorX) * 0.15; cursorY += (targetY - cursorY) * 0.15; cursor.style.left = cursorX + 'px'; cursor.style.top = cursorY + 'px'; requestAnimationFrame(animateCursor); }
-      animateCursor();
       document.addEventListener('mouseleave', function() { cursor.classList.remove('active'); cursorVisible = false; });
       document.querySelectorAll('a, button, .ladder-card, .timeline-item').forEach(function(el) {
         el.addEventListener('mouseenter', function() { cursor.classList.add('hovering'); });
