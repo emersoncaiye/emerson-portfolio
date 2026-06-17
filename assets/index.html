@@ -1163,22 +1163,6 @@
     }
 
     /* ===== FOOTER ===== */
-    .brand-signature {
-      padding: 60px clamp(30px, 5vw, 120px) 20px;
-      background: #141414;
-      text-align: center;
-      font-family: var(--font-mono);
-      font-size: clamp(11px, 1.2vw, 16px);
-      letter-spacing: 8px;
-      color: rgba(255,255,255,0.3);
-      line-height: 2;
-    }
-
-    .brand-signature .sig-sep {
-      color: rgba(255,255,255,0.15);
-      margin: 0 4px;
-    }
-
     footer {
       padding: 60px;
       background: #141414;
@@ -1970,13 +1954,6 @@
     </div>
   </section>
 
-  <!-- BRAND SIGNATURE -->
-  <div class="brand-signature">
-    <span data-i18n="sig_1">选对</span><span class="sig-sep"> · </span>
-    <span data-i18n="sig_2">持有</span><span class="sig-sep"> · </span>
-    <span data-i18n="sig_3">流转</span>
-  </div>
-
   <!-- FOOTER -->
   <footer>
     <div data-i18n="footer_text">THAT Program · Taste, Hold and Transfer</div>
@@ -2076,9 +2053,6 @@
           visitors_label: '当前在线',
           visitors_text: 'Taste, Hold and Transfer',
           footer_text: 'THAT Program · Taste, Hold and Transfer',
-          sig_1: '选对',
-          sig_2: '持有',
-          sig_3: '流转',
           about_standard_label: '我的选品标准',
           about_sig1: '降噪',
           about_sig2: '聪明',
@@ -2175,9 +2149,6 @@
           visitors_label: 'Online Now',
           visitors_text: 'Taste, Hold and Transfer',
           footer_text: 'THAT Program · Taste, Hold and Transfer',
-          sig_1: 'Taste',
-          sig_2: 'Hold',
-          sig_3: 'Transfer',
           about_standard_label: 'Selection Criteria',
           about_sig1: 'Noise Off',
           about_sig2: 'Smart',
@@ -2349,7 +2320,7 @@
       // ===== DETAIL PAGE LOGIC =====
       function showDetail(index) {
         // Hide all sections except detail
-        var allSections = document.querySelectorAll('section, .brand-signature, footer');
+        var allSections = document.querySelectorAll('section, footer');
         allSections.forEach(function(s) {
           s.style.display = 'none';
         });
@@ -2410,7 +2381,7 @@
           history.replaceState(null, '', window.location.pathname);
           setTimeout(function() {
             detail.style.display = 'none';
-            var allSections = document.querySelectorAll('section, .brand-signature, footer');
+            var allSections = document.querySelectorAll('section, footer');
             allSections.forEach(function(s) {
               s.style.display = '';
             });
