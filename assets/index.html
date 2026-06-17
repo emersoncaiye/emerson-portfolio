@@ -2413,6 +2413,8 @@
         var detail = document.getElementById('item-detail');
         if (detail) {
           detail.classList.remove('visible');
+          // Clear hash without triggering hashchange
+          history.replaceState(null, '', window.location.pathname);
           setTimeout(function() {
             detail.style.display = 'none';
             var allSections = document.querySelectorAll('section, .brand-signature, footer');
@@ -2420,11 +2422,15 @@
               s.style.display = '';
             });
             document.querySelector('header').style.display = '';
-            // Scroll to taste section instead of top
-            var tasteSection = document.getElementById('taste');
-            if (tasteSection) {
-              tasteSection.scrollIntoView({ behavior: 'auto', block: 'start' });
-            }
+            // Wait for layout to settle, then scroll to taste section
+            requestAnimationFrame(function() {
+              requestAnimationFrame(function() {
+                var tasteSection = document.getElementById('taste');
+                if (tasteSection) {
+                  tasteSection.scrollIntoView({ behavior: 'auto', block: 'start' });
+                }
+              });
+            });
             // Re-trigger reveal
             checkReveal();
           }, 300);
