@@ -58,7 +58,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN" id="html-root">
 <script src="https://lf-cdn.coze.cn/obj/unpkg/coze-space/page-editor-general-web/0.1.0-alpha.274555/dist/umd/index.js"></script><script src="https://lf-cdn.coze.cn/obj/unpkg/coze-webapp/console-bridge/0.0.1-alpha.22488f/dist/index.js"></script><script src="https://lf-cdn.coze.cn/obj/unpkg/coze-webapp/history-bridge/0.0.1-alpha.10bbfe/dist/index.min.js"></script><head>
-  <meta charset="UTF-8"><!-- v3 1781747396 -->
+  <meta charset="UTF-8"><!-- v4 1781747973 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.cn">
   <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin>
@@ -1174,58 +1174,63 @@
       align-items: center;
     }
 
-    footer .footer-top {
+    footer .footer-main {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 48px;
     }
     footer .footer-brand h3 {
       font-family: var(--font-serif);
       font-size: 24px;
       font-weight: 400;
       color: rgba(255,255,255,0.9);
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     footer .footer-brand p {
-      font-family: var(--font-sans);
+      font-family: var(--font-serif);
       font-size: 13px;
-      letter-spacing: 1px;
       color: rgba(255,255,255,0.4);
     }
-    footer .footer-social {
-      display: flex;
-      gap: 24px;
-      align-items: center;
+    footer .footer-right {
+      text-align: right;
     }
-    footer .footer-social a {
-      color: rgba(255,255,255,0.4);
-      text-decoration: none;
-      font-family: var(--font-sans);
-      font-size: 13px;
-      transition: color 0.3s;
-    }
-    footer .footer-social a:hover { color: rgba(255,255,255,0.9); }
     footer .footer-nav {
       display: flex;
-      gap: 32px;
-      margin-bottom: 48px;
-      padding: 24px 0;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      gap: 24px;
+      justify-content: flex-end;
+      margin-bottom: 10px;
     }
     footer .footer-nav a {
-      color: rgba(255,255,255,0.5);
+      color: rgba(255,255,255,0.4);
       text-decoration: none;
-      font-family: var(--font-sans);
+      font-family: var(--font-serif);
       font-size: 13px;
       transition: color 0.3s;
     }
     footer .footer-nav a:hover { color: rgba(255,255,255,0.9); }
+    footer .footer-social {
+      display: flex;
+      gap: 24px;
+      justify-content: flex-end;
+    }
+    footer .footer-social a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-family: var(--font-serif);
+      font-size: 13px;
+      transition: color 0.3s;
+    }
+    footer .footer-social a:hover { color: rgba(255,255,255,0.9); }
     footer .footer-bottom {
-      font-family: var(--font-sans);
+      font-family: var(--font-serif);
       font-size: 12px;
       letter-spacing: 1px;
+      color: rgba(255,255,255,0.25);
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 40px;
+      padding-top: 24px;
+    }
       color: rgba(255,255,255,0.25);
     }
 
@@ -2006,22 +2011,24 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-top">
+    <div class="footer-main">
       <div class="footer-brand">
         <h3>THAT program</h3>
         <p>Taste, Hold and Transfer</p>
       </div>
-      <div class="footer-social">
-        <a href="#" data-i18n="footer_instagram">Instagram</a>
-        <a href="#" data-i18n="footer_xiaohongshu">小红书</a>
-        <a href="mailto:emerson.the.k@gmail.com">emerson.the.k@gmail.com</a>
+      <div class="footer-right">
+        <div class="footer-nav">
+          <a href="index.html" data-i18n="footer_home">首页</a>
+          <a href="archive.html">Archive</a>
+          <a href="flow.html">Flow</a>
+          <a href="about.html">About</a>
+        </div>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">小红书</a>
+          <a href="mailto:emerson.the.k@gmail.com">emerson.the.k@gmail.com</a>
+        </div>
       </div>
-    </div>
-    <div class="footer-nav">
-      <a href="index.html" data-i18n="footer_home">首页</a>
-      <a href="archive.html" data-i18n="footer_archive">Archive</a>
-      <a href="flow.html" data-i18n="footer_flow">Flow</a>
-      <a href="about.html" data-i18n="footer_about">关于</a>
     </div>
     <div class="footer-bottom">&copy; 2026 THAT program. Circularity by Design.</div>
   </footer>

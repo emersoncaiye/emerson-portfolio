@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN" id="html-root">
 <head>
-  <meta charset="UTF-8"><!-- v3 1781747396 -->
+  <meta charset="UTF-8"><!-- v4 1781747973 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-i18n="page_title">三角洲 · Selection Archive</title>
   <link rel="preconnect" href="https://fonts.googleapis.cn">
@@ -124,16 +124,17 @@
     footer { padding: 60px clamp(30px, 5vw, 120px); font-family: var(--font-sans); font-size: 13px; letter-spacing: 2px; color: var(--gray-300); border-top: 1px solid #121212; max-width: min(1600px, 92vw); margin: 0 auto; }
     footer a { color: inherit; text-decoration: none; transition: color 0.3s; }
     footer a:hover { color: var(--sprout); }
-    footer .footer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 48px; }
-    footer .footer-brand h3 { font-family: var(--font-serif); font-size: 24px; font-weight: 400; color: var(--text); margin-bottom: 8px; }
-    footer .footer-brand p { font-family: var(--font-sans); font-size: 13px; letter-spacing: 1px; color: var(--gray-600); }
-    footer .footer-social { display: flex; gap: 24px; align-items: center; }
-    footer .footer-social a { color: var(--gray-600); }
-    footer .footer-social a:hover { color: var(--sprout); }
-    footer .footer-nav { display: flex; gap: 32px; margin-bottom: 48px; padding: 24px 0; border-top: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100); }
-    footer .footer-nav a { color: var(--gray-600); }
+    footer .footer-main { display: flex; justify-content: space-between; align-items: flex-start; }
+    footer .footer-brand h3 { font-family: var(--font-serif); font-size: 24px; font-weight: 400; color: var(--text); margin-bottom: 6px; }
+    footer .footer-brand p { font-family: var(--font-serif); font-size: 13px; color: var(--gray-600); }
+    footer .footer-right { text-align: right; }
+    footer .footer-nav { display: flex; gap: 24px; justify-content: flex-end; margin-bottom: 10px; }
+    footer .footer-nav a { color: var(--gray-600); font-family: var(--font-serif); font-size: 13px; }
     footer .footer-nav a:hover { color: var(--text); }
-    footer .footer-bottom { font-size: 12px; letter-spacing: 1px; color: var(--gray-300); }
+    footer .footer-social { display: flex; gap: 24px; justify-content: flex-end; }
+    footer .footer-social a { color: var(--gray-600); font-family: var(--font-serif); font-size: 13px; }
+    footer .footer-social a:hover { color: var(--sprout); }
+    footer .footer-bottom { font-family: var(--font-serif); font-size: 12px; letter-spacing: 1px; color: var(--gray-300); text-align: center; border-top: 1px solid var(--gray-100); margin-top: 40px; padding-top: 24px; }
     @media (max-width: 480px) { footer { flex-direction: column; gap: 16px; text-align: center; padding: 30px 20px; } }
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -234,22 +235,24 @@
     </article>
   </div>
   <footer>
-    <div class="footer-top">
+    <div class="footer-main">
       <div class="footer-brand">
         <h3>THAT program</h3>
         <p>Taste, Hold and Transfer</p>
       </div>
-      <div class="footer-social">
-        <a href="#" data-i18n="footer_instagram">Instagram</a>
-        <a href="#" data-i18n="footer_xiaohongshu">小红书</a>
-        <a href="mailto:emerson.the.k@gmail.com">emerson.the.k@gmail.com</a>
+      <div class="footer-right">
+        <div class="footer-nav">
+          <a href="index.html" data-i18n="footer_home">首页</a>
+          <a href="archive.html">Archive</a>
+          <a href="flow.html">Flow</a>
+          <a href="about.html">About</a>
+        </div>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">小红书</a>
+          <a href="mailto:emerson.the.k@gmail.com">emerson.the.k@gmail.com</a>
+        </div>
       </div>
-    </div>
-    <div class="footer-nav">
-      <a href="index.html" data-i18n="footer_home">首页</a>
-      <a href="archive.html" data-i18n="footer_archive">Archive</a>
-      <a href="flow.html" data-i18n="footer_flow">Flow</a>
-      <a href="about.html" data-i18n="footer_about">关于</a>
     </div>
     <div class="footer-bottom">&copy; 2026 THAT program. Circularity by Design.</div>
   </footer>

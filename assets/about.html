@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"><!-- v3 1781747396 -->
+  <meta charset="UTF-8"><!-- v4 1781747973 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About · 关于 · THAT Program</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -241,34 +241,21 @@
 
     /* Footer */
     footer {
-      padding: clamp(32px, 5vw, 60px) clamp(30px, 5vw, 120px);
+      padding: 60px clamp(30px, 5vw, 120px);
       border-top: 1px solid #121212;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
       font-family: var(--font-sans); font-size: 12px;
     }
-    .footer-brand .name {
-      font-family: var(--font-serif); font-size: 18px; color: var(--text);
-      margin-bottom: 4px;
-    }
-    .footer-brand .tagline { font-size: 13px; color: var(--gray-600); }
-    .footer-right { text-align: right; }
-    .footer-nav { display: flex; gap: 20px; justify-content: flex-end; margin-bottom: 12px; }
-    .footer-nav a {
-      color: var(--gray-600); text-decoration: none; font-size: 13px;
-      transition: color 0.3s; cursor: none;
-    }
-    .footer-nav a:hover { color: var(--text); }
-    .footer-social { display: flex; gap: 16px; justify-content: flex-end; margin-bottom: 16px; }
-    .footer-social a {
-      color: var(--gray-600); text-decoration: none; font-size: 12px;
-      transition: color 0.3s; cursor: none;
-    }
-    .footer-social a:hover { color: var(--text); }
-    .footer-copy {
-      color: var(--gray-300); font-size: 11px; letter-spacing: 0.05em;
-      grid-column: 1 / -1; text-align: center; padding-top: 24px;
-      border-top: 1px solid var(--gray-100);
-    }
+    footer .footer-main { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
+    footer .footer-brand h3 { font-family: var(--font-serif); font-size: 24px; font-weight: 400; color: var(--text); margin-bottom: 6px; }
+    footer .footer-brand p { font-family: var(--font-serif); font-size: 13px; color: var(--gray-600); }
+    footer .footer-right { text-align: right; }
+    footer .footer-nav { display: flex; gap: 24px; justify-content: flex-end; margin-bottom: 10px; }
+    footer .footer-nav a { color: var(--gray-600); text-decoration: none; font-family: var(--font-serif); font-size: 13px; transition: color 0.3s; }
+    footer .footer-nav a:hover { color: var(--text); }
+    footer .footer-social { display: flex; gap: 24px; justify-content: flex-end; }
+    footer .footer-social a { color: var(--gray-600); text-decoration: none; font-family: var(--font-serif); font-size: 13px; transition: color 0.3s; }
+    footer .footer-social a:hover { color: var(--sprout); }
+    footer .footer-bottom { font-family: var(--font-serif); font-size: 12px; letter-spacing: 1px; color: var(--gray-300); text-align: center; border-top: 1px solid var(--gray-100); padding-top: 24px; }
 
     /* Reveal */
     .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), transform 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
@@ -294,9 +281,9 @@
     @media (max-width: 900px) {
       .gates-grid { grid-template-columns: 1fr; }
       .contact-links { flex-direction: column; gap: 16px; }
-      footer { grid-template-columns: 1fr; }
-      .footer-right { text-align: left; }
-      .footer-nav, .footer-social { justify-content: flex-start; }
+      footer .footer-main { flex-direction: column; }
+      footer .footer-right { text-align: left; }
+      footer .footer-nav, footer .footer-social { justify-content: flex-start; }
     }
   </style>
 </head>
@@ -412,24 +399,26 @@
   </main>
 
   <footer>
-    <div class="footer-brand">
-      <div class="name">THAT program</div>
-      <div class="tagline" data-i18n="footer_tagline">Taste, Hold and Transfer</div>
-    </div>
-    <div class="footer-right">
-      <div class="footer-nav">
-        <a href="index.html" data-i18n="footer_home">首页</a>
-        <a href="archive.html">Archive</a>
-        <a href="flow.html">Flow</a>
-        <a href="about.html">About</a>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <h3>THAT program</h3>
+        <p>Taste, Hold and Transfer</p>
       </div>
-      <div class="footer-social">
-        <a href="https://instagram.com/" target="_blank">Instagram</a>
-        <a href="https://xiaohongshu.com/" target="_blank" data-i18n="footer_xhs">小红书</a>
-        <a href="mailto:emerson.the.k@gmail.com">emerson.the.k@gmail.com</a>
+      <div class="footer-right">
+        <div class="footer-nav">
+          <a href="index.html" data-i18n="footer_home">首页</a>
+          <a href="archive.html">Archive</a>
+          <a href="flow.html">Flow</a>
+          <a href="about.html">About</a>
+        </div>
+        <div class="footer-social">
+          <a href="https://instagram.com/" target="_blank">Instagram</a>
+          <a href="https://xiaohongshu.com/" target="_blank" data-i18n="footer_xhs">小红书</a>
+          <a href="mailto:emerson.the.k@gmail.com">emerson.the.k@gmail.com</a>
+        </div>
       </div>
     </div>
-    <div class="footer-copy">&copy; 2026 THAT program. Circularity by Design.</div>
+    <div class="footer-bottom">&copy; 2026 THAT program. Circularity by Design.</div>
   </footer>
 
   <script>
