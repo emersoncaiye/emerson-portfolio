@@ -54,40 +54,49 @@
     }
 
     header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 20px clamp(20px, 4vw, 60px); display: flex; justify-content: space-between; align-items: center;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px clamp(20px, 4vw, 60px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       background: rgba(251, 249, 247, 0.7);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       color: var(--text); font-family: var(--font-sans); font-size: 13px;
       letter-spacing: 2px; text-transform: uppercase;
       border-bottom: 1px solid #121212;
-      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), background 0.4s, padding 0.4s;
     }
-    header.header--hidden { transform: translateY(-100%); }
-    header.header--scrolled { background: rgba(251, 249, 247, 0.92); padding: 14px clamp(20px, 4vw, 60px); }
-    .logo a {
-      font-family: var(--font-serif); font-size: 18px; letter-spacing: 0;
-      text-transform: none; color: var(--text); text-decoration: none;
+
+    header .logo a {
+      text-decoration: none;
+      color: inherit;
+      font-family: var(--font-sans);
+      font-size: 18px;
+      letter-spacing: 2px;
+      font-weight: 300;
     }
-    nav { display: flex; gap: 32px; align-items: center; }
-    nav a {
-      color: var(--text); text-decoration: none; position: relative; padding-bottom: 2px;
-      transition: color 0.3s; cursor: none;
-    }
-    nav a::after {
-      content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
-      background: var(--accent); transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-    nav a:hover::after { width: 100%; }
-    nav a.nav-accent { color: var(--sprout); }
+
     .lang-toggle {
-      background: none; border: none; color: var(--gray-300); font-family: var(--font-sans);
-      font-size: 13px; letter-spacing: 2px; cursor: none; padding: 4px 8px;
-      transition: color 0.3s;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 2px;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+      background: none;
+      border: none;
+      color: inherit;
+      padding: 0;
     }
-    .lang-toggle:hover { color: var(--text); }
-    .lang-toggle .active-lang { color: var(--text); }
-    .lang-toggle .sep { margin: 0 4px; }
+    .lang-toggle:hover { opacity: 1; }
+    .lang-toggle .sep { opacity: 0.3; margin: 0 4px; }
+    .lang-toggle .active-lang { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+
+    header nav { display: flex; gap: 24px; }
+    header nav a { color: inherit; text-decoration: none; opacity: 0.7; transition: opacity 0.3s; font-size: 13px; }
+    header nav a:hover { opacity: 1; }
+    header nav a.nav-accent { opacity: 0.55; }
 
     main { padding-top: var(--header-h); }
 
@@ -466,13 +475,6 @@
         const scrollTop = window.scrollY;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
         scrollProgress.style.width = (scrollTop / docHeight) * 100 + '%';
-        const header = document.querySelector('header');
-        if (scrollTop > 100) {
-          header.classList.add('header--scrolled');
-          if (scrollTop > lastScrollY && scrollTop > 300) header.classList.add('header--hidden');
-          else header.classList.remove('header--hidden');
-        } else header.classList.remove('header--scrolled', 'header--hidden');
-        lastScrollY = scrollTop;
       }
       window.addEventListener('scroll', function() {
         if (!scrollTicking) {
