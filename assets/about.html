@@ -287,7 +287,7 @@
 
   <main>
     <!-- Hero -->
-    <div class="about-hero reveal">
+    <div class="about-hero">
       <div>
         <h1 data-i18n="about_title">关于 THAT</h1>
         <div class="tagline" data-i18n="about_tagline">克制但偶尔反叛，安静但有冲击力。不吵闹，也不乖巧。</div>
@@ -447,6 +447,8 @@
         });
       }, { threshold: 0.12 });
       document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+      // Fallback: force reveal all after 1.5s
+      setTimeout(function() { document.querySelectorAll('.reveal:not(.visible)').forEach(function(el) { el.classList.add('visible'); }); }, 1500);
 
       // i18n
       const translations = {
