@@ -1163,15 +1163,15 @@
 
     /* ===== FOOTER ===== */
     footer {
-      padding: clamp(40px, 6vw, 80px) clamp(40px, 8vw, 140px);
-      background: var(--bg);
-      color: var(--gray-600);
+      padding: 60px;
+      background: #141414;
+      color: rgba(255,255,255,0.4);
       font-family: var(--font-sans);
       font-size: 13px;
       letter-spacing: 1px;
-      max-width: 1200px;
-      margin: 0 auto;
-      border-top: 1px solid var(--gray-100);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     footer .footer-top {
@@ -1184,14 +1184,14 @@
       font-family: var(--font-serif);
       font-size: 24px;
       font-weight: 400;
-      color: var(--ink);
+      color: rgba(255,255,255,0.9);
       margin-bottom: 8px;
     }
     footer .footer-brand p {
       font-family: var(--font-sans);
       font-size: 13px;
       letter-spacing: 1px;
-      color: var(--gray-600);
+      color: rgba(255,255,255,0.4);
     }
     footer .footer-social {
       display: flex;
@@ -1199,29 +1199,29 @@
       align-items: center;
     }
     footer .footer-social a {
-      color: var(--gray-300);
+      color: rgba(255,255,255,0.4);
       text-decoration: none;
       font-family: var(--font-sans);
       font-size: 13px;
       transition: color 0.3s;
     }
-    footer .footer-social a:hover { color: var(--text); }
+    footer .footer-social a:hover { color: rgba(255,255,255,0.9); }
     footer .footer-nav {
       display: flex;
       gap: 32px;
       margin-bottom: 48px;
       padding: 24px 0;
-      border-top: 1px solid var(--gray-100);
-      border-bottom: 1px solid var(--gray-100);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     footer .footer-nav a {
-      color: var(--gray-600);
+      color: rgba(255,255,255,0.5);
       text-decoration: none;
       font-family: var(--font-sans);
       font-size: 13px;
       transition: color 0.3s;
     }
-    footer .footer-nav a:hover { color: var(--text); }
+    footer .footer-nav a:hover { color: rgba(255,255,255,0.9); }
     footer .footer-bottom {
       font-family: var(--font-sans);
       font-size: 12px;
@@ -2014,6 +2014,7 @@
       <div class="footer-social">
         <a href="#" data-i18n="footer_instagram">Instagram</a>
         <a href="#" data-i18n="footer_xiaohongshu">小红书</a>
+        <a href="mailto:emerson.the.k@gmail.com">emerson.the.k@gmail.com</a>
       </div>
     </div>
     <div class="footer-nav">
