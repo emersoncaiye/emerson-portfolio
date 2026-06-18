@@ -58,7 +58,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN" id="html-root">
 <script src="https://lf-cdn.coze.cn/obj/unpkg/coze-space/page-editor-general-web/0.1.0-alpha.274555/dist/umd/index.js"></script><script src="https://lf-cdn.coze.cn/obj/unpkg/coze-webapp/console-bridge/0.0.1-alpha.22488f/dist/index.js"></script><script src="https://lf-cdn.coze.cn/obj/unpkg/coze-webapp/history-bridge/0.0.1-alpha.10bbfe/dist/index.min.js"></script><head>
-  <meta charset="UTF-8"><!-- v8 1781752103 -->
+  <meta charset="UTF-8"><!-- v9 1781752189 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.cn">
   <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin>
@@ -2425,9 +2425,16 @@
       });
 
       // ===== SIDE NAV HIGHLIGHT =====
+      const sideNav = document.getElementById('sideNav');
       const sideNavLinks = document.querySelectorAll('.side-nav a');
       const sections = ['taste', 'hold', 'transfer'].map(id => document.getElementById(id));
       function updateSideNav() {
+        // Show side nav after scrolling past hero
+        if (window.scrollY > window.innerHeight * 0.5) {
+          sideNav.classList.add('visible');
+        } else {
+          sideNav.classList.remove('visible');
+        }
         const scrollY = window.scrollY + window.innerHeight * 0.4;
         let active = 0;
         sections.forEach(function(sec, i) {
