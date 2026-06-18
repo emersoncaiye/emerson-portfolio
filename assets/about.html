@@ -180,25 +180,12 @@
       font-weight: 400; color: var(--ink); line-height: 1.4;
     }
 
-    /* Founder */
-    .founder-grid {
-      display: grid; grid-template-columns: 1fr 2fr; gap: clamp(40px, 6vw, 80px);
-      align-items: start; margin-top: 32px;
+
+    /* Closing */
+    #closing .prose p:first-child {
+      font-family: var(--font-serif); font-size: clamp(18px, 2.5vw, 28px);
+      line-height: 1.8; color: var(--ink);
     }
-    .founder-name {
-      font-family: var(--font-serif); font-size: clamp(32px, 5vw, 48px);
-      font-weight: 400; color: var(--ink); line-height: 1.1;
-    }
-    .founder-name .role {
-      font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--sprout); margin-top: 12px;
-      display: block;
-    }
-    .founder-bio p {
-      font-family: var(--font-sans); font-size: clamp(14px, 1.3vw, 16px);
-      font-weight: 300; line-height: 1.9; color: var(--gray-600);
-    }
-    .founder-bio p + p { margin-top: 16px; }
 
     /* Contact */
     .contact-links {
@@ -270,11 +257,9 @@
 
     @media (min-width: 1440px) {
       .gates-grid { grid-template-columns: repeat(3, 1fr); gap: 40px; }
-      .founder-grid { grid-template-columns: 1fr 2fr; }
       .contact-links { gap: 40px; }
     }
     @media (max-width: 900px) {
-      .founder-grid { grid-template-columns: 1fr; gap: 32px; }
       .gates-grid { grid-template-columns: 1fr; }
       .contact-links { flex-direction: column; gap: 16px; }
       footer { grid-template-columns: 1fr; }
@@ -304,24 +289,23 @@
     <!-- Hero -->
     <div class="about-hero reveal">
       <div>
-        <h1 data-i18n="about_title">关于 THAT</h1>
+        <h1 data-i18n="about_title">我就是那个人</h1>
         <div class="tagline" data-i18n="about_tagline">克制的反叛。安静的冲击力。不是喧闹的反叛，不是沉默的顺从。</div>
       </div>
     </div>
 
-    <!-- Brand Story -->
+    <!-- Opening -->
     <div class="section reveal" id="story">
-      <div class="section-label">Brand Story · 品牌故事</div>
-      <h2 data-i18n="story_title">我之所以做这个空间</h2>
       <div class="prose">
-        <p data-i18n="story_p1">是因为我就是那个人。</p>
-        <p data-i18n="story_p2">你大概也是。</p>
-        <p data-i18n="story_p3">每次搬家，打包的时候会发现——有些东西你根本舍不得放进行李箱，不是因为贵，是因为它对了。一个来自京都百元店的杯子。一个在布鲁克林跳蚤市场翻到的黄铜台灯。一条朋友说"你疯了吧"但你知道它会穿十年的围巾。</p>
-        <p data-i18n="story_p4">我一件一件淘出来的。不是在画廊，不是在买手店。是在深夜刷页面时突然停住手指的那种感觉——就是它。</p>
+        <p data-i18n="story_p1">你大概也是。</p>
+        <p data-i18n="story_p2">每次搬家，打包的时候会发现——有些东西你根本舍不得放进行李箱，不是因为贵，是因为它对了。一个来自京都百元店的杯子。一个在布鲁克林跳蚤市场翻到的黄铜台灯。一条朋友说"你疯了吧"但你知道它会穿十年的围巾。</p>
+        <p data-i18n="story_p3">我一件一件淘出来的。不是在画廊，不是在买手店。是在深夜刷页面时突然停住手指的那种感觉——就是它。</p>
+        <p data-i18n="story_p4">价格不重要。有的东西五块，有的一百。唯一重要的是它是不是对的。</p>
         <div class="pull-quote" data-i18n="story_quote">漂亮的东西应该流动。</div>
-        <p data-i18n="story_p5">所以我想，为什么不把这些感觉变成一个空间？你可以带走它，也可以只是跟它住一季。当你不再需要了——也许是又要搬了，也许只是准备好了——把它送回来。它会继续飞往下一个人的生活里。</p>
-        <p data-i18n="story_p6">而每一次流转，都有一些什么流向了更远的地方。售价的一小部分会变成公益金。你让好东西继续走，我们替这条路多做一点。</p>
+        <p data-i18n="story_p5">所以我想，为什么不把这些感觉变成一个空间？你可以买下它，也可以只是跟它住一季。当你不再需要了——要搬家了、厌倦了、准备好迎接新东西了——把它送回来。它会继续飞往下一个人的生活里。</p>
+        <p data-i18n="story_p6">送回来的东西，我们会清洁、重新上架。每一次再流通，售价的 10% 会变成公益金。你让好东西继续走，我们替这条路多做一点。</p>
         <p data-i18n="story_p7"><strong>这不是二手店。这是一个人把自己对物品的判断，变成了一种让好东西不停下来的方式。</strong></p>
+        <p data-i18n="story_p8" style="margin-top: 48px; font-style: italic; color: var(--gray-600);">因为我不想被物品绑住，也不想将就，所以我为自己挑东西时，立下了三道门槛。</p>
       </div>
     </div>
 
@@ -329,7 +313,7 @@
     <div class="section reveal" id="framework">
       <div class="section-label">Aesthetic Framework · 审美框架</div>
       <h2 data-i18n="framework_title">三道门槛</h2>
-      <p class="prose" data-i18n="framework_intro">我不是什么都选。每件东西进来之前，它会经过三道门槛。不是标准——是直觉的检验。</p>
+      <p class="prose" data-i18n="framework_intro">不是标准——是从生活里长出来的直觉。</p>
 
       <div class="gates-grid">
         <div class="gate-card reveal">
@@ -360,32 +344,16 @@
 
     <!-- Curatorial Principles -->
     <div class="section reveal" id="curatorial">
-      <div class="section-label">Curatorial Principles · 选品原则</div>
-      <h2 data-i18n="curatorial_title">什么能进来</h2>
       <div class="prose">
-        <p data-i18n="curatorial_p1">初期，我们只选体积小、无尺码、价格友好、审美明确的物件。杯子、器皿、手作、中古设计款。香氛和蜡烛，但只选小众有质感的。围巾、配饰、羊毛亚麻——要有设计感。包袋、tote、帆布、小皮包——经得起流转的。小灯、中古台灯——能为角落制造氛围的。</p>
-        <p data-i18n="curatorial_p2">什么不进？量产网红款、大牌仿品、快时尚、宜家基础款。包装廉价的不进，磨损严重的不进。服饰只选无尺码或宽松款。</p>
-        <p data-i18n="curatorial_p3">但长期来看，我们不是按品类思考——而是按生活思考。不是"我要不要卖杯子"，而是"我的品牌支持什么样的生活状态"。</p>
-        <div class="pull-quote" data-i18n="curatorial_quote">一个人在东京或上海的小公寓，东西不多，但每件都被认真选过。</div>
-        <p data-i18n="curatorial_p4">一件好外套，一双舒服的乐福鞋，日常的包，小灯，香薰，杯子，围巾，笔记本。衣服、家居、物件——它们属于同一种生活逻辑。安静、克制、有呼吸感。可以搬走，可以留下，但每一样都值得被认真对待。</p>
+        <p data-i18n="curatorial_text">所以我只收那些声音不大的东西：手作的杯子、有年份的灯、洗过很多次的衬衫。你生活里用得到，并且愿意用很久。不进来的？那些吵的、快的、用完就扔的。不是不好，只是不属于这里。</p>
       </div>
     </div>
 
-    <!-- Founder -->
-    <div class="section reveal" id="founder">
-      <div class="section-label">Founder · 创始人</div>
-      <div class="founder-grid">
-        <div>
-          <div class="founder-name">
-            Em
-            <span class="role" data-i18n="founder_role">Founder & Curator</span>
-          </div>
-        </div>
-        <div class="founder-bio">
-          <p data-i18n="founder_p1">不是什么专家。只是一个经常搬家、预算有限、但没办法将就的人。在深夜的二手平台上一件一件翻，翻出了自己的判断力。</p>
-          <p data-i18n="founder_p2">我选东西看四点：不吵、聪明、值得流转、用得上。听起来简单，但做到不将就，需要很多次放弃。</p>
-          <p data-i18n="founder_p3">不是追求"安静"，是追求"准确"——颜色可以鲜艳，图案可以有性格，但每一件被选中的东西，都在说同一句话："我知道我是谁。"</p>
-        </div>
+    <!-- Closing -->
+    <div class="section reveal" id="closing">
+      <div class="prose">
+        <p data-i18n="closing_p1">不是追求"安静"，是追求"准确"。颜色可以鲜艳，图案可以有性格，但每一件被选中的东西，都在说同一句话：<strong>"我知道我是谁。"</strong></p>
+        <p data-i18n="closing_p2" style="font-style: italic; color: var(--gray-600);">—— Em, Founder & Curator</p>
       </div>
     </div>
 
@@ -483,19 +451,19 @@
       // i18n
       const translations = {
         zh: {
-          about_title: '关于 THAT',
+          about_title: '我就是那个人',
           about_tagline: '克制的反叛。安静的冲击力。不是喧闹的反叛，不是沉默的顺从。',
-          story_title: '我之所以做这个空间',
-          story_p1: '是因为我就是那个人。',
-          story_p2: '你大概也是。',
-          story_p3: '每次搬家，打包的时候会发现——有些东西你根本舍不得放进行李箱，不是因为贵，是因为它对了。一个来自京都百元店的杯子。一个在布鲁克林跳蚤市场翻到的黄铜台灯。一条朋友说"你疯了吧"但你知道它会穿十年的围巾。',
-          story_p4: '我一件一件淘出来的。不是在画廊，不是在买手店。是在深夜刷页面时突然停住手指的那种感觉——就是它。',
+          story_p1: '你大概也是。',
+          story_p2: '每次搬家，打包的时候会发现——有些东西你根本舍不得放进行李箱，不是因为贵，是因为它对了。一个来自京都百元店的杯子。一个在布鲁克林跳蚤市场翻到的黄铜台灯。一条朋友说"你疯了吧"但你知道它会穿十年的围巾。',
+          story_p3: '我一件一件淘出来的。不是在画廊，不是在买手店。是在深夜刷页面时突然停住手指的那种感觉——就是它。',
+          story_p4: '价格不重要。有的东西五块，有的一百。唯一重要的是它是不是对的。',
           story_quote: '漂亮的东西应该流动。',
-          story_p5: '所以我想，为什么不把这些感觉变成一个空间？你可以带走它，也可以只是跟它住一季。当你不再需要了——也许是又要搬了，也许只是准备好了——把它送回来。它会继续飞往下一个人的生活里。',
-          story_p6: '而每一次流转，都有一些什么流向了更远的地方。售价的一小部分会变成公益金。你让好东西继续走，我们替这条路多做一点。',
+          story_p5: '所以我想，为什么不把这些感觉变成一个空间？你可以买下它，也可以只是跟它住一季。当你不再需要了——要搬家了、厌倦了、准备好迎接新东西了——把它送回来。它会继续飞往下一个人的生活里。',
+          story_p6: '送回来的东西，我们会清洁、重新上架。每一次再流通，售价的 10% 会变成公益金。你让好东西继续走，我们替这条路多做一点。',
           story_p7: '这不是二手店。这是一个人把自己对物品的判断，变成了一种让好东西不停下来的方式。',
+          story_p8: '因为我不想被物品绑住，也不想将就，所以我为自己挑东西时，立下了三道门槛。',
           framework_title: '三道门槛',
-          framework_intro: '我不是什么都选。每件东西进来之前，它会经过三道门槛。不是标准——是直觉的检验。',
+          framework_intro: '不是标准——是从生活里长出来的直觉。',
           gate1_title: '审美门',
           gate1_desc: '你看见它的那一秒，心里有没有停了一下？不是"市场认为好看"，是你觉得它值得被看见。它可以是安静的，也可以有锋芒——但那种存在感是真实的，不是跟风跟出来的。',
           gate1_rule: '不随便。不跟风。不盲目。',
@@ -507,16 +475,9 @@
           gate3_rule: '不被消耗，只被传递。',
           summary_label: '一句话',
           summary_text: '有判断力，聪明，值得流转。',
-          curatorial_title: '什么能进来',
-          curatorial_p1: '初期，我们只选体积小、无尺码、价格友好、审美明确的物件。杯子、器皿、手作、中古设计款。香氛和蜡烛，但只选小众有质感的。围巾、配饰、羊毛亚麻——要有设计感。包袋、tote、帆布、小皮包——经得起流转的。小灯、中古台灯——能为角落制造氛围的。',
-          curatorial_p2: '什么不进？量产网红款、大牌仿品、快时尚、宜家基础款。包装廉价的不进，磨损严重的不进。服饰只选无尺码或宽松款。',
-          curatorial_p3: '但长期来看，我们不是按品类思考——而是按生活思考。不是"我要不要卖杯子"，而是"我的品牌支持什么样的生活状态"。',
-          curatorial_quote: '一个人在东京或上海的小公寓，东西不多，但每件都被认真选过。',
-          curatorial_p4: '一件好外套，一双舒服的乐福鞋，日常的包，小灯，香薰，杯子，围巾，笔记本。衣服、家居、物件——它们属于同一种生活逻辑。安静、克制、有呼吸感。可以搬走，可以留下，但每一样都值得被认真对待。',
-          founder_role: 'Founder & Curator',
-          founder_p1: '不是什么专家。只是一个经常搬家、预算有限、但没办法将就的人。在深夜的二手平台上一件一件翻，翻出了自己的判断力。',
-          founder_p2: '我选东西看四点：不吵、聪明、值得流转、用得上。听起来简单，但做到不将就，需要很多次放弃。',
-          founder_p3: '不是追求"安静"，是追求"准确"——颜色可以鲜艳，图案可以有性格，但每一件被选中的东西，都在说同一句话："我知道我是谁。"',
+          curatorial_text: '所以我只收那些声音不大的东西：手作的杯子、有年份的灯、洗过很多次的衬衫。你生活里用得到，并且愿意用很久。不进来的？那些吵的、快的、用完就扔的。不是不好，只是不属于这里。',
+          closing_p1: '不是追求"安静"，是追求"准确"。颜色可以鲜艳，图案可以有性格，但每一件被选中的东西，都在说同一句话："我知道我是谁。"',
+          closing_p2: '—— Em, Founder & Curator',
           contact_title: '找到我们',
           contact_xhs_label: '小红书',
           contact_xhs: 'THAT Program',
@@ -525,19 +486,19 @@
           footer_xhs: '小红书'
         },
         en: {
-          about_title: 'About THAT',
+          about_title: 'I Am That Person',
           about_tagline: 'Restrained rebellion. Quiet impact. Not loud defiance, not silent compliance.',
-          story_title: 'Why I built this space',
-          story_p1: 'Because I am that person.',
-          story_p2: 'You probably are too.',
-          story_p3: 'Every time you move, packing reveals the truth — some things you can\'t bear to put in the suitcase. Not because they\'re expensive, but because they\'re right. A cup from a Kyoto hundred-yen shop. A brass lamp found at a Brooklyn flea market. A scarf your friend called crazy but you knew would last ten years.',
-          story_p4: 'I found them one by one. Not in galleries, not in boutiques. It was that feeling when scrolling late at night and your finger just stops — this is it.',
+          story_p1: 'You probably are too.',
+          story_p2: 'Every time you move, packing reveals the truth — some things you can\'t bear to put in the suitcase. Not because they\'re expensive, but because they\'re right. A cup from a Kyoto hundred-yen shop. A brass lamp found at a Brooklyn flea market. A scarf your friend called crazy but you knew would last ten years.',
+          story_p3: 'I found them one by one. Not in galleries, not in boutiques. It was that feeling when scrolling late at night and your finger just stops — this is it.',
+          story_p4: 'Price doesn\'t matter. Some things cost five bucks, some a hundred. The only thing that matters is whether it\'s right.',
           story_quote: 'Beautiful things should flow.',
-          story_p5: 'So I thought, why not turn these feelings into a space? You can take it home, or just live with it for a season. When you no longer need it — maybe you\'re moving again, maybe you\'re just ready — send it back. It\'ll keep flying into someone else\'s life.',
-          story_p6: 'And every time it moves, something flows further. A fraction of each sale becomes a charity fund. You keep beautiful things moving; we make that path do a little more good.',
+          story_p5: 'So I thought, why not turn these feelings into a space? You can take it home, or just live with it for a season. When you no longer need it — maybe you\'re moving again, maybe you\'re just ready for something new — send it back. It\'ll keep flying into someone else\'s life.',
+          story_p6: 'What comes back gets cleaned and relisted. Every time it circulates again, 10% of the sale price goes to a charity fund. You keep beautiful things moving; we make that path do a little more good.',
           story_p7: 'This isn\'t a thrift store. It\'s one person turning their judgment about objects into a way to keep good things from stopping.',
+          story_p8: 'Because I don\'t want to be tied down by things, and I refuse to settle, I set three gates for myself when choosing what to bring in.',
           framework_title: 'Three Gates',
-          framework_intro: 'I don\'t choose everything. Before anything enters, it passes through three gates. Not standards — instinct checks.',
+          framework_intro: 'Not standards — instincts that grew out of living.',
           gate1_title: 'The Aesthetic Gate',
           gate1_desc: 'The second you see it — does something in you pause? Not what the market thinks is beautiful, but whether you feel it deserves to be seen. It can be quiet, it can have edges — but that presence has to be real, not trend-chased.',
           gate1_rule: 'No randomness. No trends. No blindness.',
@@ -549,16 +510,9 @@
           gate3_rule: 'Not consumed, only passed on.',
           summary_label: 'In a sentence',
           summary_text: 'Discerning, smart, worth circulating.',
-          curatorial_title: 'What gets in',
-          curatorial_p1: 'Early on, we only choose small, size-free, affordable objects with clear aesthetic identity. Cups, vessels, handmade, vintage design pieces. Fragrance and candles — but only niche and textured. Scarves, accessories, wool and linen — with design intent. Bags, totes, canvas, small leather — built to circulate. Small lamps, vintage desk lamps — the kind that make a corner breathe.',
-          curatorial_p2: 'What stays out? Mass-produced trendy items, designer knockoffs, fast fashion, IKEA basics. Cheap packaging stays out. Heavy wear stays out. Apparel is only one-size or relaxed fit.',
-          curatorial_p3: 'Long-term, we don\'t think by category — we think by life. Not "should I sell cups," but "what kind of life does my brand support?"',
-          curatorial_quote: 'A small apartment in Tokyo or Shanghai. Not many things, but each one chosen with care.',
-          curatorial_p4: 'A good coat, comfortable loafers, an everyday bag, a small lamp, a candle, a cup, a scarf, a notebook. Clothes, home, objects — they belong to the same life logic. Quiet, restrained, breathing. Ready to move, ready to stay, but every piece worth taking seriously.',
-          founder_role: 'Founder & Curator',
-          founder_p1: 'Not an expert. Just someone who moves often, lives on a budget, and can\'t bring themselves to settle. Scrolling second-hand platforms late at night, one piece at a time, until judgment became instinct.',
-          founder_p2: 'I choose by four criteria: not loud, smart, worth circulating, useful. Sounds simple, but refusing to settle takes a lot of letting go.',
-          founder_p3: 'Not chasing "quiet" — chasing "precise." Colors can be vivid, patterns can have personality, but every chosen piece says the same thing: "I know who I am."',
+          curatorial_text: 'So I only take in things that don\'t shout: handmade cups, lamps with a history, shirts washed a hundred times. Things you\'ll use in your life, and want to keep using. What stays out? The loud, the fast, the disposable. Not bad — just not from here.',
+          closing_p1: 'Not chasing "quiet" — chasing "precise." Colors can be vivid, patterns can have personality, but every chosen piece says the same thing: "I know who I am."',
+          closing_p2: '— Em, Founder & Curator',
           contact_title: 'Find us',
           contact_xhs_label: 'Xiaohongshu',
           contact_xhs: 'THAT Program',
