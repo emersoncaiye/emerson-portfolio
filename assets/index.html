@@ -1164,13 +1164,14 @@
     /* ===== FOOTER ===== */
     footer {
       padding: clamp(40px, 6vw, 80px) clamp(40px, 8vw, 140px);
-      background: #141414;
-      color: rgba(255,255,255,0.4);
+      background: var(--bg);
+      color: var(--gray-600);
       font-family: var(--font-sans);
       font-size: 13px;
       letter-spacing: 1px;
       max-width: 1200px;
       margin: 0 auto;
+      border-top: 1px solid var(--gray-100);
     }
 
     footer .footer-top {
@@ -1183,14 +1184,14 @@
       font-family: var(--font-serif);
       font-size: 24px;
       font-weight: 400;
-      color: rgba(255,255,255,0.9);
+      color: var(--ink);
       margin-bottom: 8px;
     }
     footer .footer-brand p {
       font-family: var(--font-sans);
       font-size: 13px;
       letter-spacing: 1px;
-      color: rgba(255,255,255,0.4);
+      color: var(--gray-600);
     }
     footer .footer-social {
       display: flex;
@@ -1198,29 +1199,29 @@
       align-items: center;
     }
     footer .footer-social a {
-      color: rgba(255,255,255,0.4);
+      color: var(--gray-300);
       text-decoration: none;
       font-family: var(--font-sans);
       font-size: 13px;
       transition: color 0.3s;
     }
-    footer .footer-social a:hover { color: rgba(255,255,255,0.9); }
+    footer .footer-social a:hover { color: var(--text); }
     footer .footer-nav {
       display: flex;
       gap: 32px;
       margin-bottom: 48px;
       padding: 24px 0;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
+      border-top: 1px solid var(--gray-100);
+      border-bottom: 1px solid var(--gray-100);
     }
     footer .footer-nav a {
-      color: rgba(255,255,255,0.5);
+      color: var(--gray-600);
       text-decoration: none;
       font-family: var(--font-sans);
       font-size: 13px;
       transition: color 0.3s;
     }
-    footer .footer-nav a:hover { color: rgba(255,255,255,0.9); }
+    footer .footer-nav a:hover { color: var(--text); }
     footer .footer-bottom {
       font-family: var(--font-sans);
       font-size: 12px;
