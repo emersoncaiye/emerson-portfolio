@@ -159,21 +159,6 @@ function renderExpItem(text: string) {
   <div class="timeline">
     <div class="timeline-item reveal">
       <div class="timeline-left">
-        <span class="timeline-year">{t.exp7Date}</span>
-        <span class="timeline-month">{t.exp7Month}</span>
-      </div>
-      <div class="timeline-track">
-        <div class="timeline-dot"></div>
-      </div>
-      <div class="timeline-content">
-        <div class="exp-role">{t.exp7Role}</div>
-        <div class="exp-company">{t.exp7Company}</div>
-        <ul class="exp-list" set:html={t.exp7Items.map(renderExpItem).join('')} />
-      </div>
-    </div>
-
-    <div class="timeline-item reveal">
-      <div class="timeline-left">
         <span class="timeline-year">{t.exp8Date}</span>
         <span class="timeline-month">{t.exp8Month}</span>
       </div>
