@@ -1,0 +1,15 @@
+---
+import JournalArticle from '../../../components/JournalArticle.astro';
+import { getContent, journalSlugs, type Lang } from '../../../content';
+
+export function getStaticPaths() {
+  return journalSlugs('zh').map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const lang = 'zh' as Lang;
+const t = getContent(lang);
+const article = t.articles[slug!];
+---
+
+<JournalArticle lang={lang} t={t} article={article} />

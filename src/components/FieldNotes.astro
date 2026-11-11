@@ -1,0 +1,259 @@
+---
+import type { Content } from '../content/types';
+import { base } from '../content';
+
+interface Props {
+  t: Content;
+}
+
+const { t } = Astro.props;
+const { entries, photos, labels } = t.journal;
+
+---
+
+<section id="journal" class="section journal container" aria-labelledby="journal-label">
+  <div class="section-head reveal">
+    <span class="section-index">03</span>
+    <h2 class="section-kicker" id="journal-label">{t.journal.label}</h2>
+    <span class="rule" aria-hidden="true"></span>
+  </div>
+  <p class="section-standfirst reveal">{t.journal.intro}</p>
+
+  <div class="notes-grid">
+    <!-- Entry 01 — image card, large -->
+    {entries[0] && entries[0].slug && (
+      <a
+        class="note-card note-image span-7"
+        href={`${base(t.lang)}/journal/${entries[0].slug}/`}
+      >
+        <div class="note-media img-frame" style="aspect-ratio: 16 / 10;">
+          <img src={entries[0].image} alt={entries[0].imageAlt} loading="lazy" width="1200" height="1600" style="object-position: 50% 62%;" />
+        </div>
+        <div class="note-caption">
+          <span class="note-place">{entries[0].place}</span>
+        </div>
+        <h3 class="note-title">{entries[0].title}</h3>
+        <p class="note-desc">{entries[0].description}</p>
+      </a>
+    )}
+
+    <!-- Entry 02 — text card -->
+    {entries[1] && entries[1].slug && (
+      <a class="note-card note-text span-5 offset" href={`${base(t.lang)}/journal/${entries[1].slug}/`}>
+        <div class="note-caption">
+          <span class="note-num">{entries[1].num}</span>
+          <span class="note-place">{entries[1].place}</span>
+        </div>
+        <h3 class="note-title">{entries[1].title}</h3>
+        <p class="note-desc">{entries[1].description}</p>
+        <span class="note-read text-link">{labels.read} <span class="arrow" aria-hidden="true">→</span></span>
+      </a>
+    )}
+
+    <!-- Entry 03 — text card -->
+    {entries[2] && entries[2].slug && (
+      <a class="note-card note-text span-5" href={`${base(t.lang)}/journal/${entries[2].slug}/`}>
+        <div class="note-caption">
+          <span class="note-num">{entries[2].num}</span>
+          <span class="note-place">{entries[2].place}</span>
+        </div>
+        <h3 class="note-title">{entries[2].title}</h3>
+        <p class="note-desc">{entries[2].description}</p>
+        <span class="note-read text-link">{labels.read} <span class="arrow" aria-hidden="true">→</span></span>
+      </a>
+    )}
+
+    <!-- Entry 04 — forthcoming -->
+    {entries[3] && !entries[3].slug && (
+      <div class="note-card note-text note-soon span-4" aria-label={labels.forthcoming}>
+        <div class="note-caption">
+          <span class="note-num">{entries[3].num}</span>
+          <span class="note-place">{entries[3].place}</span>
+        </div>
+        <h3 class="note-title">{entries[3].title}</h3>
+        <p class="note-desc">{entries[3].description}</p>
+        <span class="note-status">{labels.forthcoming}</span>
+      </div>
+    )}
+  </div>
+
+  <!-- Photo fragments — original horizontal moments gallery -->
+  <div
+    class="moments-scroll journal-strip reveal"
+    tabindex="0"
+    role="region"
+    aria-label={t.journal.label}
+  >
+    {photos.map((p) => (
+      <figure class="moment-card">
+        <div class="moment-img">
+          <img src={p.image} alt={p.alt} loading="lazy" width="1600" height="1200" />
+        </div>
+        <figcaption>
+          <span class="moment-caption">{p.caption}</span>
+          <span class="moment-sub">{p.place}</span>
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+</section>
+
+<style>
+  .section {
+    padding-top: 5.25rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .notes-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 2rem;
+    row-gap: 2.5rem;
+    align-items: start;
+  }
+
+  .journal-strip {
+    margin-top: 3rem;
+  }
+
+  .span-7 { grid-column: span 7; }
+  .span-5 { grid-column: span 5; }
+  .span-4 { grid-column: span 4; }
+  .span-3 { grid-column: span 3; }
+
+  /* ===== Entry cards ===== */
+  .note-card {
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+  }
+
+  a.note-card {
+    outline-offset: 6px;
+  }
+
+  .note-media {
+    width: 100%;
+  }
+
+  .note-caption {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-top: 0.85rem;
+  }
+
+  .note-num {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+  }
+
+  .note-place {
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .note-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text);
+    margin-top: 0.4rem;
+    transition: color 0.3s var(--ease);
+  }
+
+  a.note-card:hover .note-title {
+    color: var(--accent);
+  }
+
+  .note-desc {
+    font-size: 0.8125rem;
+    line-height: 1.75;
+    color: var(--text-soft);
+    margin-top: 0.5rem;
+    max-width: 46ch;
+  }
+
+  .note-read {
+    margin-top: 0.9rem;
+    align-self: flex-start;
+  }
+
+  /* Text card composition */
+  .note-text {
+    padding-top: 0.5rem;
+  }
+
+  /* Bottom-aligned so the card closes the first row instead of leaving a hole */
+  .note-text.offset {
+    align-self: end;
+    padding-bottom: 0.35rem;
+  }
+
+  .note-text .note-title {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  /* Forthcoming — flush with the right edge, echoing the offset above */
+  .note-soon {
+    grid-column: 9 / -1;
+    opacity: 0.75;
+    border-top: 1px solid var(--border);
+    padding-top: 1.25rem;
+  }
+
+  .note-soon .note-title {
+    color: var(--text-soft);
+  }
+
+  .note-status {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 900px) {
+    .notes-grid {
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 1.5rem;
+    }
+
+    .span-7, .span-5, .span-4, .span-3 {
+      grid-column: auto;
+    }
+
+    .note-text.offset {
+      align-self: start;
+    }
+
+    .note-soon {
+      grid-column: auto;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .section {
+      padding-top: 4.5rem;
+    }
+
+    .notes-grid {
+      grid-template-columns: 1fr;
+      column-gap: 0;
+      row-gap: 2.5rem;
+    }
+
+    .note-text .note-title {
+      font-size: 1.25rem;
+    }
+  }
+</style>

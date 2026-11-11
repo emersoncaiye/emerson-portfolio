@@ -1,0 +1,47 @@
+---
+import type { Content } from '../content/types';
+
+interface Props {
+  t: Content;
+}
+
+const { t } = Astro.props;
+---
+
+<footer class="footer">
+  <div class="footer-inner container">
+    <span>{t.footer.rights}</span>
+    <span class="footer-colophon">{t.footer.colophon}</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid #2e2e2e;
+    background: var(--bg-dark);
+    padding: 1.5rem 0;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer span {
+    font-size: 0.6875rem;
+    letter-spacing: 0.05em;
+    color: #8c8c8c;
+  }
+
+  .footer-colophon {
+    text-align: right;
+  }
+
+  @media (max-width: 640px) {
+    .footer-colophon {
+      text-align: left;
+    }
+  }
+</style>

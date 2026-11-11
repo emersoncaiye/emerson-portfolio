@@ -1,0 +1,179 @@
+---
+import type { Content } from '../content/types';
+
+interface Props {
+  t: Content;
+}
+
+const { t } = Astro.props;
+---
+
+<section id="experience" class="section container" aria-labelledby="experience-label">
+  <div class="section-head reveal">
+    <span class="section-index">04</span>
+    <h2 class="section-kicker" id="experience-label">{t.experience.label}</h2>
+    <span class="rule" aria-hidden="true"></span>
+  </div>
+  <p class="section-standfirst reveal">{t.experience.intro}</p>
+
+  <ol class="timeline">
+    {t.experience.items.map((item, i) => (
+      <li class="timeline-item reveal" class:list={{ 'reveal-delay-1': i === 1, 'reveal-delay-2': i === 2 }}>
+        <div class="timeline-when">
+          <span class="timeline-date">{item.date}</span>
+          <span class="timeline-place">{item.place}</span>
+        </div>
+        <div class="timeline-track" aria-hidden="true">
+          <span class="timeline-dot"></span>
+        </div>
+        <div class="timeline-content">
+          <h3 class="exp-role">{item.role}</h3>
+          <p class="exp-org">{item.org}</p>
+          <p class="exp-desc">{item.description}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .section {
+    padding-top: 5.25rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .timeline {
+    list-style: none;
+    max-width: 860px;
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 11rem 1.75rem 1fr;
+    align-items: start;
+  }
+
+  .timeline-when {
+    text-align: right;
+    padding-top: 0.3rem;
+    padding-right: 0.75rem;
+  }
+
+  .timeline-date {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .timeline-place {
+    display: block;
+    font-size: 0.6875rem;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-top: 0.15rem;
+  }
+
+  .timeline-track {
+    width: 1px;
+    background: var(--border);
+    min-height: 100%;
+    align-self: stretch;
+    position: relative;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    top: 0.7rem;
+    left: -2.5px;
+    width: 5px;
+    height: 5px;
+    background: var(--accent);
+  }
+
+  .timeline-content {
+    padding: 0.1rem 0 2.5rem 1.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .timeline-item:last-child .timeline-content {
+    border-bottom: none;
+    padding-bottom: 0.5rem;
+  }
+
+  .exp-role {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .exp-org {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.01em;
+    margin-top: 0.15rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .exp-desc {
+    font-size: 0.875rem;
+    line-height: 1.85;
+    color: var(--text-soft);
+    max-width: 58ch;
+  }
+
+  @media (max-width: 640px) {
+    .section {
+      padding-top: 4.5rem;
+    }
+
+    /* Date sits above the entry; the rule and marker stay on the left */
+    .timeline-item {
+      grid-template-columns: 1.25rem 1fr;
+    }
+
+    .timeline-track {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+    }
+
+    .timeline-when {
+      grid-column: 2;
+      grid-row: 1;
+      text-align: left;
+      padding: 0 0 0.5rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0 0.6rem;
+    }
+
+    .timeline-date {
+      font-size: 0.75rem;
+    }
+
+    .timeline-place {
+      margin-top: 0;
+    }
+
+    .timeline-content {
+      grid-column: 2;
+      grid-row: 2;
+      padding-left: 1rem;
+      padding-bottom: 1.75rem;
+    }
+
+    .timeline-dot {
+      top: 0.45rem;
+    }
+
+    .exp-desc {
+      font-size: 0.8125rem;
+    }
+  }
+</style>

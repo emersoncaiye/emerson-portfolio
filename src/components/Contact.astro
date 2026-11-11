@@ -1,0 +1,124 @@
+---
+import type { Content } from '../content/types';
+
+interface Props {
+  t: Content;
+}
+
+const { t } = Astro.props;
+---
+
+<section id="contact" class="contact" aria-labelledby="contact-label">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-index">06</span>
+      <h2 class="section-kicker" id="contact-label">{t.contact.label}</h2>
+      <span class="rule" aria-hidden="true"></span>
+    </div>
+
+    <p class="contact-heading reveal reveal-delay-1">{t.contact.heading}</p>
+
+    <div class="contact-links reveal reveal-delay-2">
+      <a href={`mailto:${t.contact.email}`} class="contact-email link-hover">{t.contact.email}</a>
+      <span class="contact-sep" aria-hidden="true"></span>
+      <a
+        href={t.contact.github}
+        target="_blank"
+        rel="noopener"
+        class="contact-secondary link-hover"
+      >
+        {t.contact.githubLabel} ↗
+      </a>
+    </div>
+
+    <p class="contact-note reveal reveal-delay-3">{t.contact.note}</p>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background: var(--bg-dark);
+    padding-top: 6.5rem;
+    padding-bottom: 6rem;
+    margin-top: 4rem;
+  }
+
+  .contact .section-kicker {
+    color: #9a9a9a;
+  }
+
+  .contact .rule {
+    background: #333;
+  }
+
+  .contact-heading {
+    font-family: var(--font-serif);
+    font-size: clamp(2.25rem, 5.5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    color: #f0efec;
+    max-width: 14ch;
+    margin-top: 1.5rem;
+    margin-bottom: 2.75rem;
+  }
+
+  .contact-links {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-sep {
+    width: 32px;
+    height: 1px;
+    background: #444;
+  }
+
+  .contact-email {
+    font-family: var(--font-serif);
+    font-size: clamp(1.125rem, 2.4vw, 1.5rem);
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .contact-email::after {
+    background: var(--accent);
+  }
+
+  .contact-secondary {
+    font-size: 0.875rem;
+    letter-spacing: 0.06em;
+    color: #999;
+  }
+
+  .contact-secondary:hover {
+    color: #f0efec;
+  }
+
+  .contact-note {
+    margin-top: 3rem;
+    font-size: 0.8125rem;
+    line-height: 1.8;
+    color: #909090;
+    max-width: 44ch;
+  }
+
+  @media (max-width: 640px) {
+    .contact {
+      padding-top: 4.5rem;
+      padding-bottom: 4rem;
+    }
+
+    .contact-links {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .contact-sep {
+      display: none;
+    }
+  }
+</style>

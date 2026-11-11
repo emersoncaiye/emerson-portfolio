@@ -1,37 +1,94 @@
 ---
 import '../styles/global.css';
+import type { Lang } from '../content/types';
 
 interface Props {
+  lang: Lang;
   title: string;
+  description: string;
+  skipLabel: string;
+  ogImage?: string;
 }
 
-const { title } = Astro.props;
+const { lang, title, description, skipLabel, ogImage = '/images/site-cover.jpg' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="zh">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="蔡也 - 學以致用的行動者、跨文化溝通者、複雜問題解決者" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="theme-color" content="#FEFCF9" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
   <body>
+    <a class="skip-link" href="#main">{skipLabel}</a>
     <slot />
+
     <script>
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       // Scroll reveal
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-            }
-          });
-        },
-        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-      );
-      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+      const revealEls = document.querySelectorAll('.reveal');
+      if (reduced || !('IntersectionObserver' in window)) {
+        revealEls.forEach((el) => el.classList.add('visible'));
+      } else {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+        );
+        revealEls.forEach((el) => observer.observe(el));
+      }
+
+      // Header state
+      const header = document.querySelector('.site-header');
+      const onScroll = () => {
+        if (!header) return;
+        header.classList.toggle('is-scrolled', window.scrollY > 12);
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // Active section indicator (home page only)
+      const navLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-section]'));
+      const sections = navLinks
+        .map((link) => document.querySelector(`#${link.dataset.section}`))
+        .filter((s): s is HTMLElement => Boolean(s));
+
+      if (sections.length > 0 && 'IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                navLinks.forEach((link) => {
+                  const active = link.dataset.section === entry.target.id;
+                  link.classList.toggle('is-active', active);
+                  if (active) {
+                    link.setAttribute('aria-current', 'true');
+                  } else {
+                    link.removeAttribute('aria-current');
+                  }
+                });
+              }
+            });
+          },
+          { rootMargin: '-35% 0px -55% 0px' }
+        );
+        sections.forEach((s) => sectionObserver.observe(s));
+      }
     </script>
   </body>
 </html>

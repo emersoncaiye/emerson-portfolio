@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.cn/css2?family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;600;700&display=swap";
+@import "https://fonts.googleapis.cn/css2?family=Inter:wght@300;400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Noto+Serif+SC:wght@400;600;700&display=swap";
 
 *,
 *::before,
@@ -9,20 +9,39 @@
 }
 
 :root {
+  /* Palette — consistent with the existing identity */
   --bg: #FEFCF9;
+  --bg-tint: #F5F3EF;
   --bg-dark: #1C1C1C;
   --text: #2A2A2A;
-  --text-secondary: #8A8A8A;
+  --text-soft: #5A5A5A;
+  --text-secondary: #6E6E6E;
   --accent: #C8553D;
   --border: #E2E0DC;
-  --font-serif: 'Noto Serif SC', 'Georgia', serif;
+  --border-strong: #C9C7C1;
+
+  /* Typography */
+  /* Newsreader carries Latin; Noto Serif SC carries CJK. */
+  --font-serif: 'Newsreader', 'Noto Serif SC', Georgia, serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Rhythm */
+  --container: 1120px;
+  --gutter: 2.5rem;
+  --measure: 66ch;
   --ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -50,11 +69,87 @@ img {
   color: var(--bg);
 }
 
-/* Scroll reveal animation */
+/* ===== Accessibility ===== */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 999;
+  padding: 0.5rem 1rem;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 0.8125rem;
+  transition: top 0.2s var(--ease);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ===== Shared layout ===== */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+section[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* ===== Editorial section head: number + kicker + rule ===== */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.section-index {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+
+.section-kicker {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.section-head .rule {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  transform: translateY(-0.3em);
+}
+
+.section-standfirst {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text);
+  max-width: 34ch;
+  margin-bottom: 3.25rem;
+}
+
+/* ===== Scroll reveal ===== */
 .reveal {
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  transform: translateY(16px);
+  transition: opacity 0.65s var(--ease-out), transform 0.65s var(--ease-out);
 }
 
 .reveal.visible {
@@ -62,7 +157,29 @@ img {
   transform: translateY(0);
 }
 
-/* Link hover underline animation */
+.reveal-delay-1 { transition-delay: 0.08s; }
+.reveal-delay-2 { transition-delay: 0.16s; }
+.reveal-delay-3 { transition-delay: 0.24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .reveal-delay-1,
+  .reveal-delay-2,
+  .reveal-delay-3 {
+    transition-delay: 0s;
+  }
+
+  .text-link .arrow {
+    transition: none;
+  }
+
+}
+
+/* ===== Underline hover ===== */
 .link-hover {
   position: relative;
   display: inline;
@@ -79,6 +196,177 @@ img {
   transition: width 0.3s var(--ease);
 }
 
-.link-hover:hover::after {
+.link-hover:hover::after,
+.link-hover[aria-current='true']::after {
   width: 100%;
+}
+
+/* ===== Text link with arrow ===== */
+.text-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  border-bottom: 1px solid var(--border-strong);
+  padding-bottom: 0.2rem;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.text-link .arrow {
+  display: inline-block;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.text-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.text-link:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* ===== Image frames ===== */
+.img-frame {
+  overflow: hidden;
+  background: var(--bg-tint);
+}
+
+.img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== Moments gallery — interaction restored from the original site ===== */
+.moments-scroll {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+.moments-scroll::-webkit-scrollbar {
+  height: 3px;
+}
+
+.moments-scroll::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 1px;
+}
+
+.moment-card {
+  flex: 0 0 calc((100% - 2.5rem) / 3);
+  scroll-snap-align: start;
+  min-width: 0;
+  margin: 0;
+  transition: transform 0.3s var(--ease);
+}
+
+.moment-card:hover {
+  transform: translateY(-2px);
+}
+
+.moment-img {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+  background: var(--bg-tint);
+}
+
+.moment-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: filter 0.4s var(--ease);
+}
+
+/* Grayscale-to-colour on hover, as in the original moments gallery.
+   Only on devices that can hover, so touch screens always see full colour. */
+@media (hover: hover) {
+  .moment-img img {
+    filter: grayscale(100%);
+  }
+
+  .moment-card:hover .moment-img img {
+    filter: grayscale(0%);
+  }
+}
+
+.moment-caption {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-soft);
+  letter-spacing: 0.03em;
+}
+
+.moment-sub {
+  display: block;
+  font-size: 0.6875rem;
+  color: var(--text-secondary);
+  margin-top: 0.125rem;
+}
+
+/* Screenshot slides keep their full 16:10 frame instead of the 4:3 photo crop */
+.moment-card.wide .moment-img {
+  aspect-ratio: 16 / 10;
+}
+
+@media (max-width: 900px) {
+  .moment-card {
+    flex: 0 0 calc((100% - 1.25rem) / 2);
+  }
+}
+
+@media (max-width: 640px) {
+  .moment-card {
+    flex: 0 0 80%;
+  }
+}
+
+@media (max-width: 400px) {
+  .moment-card {
+    flex: 0 0 90%;
+  }
+}
+
+figcaption {
+  font-size: 0.6875rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  margin-top: 0.5rem;
+}
+
+/* ===== Generic prose column (journal / case pages) ===== */
+.prose p {
+  font-size: 0.9375rem;
+  line-height: 1.95;
+  color: var(--text-soft);
+  max-width: var(--measure);
+  margin-bottom: 1.4rem;
+}
+
+.prose p:first-of-type {
+  font-size: 1.0625rem;
+  color: var(--text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moment-card,
+  .moment-img img {
+    transition: none;
+  }
+
+  .moment-card:hover {
+    transform: none;
+  }
 }

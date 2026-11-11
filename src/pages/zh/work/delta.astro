@@ -1,0 +1,8 @@
+---
+import DeltaCase from '../../../components/DeltaCase.astro';
+import { getContent } from '../../../content';
+
+const lang = 'zh' as const;
+---
+
+<DeltaCase lang={lang} t={getContent(lang)} />

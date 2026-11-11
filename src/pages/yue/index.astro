@@ -1,18 +1,69 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Resume from '../../components/Resume.astro';
-import { languages } from '../../i18n/translations';
-
-const lang = 'yue';
-const t = languages[lang];
-const langLinks = [
-  { code: 'en', label: 'EN', href: '/', active: false },
-  { code: 'zh', label: '中文', href: '/zh/', active: false },
-  { code: 'yue', label: '粵語', href: '/yue/', active: true },
-  { code: 'fr', label: 'FR', href: '/fr/', active: false },
-];
+// 粤语版本暂时停用：内容已完整保留在 src/legacy/translations.ts，可随时恢复。
+// The Cantonese version is temporarily paused. This page is a placeholder so the URL stays meaningful.
+import '../../styles/global.css';
 ---
 
-<Layout title={t.title}>
-  <Resume lang={lang} t={t} langLinks={langLinks} />
-</Layout>
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>粵語版本暫時停用 — 蔡也</title>
+  </head>
+  <body>
+    <main class="notice">
+      <p class="eyebrow">CAI YE — 蔡也</p>
+      <h1>粵語版本暫時停用。</h1>
+      <p class="body">
+        内容仍然保留，稍後會重新上線。你可以先看英文、中文或法文版本。
+      </p>
+      <nav class="links" aria-label="Language">
+        <a href="/" class="link-hover">English</a>
+        <a href="/zh/" class="link-hover">中文</a>
+        <a href="/fr/" class="link-hover">Français</a>
+      </nav>
+    </main>
+  </body>
+</html>
+
+<style>
+  .notice {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 9rem 2.5rem 6rem;
+  }
+
+  .eyebrow {
+    font-size: 0.6875rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 1.75rem;
+  }
+
+  h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+  }
+
+  .body {
+    font-size: 0.9375rem;
+    line-height: 1.9;
+    color: var(--text-soft);
+    margin-bottom: 2.5rem;
+  }
+
+  .links {
+    display: flex;
+    gap: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8125rem;
+    letter-spacing: 0.06em;
+  }
+</style>

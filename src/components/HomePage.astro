@@ -1,0 +1,34 @@
+---
+import type { Content, Lang } from '../content/types';
+import { langLinks } from '../content';
+import Layout from '../layouts/Layout.astro';
+import Nav from './Nav.astro';
+import Hero from './Hero.astro';
+import SelectedWork from './SelectedWork.astro';
+import FieldNotes from './FieldNotes.astro';
+import Experience from './Experience.astro';
+import About from './About.astro';
+import Contact from './Contact.astro';
+import Footer from './Footer.astro';
+
+interface Props {
+  lang: Lang;
+  t: Content;
+}
+
+const { lang, t } = Astro.props;
+const links = langLinks(lang);
+---
+
+<Layout lang={lang} title={t.title} description={t.description} skipLabel={t.a11y.skip}>
+  <Nav lang={lang} t={t} langLinks={links} />
+  <main id="main">
+    <Hero t={t} />
+    <SelectedWork t={t} />
+    <FieldNotes t={t} />
+    <Experience t={t} />
+    <About t={t} />
+    <Contact t={t} />
+  </main>
+  <Footer t={t} />
+</Layout>

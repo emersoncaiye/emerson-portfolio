@@ -1,0 +1,306 @@
+---
+import type { Content, Lang } from '../content/types';
+import { base, langLinks } from '../content';
+import Layout from '../layouts/Layout.astro';
+import Nav from './Nav.astro';
+import Footer from './Footer.astro';
+
+interface Props {
+  lang: Lang;
+  t: Content;
+}
+
+const { lang, t } = Astro.props;
+const c = t.deltaCase;
+const backHref = `${base(lang)}/#work`;
+---
+
+<Layout lang={lang} title={`${c.title} — ${t.hero.name}`} description={c.standfirst} skipLabel={t.a11y.skip}>
+  <Nav lang={lang} t={t} langLinks={langLinks(lang, '/work/delta/')} />
+
+  <main id="main" class="case">
+    <header class="case-head container">
+      <a class="back-link" href={backHref}>
+        <span aria-hidden="true">←</span> {c.back}
+      </a>
+      <p class="case-eyebrow">{c.eyebrow}</p>
+      <h1 class="case-title">{c.title}</h1>
+      <p class="case-standfirst">{c.standfirst}</p>
+
+      <dl class="case-meta">
+        {c.meta.map((m) => (
+          <div class="meta-row">
+            <dt>{m.label}</dt>
+            <dd>{m.value}</dd>
+          </div>
+        ))}
+        {c.links.map((l) => (
+          <div class="meta-row">
+            <dt>{l.label}</dt>
+            <dd><a href={l.href} target="_blank" rel="noopener" class="link-hover">{l.value} ↗</a></dd>
+          </div>
+        ))}
+      </dl>
+    </header>
+
+    <figure class="case-hero container reveal">
+      <div class="img-frame" style="aspect-ratio: 16 / 10;">
+        <img src={c.gallery[0].image} alt={c.gallery[0].alt} width="1600" height="1000" />
+      </div>
+      <figcaption>{c.gallery[0].caption}</figcaption>
+    </figure>
+
+    <div class="case-body container">
+      <div class="prose case-intro reveal">
+        {c.intro.map((p) => (
+          <p>{p}</p>
+        ))}
+      </div>
+
+      <section class="case-section reveal" aria-labelledby="model-title">
+        <h2 class="case-h2" id="model-title">{c.modelTitle}</h2>
+        <ol class="model-list">
+          {c.model.map((m, i) => (
+            <li class="model-item">
+              <span class="model-key">{String(i + 1).padStart(2, '0')} — {m.key}</span>
+              <p class="model-text">{m.text}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="case-section reveal" aria-labelledby="notes-title">
+        <h2 class="case-h2" id="notes-title">{c.notesTitle}</h2>
+        <div class="notes-list">
+          {c.notes.map((n) => (
+            <div class="note-item">
+              <h3 class="note-h3">{n.title}</h3>
+              <p class="note-p">{n.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="case-section reveal" aria-labelledby="proto-title">
+        <h2 class="case-h2" id="proto-title">{c.prototypeTitle}</h2>
+        <div
+          class="moments-scroll reveal"
+          tabindex="0"
+          role="region"
+          aria-label={c.prototypeTitle}
+        >
+          {c.gallery.slice(1).map((g) => (
+            <figure class="moment-card wide">
+              <div class="moment-img">
+                <img src={g.image} alt={g.alt} loading="lazy" width="1600" height="1000" />
+              </div>
+              <figcaption class="moment-caption">{g.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <div class="prose">
+          {c.prototypeText.map((p) => (
+            <p>{p}</p>
+          ))}
+        </div>
+        <p class="case-disclaimer">{c.disclaimer}</p>
+      </section>
+    </div>
+
+    <div class="container">
+      <a class="back-link bottom" href={backHref}>
+        <span aria-hidden="true">←</span> {c.back}
+      </a>
+    </div>
+  </main>
+
+  <Footer t={t} />
+</Layout>
+
+<style>
+  .case {
+    padding-top: 8rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+    transition: color 0.3s var(--ease);
+  }
+
+  .back-link:hover {
+    color: var(--text);
+  }
+
+  .case-eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .case-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.25rem, 5.5vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--text);
+    max-width: 16ch;
+    margin-bottom: 1.5rem;
+  }
+
+  .case-standfirst {
+    font-family: var(--font-serif);
+    font-size: clamp(1.125rem, 2.2vw, 1.375rem);
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--text-soft);
+    max-width: 40ch;
+    margin-bottom: 3rem;
+  }
+
+  .case-meta {
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+    max-width: 660px;
+    margin-bottom: 3.5rem;
+  }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: 12rem 1fr;
+    align-items: baseline;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    padding: 0.6rem 0;
+  }
+
+  .meta-row dt {
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+
+  .meta-row dd {
+    font-size: 0.8125rem;
+    color: var(--text);
+  }
+
+  .case-hero {
+    margin-bottom: 4rem;
+  }
+
+  .case-body {
+    max-width: var(--container);
+  }
+
+  .case-intro {
+    margin-bottom: 4rem;
+  }
+
+  .case-section {
+    margin-bottom: 4.5rem;
+  }
+
+  .case-h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .model-list {
+    list-style: none;
+  }
+
+  .model-item {
+    display: grid;
+    grid-template-columns: 13rem 1fr;
+    gap: 1.5rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .model-key {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .model-text {
+    font-size: 0.875rem;
+    line-height: 1.85;
+    color: var(--text-soft);
+  }
+
+  .notes-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.25rem 3rem;
+  }
+
+  .note-h3 {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .note-p {
+    font-size: 0.8125rem;
+    line-height: 1.8;
+    color: var(--text-soft);
+  }
+
+  .case-disclaimer {
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+    color: var(--text-secondary);
+    border-left: 2px solid var(--accent);
+    padding-left: 1rem;
+    margin-top: 2rem;
+  }
+
+  .back-link.bottom {
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  @media (max-width: 800px) {
+    .case {
+      padding-top: 7rem;
+    }
+
+    .notes-list {
+      grid-template-columns: 1fr;
+    }
+
+    .model-item {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .meta-row {
+      grid-template-columns: 1fr;
+      gap: 0.15rem;
+    }
+  }
+</style>

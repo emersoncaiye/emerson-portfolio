@@ -1,0 +1,249 @@
+---
+import type { Content, Lang } from '../content/types';
+import type { LangLink } from '../content';
+
+interface Props {
+  lang: Lang;
+  t: Content;
+  langLinks: LangLink[];
+}
+
+const { lang, t, langLinks } = Astro.props;
+const base = lang === 'en' ? '' : `/${lang}`;
+
+const items = [
+  { id: 'work', label: t.nav.work },
+  { id: 'journal', label: t.nav.journal },
+  { id: 'experience', label: t.nav.experience },
+  { id: 'about', label: t.nav.about },
+  { id: 'contact', label: t.nav.contact },
+];
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href={`${base}/`} class="wordmark">{t.hero.name}</a>
+
+    <nav class="primary-nav" aria-label="Primary">
+      {items.map((item) => (
+        <a href={`${base}/#${item.id}`} data-section={item.id} class="nav-link link-hover">
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="header-tools">
+      <nav class="lang-switch" aria-label={t.a11y.language}>
+        {langLinks.map((l) => (
+          <a
+            href={l.href}
+            class:list={['lang-link', { active: l.active }]}
+            aria-current={l.active ? 'page' : undefined}
+          >
+            {l.label}
+          </a>
+        ))}
+      </nav>
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-expanded="false"
+        aria-controls="mobilePanel"
+        aria-label={t.a11y.menu}
+      >
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-panel" id="mobilePanel">
+    <nav aria-label="Mobile">
+      {items.map((item) => (
+        <a href={`${base}/#${item.id}`} class="mobile-link">{item.label}</a>
+      ))}
+    </nav>
+    <div class="mobile-langs">
+      {langLinks.map((l) => (
+        <a href={l.href} class:list={['lang-link', { active: l.active }]}>{l.label}</a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(254, 252, 249, 0.92);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+  }
+
+  .site-header.is-scrolled {
+    border-bottom-color: var(--border);
+    background: rgba(254, 252, 249, 0.96);
+  }
+
+  .header-inner {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0.9rem var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .wordmark {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+
+  .primary-nav {
+    display: flex;
+    gap: 2.25rem;
+  }
+
+  .nav-link {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary);
+    transition: color 0.3s var(--ease);
+  }
+
+  .nav-link:hover,
+  .nav-link.is-active {
+    color: var(--text);
+  }
+
+  .header-tools {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .lang-link {
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    opacity: 0.5;
+    transition: opacity 0.2s var(--ease);
+  }
+
+  .lang-link:hover,
+  .lang-link.active {
+    opacity: 1;
+  }
+
+  .lang-link.active {
+    font-weight: 600;
+  }
+
+  /* Mobile */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 2px;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--text);
+    transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  }
+
+  .mobile-panel {
+    display: none;
+  }
+
+  @media (max-width: 820px) {
+    .primary-nav,
+    .lang-switch {
+      display: none;
+    }
+
+    .menu-toggle {
+      display: flex;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(3.75px) rotate(45deg);
+    }
+    .menu-toggle.active span:nth-child(2) {
+      transform: translateY(-3.75px) rotate(-45deg);
+    }
+
+    .mobile-panel {
+      display: none;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+      padding: 1.25rem var(--gutter) 1.75rem;
+    }
+
+    .mobile-panel.open {
+      display: block;
+    }
+
+    .mobile-panel nav {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-link {
+      font-family: var(--font-serif);
+      font-size: 1.0625rem;
+      font-weight: 600;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-langs {
+      display: flex;
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    .mobile-langs .lang-link {
+      font-size: 0.75rem;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const panel = document.getElementById('mobilePanel');
+  if (toggle && panel) {
+    toggle.addEventListener('click', () => {
+      const open = panel.classList.toggle('open');
+      toggle.classList.toggle('active', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    panel.querySelectorAll('a').forEach((a) =>
+      a.addEventListener('click', () => {
+        panel.classList.remove('open');
+        toggle.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+      })
+    );
+  }
+</script>
